@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+@charset "utf-8";
+/* CSS Document */
+ 
+/* 공지색  #222831 */
+/* 포인트 주황색 #FFD369 */
+/* 메인 배경색 #151515 */
+
+body {
+    margin: 0px; 
+    font-size: 18px;
+}
+/* 공지 */
+#notice{
+	background-color: #222831; 
+	border-top: solid 1px #FFD369;
+	height: 50px;
+}
+/* 상단바 */
+#box {
+    position: relative;
+    height: auto;
+    margin: auto; 
+    background-color: #FFFFFF;
+}
+#top {
+    background-color: #010101;
+    height: 100px;
+    width: 100%;
+    position: relative;
+}
+.user-search > i{
+	color: white;
+	cursor: pointer;
+}
+.user-search > i:hover{
+	color: #FFD369;
+}
+/* 드롭다운 */
+.dropdown-item:hover{
+	background-color: #FFD369;
+}
+/* /상단바 */
+
+/* 메인 */
+#main {
+/*     background-color: #010101; */
+    background-color: #151515;
+    float: left;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.main-container{
+	margin-bottom: 10px;
+}
+.main2 {
+	display: flex;
+	padding: 0px;
+}
+.sub-left{
+	margin-right: 5px;
+	position: relative;
+}
+.sub-right{
+	margin-left: 5px;
+	position: relative;
+}
+.sub-title{
+	position: absolute;
+	color: white;
+	
+}
+.sub-title > h2 {
+	font-family: "고딕";
+	font-weight: 700;
+	margin-top: 50px;
+}
+.left-text > p {
+}
+.sub-img{
+	width: 950px;
+	height: 580px;
+}
+.a-style{
+	color:  inherit;
+}
+.a-link > a:hover{
+	color:  #FFD369;
+}
+.a-span{
+	color: #FFD369;
+}
+.a-left{
+	margin-right: 10px;
+}
+.a-right{
+	margin-left: 10px;
+}
+/* 카드 */
+#card {
+	height: 300px;
+	width: 300px;
+	position: relative;
+	
+}
+.section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.card{
+  overflow: hidden; 
+  object-fit:cover;
+  transform:scale(1.0);        
+  transition: 0.2s ease-in-out;
+  border: solid 2px #202020;
+  width: 275px;
+  height: 500px;
+  margin-right: 10px; 
+	
+}
+ .card-img-top{ 
+   object-fit:cover;      
+   transform:scale(1.0);         
+   transition: 0.2s ease-in-out; 
+   width: 280px;
+   height: 280px;
+ } 
+ .card-body{ 
+   border-top: solid 2px #202020;
+   color: white;
+   background-color: #202020;
+   
+ } 
+ .card-body > p{ 
+   color: #c0c0c0;
+   font-size: 15px;
+   
+ } 
+ .card-icon {
+ 	position: absolute;
+ 	top: 460px;
+ 	left: 190px;
+ 	
+ }
+ .card-price{
+ 	position: absolute;
+ 	top: 460px;
+ }
+
+.card:hover{  
+   transform: translateY(20px); 
+   cursor: pointer; 
+   
+ } 
+ 
+.card-container{
+ 	display: flex;
+/*  	justify-content: center; */
+ }
+
+.fa-shopping-cart{
+	color: white;
+}
+
+.fa-shopping-cart:hover{
+   animation: motion 0.3s /* 속도 */
+               linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
+               infinite alternate; /* 무한 반복 */
+   color: #FFD369;
+ }
+@keyframes motion {
+	0% {margin-top: 0px;} /* 처음 위치 */
+	100% {margin-top: 7px;} /* 마지막 위치 */
+  }
+  
+  
+.fa-heart{
+	color: white;
+}
+
+.fa-heart:hover{
+   animation: motion 0.3s /* 속도 */
+               linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
+               infinite alternate; /* 무한 반복 */
+   color: red;
+ }
+@keyframes2 motion2 {
+	0% {margin-top: 0px;} /* 처음 위치 */
+	100% {margin-top: 7px;} /* 마지막 위치 */
+  }
+  
+/* 하단바 */
+footer{
+	background-color: #202020;
+ }
+.footer-container{
+	display: flex;
+	color: #e3e3e3;
+}
+.footer-top{
+	margin-right: 140px;
+	padding-left: 75px;
+}
+.footer-label{
+	text-align: center;
+	font-size: 15px;
+}
+.footer-list > ul{
+	list-style: none;
+	font-size: 10px;
+	color: #808080;
+	padding-left: 0px;
+}
+.footer-list > ul > li {
+	margin-bottom: 8px;
+}
+.footer-line{
+	border-bottom: solid 1px #444444;
+}

@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.divProduct {
+	padding-top: 30px;
+}
+
+#divProd {
+	transition: all 0.2s linear;
+	background-color: #202020;
+	border: solid 2px #202020;
+}
+
+#divProd:hover {
+  	transform: scale(1.1);
+}
+
+.prdName {
+	text-align: center;
+	font-weight: bold;
+	font-size: 23px;
+	font: bold;
+	padding-top: 10px;
+}
+.prdInfo {
+	text-align: center;
+	font-size: 15px;
+	font: bold;
+}
+
+.btnProductInfo {
+		background-color:#ffbe33;
+  		opacity: 0;
+		margin-top: 5px;
+	border-radius:10px;
+		border:none; 
+		height:40px;
+		font: bold;
+		font-size: 15px;
+}
+	
+#divSide {
+	width: 280px;
+	height: 100vh;
+	float: left;
+	margin: 30px 10px 0px 10px;
+/*  		position: absolute; */
+}
+
+#divSideBar {
+		width: 280px;
+		height: 700px;
+		background-color: #202020;
+		border: solid 1px #ffbe33;
+  		position: absolute;
+}
