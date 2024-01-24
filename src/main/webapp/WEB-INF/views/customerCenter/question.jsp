@@ -72,6 +72,11 @@ body{
 .card-header:first-child a:hover{
 	color:#FFD369;
 }
+.card-span{
+	position: absolute;
+	bottom: 9px;
+	left: 41px;
+}
 
 </style>
 <script>
@@ -165,7 +170,9 @@ $(function(){
 				<div id="card-203733">
 					<div class="card">
 						<div class="card-header">
-							 <a class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-312844">질문 1
+							 <a class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-312844">
+							 <i class="fa fa-question-circle"></i>
+							 <span class="card-span">질문 1</span>
 							 <i class="fa fa-angle-down"></i>
 							 </a>
 						</div>
@@ -177,7 +184,9 @@ $(function(){
 					</div>
 					<div class="card">
 						<div class="card-header">
-							 <a class="collapsed card-link d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-376540">질문2
+							 <a class="collapsed card-link d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-376540">
+							 <i class="fa fa-question-circle"></i>
+							 <span class="card-span">질문 2</span>
 							 <i class="fa fa-angle-down"></i>
 							 </a>
 						</div>

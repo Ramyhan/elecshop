@@ -18,6 +18,12 @@ a{
 i{
 	margin-top: 5px;
 }
+.card-body{
+	border-bottom: 2px solid;
+	background-color: white;
+	color: gray;
+	border-top: 0px;
+}
 </style>
 <div class="container-fluid">
 	<div class="row">
