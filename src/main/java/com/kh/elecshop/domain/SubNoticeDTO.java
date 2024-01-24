@@ -8,13 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class NoticeVO {
+public class SubNoticeDTO {
 	private int nno;
 	private String ncategory;
 	private String ntitle;
-	private String content;
-	private Date regdate;
+	private Date nregdate;
+	
 }
