@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.elecshop.mapper.ProductMapper">
+
+	<select id="selectProductList" resultType="com.kh.elecshop.domain.ProductDTO">
+		select pno, pname, pcode, pinfo_main, pimage_thoumb
+		from tbl_product
+		where ptype = #{ptype}
+	</select>
+	
+	<select id="selectProduct" resultType="com.kh.elecshop.domain.ProductVO">
+		select *
+		from tbl_product
+		where pno = #{pno}
+	</select>
+
+</mapper>
