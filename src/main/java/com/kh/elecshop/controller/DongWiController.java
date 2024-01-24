@@ -14,4 +14,8 @@ public class DongWiController {
 	public void login() {
 		
 	}
+	@GetMapping("/singup")
+	public void singUp() {
+		
+	}
 }

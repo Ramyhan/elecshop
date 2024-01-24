@@ -268,3 +268,12 @@ footer{
  	align-items: center;
     justify-content: center;
 }
+.login-ui {
+	 background-color: #202020; 
+	 border: solid 1px #FFD369;
+	 border-radius: 15px;"
+}
+.login-ui > h3{
+	text-align: center;
+	
+}

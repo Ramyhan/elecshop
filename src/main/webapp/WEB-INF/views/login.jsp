@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <div class="container-fluid login">
-<div class="login-ui" style=" background-color: #202020; 
-border: solid 1px #FFD369; border-radius: 15px;">
-	<h3 style="text-align: center; margin-top: 20px">로그인</h3>
-	<div class="row" style="margin: 110px; ">
+<div class="login-ui">
+	<h3 style="margin-top: 40px;">로그인</h3>
+	<div class="row" style="margin: 110px; margin-top: 70px; ">
 		<div class="col-md-12">
 			<form role="form">
 				<div class="form-group">
