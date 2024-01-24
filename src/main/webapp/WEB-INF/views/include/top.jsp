@@ -5,18 +5,17 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
-  <!-- 메인 틀 -->	
-  <link href="/resources/css/dongwi/my.css" rel="stylesheet" type="text/css" />
-  
-  
-  <!-- 상단바 bootstrap -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>div 태그</title>
+	<!-- 부트스트랩 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<!--   <link rel="stylesheet" type="text/css" href="/resources/css/dongwi/bootstrap.css" /> -->
+  <!-- 메인 틀 -->	
+  <link href="/resources/css/dongwi/my.css" rel="stylesheet" type="text/css" />
+  
+  
   <!--owl slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <!-- nice select  -->
@@ -45,7 +44,7 @@
     right: 50px;
     width: 1250px;
 ">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/main">
           <span>
             임시
           </span>
@@ -58,38 +57,56 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item"> <!-- active -->
-                <a class="nav-link" href="index.html">노트북 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">노트북 <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.html">모니터</a>
+                <a class="nav-link" href="#">모니터</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">태블릿</a>
+                <a class="nav-link" href="#">태블릿</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="book.html">음향기기</a>
+                <a class="nav-link" href="#">음향기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="book.html">주변기기</a>
+                <a class="nav-link" href="#">주변기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="book.html">고객센터</a>
+                <a class="nav-link" href="#">고객센터</a>
               </li>
             </ul>
             <div class="user_option" style="
             margin-left: 100px;
 				">
-              <a href="" class="user_link">
-                <i class="fa fa-user" aria-hidden="true"></i>
+				<div class="dropdown user-icon">
+              <a href="" class="user_link dropdown topbar-dropdown" data-toggle="dropdown">
+                <i class="fa fa-user" aria-hidden="true">
+                </i>
               </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-              <a href="#" class="order_online">
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="/login">로그인</a> 
+				<a class="dropdown-item" href="#">회원가입</a> 
+				</div>
+				</div>
+				<div class="dropdown">
+				<a href="" class="dropdown topbar-dropdown user-search" data-toggle="dropdown">
+                <i class="fa fa-search"></i>
+                </a>
+                <div class="dropdown-menu search-menu" aria-labelledby="dropdownMenuButton">
+				<div class="search-bar">
+ 				 <input type="text" placeholder="검색어 입력">
+ 				 <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+				 </div>
+				</div>
+				</div>
+              <div class="dropdown">
+              <a href="#" class="order_online dropdown topbar-dropdown" data-toggle="dropdown">
                 장바구니
               </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"></a>
+              </div>
+            </div>
             </div>
           </div>
         </nav>
@@ -97,4 +114,6 @@
     </header>
 		</div>
 		</div>
+		
+		
 		<!-- //상단바 -->
