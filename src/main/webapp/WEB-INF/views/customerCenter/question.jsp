@@ -112,7 +112,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_22" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=22">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/delivery-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">배송</span>					
@@ -120,7 +120,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_23" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=23">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/shipping-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">반품/교환/환불</span>					
@@ -128,7 +128,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_24" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=24">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/point-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">이벤트/적립금</span>					
@@ -136,7 +136,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_91" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=91">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/gear-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">A/S</span>					
@@ -144,7 +144,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_25" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=25">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/user-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">회원</span>					
@@ -152,7 +152,7 @@ $(function(){
 				</a>
 			</li>					
 			<li id="CategoryNo_105" class="">
-				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=105">
+				<a href="#">
 					<em class="icon_wrap">
 						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/etc-48.png);background-repeat: no-repeat;"></span>
 						<span class="link_title">기타</span>					

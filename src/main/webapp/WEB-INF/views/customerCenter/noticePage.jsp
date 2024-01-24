@@ -13,8 +13,14 @@
 					<div class="d-flex justify-content-between" style="border-bottom: 4px groove;">
 					 <p style="color:#2964e0; padding: 4px 22px  0  12px;">태그 넣는 곳</p>
 					 <h3>제목 넣는 곳</h3>
-					 <div>
-					 <span style="padding: 4px 22px  0  12px;">날짜 넣는 곳</span>
+					 <div class="d-flex">
+						 <div>
+							 <span style="padding: 4px 16px  0  12px; border-right: 1px solid rgba(0, 0, 0, .3); margin-right: 11px;">날짜 넣는 곳</span>
+						 </div>
+						 <div>
+						 	<span style="font-weight: 1000">조회수</span>
+						 	<span>1242</span>
+						 </div>
 					 </div>
 					</div>
 					<div style="width: 100%; height: 500px;">
