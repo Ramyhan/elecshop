@@ -5,7 +5,6 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>div 태그</title>
 	
   <!-- 메인 틀 -->	
   <link href="/resources/css/dongwi/my.css" rel="stylesheet" type="text/css" />
