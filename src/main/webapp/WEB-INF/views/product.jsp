@@ -75,7 +75,19 @@
 	}
 	
 </style>
-
+<script>
+$(function() {
+	var spec1 = "${productVO.pinfo1}".split(",");
+	var spec2 = "${productVO.pinfo2}".split(",");
+	var spec3 = "${productVO.pinfo3}".split(",");
+	$(".specName1").text(spec1[0]);
+	$(".specInfo1").text(spec1[1]);
+	$(".specName2").text(spec2[0]);
+	$(".specInfo2").text(spec2[1]);
+	$(".specName3").text(spec3[0]);
+	$(".specInfo3").text(spec3[1]);
+});
+</script>
 <body>
 	<div id="main" style="color: white;">
 		<div class="container">
@@ -85,13 +97,13 @@
 						<img id="productMainImage" alt="상품 사진" src="/resources/images/galaxybook4pro.png"/>	
 					</div>
 					<div class="col-md-5" style="border: solid  1px #ffbe33; border-radius:10px;">
-						<h1 style="font-weight: 600;">Galaxy Book4 Pro</h1><br>
-						<div style="float:left;">NT960QGK-KD72G</div><br>
+						<h1 style="font-weight: 600;">${productVO.pname}</h1><br>
+						<div style="float:left;">${productVO.pcode}</div><br>
 						<div class="rate" style="float:left;">
 							<span style="width: 50%"></span>
 						</div>
 						<div style="margin-left:130px;">3.5점 (150건)</div><br><br>
-						<h3>기준가: 3,140,000</h3><br><br>
+						<h3>기준가: ${productVO.pprice}</h3><br><br>
 						
 						<!-- 상품옵션 -->
 						<div class="divOptionName">SSD</div>
@@ -123,29 +135,28 @@
 					
 					<!-- 상품 이미지 및 스펙 -->
 					<div class="divInfo	col-md-12 productImage">
-						<img class="productInfoImage" alt="상품 사진" src="/resources/images/galaxybook4pro2.jpg"/>
-						<img class="productInfoImage" alt="상품 사진" src="/resources/images/galaxybook4pro3.jpg"/>
+						<img class="productInfoImage" alt="상품 사진" src="/resources/images/${productVO.pimage_info1}"/>
+						<img class="productInfoImage" alt="상품 사진" src="/resources/images/${productVO.pimage_info2}"/>
 					</div>
 					<div class="divInfo	col-md-12 productInfo">
 						<h1>스팩</h1>
-						<h3 class="info" style="padding-top:10px;">갤럭시 북4 Pro 360 (40.6 cm) Core™ Ultra 7 / 1 TB NVMe SSD</h3>
+						<h3 class="info" style="padding-top:10px;">${productVO.pname} ${productVO.pcode}</h3>
 						<div class="info">
-							<div class="infoName">운영체계</div>
-							<div class="infoComment">
-								<div>Windows 11 Home</div>
+							<div class="infoName specName1">스펙1</div>
+							<div class="infoComment specInfo1">
+								<div>스펙1</div>
 							</div>
 						</div>
 						<div class="info">
-							<div class="infoName">프로세서/칩셋</div>
-							<div class="infoComment">
-								<div>Intel® Core™ Ultra 7 Processor 155H</div>
-								<div>(UP to 4.8 GHz 24MB L3 Cache)</div>
+							<div class="infoName specName2">스펙2</div>
+							<div class="infoComment specInfo2">
+								<div>스펙2</div>
 							</div>
 						</div>
 						<div class="info">
-							<div class="infoName">메모리</div>
-							<div class="infoComment">
-								<div>32 GB LPDDR5X Memory (On Board 32 GB)</div>
+							<div class="infoName specName3">스펙3</div>
+							<div class="infoComment specInfo3">
+								<div>스펙3</div>
 							</div>
 						</div>
 					</div>
@@ -181,15 +192,6 @@
 											<td>Default</td>
 											<td>Default</td>
 											<td>Default</td>
-										</tr>
-										<tr class="table-active">
-											<td>1</td>
-											<td>TB - Monthly</td>
-											<td>01/04/2012</td>
-											<td>Approved</td>
-											<td>Approved</td>
-											<td>Approved</td>
-											<td>Approved</td>
 										</tr>
 									</tbody>
 								</table>
