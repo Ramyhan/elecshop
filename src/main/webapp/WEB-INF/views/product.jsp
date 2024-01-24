@@ -61,7 +61,7 @@
 	
 	
 	.info {
-		border-bottom:solid 1px #ffbe33;
+		border-bottom:solid 1px #AAAAAA;
 		font-family: "고딕";
 	}
 	
@@ -195,12 +195,10 @@
 								</table>
 							</div>
 						</div>
-						
 					</div>
 					<!-- //상품평 -->
 				</div>
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/include/bottom.jsp"%>
