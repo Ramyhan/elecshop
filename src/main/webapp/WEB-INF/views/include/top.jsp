@@ -57,7 +57,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item"> <!-- active -->
-                <a class="nav-link" href="#">노트북 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/productList?ptype=1">노트북 <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">모니터</a>
@@ -85,7 +85,7 @@
               </a>
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item" href="/login">로그인</a> 
-				<a class="dropdown-item" href="#">회원가입</a> 
+				<a class="dropdown-item" href="/signup">회원가입</a> 
 				</div>
 				</div>
 				<div class="dropdown">
