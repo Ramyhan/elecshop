@@ -1,10 +1,21 @@
 package com.kh.elecshop.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.service.MemberService;
+
+import lombok.extern.log4j.Log4j;
 
 @Controller
+@Log4j
 public class DongWiController {
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("/main")
 	public void main() {
@@ -14,8 +25,15 @@ public class DongWiController {
 	public void login() {
 		
 	}
-	@GetMapping("/singup")
-	public void singUp() {
+	@GetMapping("/signup")
+	public void signup() {
 		
+	}
+	
+	@PostMapping("/registerMember")
+	public String registerMember(MemberVO memberVO) {
+		boolean result = memberService.registerMember(memberVO);
+		System.out.println(result);
+		return "redirect:/login";
 	}
 }
