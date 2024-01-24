@@ -38,6 +38,7 @@ body{
 .clearfix a{
 	color: black;
 }
+
 .link_title{
 	font-family:fantasy;
 	font-weight: 800;
@@ -49,9 +50,14 @@ body{
 	border-radius: 16px;
 	border:0px;
 	background-color: white;
+	width: 100%;
+	height: 100%;
 }
 .card-body{
 	border-bottom: 2px solid;
+	background-color: white;
+	color: gray;
+	border-top: 0px;
 }
 .clearfix li a{
 	background-color: white;
@@ -60,118 +66,132 @@ body{
 	background-color: white;
     border-radius: 0;
 }
+.card-header:first-child a{
+	color: black;
+}
+.card-header:first-child a:hover{
+	color:#FFD369;
+}
 
 </style>
-	<div class="question_tab_list" style="padding-top: 33px;">
-		<div class="d-flex justify-content-center">
-			<ul class="clearfix">
-				<li class="on">
-					<a href="#">
-						<em class="icon_wrap all">
-							<span class="icon" style="background:url(/resources/css/dongyeong/images/mark-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">전체</span>	
-						</em>
-					</a>
-				</li>								
-				<li id="CategoryNo_20" class="">
-					<a href="#">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/product-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">상품</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_21" class="">
-					<a href="#">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(//image2.compuzone.co.kr/img/faqCategory/21/faq_PCImg_21.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">주문/결제</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_22" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=22">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/delivery-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">배송</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_23" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=23">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/shipping-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">반품/교환/환불</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_24" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=24">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/point-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">이벤트/적립금</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_91" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=91">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/gear-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">A/S</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_25" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=25">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/user-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">회원</span>					
-						</em>
-					</a>
-				</li>					
-				<li id="CategoryNo_105" class="">
-					<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=105">
-						<em class="icon_wrap">
-							<span class="icon" style="background-image:url(/resources/css/dongyeong/images/etc-48.png);background-repeat: no-repeat;"></span>
-							<span class="link_title">기타</span>					
-						</em>
-					</a>
-				</li>					
-			</ul>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-					<div style="background-color: black; height: 2px;"></div>
-					<div id="card-203733">
-						<div class="card">
-							<div class="card-header">
-								 <a class="card-link collapsed" data-toggle="collapse" data-parent="#card-203733" href="#card-element-312844">Collapsible Group Item #1</a>
-							</div>
-							<div id="card-element-312844" class="collapse">
-								<div class="card-body">
-									Anim pariatur cliche...
-								</div>
+<script>
+$(function(){
+	
+})
+</script>
+<div class="question_tab_list" style="padding-top: 33px;">
+	<div class="d-flex justify-content-center">
+		<ul class="clearfix">
+			<li class="on">
+				<a href="#">
+					<em class="icon_wrap all">
+						<span class="icon" style="background:url(/resources/css/dongyeong/images/mark-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">전체</span>	
+					</em>
+				</a>
+			</li>								
+			<li id="CategoryNo_20" class="">
+				<a href="#">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/product-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">상품</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_21" class="">
+				<a href="#">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(//image2.compuzone.co.kr/img/faqCategory/21/faq_PCImg_21.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">주문/결제</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_22" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=22">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/delivery-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">배송</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_23" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=23">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/shipping-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">반품/교환/환불</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_24" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=24">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/point-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">이벤트/적립금</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_91" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=91">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/gear-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">A/S</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_25" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=25">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/user-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">회원</span>					
+					</em>
+				</a>
+			</li>					
+			<li id="CategoryNo_105" class="">
+				<a href="../cscenter/faq_list.htm?FaqBigCategoryNo=105">
+					<em class="icon_wrap">
+						<span class="icon" style="background-image:url(/resources/css/dongyeong/images/etc-48.png);background-repeat: no-repeat;"></span>
+						<span class="link_title">기타</span>					
+					</em>
+				</a>
+			</li>					
+		</ul>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div style="background-color: black; height: 2px;"></div>
+				<div id="card-203733">
+					<div class="card">
+						<div class="card-header">
+							 <a class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-312844">질문 1
+							 <i class="fa fa-angle-down"></i>
+							 </a>
+						</div>
+						<div id="card-element-312844" class="collapse">
+							<div class="card-body">
+								Anim pariatur cliche...
 							</div>
 						</div>
-						<div class="card">
-							<div class="card-header">
-								 <a class="collapsed card-link" data-toggle="collapse" data-parent="#card-203733" href="#card-element-376540">Collapsible Group Item #2</a>
-							</div>
-							<div id="card-element-376540" class="collapse">
-								<div class="card-body">
-									Anim pariatur cliche...
-								</div>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							 <a class="collapsed card-link d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-376540">질문2
+							 <i class="fa fa-angle-down"></i>
+							 </a>
+						</div>
+						<div id="card-element-376540" class="collapse">
+							<div class="card-body">
+								Anim pariatur cliche...
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2">
-				</div>
+			</div>
+			<div class="col-md-2">
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</div>
+<%@ include file="/WEB-INF/views/include/bottom.jsp"%>
