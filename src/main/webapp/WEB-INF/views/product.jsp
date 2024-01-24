@@ -36,7 +36,7 @@
 					<span style="width: 50%"></span>
 				</div>
 				<div style="margin-left:130px;">3.5점 (150건)</div><br><br>
-				<h3>가격: 3,500,000</h3>
+				<h3>가격: 3,140,000</h3>
 			</div>
 		</div>
 		</div>
