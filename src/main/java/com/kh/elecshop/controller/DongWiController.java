@@ -10,4 +10,8 @@ public class DongWiController {
 	public void main() {
 		
 	}
+	@GetMapping("/login")
+	public void login() {
+		
+	}
 }
