@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <div class="container-fluid login">
-	<div class="row">
+<div class="login-ui" style=" background-color: #202020; 
+border: solid 1px #FFD369; border-radius: 15px;">
+	<h3 style="text-align: center; margin-top: 20px">로그인</h3>
+	<div class="row" style="margin: 110px; ">
 		<div class="col-md-12">
 			<form role="form">
 				<div class="form-group">
-					 
 					<label for="id">
 						아이디
 					</label>
@@ -25,5 +27,6 @@
 			</form>
 		</div>
 	</div>
+</div>
 </div>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>
