@@ -86,6 +86,4 @@ body{
 	</div>
 	<div class="box"></div>
 </div>
-
-</body>
-</html>
+<%@ include file="/WEB-INF/views/include/bottom.jsp"%>

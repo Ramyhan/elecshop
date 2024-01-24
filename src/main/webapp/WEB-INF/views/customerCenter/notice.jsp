@@ -25,7 +25,7 @@
 				<div class="col-md-8">
 				<div style="font-weight: bolder; font-size: 25px;">공지사항</div>
 				<div class="d-flex justify-content-between" 
-    			style="width: 100%; height: 20%; border: 3px solid #B7C4CF; background-color: gray;">
+    			style="width: 100%; height: 20%; border: 3px solid #B7C4CF; background-color: white;">
     				<div class="notice-div notice align-self-center">
         				<a class="notice" href="#">전체</a>
     				</div>
@@ -84,5 +84,4 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/include/bottom.jsp"%>
