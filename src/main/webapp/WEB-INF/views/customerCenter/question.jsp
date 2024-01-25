@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
+<script>
+$(function(){
+	$("")
+});
+</script>
 <style>
 body{
 	background-color: white;
@@ -73,9 +79,9 @@ body{
 	color:#FFD369;
 }
 .card-span{
-	position: absolute;
-	bottom: 9px;
-	left: 41px;
+	position: fixed;
+	top: 9px;
+	left: 50px;
 }
 
 </style>
@@ -162,40 +168,30 @@ $(function(){
 		</ul>
 	</div>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" style="margin-bottom: 50px;">
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
 				<div style="background-color: black; height: 2px;"></div>
 				<div id="card-203733">
-					<div class="card">
-						<div class="card-header">
-							 <a class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-312844">
-							 <i class="fa fa-question-circle"></i>
-							 <span class="card-span">질문 1</span>
-							 <i class="fa fa-angle-down"></i>
-							 </a>
-						</div>
-						<div id="card-element-312844" class="collapse">
-							<div class="card-body">
-								Anim pariatur cliche...
+					<c:forEach var="question" items="${questionList}">
+						<div class="card">
+							<div class="card-header">
+								 <a data-qno="${question.qno}" class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-${question.qno}">
+								 <i class="fa fa-question-circle"></i>
+								 <span class="card-span" data-qcategory="${question.qcategory}" data-qsubcategory="${question.qsubcategory}">
+								 	${question.qtitle}
+								 </span>
+								 <i class="fa fa-angle-down"></i>
+								 </a>
+							</div>
+							<div id="card-element-${question.qno}" class="collapse">
+								<div class="card-body">
+									${question.qcontent}
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="card">
-						<div class="card-header">
-							 <a class="collapsed card-link d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-376540">
-							 <i class="fa fa-question-circle"></i>
-							 <span class="card-span">질문 2</span>
-							 <i class="fa fa-angle-down"></i>
-							 </a>
-						</div>
-						<div id="card-element-376540" class="collapse">
-							<div class="card-body">
-								Anim pariatur cliche...
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="col-md-2">
