@@ -42,11 +42,11 @@ public class ProductController {
 	@GetMapping("/product")
 	public void product(int pno, Model model) {
 		ProductVO productVO = productService.getProduct(pno);
-		List<ProductOptionVO> OptionList = ProductOptionService.getOption(pno);
+		List<ProductOptionVO> optionList = ProductOptionService.getOption(pno);
 		List<ReviewVO> reviewList = reviewService.getReviewList(pno);
 		log.info("productVO: " + productVO);
 		model.addAttribute("productVO", productVO);
-		model.addAttribute("optionList", OptionList);
+		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewList", reviewList);
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
 <style>
@@ -103,8 +104,83 @@ $(function() {
 		$("#totalPrice").text(totalPrice);
 	});
 	
+	// 리뷰등록 모달 띄우기
 	$("#regReview").click(function() {
+		$("#myModalLabel").text("상품평 등록");
+		$("#rcontent").val("");
+		$("#registerReview").val("작성 완료");
 		$("#modal-review").modal("show");
+	});
+	
+	// 리뷰등록 모달 띄우기
+	$(".btnReviewUpdate").click(function() {
+		var rno = $(this).attr("data-update-rno");
+		var url = "/review/" + rno;
+		
+		$.get(url, function(rData) {
+			console.log("rData: ", rData);
+			$("#myModalLabel").text("상품평 수정");
+			
+			
+			$("#mid").val(rData.mid);
+			$("#rcontent").val(rData.rcontent);
+			var test = $(".rgrade").is("text", rData.rgade + "점");
+			console.log("test: ", test);
+			
+			$("#registerReview").val("수정 완료");
+			$("#modal-review").modal("show");
+		});
+	});
+	
+	// 리뷰 등록 버튼
+	$("#registerReview").click(function() {
+		var pno = $(this).attr("data-pno");
+		var mid = $("#mid").val();
+		var rcontent = $("#rcontent").val();
+		var rgrade = $("#rgrade:checked").val();
+		
+		var url = "/review/register";
+		var method = "post";
+		var sData = {
+				"pno" : pno,
+				"mid" : mid,
+				"rcontent" : rcontent,
+				"rgrade" : rgrade
+		}
+		console.log("sData: ", sData);
+		
+		$.ajax({
+			"method" : method,
+			"url" : url,
+			"data" : JSON.stringify(sData),
+			"contentType" : "application/json",
+			"success" : function(rData) {
+				console.log("rData: ", rData);
+				if (rData == "true") {
+					alert("등록을 성공적으로 마쳤습니다.");
+					$("#modal-review").modal("hide");
+				}
+			}
+		})
+	});
+	
+	// 리뷰 삭제
+	$(".btnReviewDelete").click(function() {
+		var that = $(this);
+		var rno = $(this).attr("data-delete-rno");
+		$.ajax({
+			"method" : "delete",
+			"url" : "/review/" + rno,
+			"success" : function(rData) {
+				if (rData == "true") {
+					var deleteTarget = that.parent().parent();
+					deleteTarget.fadeOut(1000);
+				}
+			}
+		});
+// 		$.delete("/review/" + rno, sData, function(rData) {
+// 			console.log("rData: ", rData);
+// 		});
 	});
 });
 </script>
@@ -213,6 +289,9 @@ $(function() {
 							<span style="width: 50%"></span>
 						</div>
 						<div class="row" style="padding-top: 30px;">
+						<button type="button" class="btn btn-primary" id="regReview" style="left: 100px; margin:0px 0px 10px 15px;">
+							상품평 보기
+						</button>
 						<button type="button" class="btn btn-success" id="regReview" style="left: 100px; margin:0px 0px 10px 15px;">
 							상품평 등록
 						</button>
@@ -236,9 +315,9 @@ $(function() {
 											<td>${review.mid}</td>
 											<td>${review.rcontent}</td>
 											<td>${review.rgrade}</td>
-											<td>${review.rregdate}</td>
-											<td><button type="button" class="btn btn-warning">수정</button></td>
-											<td><button type="button" class="btn btn-danger">삭제</button></td>
+											<td><fmt:formatDate value="${review.rregdate}" pattern="yyyy-MM-dd"/></td>
+											<td><button type="button" class="btn btn-warning btnReviewUpdate" data-update-rno="${review.rno}">수정</button></td>
+											<td><button type="button" class="btn btn-danger btnReviewDelete" data-delete-rno="${review.rno}">삭제</button></td>
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -269,14 +348,22 @@ $(function() {
 						</div>
 						<div class="modal-body">
 							<label for="mid">작성자</label>
-							<input class="form-control" type="text" id="mid" readonly>
+							<input class="form-control" type="text" id="mid" class="mid">
 							<label for="rcontent">내용</label>
 							<textarea class="form-control" id="rcontent" class="rcontent"></textarea>
+							<label>평점</label>
+							<div class="col-md-12">
+								<input type="radio" name="rgrade" id="rgrade" class="rgrade" value="1"/>1점
+								&emsp;<input type="radio" name="rgrade" id="rgrade" class="rgrade" value="2"/>2점
+								&emsp;<input type="radio" name="rgrade" id="rgrade" class="rgrade" value="3" checked/>3점
+								&emsp;<input type="radio" name="rgrade" id="rgrade" class="rgrade" value="4"/>4점
+								&emsp;<input type="radio" name="rgrade" id="rgrade" class="rgrade" value="5"/>5점
+							</div>
 						</div>
 						<div class="modal-footer">
 							 
-							<button type="button" class="btn btn-primary">
-								상품평 등록
+							<button type="button" class="btn btn-primary" id="registerReview" data-pno="${productVO.pno}">
+								작성 완료
 							</button> 
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">
 								취소
