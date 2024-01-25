@@ -16,5 +16,10 @@ public class MemberServiceImpl implements MemberService {
 		int count = memberMapper.insertMember(memberVO);
 		return (count == 1) ? true : false;
 	}
+	@Override
+	public MemberVO login(String mid, String mpw) {
+		MemberVO memberVO = memberMapper.login(mid, mpw);
+		return memberVO;
+	}
 
 }

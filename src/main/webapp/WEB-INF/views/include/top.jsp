@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,8 +85,17 @@
                 </i>
               </a>
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <c:choose>
+               <c:when test="${not empty loginInfo }">
+               	<span> ${loginInfo.mid } ${loginInfo.mname }</span>
+				<a class="dropdown-item" href="#">마이페이지</a> 
+               
+               </c:when>
+               <c:otherwise>
 				<a class="dropdown-item" href="/login">로그인</a> 
 				<a class="dropdown-item" href="/signup">회원가입</a> 
+               </c:otherwise>
+               </c:choose>
 				</div>
 				</div>
 				<div class="dropdown">
@@ -114,6 +124,4 @@
     </header>
 		</div>
 		</div>
-		
-		
 		<!-- //상단바 -->

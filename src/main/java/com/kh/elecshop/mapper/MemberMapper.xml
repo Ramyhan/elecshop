@@ -9,4 +9,9 @@
 		values
 		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mphone}, #{mbirthday})
 	</insert>
+	<select id="login" resultType="com.kh.elecshop.domain.MemberVO">
+	select * from tbl_member
+	where mid = #{mid}
+	and mpw = #{mpw}
+	</select>
 </mapper>
