@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
 <style>
 	h1 {
@@ -77,6 +78,7 @@
 </style>
 <script>
 $(function() {
+	// 스펙 정보 세팅
 	var spec1 = "${productVO.pinfo1}".split(",");
 	var spec2 = "${productVO.pinfo2}".split(",");
 	var spec3 = "${productVO.pinfo3}".split(",");
@@ -86,6 +88,9 @@ $(function() {
 	$(".specInfo2").text(spec2[1]);
 	$(".specName3").text(spec3[0]);
 	$(".specInfo3").text(spec3[1]);
+	
+	// 옵션 선택시 현재가격 변경
+	
 });
 </script>
 <body>
@@ -109,26 +114,49 @@ $(function() {
 						<div class="divOptionName">SSD</div>
 						<div class="divOption">
 							<div>
-								<select class="selectOption" style="width: 100%; border-radius:10px;">
+								<select id="option" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option selected>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionVO}" var="option">
+								<c:if test="${ option.otype == 1 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
 								</select>
 							</div>
 						</div><br>
 						<div class="divOptionName">RAM</div>
 						<div class="divOption">
 							<div>
-								<select class="selectOption" style="width: 100%; border-radius:10px;">
+								<select id="option" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option selected>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionVO}" var="option">
+								<c:if test="${ option.otype == 2 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
 								</select>
 							</div>
+						</div><br>
+						<div class="divOptionName">Color</div>
+						<div class="divOption">
+							<div>
+								<select id="option" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
+									<option selected>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionVO}" var="option">
+								<c:if test="${ option.otype == 3 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
+								</select>
+							</div>
+						</div>
+						
+						<div style="padding: 10px 0px 10px 0px;">
+							<div style="font-size: 30px; font-family: '고딕'">
+								현재가: <span id="totalPrice">${productVO.pprice}"</span>원
+							</div>
+							<button type="button" class="btn btn-warning">구매하기</button>
+							<button type="button" class="btn btn-success">장바구니에 담기</button>
 						</div>
 					</div>
 					<!-- //상품옵션 -->
