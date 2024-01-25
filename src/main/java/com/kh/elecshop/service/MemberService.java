@@ -5,4 +5,6 @@ import com.kh.elecshop.domain.MemberVO;
 public interface MemberService {
 
 	public boolean registerMember(MemberVO memberVO);
+	
+	public MemberVO login(String mid, String mpw);
 }

@@ -20,7 +20,6 @@ body {
 /* 공지 */
 #notice{
 	background-color: #222831; 
-	border-top: solid 1px #FFD369;
 	height: 50px;
 }
 /* 상단바 */
@@ -29,6 +28,7 @@ body {
     height: auto;
     margin: auto; 
     background-color: #FFFFFF;
+    border-bottom: solid 1px #FFD369;
 }
 #top {
     background-color: #010101;
