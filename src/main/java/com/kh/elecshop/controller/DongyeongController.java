@@ -24,7 +24,10 @@ public class DongyeongController {
 	private NoticeService noticeService;
 	
 	@GetMapping("/FAQ")
-	public void FAQ() {
+	public void FAQ(Model model) {
+		List<SubNoticeDTO> list = noticeService.getSubNotice();
+		model.addAttribute("subNotice", list);
+		
 		
 	}
 	@GetMapping("/notice")
@@ -35,11 +38,8 @@ public class DongyeongController {
 	}
 	@GetMapping("/noticePage")
 	public void noticePage(int nno, Model model) {
-		System.out.println("엠엠오" + nno);
 		NoticeVO noticeVO = noticeService.getNoticePage(nno);
-		System.out.println("22"+noticeVO);
 		model.addAttribute("noticePage", noticeVO);
-		//return "redirect:/customerCenter/noticePage";
 	}
 	@GetMapping("/inquiry")
 	public void inquiry() {
