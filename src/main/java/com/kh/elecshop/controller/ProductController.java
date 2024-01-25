@@ -36,6 +36,7 @@ public class ProductController {
 		List<ProductDTO> list = productService.getProductList(ptype);
 		log.info("list: " + list);
 		model.addAttribute("productDTOList", list);
+		// test
 	}
 		
 	@GetMapping("/product")
