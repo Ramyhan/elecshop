@@ -4,7 +4,16 @@
 <%@include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
 <script>
 $(function(){
-	$("")
+	$(".card-a").click(function(){
+		if($(this).attr("aria-expanded") == "true"){
+			$(this).find(".question-up").css("opacity", "0%");
+			$(this).find(".question-down").css("opacity", "100%");
+		}else{
+			$(this).find(".question-up").css("opacity", "100%");
+			$(this).find(".question-down").css("opacity", "0%");
+		}
+	});
+	
 });
 </script>
 <style>
@@ -82,6 +91,11 @@ body{
 	position: fixed;
 	top: 9px;
 	left: 50px;
+}
+.question-up{
+	position: absolute;
+	left: 96.2%;
+	opacity: 0%;
 }
 
 </style>
@@ -177,12 +191,13 @@ $(function(){
 					<c:forEach var="question" items="${questionList}">
 						<div class="card">
 							<div class="card-header">
-								 <a data-qno="${question.qno}" class="card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-${question.qno}">
+								 <a data-qno="${question.qno}" class="card-a card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-${question.qno}">
 								 <i class="fa fa-question-circle"></i>
 								 <span class="card-span" data-qcategory="${question.qcategory}" data-qsubcategory="${question.qsubcategory}">
 								 	${question.qtitle}
 								 </span>
-								 <i class="fa fa-angle-down"></i>
+								 <i class="question-down fa fa-angle-down"></i>
+								  <i class="question-up fa fa-angle-up"></i>
 								 </a>
 							</div>
 							<div id="card-element-${question.qno}" class="collapse">

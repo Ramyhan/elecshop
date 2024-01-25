@@ -6,4 +6,5 @@ import com.kh.elecshop.domain.QuestionVO;
 
 public interface QuestionMapper {
 	public List<QuestionVO> selectQuestionList();
+	public List<QuestionVO> selectQuestionTop5();
 }

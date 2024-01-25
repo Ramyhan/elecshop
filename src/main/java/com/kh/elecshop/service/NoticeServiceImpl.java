@@ -24,6 +24,11 @@ public class NoticeServiceImpl implements NoticeService{
 		NoticeVO noticeVO = mapper.selectByNno(nno);
 		return noticeVO;
 	}
+	@Override
+	public List<SubNoticeDTO> getNoticeTop5() {
+		List<SubNoticeDTO> list = mapper.selectByTop5();
+		return list;
+	}
 	
 	
 }

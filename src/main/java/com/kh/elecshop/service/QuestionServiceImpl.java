@@ -19,5 +19,11 @@ public class QuestionServiceImpl implements QuestionService{
 		List<QuestionVO> list = questionMapper.selectQuestionList();
 		return list;
 	}
+
+	@Override
+	public List<QuestionVO> getQuestionTop5() {
+		List<QuestionVO> list = questionMapper.selectQuestionTop5();
+		return list;
+	}
 	
 }
