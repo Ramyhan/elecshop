@@ -85,7 +85,7 @@
               </a>
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item" href="/login">로그인</a> 
-				<a class="dropdown-item" href="#">회원가입</a> 
+				<a class="dropdown-item" href="/signup">회원가입</a> 
 				</div>
 				</div>
 				<div class="dropdown">

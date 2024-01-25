@@ -32,7 +32,7 @@ body {
 }
 #top {
     background-color: #010101;
-    height: 100px;
+    height: auto;
     width: 100%;
     position: relative;
 }
@@ -266,14 +266,42 @@ footer{
 	background-color: #101010;
  	color: white;
  	align-items: center;
-    justify-content: center;
 }
 .login-ui {
 	 background-color: #202020; 
 	 border: solid 1px #FFD369;
-	 border-radius: 15px;"
+	 border-radius: 15px;
+	 box-shadow: 2px 2px 100px rgb(180,180,180);
 }
 .login-ui > h3{
 	text-align: center;
 	
+}
+#btn-addr-search:hover{
+	background-color: #FFD369;
+}
+#btn-register{
+	
+}
+.signup {
+	display: flex;
+/* 	margin-top: 50px; */
+	justify-content: center;
+/* 	height: 100%; */
+/* 	align-items: center; */
+	color: white;
+	background-color: #101010;
+}
+.signup-row{
+	 background-color: #202020; 
+	 border: solid 1px #FFD369;
+	 border-radius: 15px;
+	 box-shadow: 2px 2px 100px rgb(180,180,180);
+	 margin: 80px;
+}
+.signup-row > .col-md-12{
+	 padding: 20px;
+}
+.signup input{
+	width: 340px;
 }
