@@ -10,4 +10,9 @@
 		select * from t_notice
 		where nno = #{nno}
 	</select>
+	<select id="selectByTop5" resultType="com.kh.elecshop.domain.SubNoticeDTO">
+		select nno,ncategory, ntitle, nregdate from
+		(select * from t_notice order by rownum desc)
+		where rownum between 1 and 5
+	</select>
 </mapper>

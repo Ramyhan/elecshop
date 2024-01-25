@@ -1,5 +1,6 @@
 package com.kh.elecshop.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,12 +34,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		log.info("postHandle");
 		ModelMap map = (ModelMap)modelAndView.getModel();
 		MemberVO memberVO = (MemberVO)map.get("loginInfo");
+		Boolean useCookie = (boolean)map.get("useCookie");
 		log.info(memberVO);
 		modelAndView.setView(null);
 		if (memberVO == null) {
 			modelAndView.setViewName("redirect:/login");
 		}else {
 			HttpSession session = request.getSession();
+			if(useCookie != null && useCookie == true) {
+				Cookie cookie = new Cookie("savedId", memberVO.getMid());
+				cookie.setMaxAge(30);
+				response.addCookie(cookie);
+			}
 			session.setAttribute("loginInfo", memberVO);
 			modelAndView.setViewName("redirect:/main");
 		}

@@ -30,9 +30,10 @@ public class CustomerCenterCotroller {
 	
 	@GetMapping("/FAQ")
 	public void FAQ(Model model) {
-		List<SubNoticeDTO> list = noticeService.getSubNotice();
-		model.addAttribute("subNotice", list);
-		
+		List<SubNoticeDTO>top5Notice = noticeService.getNoticeTop5();
+		List<QuestionVO> top5Question = questionService.getQuestionTop5();
+		model.addAttribute("top5Notice", top5Notice);
+		model.addAttribute("top5Question", top5Question);
 		
 	}
 	@GetMapping("/notice")

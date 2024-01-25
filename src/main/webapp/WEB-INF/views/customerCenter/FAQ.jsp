@@ -3,6 +3,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
+<script>
+$(function(){
+	$(".card-a").click(function(){
+		if($(this).attr("aria-expanded") == "true"){
+			$(this).find(".question-up").css("opacity", "0%");
+			$(this).find(".question-down").css("opacity", "100%");
+		}else{
+			$(this).find(".question-up").css("opacity", "100%");
+			$(this).find(".question-down").css("opacity", "0%");
+		}
+	});
+	
+});
+</script>
 <style>
 body{
  	background-color: white;
@@ -26,6 +40,11 @@ i{
 	color: gray;
 	border-top: 0px;
 }
+.question-up{
+	position: absolute;
+	left: 96.35%;
+	opacity: 0%;
+}
 </style>
 <div class="container-fluid">
 	<div class="row">
@@ -43,12 +62,12 @@ i{
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="subNotice" items="${subNotice}">
+							<c:forEach var="top5Notice" items="${top5Notice}">
 								<tr>
-									<td>(${subNotice.ncategory})</td>
-									<td>${subNotice.ntitle}</td>
+									<td>(${top5Notice.ncategory})</td>
+									<td>${top5Notice.ntitle}</td>
 									<td style="text-align: right;">
-										<fmt:formatDate value="${subNotice.nregdate}"/>
+										<fmt:formatDate value="${top5Notice.nregdate}"/>
 									</td>
 								</tr>
 							</c:forEach>
@@ -86,83 +105,30 @@ i{
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-bottom: 50px;">
 			<div class="d-flex justify-content-between">
-			<h3 style="font">자주 묻는 질문 리스트</h3>
+			<h3 style="font">자주 묻는 질문 TOP 5</h3>
 			<a href="#">더보기</a>
 			</div>	
 			<hr style="border: solid;">
 			<div id="card-51726" >
+			<c:forEach var="questionTop5" items="${top5Question}">
 				<div class="faq-card">
 					<div class="card-header">
-						 <a class="question card-link" data-toggle="collapse" data-parent="#card-51726" href="#question1">
+						 <a class="card-a question card-link" data-toggle="collapse" data-parent="#card-51726" href="#card-${questionTop5.qno}">
 						  <i class="fa fa-question-circle"></i>
-						 <span style="width:100%; margin-left:9px">question1</span>
-						 <i class="fa fa-angle-down"></i>
+						 <span style="width:100%; margin-left:9px">${questionTop5.qtitle}</span>
+						 <i class="question-down fa fa-angle-down"></i>
+						  <i class="question-up fa fa-angle-up"></i>
 						 </a>
 					</div>
-					<div id="question1" class="collapse">
+					<div id="card-${questionTop5.qno}" class="collapse">
 						<div class="card-body">
-							Anim pariatur cliche...
+							${questionTop5.qcontent }
 						</div>
 					</div>
 				</div>
-				<div class="faq-card">
-					<div class="card-header">
-						 <a class="question card-link" data-toggle="collapse" data-parent="#question2" href="#question2">
-						 <i class="fa fa-question-circle"></i>
-						 <span style="width:100%; margin-left:9px">question2</span>
-						 <i class="fa fa-angle-down"></i>
-						 </a>
-					</div>
-					<div id="question2" class="collapse">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="faq-card">
-					<div class="card-header">
-						 <a class="question card-link" data-toggle="collapse" data-parent="#card-51726" href="#question3">
-						 <i class="fa fa-question-circle"></i>
-						 <span style="width:100%; margin-left:9px">question3</span>
-						 <i class="fa fa-angle-down"></i>
-						 </a>
-					</div>
-					<div id="question3" class="collapse">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="faq-card">
-					<div class="card-header">
-						 <a class="question card-link" data-toggle="collapse" data-parent="#card-51726" href="#question4">
-						 <i class="fa fa-question-circle"></i>
-						 <span style="width:100%; margin-left:9px">question4</span>
-						 <i class="fa fa-angle-down"></i>
-						 </a>
-					</div>
-					<div id="question4" class="collapse">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="faq-card">
-					<div class="card-header">
-						 <a class="question card-link" data-toggle="collapse" data-parent="#card-51726" href="#question5">
-						 <i class="fa fa-question-circle"></i>
-						 <span style="width:100%; margin-left:9px">question5</span>
-						 <i class="fa fa-angle-down"></i>
-						 </a>
-					</div>
-					<div id="question5" class="collapse">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 		<!-- //질문카드 -->
