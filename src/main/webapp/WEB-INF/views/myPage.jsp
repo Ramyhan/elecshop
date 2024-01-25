@@ -18,6 +18,6 @@
 	</div>
 </div>
 <div class="myPage-main">
-	
+	일단 메인
 </div>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>
