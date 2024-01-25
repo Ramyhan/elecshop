@@ -32,7 +32,7 @@ public class CustomerCenterCotroller {
 	public void FAQ(Model model) {
 		List<SubNoticeDTO> list = noticeService.getSubNotice();
 		model.addAttribute("subNotice", list);
-		
+		// test
 		
 	}
 	@GetMapping("/notice")
