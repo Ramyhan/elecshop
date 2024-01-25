@@ -61,19 +61,19 @@
                 <a class="nav-link" href="/productList?ptype=1">노트북 <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">모니터</a>
+                <a class="nav-link" href="/productList?ptype=2">모니터</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">태블릿</a>
+                <a class="nav-link" href="/productList?ptype=3">태블릿</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">음향기기</a>
+                <a class="nav-link" href="/productList?ptype=4">음향기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">주변기기</a>
+                <a class="nav-link" href="/productList?ptype=5">주변기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">고객센터</a>
+                <a class="nav-link" href="/customerCenter/shop">고객센터</a>
               </li>
             </ul>
             <div class="user_option" style="
