@@ -76,9 +76,13 @@
                 <a class="nav-link" href="/customerCenter/FAQ">고객센터</a>
               </li>
             </ul>
-            <div class="user_option" style="
-            margin-left: 100px;
-				">
+            <div class="user_option" style="">
+            <c:choose>
+            <c:when test="${not empty loginInfo}">
+            <p>${loginInfo.mid}님<br>반갑습니다.</p>
+            </c:when>
+            </c:choose>
+            
 				<div class="dropdown user-icon">
               <a href="" class="user_link dropdown topbar-dropdown" data-toggle="dropdown">
                 <i class="fa fa-user" aria-hidden="true">
@@ -87,8 +91,8 @@
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <c:choose>
                <c:when test="${not empty loginInfo }">
-               	<span> ${loginInfo.mid } ${loginInfo.mname }</span>
-				<a class="dropdown-item" href="#">마이페이지</a> 
+				<a class="dropdown-item" href="/myPage">마이페이지</a> 
+				<a class="dropdown-item" href="/logout">로그아웃</a> 
                
                </c:when>
                <c:otherwise>

@@ -20,6 +20,15 @@
 					</label>
 					<input type="password" class="form-control" id="mpw" name="mpw" />
 				</div>
+				<div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                          <input type="checkbox" class="custom-control-input" 
+                          	id="useCookie" name="useCookie">
+                          <label class="custom-control-label" for="useCookie">
+                          	아이디 저장
+                          </label>
+                      </div>
+                  </div>
 				<button type="submit" class="btn btn-warning">
 					로그인
 				</button>
@@ -28,4 +37,22 @@
 	</div>
 </div>
 </div>
+
+<script>
+$(function (){
+	var cookie = document.cookie;
+	console.log(cookie);
+	var cookies = cookie.split("=");
+	console.log(cookies);
+	for(var v = 0; v < cookies.length; v++){
+		if(cookies[0].trim() == "savedId"){
+			var savedId = cookies[1];
+			console.log(savedId);
+			$("#mid").val(savedId);
+		}
+	}
+	
+	
+});
+</script>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>
