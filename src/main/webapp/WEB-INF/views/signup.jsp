@@ -6,51 +6,51 @@
 		<div class="col-md-12">
 			<form role="form" class="signup-form" action="/registerMember" method="post">
 				<div class="form-group">
-					<label for="mpw">
+					<label>
 						아이디
 					</label>
-					<input type="text" class="form-control" id="mid" name="mpw" />
+					<input type="text" class="form-control" id="mid" name="mid" />
 				</div>
 				<div class="form-group">
 					 
-					<label for="mpw">
+					<label>
 						비밀번호
 					</label>
 					<input type="password" class="form-control" id="mpw" name="mpw" />
 				</div>
-<!-- 				<div class="form-group"> -->
-					 
-<!-- 					<label for="mpw2"> -->
-<!-- 						비밀번호 재확인 -->
-<!-- 					</label> -->
-<!-- 					<input type="password" class="form-control" id="mpw2" name="mpw2" /> -->
-<!-- 				</div> -->
 				<div class="form-group">
-					<label for="mname">
+					<label>
 						이름
 					</label>
 					<input type="text" class="form-control" id="mname" name="mname" />
 				</div>
 				<div class="form-group">
-					<label for="date">
+					<label>
 						생년월일
 					</label>
-					<input type="date" max="2024-01-01" min="1920-01-01" value="2000-01-01" class="form-control" 
+					<input type="date" pattern="yyyy-MM-dd" max="2024-01-01" min="1920-01-01" value="2000-01-01" class="form-control" 
 					id="mbirthday" name="mbirthday" />
+<!-- 					<input type="text" class="form-control" id="mbirthday" name="mbirthday" /> -->
 				</div>
 				<div class="form-group">
-					<label for="maddr">
+					<label>
 						주소
 					</label>
-					<input type="text" class="form-control" id="maddr" name="maddr" readonly><br>
+					<input type="text" class="form-control" id="maddr" name="maddr"><br>
 					<input type="text" id="maddr_detail" name="maddr_detail">
 					<button type="button" id="btn-addr-search" class="btn btn-light">주소 검색</button>
 				</div>
 				<div class="form-group">
-					<label for="mphone">
+					<label>
 						핸드폰 번호
 					</label>
-					<input type="number" oninput="oninputPhone(this)" class="form-control" id="mphone" name="mphone" />
+					<input type="text" class="form-control" id="mphone" name="mphone" />
+				</div>
+				<div class="form-group">
+					<label>
+						이메일
+					</label>
+					<input type="email" class="form-control" id="memail" name="memail" />
 				</div>
 				<button id="btn-register" type="submit" class="btn btn-primary">
 					회원가입
@@ -63,12 +63,29 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 $(function(){
+	$("#btn-register").click(function(){
+		var mname = $("#mname").val();
+		var mid = $("#mid").val();
+		var mpw = $("#mpw").val();
+		var mbirthday = $("#mbirthday").val();
+		var maddr = $("#maddr").val();
+		var maddr_detail = $("#maddr_detail").val();
+		var mphone = $("#mphone").val();
+		var memail = $("#memail").val();
+		console.log("mname", mname);
+		console.log("mid", mid);
+		console.log("mpw", mpw);
+		console.log("mbirthday", mbirthday);
+		console.log("maddr", maddr);
+		console.log("maddr_detail", maddr_detail);
+		console.log("mphone", mphone);
+		console.log("memail", memail);
+	});
 	$("#btn-addr-search").click(function(){
     new daum.Postcode({
         oncomplete: function(data) {
         	console.log(data);
         	var roadAddr = data.roadAddress;
-        	console.log(roadAddr);
         	$("#maddr").val(roadAddr);
         }
     }).open();

@@ -5,8 +5,8 @@
 <mapper namespace="com.kh.elecshop.mapper.MemberMapper">
 	<insert id="insertMember">
 		insert into tbl_member
-		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mphone)
-		values(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mphone})
+		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mphone, mbirthday)
+		values
+		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mphone}, #{mbirthday})
 	</insert>
-	
 </mapper>
