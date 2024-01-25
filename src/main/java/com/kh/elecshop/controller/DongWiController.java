@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.service.MemberService;
@@ -32,8 +33,8 @@ public class DongWiController {
 	
 	@PostMapping("/registerMember")
 	public String registerMember(MemberVO memberVO) {
+		log.info(memberVO);
 		boolean result = memberService.registerMember(memberVO);
-		System.out.println(result);
 		return "redirect:/login";
 	}
 }

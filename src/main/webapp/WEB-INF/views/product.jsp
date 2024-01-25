@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
 <style>
 	h1 {
@@ -77,6 +78,7 @@
 </style>
 <script>
 $(function() {
+	// 스펙 정보 세팅
 	var spec1 = "${productVO.pinfo1}".split(",");
 	var spec2 = "${productVO.pinfo2}".split(",");
 	var spec3 = "${productVO.pinfo3}".split(",");
@@ -86,6 +88,24 @@ $(function() {
 	$(".specInfo2").text(spec2[1]);
 	$(".specName3").text(spec3[0]);
 	$(".specInfo3").text(spec3[1]);
+	
+	// 옵션 선택시 현재가격 변경
+	$(".selectOption").change(function() {
+		var option1Price = parseInt($("#selectOption1").val());
+		var option2Price = parseInt($("#selectOption2").val());
+		var option3Price = parseInt($("#selectOption3").val());
+		var totalOptionPrice = option1Price + option2Price + option3Price
+// 		console.log("totalOptionPrice: ", totalOptionPrice);
+		
+		var totalPrice = parseInt("${productVO.pprice}") + totalOptionPrice;
+// 		console.log("totalPrice: ", totalPrice);
+		
+		$("#totalPrice").text(totalPrice);
+	});
+	
+	$("#regReview").click(function() {
+		$("#modal-review").modal("show");
+	});
 });
 </script>
 <body>
@@ -109,26 +129,49 @@ $(function() {
 						<div class="divOptionName">SSD</div>
 						<div class="divOption">
 							<div>
-								<select class="selectOption" style="width: 100%; border-radius:10px;">
-									<option selected>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
+								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
+									<option value="0" selected>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionList}" var="option">
+								<c:if test="${ option.otype == 1 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
 								</select>
 							</div>
 						</div><br>
 						<div class="divOptionName">RAM</div>
 						<div class="divOption">
 							<div>
-								<select class="selectOption" style="width: 100%; border-radius:10px;">
-									<option selected>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
-									<option>-----옵션을 선택해주세요-----</option>
+								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
+									<option value="0" selected>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionList}" var="option">
+								<c:if test="${ option.otype == 2 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
 								</select>
 							</div>
+						</div><br>
+						<div class="divOptionName">Color</div>
+						<div class="divOption">
+							<div>
+								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
+									<option value="0" selected>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionList}" var="option">
+								<c:if test="${ option.otype == 3 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
+								</select>
+							</div>
+						</div>
+						
+						<div style="padding: 10px 0px 10px 0px;">
+							<div style="font-size: 30px; font-family: '고딕'">
+								현재가: <span id="totalPrice">${productVO.pprice}</span>원
+							</div>
+							<button type="button" class="btn btn-warning">구매하기</button>
+							<button type="button" class="btn btn-success">장바구니에 담기</button>
 						</div>
 					</div>
 					<!-- //상품옵션 -->
@@ -169,7 +212,10 @@ $(function() {
 						<div class="rate" style="scale: 2; left: 60px; top: 10px;">
 							<span style="width: 50%"></span>
 						</div>
-						<div class="row" style="padding-top: 50px;">
+						<div class="row" style="padding-top: 30px;">
+						<button type="button" class="btn btn-success" id="regReview" style="left: 100px; margin:0px 0px 10px 15px;">
+							상품평 등록
+						</button>
 							<div class="col-md-12">
 								<table class="table" style="color: white;">
 									<thead>
@@ -184,15 +230,17 @@ $(function() {
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach items="${reviewList}" var="review">
 										<tr>
-											<td>1</td>
-											<td>TB - Monthly</td>
-											<td>01/04/2012</td>
-											<td>Default</td>
-											<td>Default</td>
-											<td>Default</td>
-											<td>Default</td>
+											<td>${review.rno}</td>
+											<td>${review.mid}</td>
+											<td>${review.rcontent}</td>
+											<td>${review.rgrade}</td>
+											<td>${review.rregdate}</td>
+											<td><button type="button" class="btn btn-warning">수정</button></td>
+											<td><button type="button" class="btn btn-danger">삭제</button></td>
 										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -203,4 +251,46 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	
+	<!-- 리뷰등록 모달창 -->
+	<div class="row">
+		<div class="col-md-12">
+			
+			<div class="modal fade" id="modal-review" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								상품평 등록
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<label for="mid">작성자</label>
+							<input class="form-control" type="text" id="mid" readonly>
+							<label for="rcontent">내용</label>
+							<textarea class="form-control" id="rcontent" class="rcontent"></textarea>
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-primary">
+								상품평 등록
+							</button> 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">
+								취소
+							</button>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	
 <%@ include file="/WEB-INF/views/include/bottom.jsp"%>
