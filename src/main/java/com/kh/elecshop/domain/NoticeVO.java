@@ -16,5 +16,6 @@ public class NoticeVO {
 	private String ncategory;
 	private String ntitle;
 	private String content;
-	private Date regdate;
+	private Date nregdate;
+	private int count;
 }
