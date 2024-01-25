@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/customerCenterTop.jsp" %>
 <style>
 body{
@@ -42,43 +43,52 @@ body{
 	<div class="box">
 		<div class="inquiry-div-main">
 		<!-- inquiry form -->
-			<form action="">
+			<form action="" method="post" enctype="multipart/">
 				<h3 style="text-align: center;">1:1문의</h3>
 				<div class="inquiry-div-sub d-flex">
 					<label>아이디</label>
 					<em style="padding-right: 85px; color: green;">(선택)</em>
-					<div>아이디명</div>
+					<c:choose>
+						<c:when test="${not empty loginInfo}">
+							<input type="hidden" id="mid" name="iid" value="${loginInfo.mid}">
+							<div>${loginInfo.mid}</div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" id="mid" name="iid" value="비사용자">
+							<div>비회원</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="inquiry-div-sub d-flex">
 					<label>카테고리</label>
 					<em style="padding-right: 73px; color: green;">(필수)</em>
-					<select>
-						<option>반품/환불</option>
-						<option>노트북</option>
-						<option>모니터</option>
-						<option>태블릿</option>
-						<option>음향기기</option>
-						<option>주변기기</option>
+					<select id="icategory">
+						<option value="반품/환불">반품/환불</option>
+						<option value="노트북">노트북</option>
+						<option value="모니터">모니터</option>
+						<option value="태블릿">태블릿</option>
+						<option value="음향기기">음향기기</option>
+						<option value="주변기기">주변기기</option>
 					</select>
 				</div>
 				<div class="inquiry-div-sub d-flex">
 					<label>이메일</label>
 					<em style="padding-right: 86px; color: blue;">(필수)</em>
-					<input class="input" type="text" >
+					<input class="input" type="text" id="iemail" name="iemail">
 				</div>
 				<div class="inquiry-div-sub d-flex flex-wrap">
 					<label>문의 내용</label>
 					<em style="padding-right: 66px; color: blue;">(필수)</em>
-					<textarea class="input" maxlength="1000" style="height: 200px;"></textarea>
+					<textarea class="input" maxlength="1000" style="height: 200px;" name="imessage"></textarea>
 					<span style="padding-left: 176px; padding-top: 15px">0자 입력 / 최대 1000자</span>
 				</div>
 				<div  class="inquiry-div-sub d-flex">
 					<label>파일첨부</label>
 					<em style="padding-right: 72px; color: green;">(선택)</em>
-					<input type="file">
+					<input type="file" id="iflie" name="ifile">
 				</div>
 				<div class="inquiry-div-sub d-flex justify-content-center">
-					<button type="button" class="inquiry-btn">문의하기</button>
+					<button type="submit" class="inquiry-btn">문의하기</button>
 				</div>
 			</form>
 			<!-- //inquiry form -->

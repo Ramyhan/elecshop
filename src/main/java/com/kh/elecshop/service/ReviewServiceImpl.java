@@ -19,5 +19,29 @@ public class ReviewServiceImpl implements ReviewService {
 		List<ReviewVO> reviewList = reviewMapper.selectReviewList(pno);
 		return reviewList;
 	}
+
+	@Override
+	public boolean registerReview(ReviewVO reviewVO) {
+		int count = reviewMapper.insertReview(reviewVO);
+		return (count == 1) ? true : false;
+	}
+
+	@Override
+	public boolean updateReview(int rno) {
+		int count = reviewMapper.updateReview(rno);
+		return (count == 1) ? true : false;
+	}
+
+	@Override
+	public boolean deleteReview(int rno) {
+		int count = reviewMapper.deleteReview(rno);
+		return (count == 1) ? true : false;
+	}
+
+	@Override
+	public ReviewVO getReview(int rno) {
+		ReviewVO reviewVO = reviewMapper.selectReview(rno); 
+		return reviewVO;
+	}
 	
 }

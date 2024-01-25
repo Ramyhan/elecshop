@@ -6,4 +6,9 @@
 	<select id="selectQuestionList" resultType="com.kh.elecshop.domain.QuestionVO">
 		select * from t_question
 	</select>
+	<select id="selectQuestionTop5" resultType="com.kh.elecshop.domain.QuestionVO">
+		select qno,qcategory,qtitle,qcontent,qimage,qsubcategory 
+		from(select * from t_question order by rownum desc)
+		where rownum between 1 and 5
+	</select>
 </mapper>

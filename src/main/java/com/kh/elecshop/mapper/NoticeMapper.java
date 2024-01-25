@@ -10,5 +10,6 @@ public interface NoticeMapper {
 	
 	public List<SubNoticeDTO> subselectAll();
 	public NoticeVO selectByNno(int nno);
+	public List<SubNoticeDTO> selectByTop5();
 }
 
