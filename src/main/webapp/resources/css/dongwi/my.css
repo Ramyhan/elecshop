@@ -72,6 +72,12 @@ body {
 .user-search > i:hover{
 	color: #FFD369;
 }
+.user_option > p {
+	padding-top: 8px;
+	color: white;
+	text-align: center;
+	
+}
 /* 드롭다운 */
 .dropdown-item:hover{
 	background-color: #FFD369;
@@ -305,3 +311,58 @@ footer{
 .signup input{
 	width: 340px;
 }
+/* 마이페이지 */
+/* 사이드바 */
+.side-bar{
+	background-color: #303030;
+	position: fixed;
+	left: -260px;
+	width: 300px;
+	height: 100%;
+	transition: left 1s, background-color 3s;
+}
+.side-bar:hover {
+	left: 0%;
+	background-color: #151515;
+	transition: left 1s, background-color 3s;
+	
+}
+.side-bar>.icon>div{
+    text-align:right;
+    padding: 10px;
+    color: #FFD369;
+}
+.side-bar:hover>.icon>div:last-child{   
+    display:block;
+    color: #FFD369;
+}
+
+.side-bar:hover>.icon>div:first-child{  
+    display:none;
+}
+.side-bar>.icon>div:last-child{
+    display:none;
+}
+.side-menu > ul > li{
+	list-style: none;
+	position: relative;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	border: solid 1px #888888;
+	right: 40px;
+	
+}
+.side-menu > ul > li > a{
+	display:block;
+    font-weight:bold;
+    padding:10px;
+    white-space:nowrap;
+    color: white;
+    
+}
+.side-menu ul > li:hover>a{
+    color: #FFD369;
+    border: solid 1px #FFD369;
+}
+/* 사이드바 */
