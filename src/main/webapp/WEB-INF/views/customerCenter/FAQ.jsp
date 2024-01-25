@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
 <style>
 body{
@@ -37,15 +39,19 @@ i{
 							<tr>
 								<th>공지사항</th>
 								<th></th>
-								<th style="text-align: right;"><a href="#">더보기</a></th>
+								<th style="text-align: right;"><a href="/customerCenter/notice">더보기</a></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>번호</td>
-								<td>제목</td>
-								<td style="text-align: right;">01/04/2012</td>
-							</tr>
+							<c:forEach var="subNotice" items="${subNotice}">
+								<tr>
+									<td>(${subNotice.ncategory})</td>
+									<td>${subNotice.ntitle}</td>
+									<td style="text-align: right;">
+										<fmt:formatDate value="${subNotice.nregdate}"/>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

@@ -88,6 +88,7 @@ $(function() {
 			} else {
 				$("#divSideBar").stop().animate({"top" : position + "px"},1000);
 			}
+			
 		});
 	
 	
