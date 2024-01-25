@@ -73,7 +73,7 @@
                 <a class="nav-link" href="/productList?ptype=5">주변기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">고객센터</a>
+                <a class="nav-link" href="/customerCenter/shop">고객센터</a>
               </li>
             </ul>
             <div class="user_option" style="
