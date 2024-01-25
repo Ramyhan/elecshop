@@ -6,17 +6,18 @@
 		<div><i class="fa fa-align-justify"></i></div>
 		<div><i class="fa fa-angle-double-left"></i></div>
 	</div>
-	<div class="side-menu">
+	<div class="side-menu side-myPage">
 		<ul>
-			<li><a href="#">내 정보</a></li>
+			<li><a href="/myPage">내 정보</a></li>
 			<li><a href="#">비밀번호 변경</a></li>
 			<li><a href="#">포인트</a></li>
+			<li><a href="#">찜 목록</a></li>
 			<li><a href="#">나의 문의 내역</a></li>
 			<li><a href="#">계정 탈퇴</a></li>
 		</ul>
 	</div>
 </div>
-<div class="container-fluid" style="height: 100%;">
+<div class="myPage-main">
 	
 </div>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>
