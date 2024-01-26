@@ -36,4 +36,10 @@
 		where rno = #{rno}
 	</select>
 	
+	<select id="selectGrade" resultType="com.kh.elecshop.domain.ReviewGradeDTO">
+		select count(*) count, round(avg(rgrade), 1) average
+		from tbl_review
+		where pno = #{pno}
+	</select>
+	
 </mapper>

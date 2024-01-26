@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.elecshop.domain.ReviewGradeDTO;
 import com.kh.elecshop.domain.ReviewVO;
 import com.kh.elecshop.mapper.ReviewMapper;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
@@ -27,8 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public boolean updateReview(int rno) {
-		int count = reviewMapper.updateReview(rno);
+	public boolean updateReview(ReviewVO reviewVO) {
+		int count = reviewMapper.updateReview(reviewVO);
 		return (count == 1) ? true : false;
 	}
 
@@ -42,6 +46,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public ReviewVO getReview(int rno) {
 		ReviewVO reviewVO = reviewMapper.selectReview(rno); 
 		return reviewVO;
+	}
+
+	@Override
+	public ReviewGradeDTO getReviewGrade(int pno) {
+		ReviewGradeDTO reviewGradeDTO = reviewMapper.selectGrade(pno);
+		return reviewGradeDTO;
 	}
 	
 }
