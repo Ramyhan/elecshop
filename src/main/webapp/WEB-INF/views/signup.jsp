@@ -16,7 +16,14 @@
 					<label>
 						비밀번호
 					</label>
-					<input type="password" class="form-control" id="mpw" name="mpw" />
+					<input type="password" class="form-control pw" id="mpw" name="mpw" />
+				</div>
+				<div class="form-group">
+					<label>
+						비밀번호 재확인
+					</label>
+					<input type="password" class="form-control pw" id="mpw2" >
+					<font id="passwordCheck"></font>
 				</div>
 				<div class="form-group">
 					<label>
@@ -63,24 +70,41 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 $(function(){
-	$("#btn-register").click(function(){
-		var mname = $("#mname").val();
-		var mid = $("#mid").val();
-		var mpw = $("#mpw").val();
-		var mbirthday = $("#mbirthday").val();
-		var maddr = $("#maddr").val();
-		var maddr_detail = $("#maddr_detail").val();
-		var mphone = $("#mphone").val();
-		var memail = $("#memail").val();
-		console.log("mname", mname);
-		console.log("mid", mid);
-		console.log("mpw", mpw);
-		console.log("mbirthday", mbirthday);
-		console.log("maddr", maddr);
-		console.log("maddr_detail", maddr_detail);
-		console.log("mphone", mphone);
-		console.log("memail", memail);
-	});
+// 	$("#btn-register").click(function(){
+// 		var mname = $("#mname").val();
+// 		var mid = $("#mid").val();
+// 		var mpw = $("#mpw").val();
+// 		var mbirthday = $("#mbirthday").val();
+// 		var maddr = $("#maddr").val();
+// 		var maddr_detail = $("#maddr_detail").val();
+// 		var mphone = $("#mphone").val();
+// 		var memail = $("#memail").val();
+// 		console.log("mname", mname);
+// 		console.log("mid", mid);
+// 		console.log("mpw", mpw);
+// 		console.log("mbirthday", mbirthday);
+// 		console.log("maddr", maddr);
+// 		console.log("maddr_detail", maddr_detail);
+// 		console.log("mphone", mphone);
+// 		console.log("memail", memail);
+// 	});
+
+	$(".pw").keyup(function() {
+		var pass1 = $("#mpw").val();
+		var pass2 = $("#mpw2").val();
+		
+		if(pass1 != "" || pass2 != ""){
+			if(pass1 == pass2){
+				$("#passwordCheck").text("비밀번호가 일치합니다.");
+				$("#passwordCheck").attr("color", "#FFD369");
+			}else{
+				$("#passwordCheck").text("비밀번호가 일치하지 않습니다.")
+				$("#passwordCheck").attr("color", "red");
+			}
+		}
+	})
+	
+// 	카카오 맵
 	$("#btn-addr-search").click(function(){
     new daum.Postcode({
         oncomplete: function(data) {
@@ -92,10 +116,5 @@ $(function(){
 		
 	})
 });
-// function oninputPhone(target) {
-//     target.value = target.value
-//         .replace(/[^0-9]/g, '')
-//         .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-// }
 </script>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>

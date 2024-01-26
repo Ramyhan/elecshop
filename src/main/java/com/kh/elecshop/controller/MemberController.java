@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
@@ -42,9 +44,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/loginPost")
-	public void loginPost(LoginDTO loginDTO, Model model) {
+	public void loginPost(LoginDTO loginDTO, Model model, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);
 		if(memberVO == null) {
+			rttr.addFlashAttribute("loginResult", "fail");
 			return;
 		}
 		model.addAttribute("loginInfo", memberVO);
@@ -58,8 +61,26 @@ public class MemberController {
 		return "redirect:/login";
 	}
 	
-	@GetMapping("/myPage")
-	public void myPage() {
-		
+	@PostMapping("/checkLogin")
+	@ResponseBody
+	public String checkLogin(HttpSession session) {
+		boolean result = 
+				session.getAttribute("loginInfo") != null ? true : false;
+		return String.valueOf(result);
+	
 	}
+	
+	@GetMapping("/getPoint")
+	@ResponseBody
+	public String getPoint(HttpSession session) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		
+		 int count = memberService.selectPoint(memberVO.getMid());
+		 session.removeAttribute("loginInfo");
+		 memberVO.setMpoint(count);
+		 session.setAttribute("loginInfo", memberVO);
+		 return String.valueOf(count);
+	}
+	
+	
 }

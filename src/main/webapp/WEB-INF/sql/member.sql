@@ -3,12 +3,13 @@ create table tbl_member(
     mname nvarchar2(10) not null,
     mid NVARCHAR2(30) unique,
     mpw NVARCHAR2(30) not null,
-    memail NVARCHAR2(30) not null,
+    memail NVARCHAR2(30) unique,
     maddr NVARCHAR2(50) not null,
     maddr_detail NVARCHAR2(50) not null,
-    mphone NVARCHAR2(15) not null,
+    mphone NVARCHAR2(15) unique,
     mbirthday date not null,
-    mregdate date default sysdate
+    mregdate date default sysdate,
+    mpoint number default 0
 );
 commit;
 

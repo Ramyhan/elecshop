@@ -21,6 +21,7 @@ public class MemberVO {
 	private String mphone;
 	private Date mregdate;
 	private java.sql.Date mbirthday;
+	private int mpoint;
 }
 
 

@@ -40,6 +40,10 @@
 
 <script>
 $(function (){
+	var loginResult = "${loginResult}";
+	if(loginResult == "fail"){
+		alert("로그인 실패");
+	}
 	var cookie = document.cookie;
 	console.log(cookie);
 	var cookies = cookie.split("=");

@@ -30,6 +30,25 @@
   <link href="/resources/css/dongwi/responsive.css" rel="stylesheet" />
   <!-- 글리피콘 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<script>
+$(function(){
+	var checkPoint = function(){
+		$.post("/checkLogin", function(isLogin){
+			if(isLogin == "true"){
+				$.get("/getPoint", function(rData){
+					console.log(rData);					
+					$("#myPoint").text("포인트:" + rData);
+				});
+			}
+			
+		});
+		
+	}
+	
+	setInterval(checkPoint, 5000);
+	
+});
+</script>
 </head>
 
 
@@ -80,7 +99,11 @@
             <div class="user_option" style="">
             <c:choose>
             <c:when test="${not empty loginInfo}">
-            <p>${loginInfo.mid}님<br>반갑습니다.</p>
+            <div id="user_info">
+          	 <p>${loginInfo.mid}</p>
+             <p id="myPoint">포인트:${loginInfo.mpoint }</p>
+            </div>
+            
             </c:when>
             </c:choose>
             

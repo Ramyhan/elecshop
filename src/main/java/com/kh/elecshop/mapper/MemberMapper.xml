@@ -9,9 +9,34 @@
 		values
 		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mphone}, #{mbirthday})
 	</insert>
+	
 	<select id="login" resultType="com.kh.elecshop.domain.MemberVO">
-	select * from tbl_member
-	where mid = #{mid}
-	and mpw = #{mpw}
+		select * from tbl_member
+		where mid = #{mid}
+		and mpw = #{mpw}
+	</select>
+	
+	<update id="updateMember">
+		update tbl_member 
+		set
+		mname = #{mname},
+		mpw = #{mpw},
+		memail = #{memail},
+		maddr = #{maddr},
+		maddr_detail = #{maddr_detail},
+		mphone = #{mphone},
+		mbirthday = #{mbirthday}
+		where mid = #{mid}
+	</update>
+	
+	<update id="updatePoint">
+		update tbl_member set
+			mpoint = mpoint + #{ppoint}
+		where mid = #{mid}
+	</update>
+	
+	<select id="selectPoint" resultType="int">
+		select mpoint from tbl_member
+		where mid = #{mid}
 	</select>
 </mapper>

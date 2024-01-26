@@ -78,11 +78,10 @@ body {
 .user-search > i:hover{
 	color: #FFD369;
 }
-.user_option > p {
-	padding-top: 13px;
+#user_info > p{
+	margin: 0px;
 	color: white;
 	text-align: center;
-	
 }
 /* 드롭다운 */
 .dropdown-item:hover{
@@ -325,11 +324,11 @@ footer{
 	left: -260px;
 	width: 300px;
 	height: 100%;
-	transition: left 1s, background-color 3s;
+	transition: left 1s, background-color 2s;
 }
 .side-bar:hover {
 	left: 0%;
-	background-color: #151515;
+	background-color: #080808;
 	transition: left 1s, background-color 3s;
 	
 }
@@ -379,6 +378,51 @@ footer{
 .myPage-main{
 	display: flex;
 	height: 100%;
+/* 	justify-content:  */
+	background-color: #303030;
 }
-
-
+.myPage-main{
+	display: flex;
+	height: 100%;
+	
+	justify-content: flex-start;
+	background-color: #303030;
+}
+.myPage-text{
+	margin-top: 150px;
+	margin-left: 500px;
+	width: 500px;
+	color: white;
+}
+.myPage-text > h1{
+	font-family: 굴림체;
+}
+.myPage-line{
+	border-bottom: solid 1px #FFD369;
+	margin-bottom: 15px;
+}
+.myPage-modify-section{
+	padding: 0px;
+}
+.myPage-modify-main{
+/* 	display: flex; */
+	position: inherit;
+	height: 100%;
+/* 	justify-content: flex-start; */
+	background-color: #303030;
+}
+.myPage-modify-text{
+	height: 100%;
+/* 	margin-top: 150px; */
+	margin-left: 30%;
+	width: 500px;
+	color: white;
+	position: relative;
+}
+.myPage-modify-text > h1{
+	font-family: 굴림체;
+}
+.myPage-modify-line{
+	border-bottom: solid 1px #FFD369;
+	margin-bottom: 15px;
+}
