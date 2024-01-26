@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script>
 $(function(){
 	$(document).ready(function(){
@@ -106,7 +107,7 @@ $(function(){
 		background-color: white;
 	    text-align: center;
 	    position: relative;
-	    width: 54%;
+	    width: 72%;
 	    height: 7%;
 	    transform: translate(7%, 16%);
 	    display: flex;
@@ -115,33 +116,33 @@ $(function(){
 		background-color: white;
 	    text-align: center;
 	    position: relative;
-	    width: 26%;
+	    width: 36%;
 	    height: 40%;
-	    transform: translate(16%, 7%);
+	    transform: translate(14%, 7%);
 	}
 	.admin-summary{
 		background-color: white;
 	    text-align: center;
 	    position: relative;
-	    width: 26%;
+	    width: 35%;
 	    height: 40%;
-	    transform: translate(122%, -93%);
+	    transform: translate(120%, -93%);
 	}
 	.admin-iquiry{
 		background-color: white;
 	    text-align: center;
 	    position: relative;
-	    width: 26%;
+	    width: 35%;
 	    height: 40%;
-	    transform: translate(16%, -89%);
+	    transform: translate(15%, -89%);
 	}
 	.admin-info{
 		background-color: white;
 	    text-align: center;
 	    position: relative;
-	    width: 26%;
-	    height: 49.2%;
-	    transform: translate(229%, -256%);
+	    width: 20%;
+	    height: 48.6%;
+	    transform: translate(392%, -259%);
 	}
 	.day-tag{
 		display: inline-block;
@@ -157,6 +158,15 @@ $(function(){
 	}
 	.day-num{
 		color: red;
+	}
+	.day-result{
+		background-color: red;
+    	padding: 0 10 0 10;
+    	border-radius: 20px;
+	}
+	.admin-day-title{
+		margin: 4px;
+   		font-weight: 700;
 	}
 </style>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
@@ -207,8 +217,9 @@ $(function(){
 		<div class="admin-border">
 			<div class="admin-day">
 				<div class="day-div">
-					<div>
+					<div class="admin-day-title">
 						<span>오늘 할 일</span>
+						<span class="day-result">43</span>
 					</div>
 					<div>
 						<div>
@@ -225,7 +236,10 @@ $(function(){
 				</div>
 			</div>
 			<div class="admin-graph">
-				<span>그래픽</span>
+				<span>방문자 현황</span>
+				<div>
+  					<canvas id="myChart" width="400" height="400"></canvas>
+				</div>
 			</div>
 			<div class="admin-summary">
 				일자별 요약
