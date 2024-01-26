@@ -18,9 +18,6 @@
 	text-align: center;
 
 	}
-	.notice-main{
-		height: 55%;
-	}
 	.notice-table{
 		padding: 20px 30px 10px 30px;
 		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.7);
@@ -55,7 +52,7 @@
 				<div class="col-md-8">
 				<div style="font-weight: bolder; font-size: 25px;">공지사항</div>
 				<div class="d-flex justify-content-between" 
-    			style="width: 100%; height: 20%; border: 3px solid #B7C4CF; background-color: white;">
+    			style="width: 100%; border: 3px solid #B7C4CF; background-color: white;">
     				<div class="notice-div notice align-self-center">
         				<a class="notice" href="#">전체</a>
     				</div>
