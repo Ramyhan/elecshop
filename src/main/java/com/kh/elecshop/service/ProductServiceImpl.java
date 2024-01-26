@@ -20,15 +20,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDTO> getProductList(int ptype) {
-		log.info("ptype: " + ptype);
 		List<ProductDTO> list = productMapper.selectProductList(ptype);
-		log.info("ServiceList: " + list);
 		return list;
 	}
 
 	@Override
 	public ProductVO getProduct(int pno) {
-		log.info("pno: " + pno);
 		ProductVO productVO = productMapper.selectProduct(pno);
 		return productVO;
 	}
