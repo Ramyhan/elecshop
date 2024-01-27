@@ -1,0 +1,180 @@
+	.main-div{
+		display:flex;
+		min-height: calc(107vh);
+	}
+	.left-div{
+		display:inline-block;
+		vertical-align: middle;
+		width: 12.5%;
+		background-color: #393E46;
+		padding-top: 15px;
+	}
+	.scroll-div{
+		position: absolute;
+	    left: 12.5%;
+	    height: 16%;
+	    width: 1.4%;
+	    top: 39%;
+	    border: 1px solid;
+	    border-radius: 0px 7px 7px 0px;
+	    background-color: #222831;
+	    border-left: red;
+	}
+	.set-div{
+		display:flex;
+		flex-direction: column;	
+		flex: 1 0 auto;
+	}
+	.scroll-a{
+		display: block;
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+	}
+	.scroll-a i{
+		position:absolute;
+		transform: translate3d(0, 0, 0);
+  		transition: transform .4s;
+	}
+	.category-div{
+   	 	margin-bottom: 30px;
+	}
+	.category-span{
+		color: C9D6DF;
+	    font-size: 17px;
+	    padding-left: 24px;
+	    padding-right: 24px;
+	    opacity: 0.5;
+	}
+	ul{
+		list-style: none;
+    	margin:0px;
+    	padding:0px;
+	}
+	.menubar{
+		color: black;
+		display: block;
+	}
+	.menu-li{
+		padding-bottom: 30px;
+	}
+	.menu-icon{
+		padding-left: 8px;
+	}
+	.down-fa{
+	position: absolute;
+    left: 10.5%;
+	}
+	.admin-title{
+		padding: 20px 0 30 0;
+		border-bottom: 1px solid rgba(0,0,0,0.4);
+	}
+	.admin-border{
+		background-color: #E5E1DA;
+		flex: 1 0 auto;
+	}
+	.admin-day{
+		background-color: white;
+	    position: relative;
+	    width: 72%;
+	    height: 7%;
+	    transform: translate(7%, 16%);
+	    display: flex;
+	}
+	.admin-graph{
+		background-color: white;
+	    position: relative;
+	    width: 36%;
+	    height: 40%;
+	    transform: translate(14%, 7%);
+	    display: flex;
+   		flex-direction: column;
+    	align-items: center;
+	}
+	.admin-summary{
+		display: grid;
+   	 	align-items: center;
+		background-color: white;
+	    position: relative;
+	    width: 35%;
+	    height: 40%;
+	    transform: translate(120%, -93%);
+	}
+	.admin-iquiry{
+		background-color: white;
+	    position: relative;
+	    width: 35%;
+	    height: 40%;
+	    transform: translate(15%, -89%);
+	    overflow: auto;
+	}
+	.admin-info{
+		background-color: white;
+	    text-align: center;
+	    position: relative;
+	    width: 20%;
+	    height: 48.6%;
+	    transform: translate(392%, -259%);
+	}
+	.day-tag{
+		display: inline-block;
+	}
+	.admin-day ul li{
+		display: inline-block;
+	}
+	.day-div{
+		display: flex;
+	    flex: 1 0 auto;
+	    align-items: center;
+	    flex-direction: column;
+	}
+	.day-num{
+		color: red;
+	}
+	.day-result{
+		background-color: red;
+    	padding: 0 10 0 10;
+    	border-radius: 20px;
+	}
+	.admin-sub-title{
+			margin: 4px;
+		font-weight: 700;
+		text-align: center;
+	}
+	.div-hr{
+		border: 1px solid;
+		opacity: 0.06;
+		width: 100%;
+	}
+	.iquiry-div div img{
+		width: 48px;
+		height: 48px;
+		float: left;
+		margin-right: 10px;
+	}
+	.iquiry-message{
+		width: 80%;
+		margin: 11 0 22 15;
+	}
+	.iquiry-first{
+		font-weight: bold;
+		padding-left: 10px;
+	}
+	.iquiry-second-name{
+		border-right:1px solid;
+		padding-right: 10px;
+		opacity: 0.7;
+	}
+	.iquiry-second-date{
+		padding-left: 10px;
+		opacity: 0.7;
+	}
+	.iquiry-message a{
+		color: black;
+	}
+	.iquiry-message a:hover{
+		color : red;
+		opacity: 0.5;
+	}
