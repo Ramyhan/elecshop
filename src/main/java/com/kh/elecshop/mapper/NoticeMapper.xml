@@ -3,8 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.elecshop.mapper.NoticeMapper">
+<sql id="foreachByNno">
+	<foreach collection="array" item="nnos" separator=",">
+		#{nnos}
+	</foreach>
+</sql>
 	<select id="subselectAll" resultType="com.kh.elecshop.domain.SubNoticeDTO">
-		select nno,ncategory, ntitle, nregdate from t_notice
+		select nno,ncategory, ntitle, nregdate
+		from t_notice
+		where nstate = 'true'
 	</select>
 	<select id="selectByNno" resultType="com.kh.elecshop.domain.NoticeVO">
 		select * from t_notice
@@ -14,5 +21,30 @@
 		select nno,ncategory, ntitle, nregdate from
 		(select * from t_notice order by rownum desc)
 		where rownum between 1 and 5
+		and nstate = 'true'
 	</select>
+	<select id="selectAdminNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
+		select nno,ncategory,ncontent, ntitle, nregdate,nstate
+		from (select * from t_notice order by rownum desc)
+	</select>
+	<update id="updateCloseNoticeState">
+		update t_notice set
+			nstate = 'false'
+			where nno in(
+			<include refid="foreachByNno"></include>
+			)
+	</update>
+	<update id="updateOpenNoticeState">
+		update t_notice set
+			nstate = 'true'
+			where nno in(
+			<include refid="foreachByNno"></include>
+			)
+	</update>
+	<delete id="deleteNotice">
+	delete from t_notice
+	where nno in(
+		<include refid="foreachByNno"></include>
+	)
+	</delete>
 </mapper>

@@ -31,9 +31,8 @@ $(function(){
 				type : "get",
 				url: url,
 				success:function(rdata){
-					console.log(rdata);
-					$(".set-div").remove();
-					$(".main-div").append(rdata);
+					$(".set-div").empty();
+					$(".set-div").append(rdata);
 				}
 			});
 		}
