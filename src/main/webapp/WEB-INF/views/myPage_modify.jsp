@@ -20,7 +20,7 @@
 		</ul>
 	</div>
 </div>
-<div class="section myPage-modify-section">
+<!-- <div class="section myPage-modify-section"> -->
 <div class="myPage-modify-main">
 		<div class="myPage-modify-text">
 			<h1>개인 정보 수정</h1>
@@ -72,7 +72,7 @@
 			<div class="myPage-login"></div>
 		</div>
 </div>
-</div>
+<!-- </div> -->
 <script>
 $(function(){
 

@@ -44,7 +44,7 @@
 </div>
 	<!-- //메인 -->
 		<!-- 메인2 -->
-		<div class="container-fluid main2">
+		<div class="container-fluid sub-main">
 <!-- 			<div class="row"> -->
 				<div class="sub-left">
 					<div class="container sub-title">
