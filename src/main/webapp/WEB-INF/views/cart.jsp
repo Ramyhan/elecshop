@@ -80,25 +80,25 @@ $(function() {
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${cartList}" var="cartVO">
+								<c:forEach items="${cartList}" var="cartDTO">
 									<tr>
 										<td style="vertical-align: middle;">
-											<input type="checkbox" class="chkCart" data-cno="${cartVO.cno}">
+											<input type="checkbox" class="chkCart" data-cno="${cartDTO.cno}">
 										</td>
 										<td>
 											<img class="productImage" alt="상품 사진"
-												src="/resources/images/${cartVO.cimage}"/>
+												src="/resources/images/${cartDTO.pimage_thoumb}"/>
 										</td>
-										<td style="vertical-align: middle;">${cartVO.cname}</td>
+										<td style="vertical-align: middle;">${cartDTO.pname}</td>
 										<td style="vertical-align: middle;">
-										<c:set var="coption" value="${fn:split(cartVO.coption, ',')}"/>
+										<c:set var="coption" value="${fn:split(cartDTO.coption, ',')}"/>
 										<c:forEach items="${coption}" var="coption">
 											${coption}<br>
 										</c:forEach>
 										</td>
 										<td style="vertical-align: middle;">
 											<fmt:formatNumber pattern="#,###">
-												${cartVO.cprice}
+												${cartDTO.cprice}
 											</fmt:formatNumber>원
 										</td>
 									</tr>
