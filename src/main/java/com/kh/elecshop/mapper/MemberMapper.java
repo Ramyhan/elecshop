@@ -10,4 +10,6 @@ public interface MemberMapper {
 	public int insertMember(MemberVO memberVO);
 	public MemberVO login(@Param("mid") String mid, @Param("mpw") String mpw);
 	public MemberVO login(LoginDTO loginDTO);
+	public int updateMember(MemberVO memberVO);
+	public int selectPoint(String mid);
 }

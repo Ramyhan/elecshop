@@ -27,5 +27,16 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memberVO = memberMapper.login(loginDTO);
 		return memberVO;
 	}
+	@Override
+	public boolean modifyMember(MemberVO memberVO) {
+		int count = memberMapper.updateMember(memberVO);
+		
+		return (count == 1) ? true : false;
+	}
+	@Override
+	public int selectPoint(String mid) {
+		int count = memberMapper.selectPoint(mid);
+		return count;
+	}
 
 }

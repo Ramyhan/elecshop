@@ -34,9 +34,11 @@ public class ReviewController {
 		return String.valueOf(result);
 	}
 	
-	@PutMapping("/{rno}")
-	public String updateReview(@PathVariable("rno") int rno) {
-		boolean result = reviewService.updateReview(rno);
+	@PutMapping(value = "/update",
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String updateReview(@RequestBody ReviewVO reviewVO) {
+		log.info("reviewVO: " + reviewVO);
+		boolean result = reviewService.updateReview(reviewVO);
 		return String.valueOf(result);
 	}
 	

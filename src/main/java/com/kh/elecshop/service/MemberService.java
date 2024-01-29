@@ -9,4 +9,6 @@ public interface MemberService {
 	
 	public MemberVO login(String mid, String mpw);
 	public MemberVO login(LoginDTO loginDTO);
+	public boolean modifyMember(MemberVO memberVO);
+	public int selectPoint(String mid);
 }

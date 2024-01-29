@@ -34,12 +34,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		log.info("postHandle");
 		ModelMap map = (ModelMap)modelAndView.getModel();
 		MemberVO memberVO = (MemberVO)map.get("loginInfo");
-		Boolean useCookie = (boolean)map.get("useCookie");
 		log.info(memberVO);
 		modelAndView.setView(null);
 		if (memberVO == null) {
 			modelAndView.setViewName("redirect:/login");
 		}else {
+			Boolean useCookie = (boolean)map.get("useCookie");
 			HttpSession session = request.getSession();
 			if(useCookie != null && useCookie == true) {
 				Cookie cookie = new Cookie("savedId", memberVO.getMid());

@@ -76,6 +76,10 @@
 		color: #AAAAAA;
 	}
 	
+	.review {
+		display: none;
+	}
+	
 </style>
 <script>
 $(function() {
@@ -90,16 +94,24 @@ $(function() {
 	$(".specName3").text(spec3[0]);
 	$(".specInfo3").text(spec3[1]);
 	
+	// 리뷰 더보기 버튼
+	$(".review").slice(0, 6).show();
+	$("#load").click(function(e) {
+		e.preventDefault();
+		$(".review:hidden").slice(0, 6).show(500);
+		if ($(".review:hidden").length == 0) {
+			alert("상품평의 끝입니다.")
+		}
+	});
+	
 	// 옵션 선택시 현재가격 변경
 	$(".selectOption").change(function() {
 		var option1Price = parseInt($("#selectOption1").val());
 		var option2Price = parseInt($("#selectOption2").val());
 		var option3Price = parseInt($("#selectOption3").val());
 		var totalOptionPrice = option1Price + option2Price + option3Price
-// 		console.log("totalOptionPrice: ", totalOptionPrice);
 		
 		var totalPrice = parseInt("${productVO.pprice}") + totalOptionPrice;
-// 		console.log("totalPrice: ", totalPrice);
 		
 		$("#totalPrice").text(totalPrice);
 	});
@@ -108,11 +120,11 @@ $(function() {
 	$("#regReview").click(function() {
 		$("#myModalLabel").text("상품평 등록");
 		$("#rcontent").val("");
-		$("#registerReview").val("작성 완료");
+		$("#registerReview").text("작성 완료");
 		$("#modal-review").modal("show");
 	});
 	
-	// 리뷰등록 모달 띄우기
+	// 리뷰수정 모달 띄우기
 	$(".btnReviewUpdate").click(function() {
 		var rno = $(this).attr("data-update-rno");
 		var url = "/review/" + rno;
@@ -124,24 +136,38 @@ $(function() {
 			
 			$("#mid").val(rData.mid);
 			$("#rcontent").val(rData.rcontent);
-			var test = $(".rgrade").is("text", rData.rgade + "점");
-			console.log("test: ", test);
+			$(".rgrade[value='" + rData.rgrade + "']").attr("checked", true);
 			
-			$("#registerReview").val("수정 완료");
+			$("#registerReview").text("수정 완료");
+			$("#registerReview").attr("data-rno", rno);
 			$("#modal-review").modal("show");
 		});
 	});
 	
 	// 리뷰 등록 버튼
 	$("#registerReview").click(function() {
+		var rno = $(this).attr("data-rno");
 		var pno = $(this).attr("data-pno");
 		var mid = $("#mid").val();
 		var rcontent = $("#rcontent").val();
 		var rgrade = $("#rgrade:checked").val();
 		
-		var url = "/review/register";
-		var method = "post";
+		var url = "";
+		var method = "";
+		var coment = "";
+		
+		if($("#registerReview").text() == "작성 완료") {
+			url = "/review/register";
+			method = "post";
+			coment = "등록";
+		} else {
+			url = "/review/update";
+			method = "put";
+			coment = "수정";
+		}
+		
 		var sData = {
+				"rno" : rno,
 				"pno" : pno,
 				"mid" : mid,
 				"rcontent" : rcontent,
@@ -157,11 +183,13 @@ $(function() {
 			"success" : function(rData) {
 				console.log("rData: ", rData);
 				if (rData == "true") {
-					alert("등록을 성공적으로 마쳤습니다.");
+					alert(coment + "을 성공적으로 마쳤습니다.");
 					$("#modal-review").modal("hide");
+// 					$("#reviewTable").load(window.location.href + " #reviewTable");
+					location.reload();
 				}
 			}
-		})
+		});
 	});
 	
 	// 리뷰 삭제
@@ -178,9 +206,38 @@ $(function() {
 				}
 			}
 		});
-// 		$.delete("/review/" + rno, sData, function(rData) {
-// 			console.log("rData: ", rData);
-// 		});
+	});
+	
+	$("#btnCart").click(function() {
+		var pno = $(this).attr("data-pno");
+		var mid = "${loginInfo.mid}";
+		var totalPrice = $("#totalPrice").text();
+		
+		var option = "";
+		for(var v = 1; v <= $(".selectOption").length; v++) {
+			var index = parseInt($("#selectOption" + v + " option").index($("#selectOption" + v + "  option:selected")));
+			console.log("index: ", index);
+			if (index > 0) {
+				optionName = $("#optionName" + v).text();
+				optionInfo = $("#selectOption" + v + "  option:selected").text();
+				option += optionName + ":" + optionInfo + ",";
+			}
+		}
+		var sData = {
+			"pno" : pno,
+			"mid" : mid,
+			"cprice" : totalPrice,
+			"coption" : option
+		};
+		$.post("/addCart", sData, function(rData) {
+			if (rData == "true") {
+				var confirmFlag = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?")
+				
+				if(confirmFlag) {
+					location.href = "/cart";
+				}
+			}
+		});
 	});
 });
 </script>
@@ -196,13 +253,13 @@ $(function() {
 						<h1 style="font-weight: 600;">${productVO.pname}</h1><br>
 						<div style="float:left;">${productVO.pcode}</div><br>
 						<div class="rate" style="float:left;">
-							<span style="width: 50%"></span>
+							<span style="width: ${gradeDTO.persent}%"></span>
 						</div>
-						<div style="margin-left:130px;">3.5점 (150건)</div><br><br>
-						<h3>기준가: ${productVO.pprice}</h3><br><br>
+						<div style="margin-left:130px;">${gradeDTO.average}점 (${gradeDTO.count}건)</div><br><br>
+						<h3>기준가: <fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber>원</h3><br><br>
 						
 						<!-- 상품옵션 -->
-						<div class="divOptionName">SSD</div>
+						<div class="divOptionName" id="optionName1">SSD</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
@@ -215,7 +272,7 @@ $(function() {
 								</select>
 							</div>
 						</div><br>
-						<div class="divOptionName">RAM</div>
+						<div class="divOptionName" id="optionName2">RAM</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
@@ -228,7 +285,7 @@ $(function() {
 								</select>
 							</div>
 						</div><br>
-						<div class="divOptionName">Color</div>
+						<div class="divOptionName" id="optionName3">Color</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
@@ -244,10 +301,14 @@ $(function() {
 						
 						<div style="padding: 10px 0px 10px 0px;">
 							<div style="font-size: 30px; font-family: '고딕'">
-								현재가: <span id="totalPrice">${productVO.pprice}</span>원
+								현재가: <span id="totalPrice"><fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber></span>원
 							</div>
 							<button type="button" class="btn btn-warning">구매하기</button>
-							<button type="button" class="btn btn-success">장바구니에 담기</button>
+<!-- 							<button type="button" class="btn btn-success">장바구니에 담기</button> -->
+							<i class="fa fa-shopping-cart" id="btnCart" style="scale:2; margin-left:15px;"
+								title="장바구니에 담기" data-pno="${productVO.pno}"></i>
+							<i class="fa fa-heart" style="scale:2; margin-left:30px;"
+								title="찜하기"></i>
 						</div>
 					</div>
 					<!-- //상품옵션 -->
@@ -284,18 +345,18 @@ $(function() {
 					<!-- 상품평 -->
 					<div class="divInfo	col-md-12 review">
 						<h1>상품평</h1>
-						<div style="font-size:30px; font:bold">3.5(150건)</div>
+						<div style="font-size:30px; font:bold">${gradeDTO.average}점 (${gradeDTO.count}건)</div>
 						<div class="rate" style="scale: 2; left: 60px; top: 10px;">
-							<span style="width: 50%"></span>
+							<span style="width: ${gradeDTO.persent}%"></span>
 						</div>
 						<div class="row" style="padding-top: 30px;">
-						<button type="button" class="btn btn-primary" id="regReview" style="left: 100px; margin:0px 0px 10px 15px;">
-							상품평 보기
-						</button>
+<!-- 						<button type="button" class="btn btn-primary" id="showReview" style="left: 100px; margin:0px 0px 10px 15px;"> -->
+<!-- 							상품평 보기 -->
+<!-- 						</button> -->
 						<button type="button" class="btn btn-success" id="regReview" style="left: 100px; margin:0px 0px 10px 15px;">
 							상품평 등록
 						</button>
-							<div class="col-md-12">
+							<div class="col-md-12" id="reviewTable">
 								<table class="table" style="color: white;">
 									<thead>
 										<tr>
@@ -310,7 +371,7 @@ $(function() {
 									</thead>
 									<tbody>
 										<c:forEach items="${reviewList}" var="review">
-										<tr>
+										<tr class="review">
 											<td>${review.rno}</td>
 											<td>${review.mid}</td>
 											<td>${review.rcontent}</td>
@@ -320,6 +381,11 @@ $(function() {
 											<td><button type="button" class="btn btn-danger btnReviewDelete" data-delete-rno="${review.rno}">삭제</button></td>
 										</tr>
 										</c:forEach>
+										<tr>
+											<th colspan="7" style="text-align:center;">
+												<button type="button" class="btn btn-warning"  id="load">상품평 더보기</button>
+											</th>
+										</tr>
 									</tbody>
 								</table>
 							</div>
