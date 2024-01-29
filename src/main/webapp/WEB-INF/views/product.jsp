@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
@@ -119,6 +119,7 @@ $(function() {
 	// 리뷰등록 모달 띄우기
 	$("#regReview").click(function() {
 		$("#myModalLabel").text("상품평 등록");
+		$("#mid").val("${loginInfo.mid}");
 		$("#rcontent").val("");
 		$("#registerReview").text("작성 완료");
 		$("#modal-review").modal("show");
@@ -208,31 +209,44 @@ $(function() {
 		});
 	});
 	
+	// 장바구니 추가
 	$("#btnCart").click(function() {
 		var pno = $(this).attr("data-pno");
 		var mid = "${loginInfo.mid}";
+		var cname = "${productVO.pname}";
+		var cimage = "${productVO.pimage_thoumb}"
 		var totalPrice = $("#totalPrice").text();
 		
 		var option = "";
 		for(var v = 1; v <= $(".selectOption").length; v++) {
 			var index = parseInt($("#selectOption" + v + " option").index($("#selectOption" + v + "  option:selected")));
 			console.log("index: ", index);
+			
+			if (v == 1 && index == 0) {
+				alert("색상을 선택해 주세요.")
+				return;
+			}
+			
 			if (index > 0) {
 				optionName = $("#optionName" + v).text();
 				optionInfo = $("#selectOption" + v + "  option:selected").text();
 				option += optionName + ":" + optionInfo + ",";
 			}
 		}
+		
 		var sData = {
 			"pno" : pno,
 			"mid" : mid,
+			"cname" : cname,
+			"cimage" : cimage,
 			"cprice" : totalPrice,
 			"coption" : option
 		};
+		
+		console.log("sData: ", sData);
 		$.post("/addCart", sData, function(rData) {
 			if (rData == "true") {
 				var confirmFlag = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?")
-				
 				if(confirmFlag) {
 					location.href = "/cart";
 				}
@@ -247,7 +261,7 @@ $(function() {
 			<div class="section">
 				<div class="row">
 					<div class="col-md-7" style="float:right;">
-						<img id="productMainImage" alt="상품 사진" src="/resources/images/galaxybook4pro.png"/>	
+						<img id="productMainImage" alt="상품 사진" src="/resources/images/${productVO.pimage_thoumb}"/>	
 					</div>
 					<div class="col-md-5" style="border: solid  1px #ffbe33; border-radius:10px;">
 						<h1 style="font-weight: 600;">${productVO.pname}</h1><br>
@@ -259,10 +273,23 @@ $(function() {
 						<h3>기준가: <fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber>원</h3><br><br>
 						
 						<!-- 상품옵션 -->
-						<div class="divOptionName" id="optionName1">SSD</div>
+						<div class="divOptionName" id="optionName1">Color</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
+									<option value="0" selected>-----옵션을 선택해주세요-----</option>
+								<c:forEach items="#{optionList}" var="option">
+								<c:if test="${ option.otype == 3 }">
+									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
+								</c:if>
+								</c:forEach>
+								</select>
+							</div>
+						</div><br>
+						<div class="divOptionName" id="optionName2">SSD</div>
+						<div class="divOption">
+							<div>
+								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
 								<c:if test="${ option.otype == 1 }">
@@ -272,26 +299,13 @@ $(function() {
 								</select>
 							</div>
 						</div><br>
-						<div class="divOptionName" id="optionName2">RAM</div>
-						<div class="divOption">
-							<div>
-								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
-									<option value="0" selected>-----옵션을 선택해주세요-----</option>
-								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 2 }">
-									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
-								</c:if>
-								</c:forEach>
-								</select>
-							</div>
-						</div><br>
-						<div class="divOptionName" id="optionName3">Color</div>
+						<div class="divOptionName" id="optionName3">RAM</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 3 }">
+								<c:if test="${ option.otype == 2 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
@@ -377,8 +391,16 @@ $(function() {
 											<td>${review.rcontent}</td>
 											<td>${review.rgrade}</td>
 											<td><fmt:formatDate value="${review.rregdate}" pattern="yyyy-MM-dd"/></td>
-											<td><button type="button" class="btn btn-warning btnReviewUpdate" data-update-rno="${review.rno}">수정</button></td>
-											<td><button type="button" class="btn btn-danger btnReviewDelete" data-delete-rno="${review.rno}">삭제</button></td>
+											<c:choose>
+												<c:when test="${review.mid == loginInfo.mid}">
+													<td><button type="button" class="btn btn-warning btnReviewUpdate" data-update-rno="${review.rno}">수정</button></td>
+													<td><button type="button" class="btn btn-danger btnReviewDelete" data-delete-rno="${review.rno}">삭제</button></td>
+												</c:when>
+												<c:otherwise>
+													<td></td>
+													<td></td>
+												</c:otherwise>
+											</c:choose>
 										</tr>
 										</c:forEach>
 										<tr>
@@ -414,7 +436,7 @@ $(function() {
 						</div>
 						<div class="modal-body">
 							<label for="mid">작성자</label>
-							<input class="form-control" type="text" id="mid" class="mid">
+							<input class="form-control" type="text" id="mid" class="mid" readonly>
 							<label for="rcontent">내용</label>
 							<textarea class="form-control" id="rcontent" class="rcontent"></textarea>
 							<label>평점</label>
