@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
+import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.service.NoticeService;
 
@@ -35,6 +36,11 @@ public class AdminController {
 		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
 		model.addAttribute("subNotice", list);
 	}
+	@PostMapping("/notice/register")
+	public String noticeRegister() {
+		
+		return "/admin/registerNotice";
+	}
 	@PostMapping(value = "/updateCloseState", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public boolean updateCloseState(@RequestParam(value="nnos[]") int[] nnos) {
@@ -52,5 +58,15 @@ public class AdminController {
 	public int deleteNotice(@RequestParam("nnos[]") int[] nnos) {
 		int count = noticeService.removeNotice(nnos);
 		return count;
+	}
+	@PostMapping("/registerNotice")
+	@ResponseBody
+	public void registerNotice(NoticeVO noticeVO) {
+		
+		System.out.println(noticeVO);
+		String url = noticeVO.getUrl();
+		System.out.println("url" + url);
+		String[] urls = url.split(",");
+		System.out.println("urls[0]" + urls[0]);
 	}
 }

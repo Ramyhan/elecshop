@@ -10,41 +10,45 @@
 </sql>
 	<select id="subselectAll" resultType="com.kh.elecshop.domain.SubNoticeDTO">
 		select nno,ncategory, ntitle, nregdate
-		from t_notice
+		from tbl_notice
 		where nstate = 'true'
 	</select>
 	<select id="selectByNno" resultType="com.kh.elecshop.domain.NoticeVO">
-		select * from t_notice
+		select * from tbl_notice
 		where nno = #{nno}
 	</select>
 	<select id="selectByTop5" resultType="com.kh.elecshop.domain.SubNoticeDTO">
 		select nno,ncategory, ntitle, nregdate from
-		(select * from t_notice order by rownum desc)
+		(select * from tbl_notice order by rownum desc)
 		where rownum between 1 and 5
 		and nstate = 'true'
 	</select>
 	<select id="selectAdminNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select nno,ncategory,ncontent, ntitle, nregdate,nstate
-		from (select * from t_notice order by rownum desc)
+		from (select * from tbl_notice order by rownum desc)
 	</select>
 	<update id="updateCloseNoticeState">
-		update t_notice set
+		update tbl_notice set
 			nstate = 'false'
 			where nno in(
 			<include refid="foreachByNno"></include>
 			)
 	</update>
 	<update id="updateOpenNoticeState">
-		update t_notice set
+		update tbl_notice set
 			nstate = 'true'
 			where nno in(
 			<include refid="foreachByNno"></include>
 			)
 	</update>
 	<delete id="deleteNotice">
-	delete from t_notice
+	delete from tbl_notice
 	where nno in(
 		<include refid="foreachByNno"></include>
 	)
 	</delete>
+	<insert id="insertNotice">
+		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate,nimage)
+		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate},#{nimage})
+	</insert>
 </mapper>

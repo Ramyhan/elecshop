@@ -1,4 +1,4 @@
-create table t_question(
+create table tbl_question(
     qno number constraint pk_qno primary key,
     qtitle nvarchar2(25) not null,
     qcontent nvarchar2(1000) not null,

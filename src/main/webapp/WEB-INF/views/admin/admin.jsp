@@ -46,7 +46,7 @@ $(function(){
 </style>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
 <div class="main-div">
-<%@ include file="/WEB-INF/views/include/sidebar.jsp"%>
+<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 	<div class="set-div">
 		<div class="admin-title" style="width: 100%; text-align: center;">
 			<span>관리자 페이지</span>

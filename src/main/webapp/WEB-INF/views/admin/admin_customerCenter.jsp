@@ -51,13 +51,18 @@ $(function(){
 					nno.each(function(i){
 						var state = $(this).closest("tr").find(".td-state").text().trim();
 						if(state == "공개"){
-							$(this).closest("tr").find(".td-state").attr("data-nno", "false");
+							var qwe = $(this).closest("tr").find(".td-state");
+							ssz = qwe.attr("data-state", "false");
+							console.log("ssz", ssz);
 							$(this).closest("tr").find(".td-state").text("비공개");
 						}
 					});
 				}
 			});
 		}
+// 		var stxt = nno.closest("tr").find(".td-state");
+// 		stxt.text("비공개");
+// 		console.log("s1s1", stxt);
 	});
 	//공개버튼
 	$(".btn-open").on("click",function(){
@@ -74,6 +79,7 @@ $(function(){
 		var sdata ={
 				"nnos" : checked_nnos
 		}
+		console.log("checked_nnos",	checked_nnos);
 		if(checked_nnos != ""){
 			$.post("/admin/updateOpenState",sdata,function(rdata){
 				console.log("rdata", rdata);
@@ -82,7 +88,9 @@ $(function(){
 						var state = $(this).closest("tr").find(".td-state").text().trim();
 						console.log("ss",state);
 						if(state == "비공개"){
-							$(this).closest("tr").find(".td-state").attr("data-nno", "true");
+							var td = $(this).closest("tr").find(".td-state");
+							tdData = td.attr("data-state", "true");
+							console.log("tdData", tdData);
 							$(this).closest("tr").find(".td-state").text("공개");
 						}
 					});
@@ -110,6 +118,19 @@ $(function(){
 			}
 		})
 	});
+	$(".btn-register").click(function(){
+		$.ajax({
+			type :"post",
+			url : "/admin/notice/register",
+			success : function(rdata){
+				$(".set-div").empty();
+				$(".set-div").append(rdata);
+			},
+			error : function(){
+				alret("페이지 이동이 불가합니다");
+			}
+		})
+	});
 });
 </script>
 <div class="Center-div-title" style="text-align: center;">
@@ -120,7 +141,7 @@ $(function(){
 		<div class="now-title">
 		<div>
 			<span style="font-size: 30px; font-weight: 900;">현재 공지 내용</span>
-			<button type="button" >공지 추가</button>
+			<button type="button" class="btn-register">공지 추가</button>
 			<button type="button" class="btn-delete">공지 삭제</button>
 			<button type="button" class="btn-open">공개 처리</button>
 			<button type="button" class="btn-close">비공개 처리</button>
