@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.domain.ProductDTO;
@@ -22,6 +23,7 @@ import com.kh.elecshop.service.ProductOptionService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequestMapping("/product")
 @Log4j
 public class ProductController {
 	
@@ -34,7 +36,7 @@ public class ProductController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@GetMapping("/productList")
+	@GetMapping("/list")
 	public void productList(int ptype, Model model) {
 		log.info("ptype: " + ptype);
 		List<ProductDTO> list = productService.getProductList(ptype);
@@ -43,7 +45,7 @@ public class ProductController {
 		// test
 	}
 		
-	@GetMapping("/product")
+	@GetMapping("/goods")
 	public void product(int pno, Model model, HttpSession session) {
 		MemberVO memverVO = (MemberVO)session.getAttribute("loginInfo");
 		ProductVO productVO = productService.getProduct(pno);

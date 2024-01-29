@@ -25,7 +25,7 @@
 	
 	<delete id="deleteItem" parameterType="string">
 		delete from tbl_cart
-		where cno = (${value})
+		where cno in (${value})
 	</delete>
 
 </mapper>

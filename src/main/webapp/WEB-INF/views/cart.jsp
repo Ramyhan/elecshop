@@ -30,10 +30,31 @@ $(function() {
 	$("#btnRemove").click(function() {
 		var targets = $(".chkCart:checked");
 		console.log("tergets: ", targets);
+		
+		var cnos = [];
+		targets.each(function() {
+			var cno = $(this).attr("data-cno");
+			cnos.push(parseInt(cno));
+		});
+		
+		var str_cnos = cnos.join();
+		console.log("str_cnos: ", str_cnos);
+		var url = "/removeItems";
+		var sData = {"cnos" : str_cnos};
+		
+		$.post(url, sData, function(rData) {
+			console.log("delete_result: ", rData);
+			if (rData == "true") {
+				targets.each(function() {
+					$(this).closest("tr").fadeOut(500);
+				});
+			}
+		});
 	});
 });
 </script>
 <body>
+<div style=" height: 100%; background-color: #151515">
 	<div id="main" style="color: white;">
 		<div class="container">
 			<div class="section">
@@ -66,9 +87,9 @@ $(function() {
 										</td>
 										<td>
 											<img class="productImage" alt="상품 사진"
-												src="/resources/images/galaxybook4pro.png"/>
+												src="/resources/images/${cartVO.cimage}"/>
 										</td>
-										<td style="vertical-align: middle;">Galaxy Book5</td>
+										<td style="vertical-align: middle;">${cartVO.cname}</td>
 										<td style="vertical-align: middle;">
 										<c:set var="coption" value="${fn:split(cartVO.coption, ',')}"/>
 										<c:forEach items="${coption}" var="coption">
@@ -94,6 +115,7 @@ $(function() {
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<%@ include file="/WEB-INF/views/include/bottom.jsp"%>

@@ -100,19 +100,19 @@ $(function(){
 <!--             <ul class="navbar-nav  mx-auto "> -->
             <ul class="navbar-nav">
               <li class="nav-item"> <!-- active -->
-                <a class="nav-link" href="/productList?ptype=1">노트북 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/product/list?ptype=1">노트북 <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=2">모니터</a>
+                <a class="nav-link" href="/product/list?ptype=2">모니터</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=3">태블릿</a>
+                <a class="nav-link" href="/product/list?ptype=3">태블릿</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=4">음향기기</a>
+                <a class="nav-link" href="/product/list?ptype=4">음향기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=5">주변기기</a>
+                <a class="nav-link" href="/product/list?ptype=5">주변기기</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/customerCenter/FAQ">고객센터</a>
