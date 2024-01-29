@@ -127,7 +127,7 @@ $(function() {
 						</div>
 						<div class="row" id="divProduct">
 						<c:forEach items="${ productDTOList }" var="productDTO">
-							<form action="/product" method="get">
+							<form action="/product/goods" method="get">
 								<div class="col-md-4 divProduct">
 									<div class="container">
 										<div class="card divProd" id="divProd">

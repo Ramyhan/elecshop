@@ -1,11 +1,10 @@
-package com.kh.elecshop.mapper;
+package com.kh.elecshop.service;
 
 import java.util.List;
 
 import com.kh.elecshop.domain.PointVO;
 
-public interface PointMapper {
+public interface PointService {
 
-	public int insertPoint(PointVO pointVO);
 	public List<PointVO> getPointInfo(String mid);
 }

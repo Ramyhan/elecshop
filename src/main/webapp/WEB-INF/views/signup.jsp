@@ -9,55 +9,54 @@
 					<label>
 						아이디
 					</label>
-					<input type="text" class="form-control" id="mid" name="mid" />
+					<input type="text" class="form-control" id="mid" name="mid" required/>
 				</div>
 				<div class="form-group">
 					 
 					<label>
 						비밀번호
 					</label>
-					<input type="password" class="form-control pw" id="mpw" name="mpw" />
+					<input type="password" class="form-control pw" id="mpw" name="mpw" required/>
 				</div>
 				<div class="form-group">
 					<label>
 						비밀번호 재확인
 					</label>
-					<input type="password" class="form-control pw" id="mpw2" >
+					<input type="password" class="form-control pw" id="mpw2"  required >
 					<font id="passwordCheck"></font>
 				</div>
 				<div class="form-group">
 					<label>
 						이름
 					</label>
-					<input type="text" class="form-control" id="mname" name="mname" />
+					<input type="text" class="form-control" id="mname" name="mname"  required/>
 				</div>
 				<div class="form-group">
 					<label>
 						생년월일
 					</label>
 					<input type="date" pattern="yyyy-MM-dd" max="2024-01-01" min="1920-01-01" value="2000-01-01" class="form-control" 
-					id="mbirthday" name="mbirthday" />
-<!-- 					<input type="text" class="form-control" id="mbirthday" name="mbirthday" /> -->
+					id="mbirthday" name="mbirthday" required/>
 				</div>
 				<div class="form-group">
 					<label>
 						주소
 					</label>
-					<input type="text" class="form-control" id="maddr" name="maddr"><br>
-					<input type="text" id="maddr_detail" name="maddr_detail">
+					<input type="text" class="form-control" id="maddr" name="maddr"  required><br>
+					<input type="text" id="maddr_detail" name="maddr_detail"  required>
 					<button type="button" id="btn-addr-search" class="btn btn-light">주소 검색</button>
 				</div>
 				<div class="form-group">
 					<label>
 						핸드폰 번호
 					</label>
-					<input type="text" class="form-control" id="mphone" name="mphone" />
+					<input type="text" class="form-control" id="mphone" name="mphone"  required />
 				</div>
 				<div class="form-group">
 					<label>
 						이메일
 					</label>
-					<input type="email" class="form-control" id="memail" name="memail" />
+					<input type="email" class="form-control" id="memail" name="memail"  required/>
 				</div>
 				<button id="btn-register" type="submit" class="btn btn-primary">
 					회원가입

@@ -14,7 +14,7 @@ create table tbl_point(
 );
 
 create sequence seq_pid;
-
+-- 포인트 코드 기본 정보들
 insert into tbl_point_code(point_code, point_info, point_num)
 values ('AC', '출석체크', 500);
 
@@ -39,3 +39,10 @@ where mid = 'zxcv1234';
 
 select mpoint from tbl_member
 where mid = 'zxcv1234';
+
+-- 포인트 정보 가져오기
+select tbl_point.pid, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,
+tbl_point_code.point_info
+from tbl_point_code, tbl_point
+where tbl_point.mid = 'zxcv1234'
+and tbl_point_code.point_code = tbl_point.point_code;

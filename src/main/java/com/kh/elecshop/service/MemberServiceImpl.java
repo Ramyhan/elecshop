@@ -5,13 +5,19 @@ import org.springframework.stereotype.Service;
 
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.PointVO;
 import com.kh.elecshop.mapper.MemberMapper;
+import com.kh.elecshop.mapper.PointMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private PointMapper pointMapper;
+	
 	@Override
 	public boolean registerMember(MemberVO memberVO) {
 		int count = memberMapper.insertMember(memberVO);

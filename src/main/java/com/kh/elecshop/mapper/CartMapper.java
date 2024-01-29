@@ -1,9 +1,18 @@
 package com.kh.elecshop.mapper;
 
+import java.util.List;
+
+import com.kh.elecshop.domain.CartDTO;
 import com.kh.elecshop.domain.CartVO;
 
 public interface CartMapper {
 
-	public int insertCart(CartVO cartVO);
+	public int insertItem(CartVO cartVO);
+	
+	public List<CartDTO> selectCartList(String mid);
+	
+	public int selectCount(String mid);
+	
+	public int deleteItem(String snos);
 	
 }

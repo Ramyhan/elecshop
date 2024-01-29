@@ -9,4 +9,11 @@
 		values
 		(seq_pid.nextval, #{mid}, #{ppoint}, #{point_code})
 	</insert>
+	<select id="getPointInfo" resultType="com.kh.elecshop.domain.PointVO">
+		select tbl_point.pid, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,
+		tbl_point_code.point_info
+		from tbl_point_code, tbl_point
+		where tbl_point.mid = #{mid}
+		and tbl_point_code.point_code = tbl_point.point_code
+	</select>
 </mapper>

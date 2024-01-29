@@ -17,21 +17,35 @@
   <link href="/resources/css/dongwi/my.css" rel="stylesheet" type="text/css" />
   
   
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <!-- nice select  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
-  <!-- font awesome style -->
-  <link href="/resources/css/dongwi/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="/resources/css/dongwi/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="/resources/css/dongwi/responsive.css" rel="stylesheet" />
   <!-- 글리피콘 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script>
 $(function(){
+	var dailyResult = "${dailyResult}";
+	console.log(dailyResult);
+	
+	if(dailyResult == "success"){
+		alert("출석체크 성공");
+	}else if(dailyResult == "fail"){
+		alert("이미 출석체크를 하셨습니다.");
+	}
+	
+	$("#dailyCheck").on("click", function(e){
+		e.preventDefault();
+		$.post("/dailyCheck", function(rData){
+			console.log(rData);
+			if(rData == true){
+				alert("출석체크 성공");
+			}else if(rData == false){
+				alert("이미 출석체크를 하셨습니다.");
+			}
+		});
+		
+	});
+	
 	var checkPoint = function(){
 		$.post("/checkLogin", function(isLogin){
 			if(isLogin == "true"){
@@ -50,8 +64,6 @@ $(function(){
 });
 </script>
 </head>
-
-
 
 <body>
 
@@ -78,19 +90,19 @@ $(function(){
 <!--             <ul class="navbar-nav  mx-auto "> -->
             <ul class="navbar-nav">
               <li class="nav-item"> <!-- active -->
-                <a class="nav-link" href="/productList?ptype=1">노트북 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/product/list?ptype=1">노트북 <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=2">모니터</a>
+                <a class="nav-link" href="/product/list?ptype=2">모니터</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=3">태블릿</a>
+                <a class="nav-link" href="/product/list?ptype=3">태블릿</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=4">음향기기</a>
+                <a class="nav-link" href="/product/list?ptype=4">음향기기</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/productList?ptype=5">주변기기</a>
+                <a class="nav-link" href="/product/list?ptype=5">주변기기</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/customerCenter/FAQ">고객센터</a>
@@ -115,7 +127,9 @@ $(function(){
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <c:choose>
                <c:when test="${not empty loginInfo }">
-				<a class="dropdown-item" href="/myPage">마이페이지</a> 
+				<a class="dropdown-item" href="/myPage/myInfo">마이페이지</a>
+				<a class="dropdown-item" id="dailyCheck">출석체크</a>
+				<a class="dropdown-item" href="/buy">구매페이지</a>
 				<a class="dropdown-item" href="/logout">로그아웃</a> 
                
                </c:when>
@@ -137,13 +151,13 @@ $(function(){
 				 </div>
 				</div>
 				</div>
-              <div class="dropdown">
-              <a href="#" class="order_online dropdown topbar-dropdown" data-toggle="dropdown">
+              <div>
+              <a href="/cart" class="order_online">
                 장바구니
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#"></a>
-              </div>
+<!--               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+<!--               <a class="dropdown-item" href="#"></a> -->
+<!--               </div> -->
             </div>
             </div>
             <c:choose>

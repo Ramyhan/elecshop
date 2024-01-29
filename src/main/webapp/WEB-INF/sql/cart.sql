@@ -8,3 +8,8 @@ CREATE TABLE TBL_CART(
 );
 
 create sequence seq_cno;
+
+select cno, mid, cprice, coption, pname, pimage_thoumb
+from tbl_product, tbl_cart
+where mid = '1111'
+and tbl_product.pno = tbl_cart.pno;
