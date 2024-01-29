@@ -5,7 +5,7 @@ create table tbl_notice(
     ncontent nvarchar2(500) not null,
     nregdate date default sysdate,
     nstate varchar2(5) default 'false' CHECK(nstate in ('false','true')),
-    nimage varchar2(50),
+    nurl varchar2(50),
     ncount number default 0 
 );
 

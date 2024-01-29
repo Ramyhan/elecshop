@@ -15,5 +15,6 @@ public interface NoticeMapper {
 	public int updateCloseNoticeState(int[] nnos);
 	public int updateOpenNoticeState(int[] nnos);
 	public int deleteNotice(int[] nnos);
+	public int insertNotice(NoticeVO noticeVO);
 }
 

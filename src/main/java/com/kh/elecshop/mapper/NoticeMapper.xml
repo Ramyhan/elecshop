@@ -48,7 +48,7 @@
 	)
 	</delete>
 	<insert id="insertNotice">
-		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate,nimage)
-		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate},#{nimage})
+		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate,nurl,nfilename)
+		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate},#{nurl},#{nfileName})
 	</insert>
 </mapper>

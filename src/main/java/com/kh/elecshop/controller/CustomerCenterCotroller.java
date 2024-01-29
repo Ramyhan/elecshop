@@ -1,6 +1,7 @@
 package com.kh.elecshop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -47,8 +48,9 @@ public class CustomerCenterCotroller {
 	}
 	@GetMapping("/noticePage")
 	public void noticePage(int nno, Model model) {
-		NoticeVO noticeVO = noticeService.getNoticePage(nno);
-		model.addAttribute("noticePage", noticeVO);
+		Map<String, Object> map = noticeService.getNoticePage(nno);
+		System.out.println("2424" + map);
+		model.addAttribute("mapPage", map);
 	}
 	@GetMapping("/inquiry")
 	public void inquiry(HttpSession session, Model model) {

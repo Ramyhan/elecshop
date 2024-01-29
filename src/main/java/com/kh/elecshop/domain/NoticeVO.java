@@ -18,6 +18,7 @@ public class NoticeVO {
 	private String ncontent;
 	private Date nregdate;
 	private String nstate;
-	private String url;
+	private String nurl;
+	private String nfileName;
 	private int count;
 }

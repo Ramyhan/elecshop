@@ -59,14 +59,12 @@ public class AdminController {
 		int count = noticeService.removeNotice(nnos);
 		return count;
 	}
-	@PostMapping("/registerNotice")
+	@PostMapping(value="/registerNotice", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void registerNotice(NoticeVO noticeVO) {
-		
-		System.out.println(noticeVO);
-		String url = noticeVO.getUrl();
-		System.out.println("url" + url);
-		String[] urls = url.split(",");
-		System.out.println("urls[0]" + urls[0]);
+	public boolean registerNotice(NoticeVO noticeVO) {
+		System.out.println("notice" + noticeVO);
+		boolean result = noticeService.registerNotice(noticeVO);
+		System.out.println(result);
+		return result;
 	}
 }

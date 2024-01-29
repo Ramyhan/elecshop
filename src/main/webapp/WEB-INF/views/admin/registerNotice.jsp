@@ -33,21 +33,56 @@ $(function(){
 					fileDivClone.fadeIn(1000);
 					
 					// 서버에 보낼 데이터 세팅
-					fileDivClone.attr("data-url", fName);
+					fileDivClone.attr("data-url", obj.url);
+					fileDivClone.attr("data-fileName", obj.fileName);
 				});
 			}
 		})
 	});
-	$(".frm-register-notice").submit(function(){
+	$(".inquiry-btn").click(function(){
 		var that = $(this);
+		var ntitle = $("#ntitle").val();
+		var ncontent = $("#ncontent").val();
+		var ncategory = $("#ncategory").val();
+		var nstate = $("#nstate:checked").val();
 		var divAttach = $(".div-attach:gt(0)");
+		var url = "";
+		var file = "";
+		var nurls = [];
+		var files = [];
 		divAttach.each(function(i){
-			var url = $(this).attr("data-url");
-			console.log(url);
-			var inputFileName = "<input type='hidden' name='url' value='" + url + "'>";
-			that.prepend(inputFileName);
+			url = $(this).attr("data-url");
+			file = $(this).attr("data-fileName");
+			nurls.push(url);
+			files.push(file);
 		});
-// 		return false;
+		var nurl = nurls.join(",");
+		var nfilename = files.join(",");
+		console.log("nurl",nurl);
+		sData={
+				"ntitle" : ntitle,
+				"ncontent" : ncontent,
+				"ncategory": ncategory,
+				"nstate" : nstate,
+				"nfileName" : nfilename,
+				"nurl" : nurl
+		}
+		$.post("/admin/registerNotice",sData,function(rData){
+			if(rData == true){
+				alert("공지사항이 추가 되었습니다");
+				$.ajax({
+					type : "get",
+					url : "/admin/admin_customerCenter",
+					success : function(rdata){
+						$(".set-div").empty();
+						$(".set-div").append(rdata);
+					}
+				});
+			}else{
+				alert("공지사항 추가가 실패 하였습니다");
+				return
+			}
+		});
 	});
 });
 	
@@ -107,9 +142,8 @@ em{
 	<div class="box">
 		<div class="inquiry-div-main">
 		<!-- notice form -->
-			<form action="/admin/registerNotice" method="post" class="frm-register-notice">
 				<h3 style="text-align: center;">공지 추가</h3>
-				<div class="inquiry-div-sub" style="display: flex; ">
+				<div class="inquiry-div-sub" style="display: flex;">
 					<label>공지 제목</label>
 					<em style=" color: green;">(필수)</em>
 					<input class="input" type="text" id="ntitle" name="ntitle">
@@ -127,7 +161,7 @@ em{
 				<div class="inquiry-div-sub d-flex flex-wrap">
 					<label>문의 내용</label>
 					<em style=" color: blue;">(필수)</em>
-					<textarea class="input" maxlength="1000" style="height: 200px;" name="content"></textarea>
+					<textarea class="input" maxlength="1000" style="height: 200px;" id="ncontent" name="ncontent"></textarea>
 					<span style="padding-left: 156px;">0자 입력 / 최대 1000자</span>
 				</div>
 				<div class="row">
@@ -150,14 +184,13 @@ em{
 				</div>
 				<div class="inquiry-div-sub d-flex" style="text-align: center; justify-content: space-around;">
 					<div>
-						<input type="radio" name="nstate" id="nchkbox" value="true">공개
-						<input type="radio" name="nstate" id="nchkbox" checked value="false">비공개
+						<input type="radio" name="nstate" id="nstate" value="true">공개
+						<input type="radio" name="nstate" id="nstate" checked value="false">비공개
 					</div>
 				</div>
 				<div class="inquiry-div-sub d-flex justify-content-center">
 					<button type="submit" class="inquiry-btn">문의하기</button>
 				</div>
-			</form>
 			<!-- //notice form -->
 		</div>
 	</div>

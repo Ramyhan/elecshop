@@ -1,4 +1,4 @@
-create table t_iquiry(
+create table tbl_iquiry(
     ino number constraint pk_ino primary key,
     mid nvarchar2(30) constraint fk_iquiry_mid REFERENCES tbl_member(mid),
     mpw nvarchar2(20) not null,

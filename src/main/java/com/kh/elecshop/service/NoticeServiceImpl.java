@@ -1,6 +1,8 @@
 package com.kh.elecshop.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,17 @@ public class NoticeServiceImpl implements NoticeService{
 		List<SubNoticeDTO> list = mapper.subselectAll();
 		return list;
 	}
-	public NoticeVO  getNoticePage(int nno) {
+	public Map<String, Object>  getNoticePage(int nno) {
 		NoticeVO noticeVO = mapper.selectByNno(nno);
-		return noticeVO;
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(noticeVO.getNfileName()!= null) {
+		String[] filenames = noticeVO.getNfileName().split(",");
+		String[] urls = noticeVO.getNurl().split(",");
+		map.put("filenames", filenames);
+		map.put("urls", urls);
+		}
+		map.put("noticeVO", noticeVO);
+		return map;
 	}
 	@Override
 	public List<SubNoticeDTO> getNoticeTop5() {
@@ -56,6 +66,14 @@ public class NoticeServiceImpl implements NoticeService{
 	public int removeNotice(int[] nnos) {
 		int count = mapper.deleteNotice(nnos);
 		return count;
+	}
+	@Override
+	public boolean registerNotice(NoticeVO noticeVO) {
+		int count = mapper.insertNotice(noticeVO);
+		if(count == 1) {
+			return true;
+		}
+		return false;
 	}
 	
 	

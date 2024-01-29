@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 	.return-a{
@@ -31,20 +32,36 @@
 					 <div class="d-flex">
 						 <div>
 							 <span style="padding: 4px 16px  0  12px; border-right: 1px solid rgba(0, 0, 0, .3); margin-right: 11px;">
-							 <fmt:formatDate value="${noticePage.nregdate}" pattern="yy/MM/dd"/>
+							 <fmt:formatDate value="${mapPage.noticeVO.nregdate}" pattern="yy/MM/dd"/>
 							 </span>
 						 </div>
 						 <div>
 						 	<span style="font-weight: 1000">조회수</span>
-						 	<span>${noticePage.count}</span>
+						 	<span>${mapPage.noticeVO.count}</span>
 						 </div>
 					 </div>
 					</div>
 					<div style="width: 100%; height: 400px; margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.4);">
 						<div style="padding: 30px 30px 30px 30px">
-							<span>${noticePage.content}</span>
+							<span>${mapPage.noticeVO.ncontent}</span>
 						</div>
 					</div>
+					<c:choose>
+						<c:when test="${not empty mapPage.filenames || not empty mapPage.urls}">
+						<div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+									첨부파일
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<c:forEach varStatus="status" items="${mapPage.filenames}">
+							 			<a class="dropdown-item" data-url="${mapPage.urls[status.index]}" href="#">${mapPage.filenames[status.index]}</a>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						</c:when>
+					</c:choose>
 						<div>
 							<p class="return-p">
 								<a class="return-a" href="/customerCenter/notice">목록으로</a>
