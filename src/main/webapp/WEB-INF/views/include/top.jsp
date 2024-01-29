@@ -160,13 +160,13 @@ $(function(){
 				 </div>
 				</div>
 				</div>
-              <div class="dropdown">
-              <a href="#" class="order_online dropdown topbar-dropdown" data-toggle="dropdown">
+              <div>
+              <a href="/cart" class="order_online">
                 장바구니
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#"></a>
-              </div>
+<!--               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+<!--               <a class="dropdown-item" href="#"></a> -->
+<!--               </div> -->
             </div>
             </div>
             <c:choose>

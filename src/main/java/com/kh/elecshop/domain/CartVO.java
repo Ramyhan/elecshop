@@ -16,6 +16,8 @@ public class CartVO {
 	private int cno;
 	private int pno;
 	private String mid;
+	private String cname;
+	private String cimage;
 	private int cprice;
 	private String coption;
 	private Date cregdate;

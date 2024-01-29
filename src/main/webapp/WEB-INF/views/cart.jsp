@@ -1,67 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
 <style>
-h1 {
-	font-family: "고딕";
-}
+	h1 {
+		font-family: "고딕";
+	}
+	
+	.productImage {
+		width: 130px;
+		height: 130px;
+	}
+
+	#btnOrder {
+		scale: 1.5;
+		margin-top: 10px;
+	}	
 </style>
+<script>
+$(function() {
+	
+	$("#chkCart").change(function() {
+		var checked = $(this).prop("checked");
+		$(".chkCart").prop("checked", checked);
+	});
+	
+	$("#btnRemove").click(function() {
+		var targets = $(".chkCart:checked");
+		console.log("tergets: ", targets);
+	});
+});
+</script>
 <body>
 	<div id="main" style="color: white;">
 		<div class="container">
 			<div class="section">
 				<div class="col"
 					style="border: solid 1px #ffbe33; border-radius: 1px">
-					<div>
+					<div style="margin: 20px;">
 						<h1>장바구니</h1><br>
-						<h3>수량: 3개</h3><br>
+						<h3>수량: ${count}개</h3><br>
+					</div>
+					<div style="padding-bottom:10px;">
+						<button type="button" class="btn btn-warning" id="btnRemove">선택 삭제</button>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<table class="table" style="color: white;">
 								<thead>
 									<tr>
-										<th>#</th>
-										<th><input type="checkbox" class="form-check-input" value=""></th>
-										<th>Payment Taken</th>
-										<th>Status</th>
+										<th><input type="checkbox" id="chkCart"></th>
+										<th>상품 이미지</th>
+										<th>상품명</th>
+										<th>옵션</th>
+										<th>가격</th>
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach items="${cartList}" var="cartVO">
 									<tr>
-										<td>1</td>
-										<td>TB - Monthly</td>
-										<td>01/04/2012</td>
-										<td>Default</td>
+										<td style="vertical-align: middle;">
+											<input type="checkbox" class="chkCart" data-cno="${cartVO.cno}">
+										</td>
+										<td>
+											<img class="productImage" alt="상품 사진"
+												src="/resources/images/galaxybook4pro.png"/>
+										</td>
+										<td style="vertical-align: middle;">Galaxy Book5</td>
+										<td style="vertical-align: middle;">
+										<c:set var="coption" value="${fn:split(cartVO.coption, ',')}"/>
+										<c:forEach items="${coption}" var="coption">
+											${coption}<br>
+										</c:forEach>
+										</td>
+										<td style="vertical-align: middle;">
+											<fmt:formatNumber pattern="#,###">
+												${cartVO.cprice}
+											</fmt:formatNumber>원
+										</td>
 									</tr>
-									<tr class="table-active">
-										<td>1</td>
-										<td>TB - Monthly</td>
-										<td>01/04/2012</td>
-										<td>Approved</td>
-									</tr>
-									<tr class="table-success">
-										<td>2</td>
-										<td>TB - Monthly</td>
-										<td>02/04/2012</td>
-										<td>Declined</td>
-									</tr>
-									<tr class="table-warning">
-										<td>3</td>
-										<td>TB - Monthly</td>
-										<td>03/04/2012</td>
-										<td>Pending</td>
-									</tr>
-									<tr class="table-danger">
-										<td>4</td>
-										<td>TB - Monthly</td>
-										<td>04/04/2012</td>
-										<td>Call in to confirm</td>
+								</c:forEach>
+									<tr>
+										<td colspan="5" style="text-align: center; vertical-align: middle;">
+											<button type="button" class="btn btn-success" id="btnOrder">주문 하기</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div>			
 				</div>
 			</div>
 		</div>
