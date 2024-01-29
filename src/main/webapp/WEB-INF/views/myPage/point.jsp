@@ -4,25 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
-<div class="side-bar">
-	<div class="icon">
-		<div>
-			<i class="fa fa-align-justify"></i>
-		</div>
-		<div>
-			<i class="fa fa-angle-double-left"></i>
-		</div>
-	</div>
-	<div class="side-menu side-myPage-point">
-		<ul>
-			<li><a href="/myPage">내 정보</a></li>
-			<li><a href="/myPage_point">포인트</a></li>
-			<li><a href="#">찜 목록</a></li>
-			<li><a href="#">나의 문의 내역</a></li>
-			<li><a href="#">계정 탈퇴</a></li>
-		</ul>
-	</div>
-</div>
+<%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
 <!-- 포인트 -->
 

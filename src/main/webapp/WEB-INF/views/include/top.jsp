@@ -17,17 +17,9 @@
   <link href="/resources/css/dongwi/my.css" rel="stylesheet" type="text/css" />
   
   
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <!-- nice select  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
-  <!-- font awesome style -->
-  <link href="/resources/css/dongwi/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="/resources/css/dongwi/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="/resources/css/dongwi/responsive.css" rel="stylesheet" />
   <!-- 글리피콘 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script>
@@ -72,8 +64,6 @@ $(function(){
 });
 </script>
 </head>
-
-
 
 <body>
 
@@ -137,8 +127,9 @@ $(function(){
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <c:choose>
                <c:when test="${not empty loginInfo }">
-				<a class="dropdown-item" href="/myPage">마이페이지</a>
+				<a class="dropdown-item" href="/myPage/myInfo">마이페이지</a>
 				<a class="dropdown-item" id="dailyCheck">출석체크</a>
+				<a class="dropdown-item" href="/buy">구매페이지</a>
 				<a class="dropdown-item" href="/logout">로그아웃</a> 
                
                </c:when>

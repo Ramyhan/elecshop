@@ -43,7 +43,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			HttpSession session = request.getSession();
 			if(useCookie != null && useCookie == true) {
 				Cookie cookie = new Cookie("savedId", memberVO.getMid());
-				cookie.setMaxAge(30);
+				cookie.setMaxAge(60 * 60 * 24);
 				response.addCookie(cookie);
 			}
 			session.setAttribute("loginInfo", memberVO);

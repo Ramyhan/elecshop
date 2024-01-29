@@ -440,8 +440,18 @@ footer{
 	align-items: center;
 }
 .side-myPage-point > ul > li:nth-child(2) > a{
-	color: #FFD369;
+/* 	color: #FFD369; */
 }
 .point-table{
 	color: white;
+}
+.div-buy{
+	display: flex;
+	height: 100%;
+	background-color: #202020;
+}
+.buy-title > h1{
+	color: white;
+	font-family: 굴림체;
+	font-weight: 600;
 }
