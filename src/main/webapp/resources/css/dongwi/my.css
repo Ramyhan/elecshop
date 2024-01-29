@@ -377,12 +377,16 @@ footer{
 	color: #FFD369;
 }
 
-
-.myPage-main{
-	display: flex;
+.myInfo-main{
 	height: 100%;
-/* 	justify-content:  */
+	display: flex;
 	background-color: #303030;
+}
+.myPage-main{
+	
+	
+/* 	justify-content:  */
+	
 }
 /* .myPage-main{ */
 /* 	display: flex; */
@@ -393,7 +397,7 @@ footer{
 /* } */
 .myPage-text{
 	margin-top: 150px;
-	margin-left: 500px;
+	margin-left: 100px;
 	width: 500px;
 	color: white;
 }
@@ -409,6 +413,10 @@ footer{
 /* } */
 
 /* 마이페이지 회원정보수정 */
+.modify-container{
+/* 	height: 100%; */
+/* 	background-color: #303030;	 */
+}
 .myPage-modify-main{
 	display: flex;
 /* 	position: inherit; */
@@ -450,8 +458,31 @@ footer{
 	height: 100%;
 	background-color: #202020;
 }
+.buy-col{
+	border: solid 1px #FFD369;
+	right: 10px;
+}
 .buy-title > h1{
 	color: white;
 	font-family: 굴림체;
 	font-weight: 600;
+}
+.buy-title > h3{
+	color: white;
+	font-family: 굴림체;
+}
+.buy-col > h2{
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-family: 굴림체;
+}
+.buy-col > p{
+	color: white;
+	font-size: 15px;
+	font-family: 굴림체;
+}
+.btn-buy {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

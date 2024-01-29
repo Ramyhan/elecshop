@@ -1,9 +1,9 @@
 create table tbl_member(
     mno number constraint pk_mno primary key,
     mname nvarchar2(10) not null,
-    mid NVARCHAR2(30) unique,
+    mid NVARCHAR2(30) not null unique,
     mpw NVARCHAR2(30) not null,
-    memail NVARCHAR2(30) unique,
+    memail NVARCHAR2(30) not null unique,
     maddr NVARCHAR2(50) not null,
     maddr_detail NVARCHAR2(50) not null,
     mphone NVARCHAR2(15) unique,

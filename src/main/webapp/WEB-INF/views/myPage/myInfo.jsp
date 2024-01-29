@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
-<div class="myPage-main">
+<div class="myInfo-main">
+<div class="container myPage-main">
 	<div class="row">
 		<div class="myPage-text">
 			<h1>개인 정보 수정</h1>
@@ -25,7 +26,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <script>
 $(function() {
 	var modifyResult = "${modifyResult}";

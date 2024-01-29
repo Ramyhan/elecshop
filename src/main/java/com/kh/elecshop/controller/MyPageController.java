@@ -67,11 +67,11 @@ public class MyPageController {
 			rttr.addFlashAttribute("modifyResult", "success");
 			session.removeAttribute("loginInfo");
 			session.setAttribute("loginInfo", modiMemberVO);
-			return "redirect:/myPage";
+			return "redirect:/myPage/myInfo";
 		}
 		
 		rttr.addFlashAttribute("modifyResult", "fail");
-		return "redirect:/myPage";
+		return "redirect:/myPage/myInfo";
 	}
 	
 	

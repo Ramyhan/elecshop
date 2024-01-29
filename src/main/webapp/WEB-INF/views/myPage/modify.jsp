@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
-<!-- <div class="section myPage-modify-section"> -->
+<div class="">
 <div class="myPage-modify-main">
 		<div class="myPage-modify-text">
 			<h1>개인 정보 수정</h1>
@@ -54,7 +54,7 @@
 			<div class="myPage-login"></div>
 		</div>
 </div>
-<!-- </div> -->
+</div>
 <script>
 $(function(){
 
