@@ -6,15 +6,16 @@
 
 	<insert id="insertItem">
 		insert into tbl_cart
-			(cno, pno, mid, cname, cimage, cprice, coption)
+			(cno, pno, mid, cprice, coption)
 		values
-			(seq_cno.nextval, #{pno}, #{mid}, #{cname}, #{cimage}, #{cprice}, #{coption})
+			(seq_cno.nextval, #{pno}, #{mid}, #{cprice}, #{coption})
 	</insert>
 	
-	<select id="selectCartList" resultType="com.kh.elecshop.domain.CartVO">
-		select *
-		from tbl_cart
+	<select id="selectCartList" resultType="com.kh.elecshop.domain.CartDTO">
+		select cno, mid, cprice, coption, pname, pimage_thoumb
+		from tbl_product, tbl_cart
 		where mid = #{mid}
+		and tbl_product.pno = tbl_cart.pno
 	</select>
 	
 	<select id="selectCount" resultType="int">

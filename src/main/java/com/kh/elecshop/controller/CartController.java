@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.elecshop.domain.CartDTO;
 import com.kh.elecshop.domain.CartVO;
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.service.CartService;
@@ -36,7 +37,7 @@ public class CartController {
 	private void cartList(HttpSession session, Model model) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		String mid = loginInfo.getMid();
-		List<CartVO> cartList = cartService.getList(mid);
+		List<CartDTO> cartList = cartService.getList(mid);
 		int count = cartService.getCount(mid);
 		
 		model.addAttribute("cartList", cartList);
