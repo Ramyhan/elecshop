@@ -32,6 +32,28 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script>
 $(function(){
+	var dailyResult = "${dailyResult}";
+	console.log(dailyResult);
+	
+	if(dailyResult == "success"){
+		alert("출석체크 성공");
+	}else if(dailyResult == "fail"){
+		alert("이미 출석체크를 하셨습니다.");
+	}
+	
+	$("#dailyCheck").on("click", function(e){
+		e.preventDefault();
+		$.post("/dailyCheck", function(rData){
+			console.log(rData);
+			if(rData == true){
+				alert("출석체크 성공");
+			}else if(rData == false){
+				alert("이미 출석체크를 하셨습니다.");
+			}
+		});
+		
+	});
+	
 	var checkPoint = function(){
 		$.post("/checkLogin", function(isLogin){
 			if(isLogin == "true"){
@@ -115,7 +137,8 @@ $(function(){
                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <c:choose>
                <c:when test="${not empty loginInfo }">
-				<a class="dropdown-item" href="/myPage">마이페이지</a> 
+				<a class="dropdown-item" href="/myPage">마이페이지</a>
+				<a class="dropdown-item" id="dailyCheck">출석체크</a>
 				<a class="dropdown-item" href="/logout">로그아웃</a> 
                
                </c:when>

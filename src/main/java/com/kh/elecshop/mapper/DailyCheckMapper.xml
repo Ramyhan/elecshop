@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.elecshop.mapper.DailyCheckMapper">
+
+	<insert id="insertDailyCheck">
+		insert into tbl_daily_check
+		(did, mid)
+		values(seq_did.nextval, #{mid})
+	</insert>
+	
+	<select id="selectDailyCheck" resultType="com.kh.elecshop.domain.DailyCheckVO">
+		select did, mid, to_char(regdate, 'yyyy-MM-dd') regdate 
+		from tbl_daily_check
+		where mid = #{mid}
+	</select>
+	
+	<select id="checkDaily" resultType="com.kh.elecshop.domain.DailyCheckVO">
+		select * from(select * from tbl_daily_check order by rownum desc)
+		where mid = #{mid}
+		and rownum = 1
+	</select>
+</mapper>

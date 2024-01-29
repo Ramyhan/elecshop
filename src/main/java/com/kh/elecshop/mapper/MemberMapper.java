@@ -1,5 +1,7 @@
 package com.kh.elecshop.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.kh.elecshop.domain.LoginDTO;
@@ -12,4 +14,5 @@ public interface MemberMapper {
 	public MemberVO login(LoginDTO loginDTO);
 	public int updateMember(MemberVO memberVO);
 	public int selectPoint(String mid);
+	public int updatePoint(Map<String, Object> map);
 }
