@@ -29,7 +29,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class FileUploadController {
-	private final String UPLOAD_PATH = "C:\\Users\\dongk\\Desktop/upload";
+	private final String UPLOAD_PATH = "C:\\Users\\KH302\\Desktop\\upload";
 	
 	@PostMapping(value="/uploadAjax", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -95,6 +95,28 @@ public class FileUploadController {
 		}
 		return null;
 	}
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName, String dataType) {
+		log.info("fileName:" + fileName);
+		log.info("dataType:" + dataType);
+		// 파일 삭제 처리
+		// 1. 원본 파일 삭제
+		String filePath = UPLOAD_PATH + fileName;
+		File f = new File(filePath);
+		boolean result = f.delete();
+		// 2. 이미지 파일이라면 쎔네일 파일 삭제 (s_)
+		if (dataType.equals("image")) {
+			String front = fileName.substring(0, 12); // /2024/01/05/
+			String rear = fileName.substring(12);// aac58989-946b-4745-922d-0b69e32e7008_4.png
+			String thumbnailPath = UPLOAD_PATH + front + "s_" + rear;
+			File thumbF = new File(thumbnailPath);
+			result = result && thumbF.delete();
+		}
+		ResponseEntity<String> entity = new ResponseEntity<String>(
+				String.valueOf(result), HttpStatus.OK);
+		return entity;
+	}
+	
 	private String getFolder() {
 		// java.util.Date
 		Date d = new Date();

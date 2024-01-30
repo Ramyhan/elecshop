@@ -33,7 +33,7 @@ public class CustomerCenterCotroller {
 	private QuestionService questionService;
 	
 	@GetMapping("/FAQ")
-	public void FAQ(Model model) {
+	public void FAQ(Model model, HttpSession session) {
 		List<SubNoticeDTO>top5Notice = noticeService.getNoticeTop5();
 		List<QuestionVO> top5Question = questionService.getQuestionTop5();
 		model.addAttribute("top5Notice", top5Notice);

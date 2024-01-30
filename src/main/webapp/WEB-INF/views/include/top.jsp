@@ -163,7 +163,7 @@ $(function(){
             <c:choose>
             <c:when test="${loginInfo.mid == 'admin'}">
             	<div style="width: 20px;">
-	            	<a href="/admin/admin" style="border: 1px solid; display: block;">관리자</a>
+	            	<a href="/admin/admin_dashboard" style="border: 1px solid; display: block;">관리자</a>
             	</div>
             </c:when>
             </c:choose>

@@ -1,7 +1,5 @@
 package com.kh.elecshop.domain;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdminNoticeDTO {
-	private long nno;
-	private String ncategory;
-	private String ntitle;
-	private Date nregdate;
-	private String nstate;
+public class SearchDTO {
+	private String select;
+	private String word;
 }

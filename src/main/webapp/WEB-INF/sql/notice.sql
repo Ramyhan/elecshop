@@ -6,6 +6,7 @@ create table tbl_notice(
     nregdate date default sysdate,
     nstate varchar2(5) default 'false' CHECK(nstate in ('false','true')),
     nurl varchar2(50),
+    nfilename nvarchar2(50),
     ncount number default 0 
 );
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.NoticeVO;
+import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 
 public interface NoticeMapper {
@@ -16,5 +17,6 @@ public interface NoticeMapper {
 	public int updateOpenNoticeState(int[] nnos);
 	public int deleteNotice(int[] nnos);
 	public int insertNotice(NoticeVO noticeVO);
+	public List<SubNoticeDTO> selectSearchWord(SearchDTO searchDTO);
 }
 

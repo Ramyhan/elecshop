@@ -131,6 +131,41 @@ $(function(){
 			}
 		})
 	});
+	//검색버튼
+	$(".search-btn").on("click",function(){
+		var select = $(".select-box").val();
+		var searchBar = $(".sb").val();
+		if(searchBar.trim() == "공개"){
+			searchBar = "true";
+		}else if(searchBar.trim() == "비공개"){
+			searchBar = "false";
+		}
+		sData = {
+				"select" : select,
+				"word" : searchBar
+		}
+		if(searchBar != ""){
+			$.post("/admin/searchWord",sData,function(rData){
+				$(".tbltbody").empty();
+				$(".tbltbody").append(rData);
+			});
+		}
+	});
+	function formatDate(date) {
+	    
+	    var d = new Date(date),
+	    
+	    month = '' + (d.getMonth() + 1) , 
+	    day = '' + d.getDate(), 
+	    year = d.getFullYear();
+	    
+	    if (month.length < 2) month = '0' + month; 
+	    if (day.length < 2) day = '0' + day; 
+	    
+	    return [year, month, day].join('-');
+	    
+	    }
+
 });
 </script>
 <div class="Center-div-title" style="text-align: center;">
@@ -148,15 +183,15 @@ $(function(){
 		</div>
 			<nav class="navbar-light">
 			  <form class="form-inline">
-			  	<select style="height: 40px;">
-			  		<option>고유번호</option>
-			  		<option>제목</option>
-			  		<option>카테고리</option>
-			  		<option>내용</option>
-			  		<option>날짜</option>
+			  	<select class="select-box" style="height: 40px;">
+			  		<option value="n">고유번호</option>
+			  		<option value="t">제목</option>
+			  		<option value="c">카테고리</option>
+			  		<option value="d">날짜</option>
+			  		<option value="s">상태</option>
 			  	</select>
-			    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+			    <input class="sb form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="button">검색</button>
 			  </form>
 			</nav>
 		</div>
@@ -175,7 +210,7 @@ $(function(){
 							카테고리
 						</th>
 						<th>
-							공지내용
+							공지제목
 						</th>
 						<th>
 							공지 날짜
@@ -185,9 +220,9 @@ $(function(){
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="tbltbody">
 				<c:forEach var="adminNotice" items="${subNotice}">
-						<tr style="text-align: center;">
+						<tr class="tbltr" style="text-align: center;">
 							<td>
 								<input type="checkbox" class="notice-checkbox" data-nno="${adminNotice.nno}">
 							</td>
@@ -195,10 +230,10 @@ $(function(){
 								${adminNotice.nno}
 							</td>
 							<td>
-								${adminNotice.ncategory }
+								${adminNotice.ncategory}
 							</td>
 							<td>
-								${adminNotice.ncontent}
+								${adminNotice.ntitle}
 							</td>
 							<td>
 								<fmt:formatDate value="${adminNotice.nregdate}"/>

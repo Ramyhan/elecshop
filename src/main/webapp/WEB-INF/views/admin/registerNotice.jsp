@@ -25,12 +25,17 @@ $(function(){
 				$(rData).each(function(i, obj) {
 					var fileDivClone = $("#fileDiv > div:eq(0)").clone();
 					fileDivClone.find(".spanFilename").text(obj.fileName);
+					var dataType="file";
+					if(obj.image == true){
+						dataType="image";
 						var fName = obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName;
 						var url = "/display?fileName=" + fName;
 						fileDivClone.find("img").attr("src", url);
+					}
 					fileDivClone.find(".fa-times-circle").attr("data-filename", obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
 					$("#fileDiv").append(fileDivClone);
 					fileDivClone.fadeIn(1000);
+					fileDivClone.find(".fa-times-circle").attr("data-type", dataType);
 					
 					// 서버에 보낼 데이터 세팅
 					fileDivClone.attr("data-url", obj.url);
@@ -39,6 +44,7 @@ $(function(){
 			}
 		})
 	});
+	//공지 추가 버튼
 	$(".inquiry-btn").click(function(){
 		var that = $(this);
 		var ntitle = $("#ntitle").val();
@@ -81,6 +87,21 @@ $(function(){
 			}else{
 				alert("공지사항 추가가 실패 하였습니다");
 				return
+			}
+		});
+	});
+	// 첨부파일 삭제
+	$("#fileDiv").on("click", ".fa-times-circle", function() {
+		var that = $(this);
+		var url = "/deleteFile";
+		var sendData = {
+				"fileName" : that.attr("data-filename"),
+				"dataType" : that.attr("data-type")
+		};
+		$.post(url, sendData, function(rData) {
+			console.log("rData:", rData);
+			if (rData == "true") {
+				that.parent().remove();
 			}
 		});
 	});

@@ -21,22 +21,6 @@ $(function(){
 		  $(".scroll-div").animate({left:"0%"});
 	   }
 	});
-	$(".menubar").click(function(e){
-		e.preventDefault();
-		console.log("this",this);
-		var url = $(this).attr("href");
-		console.log("href",url);
-		if(url == "/admin/admin_customerCenter"){
-			$.ajax({
-				type : "get",
-				url: url,
-				success:function(rdata){
-					$(".set-div").empty();
-					$(".set-div").append(rdata);
-				}
-			});
-		}
-	});
 });
 </script>
 <style>

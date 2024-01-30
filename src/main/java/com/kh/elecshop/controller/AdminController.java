@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.NoticeVO;
+import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
+import com.kh.elecshop.service.AdminService;
 import com.kh.elecshop.service.NoticeService;
 
 import lombok.extern.log4j.Log4j;
@@ -26,20 +28,26 @@ public class AdminController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	@Autowired
+	private AdminService adminService;
 	
-	@GetMapping("/admin")
-	public void admin() {
+	@GetMapping("/admin_dashboard")
+	public void dashBoard() {
 		
-	}
-	@GetMapping("/admin_customerCenter")
-	public void admin_customerCenter(Model model) {
-		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
-		model.addAttribute("subNotice", list);
 	}
 	@PostMapping("/notice/register")
 	public String noticeRegister() {
 		
 		return "/admin/registerNotice";
+	}
+	@PostMapping("/admin_user")
+	public void user() {
+		
+	}
+	@PostMapping("/admin_customerCenter")
+	public void admin_customerCenter(Model model) {
+		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
+		model.addAttribute("subNotice", list);
 	}
 	@PostMapping(value = "/updateCloseState", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -66,5 +74,12 @@ public class AdminController {
 		boolean result = noticeService.registerNotice(noticeVO);
 		System.out.println(result);
 		return result;
+	}
+	@PostMapping("/searchWord")
+	public String seachWord(SearchDTO searchDTO, Model model) {
+		List<SubNoticeDTO> list = adminService.getSearchByNotice(searchDTO);
+		System.out.println("list" + list);
+		model.addAttribute("list", list);
+		return "admin/admin_customTable";
 	}
 }

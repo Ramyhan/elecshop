@@ -3,6 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.elecshop.mapper.NoticeMapper">
+<sql id="search">
+		<where>
+	 		<choose>
+				<when test="select == 'n'.toString()">
+					 nno like '%' || #{word} || '%'
+				</when>
+				<when test="select == 't'.toString()">
+					or ntitle like '%' || #{word} || '%'
+				</when>
+				<when test="select == 'c'.toString()">
+					or ncategory like '%' || #{word} || '%'
+				</when>
+				<when test="select == 'd'.toString()">
+					or nregdate like '%' || #{word} || '%'
+				</when>
+				<when test="select == 's'.toString()">
+					or nstate like '%' || #{word} || '%'
+				</when>
+			</choose>
+		</where>		
+	</sql>
 <sql id="foreachByNno">
 	<foreach collection="array" item="nnos" separator=",">
 		#{nnos}
@@ -24,7 +45,7 @@
 		and nstate = 'true'
 	</select>
 	<select id="selectAdminNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
-		select nno,ncategory,ncontent, ntitle, nregdate,nstate
+		select nno,ncategory,ncontent, ntitle, nregdate, nstate
 		from (select * from tbl_notice order by rownum desc)
 	</select>
 	<update id="updateCloseNoticeState">
@@ -51,4 +72,10 @@
 		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate,nurl,nfilename)
 		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate},#{nurl},#{nfileName})
 	</insert>
+	<select id="selectSearchWord" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
+		select ntitle,nno,ncategory,nregdate,nstate
+		from(select nno,ntitle,nregdate,nstate,ncategory 
+			 from tbl_notice order by rownum desc)
+		<include refid="search"></include>
+	</select>
 </mapper>
