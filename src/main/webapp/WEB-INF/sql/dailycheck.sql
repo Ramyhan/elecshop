@@ -1,10 +1,11 @@
 create table tbl_daily_check(
-    did number constraint pk_did primary key,
+    dno number constraint pk_did primary key,
     mid nvarchar2(30) constraint fk_daily_mid references tbl_member(mid),
     regdate date default sysdate
 );
 
-create sequence seq_did;
+create sequence seq_dno;
+
 commit;
 
 -- 출석 여부

@@ -1,6 +1,4 @@
 @charset "UTF-8";
-
-@charset "utf-8";
 /* CSS Document */
  
 /* 공지색  #222831 */
@@ -163,7 +161,7 @@ body {
   transform:scale(1.0);        
   transition: 0.2s ease-in-out;
   border: solid 2px #202020;
-  width: 275px;
+  width: 268px;
   height: 500px;
   margin-right: 10px; 
 	
@@ -408,6 +406,10 @@ footer{
 	border-bottom: solid 1px #FFD369;
 	margin-bottom: 15px;
 }
+.myPage-line-gray{
+	border-bottom: solid 1px #777777;
+	margin-bottom: 15px;
+}
 /* .myPage-modify-section{ */
 /* 	padding: 0px; */
 /* } */
@@ -447,30 +449,68 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
+
+/* 찜목록 */
+.myPage-like {
+	display: flex;
+/* 	height: 100%; */
+    position: relative;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+
 .side-myPage-point > ul > li:nth-child(2) > a{
 /* 	color: #FFD369; */
 }
+
+/* 구매페이지 */
 .point-table{
 	color: white;
 }
 .div-buy{
 	display: flex;
 	height: 100%;
-	background-color: #202020;
+	background-color: #303030;
+}
+.div-buy p{
+	color: white;
+	font-family: 굴림체;
+	font-weight: 600;
+}
+.div-buy i{
+	color: white;
+}
+.div-buy span{
+	color: white;
+	font-family: 굴림체;
+	font-weight: 600;
+	margin-left: 6px;
 }
 .buy-col{
 	border: solid 1px #FFD369;
 	right: 10px;
+}
+.buy-title{
+	margin-top: 50px;
 }
 .buy-title > h1{
 	color: white;
 	font-family: 굴림체;
 	font-weight: 600;
 }
-.buy-title > h3{
+.buy-info > h3{
 	color: white;
 	font-family: 굴림체;
 }
+.buy-info > p{
+	margin-left: 6px;
+}
+.buy-title > p{
+	margin-left: 6px;
+}
+
+/* 우측바 */
 .buy-col > h2{
 	color: white;
 	margin-top: 20px;
@@ -478,11 +518,83 @@ footer{
 	font-family: 굴림체;
 }
 .buy-col > p{
-	color: white;
 	font-size: 15px;
-	font-family: 굴림체;
+	margin-left: 6px;
+}
+.buy-image{
+	width: 150px;
+	height: 150px;
+	border-top: solid 1px #606060;
+	border-bottom: solid 1px #606060;
 }
 .btn-buy {
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+.buy-prodect{
+	position: static;
+}
+.buy-prodect-pname{
+	border-top: solid 1px #606060;
+	border-bottom: solid 1px #606060;
+	border-right: solid 1px #606060;
+	width: 300px;
+	height: 150px;
+}
+.buy-prodect-pname > p{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.buy-prodect-pname > ul{
+	color: white;
+	padding-left: 15px;
+}
+.buy-prodect-pname > ul >li{
+	color: white;
+	list-style: none;
+}
+.buy-prodect-count{
+border: solid 1px #606060;
+	
+}
+.buy-prodect-count > p{
+	margin: 50px;
+	text-align: center;
+	color: white;
+}
+.buy-prodect-price{
+border: solid 1px #606060;
+}
+.buy-prodect-price > p{
+	margin: 50px;
+	text-align: center;
+	color: white;
+}
+.buy-prodect-delivery{
+border: solid 1px #606060;
+}
+.buy-prodect-delivery > p{
+	margin: 50px;
+	text-align: center;
+	color: white;
+}
+/* 쿠폰 */
+
+.buy-select-coupon > p {
+	margin-top: 6px;
+}
+.buy-line{
+	border-bottom: 1px solid #555555;
+}
+.buy-myPoint{
+	margin-top: 20px;
+	margin-bottom: 100px;
+}
+.buy-myPoint > span:nth-child(2){
+	color: #FFD369;	
+	font-weight: 600;
+}
+.buy-col{
+/* 	position: absolute; */
+/* 	left: 65%; */
 }

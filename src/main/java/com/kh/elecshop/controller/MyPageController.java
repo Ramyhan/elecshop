@@ -74,5 +74,10 @@ public class MyPageController {
 		return "redirect:/myPage/myInfo";
 	}
 	
+	@GetMapping("/like")
+	public void likeList() {
+		
+	}
+	
 	
 }

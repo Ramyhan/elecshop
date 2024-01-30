@@ -6,12 +6,12 @@
 
 	<insert id="insertDailyCheck">
 		insert into tbl_daily_check
-		(did, mid)
-		values(seq_did.nextval, #{mid})
+		(dno, mid)
+		values(seq_dno.nextval, #{mid})
 	</insert>
 	
 	<select id="selectDailyCheck" resultType="com.kh.elecshop.domain.DailyCheckVO">
-		select did, mid, to_char(regdate, 'yyyy-MM-dd') regdate 
+		select dno, mid, to_char(regdate, 'yyyy-MM-dd') regdate 
 		from tbl_daily_check
 		where mid = #{mid}
 	</select>

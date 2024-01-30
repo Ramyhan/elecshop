@@ -2,94 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/top.jsp"%>
-<title>제품화면</title>
-<style>
-
-	.divProduct {
-		padding-top: 30px;
-	}
-	
-	#divProd {
-		transition: all 0.2s linear;
-		background-color: #202020;
-		border: solid 2px #202020;
-	}
-	
-	#divProd:hover {
-	  	transform: scale(1.1);
-	}
-	
-	.prdName {
-		text-align: center;
-		font-weight: bold;
-		font-size: 23px;
-		font-fmaily: "고딕";
-		font: bold;
-		padding-top: 10px;
-	}
-	.prdInfo {
-		text-align: center;
-		font-size: 15px;
-	}
-	
-	.btnProductInfo {
- 		background-color:#ffbe33;
-   		opacity: 0;
- 		margin-top: 5px;
-		border-radius:10px;
- 		border:none; 
- 		height:40px;
- 		font: bold;
- 		font-size: 15px;
-	}
-	
-	#divSide {
-		width: 280px;
-		height: 100vh;
-		float: left;
-		margin: 30px 10px 0px 10px;
-/*  		position: absolute; */
-	}
-	
-	#divSideBar {
- 		width: 280px;
- 		height: 800px;
- 		background-color: #202020;
- 		border: solid 1px #ffbe33;
-   		position: absolute;
-    	overflow-y: auto;
-	}
-	
-	#divSideBar::-webkit-scrollbar{
-		width: 7px;
-	}
-	
-	#divSideBar::-webkit-scrollbar-thumb{
-		background: #ffbe33;
-		border-radius: 10px;
-	}
-	
-	#divSideBar::-webkit-scrollbar-thumb:hover{
-		background-color:#FF9843;
-	}
-	
-	
-
-	
-</style>
+<link rel="stylesheet" href="/resources/css/productList/productList.css" />
 <script>
 $(function() {
-		$(window).scroll(function() {
-			var currentPosition = parseInt($("#divSideBar").css("top"));
-			var position = $(window).scrollTop(); 
+	$(window).scroll(function() {
+		var currentPosition = parseInt($("#divSideBar").css("top"));
+		var position = $(window).scrollTop(); 
 // 			console.log("currentPosition: ", currentPosition);
-			if (position <= 700) {
-				$("#divSideBar").stop().animate({"top":"760px"},500);
-			} else {
-				$("#divSideBar").stop().animate({"top" : position + "px"},1000);
-			}
-			
-		});
+		if (position <= 700) {
+			$("#divSideBar").stop().animate({"top":"760px"},500);
+		} else {
+			$("#divSideBar").stop().animate({"top" : position + "px"},1000);
+		}
+		
+	});
 	
 	
 	

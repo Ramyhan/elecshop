@@ -5,12 +5,12 @@
 <mapper namespace="com.kh.elecshop.mapper.PointMapper">
 	<insert id="insertPoint">
 		insert into tbl_point
-		(pid, mid, ppoint, point_code)
+		(pno, mid, ppoint, point_code)
 		values
-		(seq_pid.nextval, #{mid}, #{ppoint}, #{point_code})
+		(seq_pno.nextval, #{mid}, #{ppoint}, #{point_code})
 	</insert>
 	<select id="getPointInfo" resultType="com.kh.elecshop.domain.PointVO">
-		select tbl_point.pid, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,
+		select tbl_point.pno, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,
 		tbl_point_code.point_info
 		from tbl_point_code, tbl_point
 		where tbl_point.mid = #{mid}

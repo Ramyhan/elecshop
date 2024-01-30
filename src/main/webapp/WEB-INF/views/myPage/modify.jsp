@@ -34,12 +34,11 @@
 						/>
 				</div>
 				<div class="form-group">
-					<label> 주소 </label> <input type="text" class="form-control"
-						id="maddr" name="maddr" value="${loginInfo.maddr }"><br> <input type="text"
-						id="maddr_detail" name="maddr_detail" value="${loginInfo.maddr_detail }">
-					<button type="button" id="btn-addr-search" class="btn btn-light">주소
-						검색</button>
-				</div>
+					<label> 주소 </label> 
+					<input type="text" class="form-control" id="mpost_code" name="mpost_code" style="width: 100px;" value="${loginInfo.mpost_code }"><br>
+					<input type="text" class="form-control" id="maddr" name="maddr" value="${loginInfo.maddr }"><br> 
+					<input type="text" id="maddr_detail" name="maddr_detail" value="${loginInfo.maddr_detail }">
+					<button type="button" id="btn-addr-search" class="btn btn-light">주소 검색</button>				</div>
 				<div class="form-group">
 					<label> 핸드폰 번호 </label> <input type="text" class="form-control"
 						id="mphone" name="mphone" value="${loginInfo.mphone }" />
@@ -57,6 +56,19 @@
 </div>
 <script>
 $(function(){
+	$("#btn-addr-search").click(function(){
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	        	console.log(data);
+	        	var roadAddr = data.roadAddress;
+	        	$("#maddr").val(roadAddr);
+	        	var post_code = data.zonecode;
+	        	$("#mpost_code").val(post_code);
+	        	$("#maddr_detail").val("");
+	        }
+	    }).open();
+			
+		})
 
 	$(".pw").keyup(function() {
 		var pass1 = $("#mpw").val();
@@ -73,5 +85,8 @@ $(function(){
 		}
 	})
 })
+
+
 </script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>

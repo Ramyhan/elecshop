@@ -18,6 +18,7 @@ public class MemberVO {
 	private String memail;
 	private String maddr;
 	private String maddr_detail;
+	private String mpost_code;
 	private String mphone;
 	private Date mregdate;
 	private java.sql.Date mbirthday;

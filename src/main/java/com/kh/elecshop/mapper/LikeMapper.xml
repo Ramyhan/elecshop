@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.elecshop.mapper.LikeMapper">
+
+	<insert id="insertLike">
+		insert into tbl_like
+			(lno, mid, pno)
+		values
+			(seq_lno.nextval, #{mid}, #{pno})
+	</insert>
+	
+	<delete id="deleteByPno">
+		delete from btl_like
+		where mid = #{mid}
+		and pno = #{pno}
+	</delete>
+	
+	<delete id="deleteByLno">
+		delete from btl_like
+		where mid = #{lno}
+	</delete>
+	
+	<select id="selectItem" resultType="int">
+		select count(*)
+		from tbl_like
+		where mid = #{mid}
+		and pno = #{pno}
+	</select>
+	
+	<select id="selectList" resultType="com.kh.elecshop.domain.LikeVO">
+		select * from tbl_like
+		where mid = #{mid}
+	</select>
+
+</mapper>
