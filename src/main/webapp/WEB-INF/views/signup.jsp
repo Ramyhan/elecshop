@@ -42,6 +42,7 @@
 					<label>
 						주소
 					</label>
+					<input type="text" class="form-control" id="mpost_code" name="mpost_code" style="width: 100px;"><br>
 					<input type="text" class="form-control" id="maddr" name="maddr"  required><br>
 					<input type="text" id="maddr_detail" name="maddr_detail"  required>
 					<button type="button" id="btn-addr-search" class="btn btn-light">주소 검색</button>
@@ -110,6 +111,8 @@ $(function(){
         	console.log(data);
         	var roadAddr = data.roadAddress;
         	$("#maddr").val(roadAddr);
+        	var post_code = data.zonecode;
+        	$("#mpost_code").val(post_code);
         }
     }).open();
 		

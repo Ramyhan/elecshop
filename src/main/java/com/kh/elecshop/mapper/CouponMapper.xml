@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.elecshop.mapper.CouponMapper">
+	<insert id="insertCoupon">
+		insert into tbl_coupon
+		(cno, mid, coupon_name, use, sale, expiry_date)
+		values(seq_cno.nextval, #{mid}, #{coupon_name}, #{use}, #{sale},
+		#{expiry_date})
+	</insert>
+	
+	<select id="selectCoupon" resultType="com.kh.elecshop.domain.CouponVO">
+	 select * from tbl_coupon
+	 where mid = #{mid}
+	
+	</select>
+</mapper>

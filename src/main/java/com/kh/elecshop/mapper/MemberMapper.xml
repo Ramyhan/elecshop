@@ -5,9 +5,9 @@
 <mapper namespace="com.kh.elecshop.mapper.MemberMapper">
 	<insert id="insertMember">
 		insert into tbl_member
-		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mphone, mbirthday)
+		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mpost_code, mphone, mbirthday)
 		values
-		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mphone}, #{mbirthday})
+		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mpost_code}, #{mphone}, #{mbirthday})
 	</insert>
 	
 	<select id="login" resultType="com.kh.elecshop.domain.MemberVO">
