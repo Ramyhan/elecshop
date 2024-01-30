@@ -449,6 +449,17 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
+
+/* 찜목록 */
+.myPage-like {
+	display: flex;
+/* 	height: 100%; */
+    position: relative;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+
 .side-myPage-point > ul > li:nth-child(2) > a{
 /* 	color: #FFD369; */
 }
