@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.elecshop.domain.LikeVO;
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.domain.ProductDTO;
 import com.kh.elecshop.domain.ProductOptionVO;
@@ -18,6 +19,7 @@ import com.kh.elecshop.domain.ReviewGradeDTO;
 import com.kh.elecshop.domain.ReviewVO;
 import com.kh.elecshop.service.ProductService;
 import com.kh.elecshop.service.ReviewService;
+import com.kh.elecshop.service.LikeService;
 import com.kh.elecshop.service.ProductOptionService;
 
 import lombok.extern.log4j.Log4j;
@@ -36,18 +38,21 @@ public class ProductController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	@Autowired
+	private LikeService likeService;
+	
 	@GetMapping("/list")
 	public void productList(int ptype, Model model) {
-		log.info("ptype: " + ptype);
+//		log.info("ptype: " + ptype);
 		List<ProductDTO> list = productService.getProductList(ptype);
-		log.info("list: " + list);
+//		log.info("list: " + list);
 		model.addAttribute("productDTOList", list);
 		// test
 	}
 		
 	@GetMapping("/goods")
 	public void product(int pno, Model model, HttpSession session) {
-		MemberVO memverVO = (MemberVO)session.getAttribute("loginInfo");
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
 		ProductVO productVO = productService.getProduct(pno);
 		List<ProductOptionVO> optionList = ProductOptionService.getOption(pno);
 		List<ReviewVO> reviewList = reviewService.getReviewList(pno);
@@ -55,12 +60,23 @@ public class ProductController {
 		double average = reviewGradeDTO.getAverage();
 		int persent = (int)(average / 5 * 100);
 		
+		LikeVO likeVO = new LikeVO();
+		boolean isLike = false;
+		if(memberVO != null) {
+			likeVO = LikeVO.builder()
+					.mid(memberVO.getMid())
+					.pno(pno)
+					.build();
+			isLike = likeService.isExist(likeVO);
+		}
+		
 		reviewGradeDTO.setPersent(persent);
 		model.addAttribute("productVO", productVO);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("gradeDTO", reviewGradeDTO);
-		model.addAttribute("loginInfo", memverVO);
+		model.addAttribute("loginInfo", memberVO);
+		model.addAttribute("isLike", isLike);
 	}
 
 }

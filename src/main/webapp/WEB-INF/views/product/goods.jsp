@@ -253,6 +253,43 @@ $(function() {
 			}
 		});
 	});
+	
+	// 찜목록 추가 및 삭제
+	var isLike = "${isLike}";
+	console.log("isLike: ", isLike);
+	if (isLike == "true") {
+		$("#btnLike").css({"color" : "red"});
+		$(this).attr({"title" : "찜해제"});
+		$(this).attr({"data-status" : "red"});
+	}
+	
+	$("#btnLike").click(function() {
+		var that = $(this);
+		var atatus = $(this).attr("data-status");
+		var sData = {
+				"mid" : "${loginInfo.mid}",
+				"pno" : ${productVO.pno}
+		}
+		if(atatus == "red") {
+			$.post("/like/removeByPno", sData, function(rData) {
+				console.log("remove rData: ", rData);
+				if (rData == "true") {
+					that.css({"color" : ""});
+					that.attr({"title" : "찜하기"});
+					that.attr({"data-status" : "white"});
+				}
+			});
+		} else {
+			$.post("/like/add", sData, function(rData) {
+				console.log("add rData: ", rData);
+				if (rData == "true") {
+					that.css({"color" : "red"});
+					that.attr({"title" : "찜해제"});
+					that.attr({"data-status" : "red"});
+				}
+			});
+		}
+	});
 });
 </script>
 <body>
@@ -321,8 +358,8 @@ $(function() {
 <!-- 							<button type="button" class="btn btn-success">장바구니에 담기</button> -->
 							<i class="fa fa-shopping-cart" id="btnCart" style="scale:2; margin-left:15px;"
 								title="장바구니에 담기" data-pno="${productVO.pno}"></i>
-							<i class="fa fa-heart" style="scale:2; margin-left:30px;"
-								title="찜하기"></i>
+							<i class="fa fa-heart" id="btnLike" style="scale:2; margin-left:30px;"
+								title="찜하기" data-pno="${productVO.pno}" data-status=""></i>
 						</div>
 					</div>
 					<!-- //상품옵션 -->
