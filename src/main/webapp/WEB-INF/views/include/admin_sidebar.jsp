@@ -7,7 +7,7 @@ $(function(){
 		console.log("this",this);
 		var url = $(this).attr("href");
 		console.log("href",url);
-		var type = "post";
+		var type = "get";
 		if(url == "/admin/admin_dashboard"){
 			type = "get";
 		}
@@ -15,11 +15,14 @@ $(function(){
 			type : type,
 			url: url,
 			success:function(rdata){
-				if(type == "get"){
+				$(".set-div").empty();
+				$(".set-div").append(rdata);
+				if(url == "/admin/admin_dashboard"){
 					$("body").empty();
 					$("body").append(rdata);
 					console.log(rdata);
-				}else{
+				}
+				else{
 					
 					$(".set-div").empty();
 					$(".set-div").append(rdata);
