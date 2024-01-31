@@ -259,18 +259,19 @@ $(function() {
 	console.log("isLike: ", isLike);
 	if (isLike == "true") {
 		$("#btnLike").css({"color" : "red"});
-		$(this).attr({"title" : "찜해제"});
-		$(this).attr({"data-status" : "red"});
+		$("#btnLike").attr({"title" : "찜해제"});
+		$("#btnLike").attr({"data-status" : "red"});
 	}
 	
 	$("#btnLike").click(function() {
 		var that = $(this);
-		var atatus = $(this).attr("data-status");
+		var status = $(this).attr("data-status");
+		console.log("status: ", status);
 		var sData = {
 				"mid" : "${loginInfo.mid}",
 				"pno" : ${productVO.pno}
 		}
-		if(atatus == "red") {
+		if(status == "red") {
 			$.post("/like/removeByPno", sData, function(rData) {
 				console.log("remove rData: ", rData);
 				if (rData == "true") {
@@ -289,6 +290,45 @@ $(function() {
 				}
 			});
 		}
+	});
+	
+	$("#btn-product-buy").click(function(){
+		var pno = $(this).attr("data-pno");
+		var mid = "${loginInfo.mid}";
+		var cname = "${productVO.pname}";
+		var cimage = "${productVO.pimage_thoumb}";
+		var totalPrice = $("#totalPrice").text();
+		console.log("클릭");
+		var option = "";
+		for(var v = 1; v <= $(".selectOption").length; v++) {
+			var index = parseInt($("#selectOption" + v + " option").index($("#selectOption" + v + "  option:selected")));
+			
+			if (v == 1 && index == 0) {
+				alert("색상을 선택해 주세요.")
+				return;
+			}
+			
+			if (index > 0) {
+				optionName = $("#optionName" + v).text();
+				optionInfo = $("#selectOption" + v + "  option:selected").text();
+				option += optionName + ":" + optionInfo + ",";
+			}
+		}
+		
+		var sData = {
+			"pno" : pno,
+			"mid" : mid,
+			"cname" : cname,
+			"cimage" : cimage,
+			"cprice" : totalPrice,
+			"coption" : option
+		};
+		
+		$.post("/checkout", sData, function(rData) {
+			if (rData == "true") {
+				location.href = "/buy";
+			}
+		});
 	});
 });
 </script>
@@ -354,7 +394,7 @@ $(function() {
 							<div style="font-size: 30px; font-family: '고딕'">
 								현재가: <span id="totalPrice"><fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber></span>원
 							</div>
-							<button type="button" class="btn btn-warning">구매하기</button>
+							<button id="btn-product-buy" type="button" class="btn btn-warning" data-pno="${productVO.pno }">구매하기</button>
 <!-- 							<button type="button" class="btn btn-success">장바구니에 담기</button> -->
 							<i class="fa fa-shopping-cart" id="btnCart" style="scale:2; margin-left:15px;"
 								title="장바구니에 담기" data-pno="${productVO.pno}"></i>

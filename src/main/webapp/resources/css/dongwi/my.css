@@ -452,12 +452,13 @@ footer{
 
 /* 찜목록 */
 .myPage-like {
-	display: flex;
-/* 	height: 100%; */
-    position: relative;
+	
 	background-color: #303030;
-	justify-content: center;
-	align-items: center;
+    float: left;
+/*     height: 100%; */
+    width: 100%;
+/*     position: relative; */
+	
 }
 
 .side-myPage-point > ul > li:nth-child(2) > a{
@@ -513,13 +514,18 @@ footer{
 /* 우측바 */
 .buy-col > h2{
 	color: white;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 40px;
+	margin-bottom: 40px;
 	font-family: 굴림체;
+	font-weight: 700;
 }
 .buy-col > p{
-	font-size: 15px;
+	font-size: 18px;
 	margin-left: 6px;
+}
+.buy-result{
+	font-size: 23px;
+	font-weight: 600;
 }
 .buy-image{
 	width: 150px;
@@ -528,8 +534,12 @@ footer{
 	border-bottom: solid 1px #606060;
 }
 .btn-buy {
-	margin-top: 10px;
+	margin-top: 50px;
 	margin-bottom: 10px;
+	width: 100%;
+	height: 80px;
+	font-weight: 600;
+	font-size: 20px;
 }
 .buy-prodect{
 	position: static;
@@ -544,6 +554,8 @@ footer{
 .buy-prodect-pname > p{
 	margin-left: 15px;
 	margin-right: 15px;
+	font-family: 굴림체;
+	font-weight: 700;
 }
 .buy-prodect-pname > ul{
 	color: white;
@@ -593,8 +605,4 @@ border: solid 1px #606060;
 .buy-myPoint > span:nth-child(2){
 	color: #FFD369;	
 	font-weight: 600;
-}
-.buy-col{
-/* 	position: absolute; */
-/* 	left: 65%; */
 }

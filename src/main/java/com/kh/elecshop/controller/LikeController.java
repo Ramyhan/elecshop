@@ -30,4 +30,11 @@ public class LikeController {
 		return String.valueOf(result);
 	}
 	
+	@PostMapping("/removeLno")
+	@ResponseBody
+	private String removeByLno(int lno) {
+		boolean result = likeService.removeByLno(lno);
+		return String.valueOf(result);
+	}
+	
 }

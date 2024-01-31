@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DailyCheckVO {
 
-	private int did;
+	private Long did;
 	private String mid;
 	private Date regdate;
 }
