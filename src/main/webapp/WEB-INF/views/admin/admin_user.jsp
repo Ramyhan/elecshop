@@ -14,7 +14,13 @@
 		width: 90;
 	}
 	.user-table div{
-		margin: 30 30 30 30;
+		padding: 30 30 30 30;
+		border: 1px solid;
+	}
+	.user-table{
+		display: flex;
+		justify-content: space-around;
+		border-bottom: 1px solid;
 	}
 </style>
 <div>
@@ -30,7 +36,7 @@
 		</div>
 	</div>
 	<div style="width: 85%; height: 70%; background-color: white;">
-		<div class ="user-table d-flex">
+		<div class ="user-table">
 			<div>
 				<span>유저 번호</span>
 			</div>
