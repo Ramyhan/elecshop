@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ProductDTO {
 
 	private int pno;
+	private int lno;
 	private String pname;
 	private String pcode;
 	private String pinfo_main;

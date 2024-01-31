@@ -259,18 +259,19 @@ $(function() {
 	console.log("isLike: ", isLike);
 	if (isLike == "true") {
 		$("#btnLike").css({"color" : "red"});
-		$(this).attr({"title" : "찜해제"});
-		$(this).attr({"data-status" : "red"});
+		$("#btnLike").attr({"title" : "찜해제"});
+		$("#btnLike").attr({"data-status" : "red"});
 	}
 	
 	$("#btnLike").click(function() {
 		var that = $(this);
-		var atatus = $(this).attr("data-status");
+		var status = $(this).attr("data-status");
+		console.log("status: ", status);
 		var sData = {
 				"mid" : "${loginInfo.mid}",
 				"pno" : ${productVO.pno}
 		}
-		if(atatus == "red") {
+		if(status == "red") {
 			$.post("/like/removeByPno", sData, function(rData) {
 				console.log("remove rData: ", rData);
 				if (rData == "true") {

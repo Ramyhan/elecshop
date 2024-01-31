@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.elecshop.domain.LikeVO;
+import com.kh.elecshop.domain.ProductDTO;
 import com.kh.elecshop.mapper.LikeMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -37,16 +38,16 @@ public class LikeServiceImpl implements LikeService {
 
 	@Override
 	public boolean isExist(LikeVO likeVO) {
-		log.info("likeVO: " + likeVO);
+//		log.info("likeVO: " + likeVO);
 		int count = likeMapper.selectItem(likeVO);
-		log.info("count: " + count);
+//		log.info("count: " + count);
 		return (count == 1) ? true : false;
 	}
 
 	@Override
-	public List<LikeVO> getLikeList(String mid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductDTO> getLikeList(String mid) {
+		List<ProductDTO> list = likeMapper.selectList(mid);
+		return list;
 	}
 	
 }

@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.domain.PointVO;
+import com.kh.elecshop.domain.ProductDTO;
+import com.kh.elecshop.service.LikeService;
 import com.kh.elecshop.service.MemberService;
 import com.kh.elecshop.service.PointService;
 
@@ -31,6 +33,8 @@ public class MyPageController {
 	private MemberService memberService;
 	@Autowired
 	private PointService pointService;
+	@Autowired
+	private LikeService likeService;
 	
 	@GetMapping("/myInfo")
 	public void myInfo() {
@@ -75,8 +79,12 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/like")
-	public void likeList() {
+	public void likeList(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		String mid = memberVO.getMid();
+		List<ProductDTO> productDTO = likeService.getLikeList(mid);
 		
+		model.addAttribute("productDTO", productDTO);
 	}
 	
 	

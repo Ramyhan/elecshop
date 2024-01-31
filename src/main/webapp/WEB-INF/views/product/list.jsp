@@ -18,7 +18,6 @@ $(function() {
 	});
 	
 	
-	
 	$(".divProd").mouseover(function() {
 		$(this).children(".btnProductInfo").css("opacity", "1");
 	});
@@ -40,7 +39,7 @@ $(function() {
 </head>
 <body>
 	<!-- 메인 -->
-	<div id="main" style="color: white; text-align: center;">
+	<div id="main" style="color: white;">
 		<div class="container-fluid">
 			<div class="row">
 				<img alt="카테고리 사진" src="/resources/images/laptop_main_image.jpg"/>
@@ -49,7 +48,19 @@ $(function() {
 				<div class="section">
 					<div>
 						<div class="flex-container column" id="divSide">
-							<div id="divSideBar"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+							<div id="divSideBar">
+								<div class="divSearch">
+									<input id="inputSearch" type="text" placeholder="검색어를 입력하세요.">
+									<i id="iconSearch" class="fa fa-search"></i>
+								</div>
+								<div class="opSearch option1">SSD</div>
+								<div class="opSearch opInfo">
+									<input type="checkbox" value="">128G<br>
+									<input type="checkbox" value="">256G<br>
+									<input type="checkbox" value="">512G<br>
+									<input type="checkbox" value="">1T
+								</div>
+							</div>
 						</div>
 						<div class="row" id="divProduct">
 						<c:forEach items="${ productDTOList }" var="productDTO">
