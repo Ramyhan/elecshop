@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PointVO {
-	private int pid;
+	private Long pno;
 	private String mid;
 	private int ppoint;
 	private String point_code;

@@ -18,6 +18,13 @@
 		and tbl_product.pno = tbl_cart.pno
 	</select>
 	
+	<select id="selectBuyList" resultType="com.kh.elecshop.domain.BuyDTO">
+		select cno, mid, tbl_cart.pno, cprice, coption, pname, pimage_thoumb
+		from tbl_product, tbl_cart
+		where mid = #{mid}
+		and tbl_product.pno = tbl_cart.pno
+	</select>
+	
 	<select id="selectCount" resultType="int">
 		select count(*)
 		from tbl_cart

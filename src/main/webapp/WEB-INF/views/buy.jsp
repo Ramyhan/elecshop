@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div >
+<div>
 <div class="div-buy">
 	<div class="container">
 		<div class="buy-title">
@@ -26,69 +26,36 @@
 			<h1>주문상품</h1>
 			<div class="myPage-line"></div>
 <!-- 						상품 -->
+					<form id="order_detail">
+					
+					<c:forEach var="buyVO" items="${cartList }">
 					<div class="buy-prodect row">
-						<div >
-							<img class="buy-image" src="/resources/images/galaxybook.jpg">
+						<div>
+							<img class="buy-image" src="/resources/images/${buyVO.pimage_thoumb }">
 						</div>
 						<div class="buy-prodect-pname">
 							<br>
-							<p>갤럭시북3 프로 GalaxyBook</p>
+							<p>${buyVO.pname }</p>
 							<ul>
-							 <li><strong>옵션</strong> 16인치 black</li>
+							 <li><strong>옵션</strong><c:set var="coption" value="${fn:split(buyVO.coption, ',')}"/>
+							 <c:forEach var="coption" items="${coption }">
+							 	${coption }
+							 </c:forEach>
+							 </li>
 							</ul>
 						</div>
 						<div class="buy-prodect-count">
 							<p>수량:1개</p>
 						</div>
 						<div class="buy-prodect-price">
-							<p>1,300,000원</p>
+							<p class="prodect-price">${buyVO.cprice }</p>
 						</div>
 						<div class="buy-prodect-delivery">
 							<p>무료배송<p>
 						</div>
 					</div>
-					<div class="buy-prodect row">
-						<div >
-							<img class="buy-image" src="/resources/images/galaxybook.jpg">
-						</div>
-						<div class="buy-prodect-pname">
-							<br>
-							<p>갤럭시북3 프로 GalaxyBook</p>
-							<ul>
-							 <li><strong>옵션</strong> 16인치 black</li>
-							</ul>
-						</div>
-						<div class="buy-prodect-count">
-							<p>수량:1개</p>
-						</div>
-						<div class="buy-prodect-price">
-							<p>1,300,000원</p>
-						</div>
-						<div class="buy-prodect-delivery">
-							<p>무료배송<p>
-						</div>
-					</div>
-					<div class="buy-prodect row">
-						<div >
-							<img class="buy-image" src="/resources/images/galaxybook.jpg">
-						</div>
-						<div class="buy-prodect-pname">
-							<br>
-							<p>갤럭시북3 프로 GalaxyBook</p>
-							<ul>
-							 <li><strong>옵션</strong> 16인치 black</li>
-							</ul>
-						</div>
-						<div class="buy-prodect-count">
-							<p>수량:1개</p>
-						</div>
-						<div class="buy-prodect-price">
-							<p>1,300,000원</p>
-						</div>
-						<div class="buy-prodect-delivery">
-							<p>무료배송<p>
-						</div>
-					</div>
+					</c:forEach>
+					</form>
 <!-- 					//상품 -->
 <!-- 					쿠폰 -->
 					<div class="buy-coupon">
@@ -101,13 +68,13 @@
 					</div>
 					<div class="buy-select-coupon">
 						<p>상품쿠폰</p>
-						<select>
+						<select id="select-coupon">
 						<option>선택 안함</option>
 						<c:forEach var="vo" items="${myCoupon }">
-						<option value="${vo.cno }">${vo.coupon_name }</option>
+						<option value="${vo.sale }">${vo.coupon_name }</option>
 						</c:forEach>
 						</select>
-						<button class="btn btn-warning" type="button">쿠폰 적용</button>
+						<button id="btn-coupon" class="btn btn-warning" type="button">쿠폰 적용</button>
 					</div>
 					<br>
 					<div class="buy-line"></div>
@@ -117,11 +84,12 @@
 					<div class="buy-point">
 					<div>
 						<i class="fab fa-bitcoin"></i><span>포인트 사용</span>
-						<input type="number" value="${loginInfo.mpoint }">
+						<input id="input-point" type="number" value="${loginInfo.mpoint }">
+						<button id="btn-point" type="button" class="btn btn-warning">포인트 적용</button>
 					</div>
 						<div class="buy-myPoint">
 						<span>사용 가능 포인트</span> 
-						<span>${loginInfo.mpoint }</span>
+						<span id="member-point">${loginInfo.mpoint }</span>
 						</div>
 					</div>
 				</div>
@@ -130,20 +98,70 @@
 		<div class="buy-price" style="width: 400px; margin-top: 10%;">
 		<div class="col buy-col">
 		<h2>결제 예정금액</h2>
-		<p>상품금액 : 500,000</p>
-		<p>배송비 : 5,000</p>
-		<p>할인금액 : 10,000</p>
-		<h2>합계 : 495,000</h2>
-		<button class="btn btn-warning btn-buy" type="button">495,000원 결제</button>
+		<p>상품금액 : <span id="result-price"></span></p>
+		<p>배송비 : <span id="result-delivery">무료</span></p>
+		<p>쿠폰 : <span id="result-coupon">0</span></p>
+		<p>포인트 : <span id="result-point">0</span></p>
+		<h2 class="buy-result">합계 : <span class="buy-result" id="result-total">없음</span></h2>
+		<button id="btn-buy" class="btn btn-warning btn-buy" type="button"></button>
 		</div>
-		
 		</div>
 </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 $(function (){
+// 	초기 가격 설정
+	var prices = $(".prodect-price");
+	var totalPrice = 0;
+	console.log(prices);
+	prices.each(function(){
+		totalPrice += parseInt($(this).text());
+	});
+	$("#result-price").text(totalPrice.toLocaleString());
+	$("#result-total").text(totalPrice.toLocaleString());
+	$("#btn-buy").text(totalPrice.toLocaleString() + "원 결제");
 	
+// 	쿠폰 할인
+	$("#btn-coupon").click(function(){
+		var couponSale = parseInt($("#select-coupon").find(":selected").val());
+		var total = $("#result-price").text().replace(/,/g, "");
+		var point = parseInt($("#result-point").text().replace(/,/g, ""));
+		console.log(point);
+		var sale = parseInt(total) / couponSale;
+		
+		$("#result-total").text(((total - sale) + point).toLocaleString());
+		$("#result-coupon").text("-" + sale.toLocaleString());
+		$("#btn-buy").text(((total - sale) + point).toLocaleString() + "원 결제");
+	});
+// 	포인트 할인
+	$("#btn-point").click(function(){
+		var point = parseInt($("#input-point").val());
+		var myPoint = parseInt($("#member-point").text());
+		var coupon = parseInt($("#result-coupon").text().replace(/,/g, ""));
+		console.log(coupon);
+		if(myPoint < point){
+			alert("보유 포인트를 초과하였습니다.");
+		}else {
+			$("#result-point").text("-"+point.toLocaleString());
+			var total = parseInt($("#result-price").text().replace(/,/g, ""));
+			console.log(total);
+			$("#result-total").text(((total + coupon)-point).toLocaleString());
+			$("#btn-buy").text(((total + coupon)-point).toLocaleString() + "원 결제");
+		}
+		
+	});
+	
+	$("#btn-buy").click(function(){
+		var mid = "${loginInfo}";
+	});
+	$("#order_detail").submit(function(){
+		var temp3 = $(".buy-prodect").length;
+		var temp1 = "<input type='hidden' value='' name='list["+i+"].pno'>";
+		var temp2 = "<input type='hidden' value='' name='list["+i+"].pno'>";
+		
+	});
+// 카카오 주소
 	$("#btn-addr-search").click(function(){
 	    new daum.Postcode({
 	        oncomplete: function(data) {

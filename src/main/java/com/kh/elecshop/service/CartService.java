@@ -2,6 +2,7 @@ package com.kh.elecshop.service;
 
 import java.util.List;
 
+import com.kh.elecshop.domain.BuyDTO;
 import com.kh.elecshop.domain.CartDTO;
 import com.kh.elecshop.domain.CartVO;
 
@@ -15,4 +16,5 @@ public interface CartService {
 	
 	public boolean removeItem(String cnos);
 	
+	public List<BuyDTO> getBuyList(String mid);
 }

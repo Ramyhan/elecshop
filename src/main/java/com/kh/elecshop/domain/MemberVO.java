@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class MemberVO {
+	private Long mno;
 	private String mname;
 	private String mid;
 	private String mpw;
