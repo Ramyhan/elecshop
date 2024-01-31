@@ -47,11 +47,11 @@
 }
 
 #divSideBar {
-		width: 280px;
-		height: 800px;
-		background-color: #202020;
-		border: solid 1px #ffbe33;
-  		position: absolute;
+	width: 280px;
+	height: 600px;
+	background-color: #202020;
+	border: solid 1px #ffbe33;
+	position: absolute;
    	overflow-y: auto;
 }
 
@@ -66,4 +66,31 @@
 
 #divSideBar::-webkit-scrollbar-thumb:hover{
 	background-color:#FF9843;
+}
+
+.divSearch {
+	margin: 10px;
+	position: relative;
+	width: 258px;
+}
+
+#inputSearch {
+	width: 100%;
+  	border: 1px solid #ffbe33;
+  	border-radius: 8px;
+ 	padding: 10px 12px;
+  	font-size: 14px;
+}
+
+#iconSearch {
+	color: #ffbe33;
+	position : absolute;
+  	width: 17px;
+  	top: 10px;
+  	right: 12px;
+  	margin: 0;
+}
+
+.opSearch {
+	margin: 0 10px 0 10px;
 }

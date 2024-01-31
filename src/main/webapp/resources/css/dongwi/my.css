@@ -452,12 +452,13 @@ footer{
 
 /* 찜목록 */
 .myPage-like {
-	display: flex;
-/* 	height: 100%; */
-    position: relative;
+	
 	background-color: #303030;
-	justify-content: center;
-	align-items: center;
+    float: left;
+/*     height: 100%; */
+    width: 100%;
+/*     position: relative; */
+	
 }
 
 .side-myPage-point > ul > li:nth-child(2) > a{

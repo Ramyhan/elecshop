@@ -12,14 +12,14 @@
 	</insert>
 	
 	<delete id="deleteByPno">
-		delete from btl_like
+		delete from tbl_like
 		where mid = #{mid}
 		and pno = #{pno}
 	</delete>
 	
 	<delete id="deleteByLno">
-		delete from btl_like
-		where mid = #{lno}
+		delete from tbl_like
+		where lno = #{lno}
 	</delete>
 	
 	<select id="selectItem" resultType="int">
@@ -29,9 +29,11 @@
 		and pno = #{pno}
 	</select>
 	
-	<select id="selectList" resultType="com.kh.elecshop.domain.LikeVO">
-		select * from tbl_like
+	<select id="selectList" resultType="com.kh.elecshop.domain.ProductDTO">
+		select l.pno, lno, pname, pcode, pinfo_main, pimage_thoumb
+		from tbl_product p, tbl_like l
 		where mid = #{mid}
+		and p.pno = l.pno
 	</select>
 
 </mapper>
