@@ -92,6 +92,10 @@ $(function(){
 			
 		});
 	});
+	$(".user-create").on("click",function(){
+		$(".create-modal").modal("show");
+		
+	});
 });
 </script>
 <div class="user-div" style="width: 100%; height: 100%;">
@@ -153,6 +157,9 @@ $(function(){
 				<div class="header-cell">
 					<span>포인트</span>
 				</div>
+				<div class="header-cell">
+					<span>상태</span>
+				</div>
 			</div>
 			<c:forEach var="userList" items="${userList}">
 			<div class="user-div-row">
@@ -179,6 +186,9 @@ $(function(){
 				</div>
 				<div class="cell">
 					<span>${userList.mpoint}</span>
+				</div>
+				<div class="cell">
+					<span>${userList.mstate == 0? '정지' : '활동'}</span>
 				</div>
 			</div>
 			</c:forEach>
@@ -207,4 +217,56 @@ $(function(){
 			</nav>
 		</div>
 	</div>
+	
+	<!-- user생성 모달 -->
+<div class="create-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">테스트 유저 생성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">이름</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">아이디</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">비밀번호</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">주소</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">상세주소</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">생일</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">상태</label>
+            <input type="radio" class="form-control" id="recipient-name">
+            <input type="radio" class="form-control" id="recipient-name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- user생성 모달 -->
+	
 </div>

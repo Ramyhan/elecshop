@@ -17,5 +17,6 @@ public class AdminUserDTO {
 	private String maddr;
 	private String maddr_detail;
 	private int mpoint;
+	private int mstate;
 	private String mphone;
 }
