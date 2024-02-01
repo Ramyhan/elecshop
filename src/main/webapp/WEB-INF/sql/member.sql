@@ -14,6 +14,9 @@ create table tbl_member(
     mstate number default 1 not null check (mstate in(0, 1))
 );
 
+alter table tbl_member
+add mstate number default 0 check(mstate in(0,1)) not null;
+
 create sequence seq_mno;
 
 insert into tbl_member
