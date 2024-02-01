@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.elecshop.domain.BuyDTO;
 import com.kh.elecshop.domain.CartDTO;
 import com.kh.elecshop.domain.CartVO;
 import com.kh.elecshop.mapper.CartMapper;
@@ -41,6 +42,12 @@ public class CartServiceImpl implements CartService {
 	public boolean removeItem(String cnos) {
 		int count = cartMapper.deleteItem(cnos);
 		return (count > 0) ? true : false;
+	}
+
+	@Override
+	public List<BuyDTO> getBuyList(String mid) {
+		List<BuyDTO> list = cartMapper.selectBuyList(mid);
+		return list;
 	}
 
 }

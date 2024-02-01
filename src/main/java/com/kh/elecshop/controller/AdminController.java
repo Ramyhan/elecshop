@@ -1,6 +1,8 @@
 package com.kh.elecshop.controller;
 
+
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
+import com.kh.elecshop.domain.AdminUserDTO;
+import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.NoticeVO;
+import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.service.AdminService;
@@ -35,16 +40,36 @@ public class AdminController {
 	public void dashBoard() {
 		
 	}
-	@PostMapping("/notice/register")
+	@GetMapping("/notice/register")
 	public String noticeRegister() {
 		
 		return "/admin/registerNotice";
 	}
-	@PostMapping("/admin_user")
-	public void user() {
-		
+	@GetMapping("/admin_user")
+	public void user(Model model, Criteria criteria) {
+		log.info("22"+ criteria);
+		Map<String, Object> map = adminService.getUserList(criteria);
+		int total = (int)map.get("total");
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		@SuppressWarnings("unchecked")
+		List<AdminUserDTO> list = (List<AdminUserDTO>)map.get("userList");
+		model.addAttribute("page", pageDTO);
+		model.addAttribute("userList", list);
 	}
-	@PostMapping("/admin_customerCenter")
+//	@PostMapping("/admin_userTable")
+//	public String userTable(Model model, Criteria criteria) {
+//		Map<String, Object> map = adminService.getUserList(criteria);
+//		int count = (int)map.get("total");
+//		PageDTO pageDTO = new PageDTO(criteria, count);
+//		log.info("ddd"+pageDTO.getStartPage());
+//		log.info("ddd"+pageDTO.getEndPage());
+////		log.info("page" + pageDTO);
+//		model.addAttribute("page", pageDTO);
+//		model.addAttribute("userMap", map);
+//		return "admin/admin_userTable";
+//		
+//	}
+	@GetMapping("/admin_customerCenter")
 	public void admin_customerCenter(Model model) {
 		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
 		model.addAttribute("subNotice", list);
@@ -75,7 +100,7 @@ public class AdminController {
 		System.out.println(result);
 		return result;
 	}
-	@PostMapping("/searchWord")
+	@GetMapping("/searchWord")
 	public String seachWord(SearchDTO searchDTO, Model model) {
 		List<SubNoticeDTO> list = adminService.getSearchByNotice(searchDTO);
 		System.out.println("list" + list);

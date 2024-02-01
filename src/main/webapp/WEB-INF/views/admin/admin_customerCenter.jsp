@@ -120,7 +120,7 @@ $(function(){
 	});
 	$(".btn-register").click(function(){
 		$.ajax({
-			type :"post",
+			type :"get",
 			url : "/admin/notice/register",
 			success : function(rdata){
 				$(".set-div").empty();
@@ -145,7 +145,7 @@ $(function(){
 				"word" : searchBar
 		}
 		if(searchBar != ""){
-			$.post("/admin/searchWord",sData,function(rData){
+			$.get("/admin/searchWord",sData,function(rData){
 				$(".tbltbody").empty();
 				$(".tbltbody").append(rData);
 			});
