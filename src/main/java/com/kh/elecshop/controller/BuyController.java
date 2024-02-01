@@ -15,6 +15,7 @@ import com.kh.elecshop.domain.BuyDTO;
 import com.kh.elecshop.domain.CartVO;
 import com.kh.elecshop.domain.CouponVO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.service.CartService;
 import com.kh.elecshop.service.CouponService;
 
@@ -46,9 +47,9 @@ public class BuyController {
 		return String.valueOf(result);
 	}
 	
-//	@PostMapping("/order_detail")
-//	public void order(OrderDTO oDTO, BuyDTO) {
-//		
-//		
-//	}
+	@PostMapping("/order_detail")
+	public void order(OrderVO orderVO) {
+		
+		
+	}
 }

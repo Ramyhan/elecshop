@@ -13,11 +13,11 @@
 			<div class="buy-info">
 				<h3>배송정보</h3>
 				 <p>${loginInfo.mname }</p>
-				 <p><c:set var="num" value="${loginInfo.mphone }" />
+				 <p id="product-ophone"><c:set var="num" value="${loginInfo.mphone }" />
 				  	${fn:substring(num,0,3) }-${fn:substring(num,3,7) }-${fn:substring(num,7,11) }
 				</p>
-				<p id="addr">(${loginInfo.mpost_code }) ${loginInfo.maddr }</p>
-				<input id="maddr_detail" name="maddr_detail" type="text" value="${loginInfo.maddr_detail }">
+				<p id="product-mpost_code">(${loginInfo.mpost_code }) <span id="product-maddr">${loginInfo.maddr }</span></p>
+				<input id="product-maddr_detail" name="maddr_detail" type="text" value="${loginInfo.maddr_detail }">
 				
 				<button type="button" id="btn-addr-search" class="btn btn-warning">주소 검색</button>
 			</div>
@@ -29,18 +29,16 @@
 					<form id="order_detail">
 					
 					<c:forEach var="buyVO" items="${cartList }">
-					<div class="buy-prodect row">
+					<div class="buy-prodect row buy-product">
 						<div>
 							<img class="buy-image" src="/resources/images/${buyVO.pimage_thoumb }">
 						</div>
 						<div class="buy-prodect-pname">
 							<br>
-							<p>${buyVO.pname }</p>
+							<p id="product-oname">${buyVO.pname }</p>
 							<ul>
-							 <li><strong>옵션</strong><c:set var="coption" value="${fn:split(buyVO.coption, ',')}"/>
-							 <c:forEach var="coption" items="${coption }">
-							 	${coption }
-							 </c:forEach>
+							 <li><strong>옵션</strong><span id="product-ooption"><c:set var="coption" value="${fn:split(buyVO.coption, ',')}"/>
+							 <c:forEach var="coption" items="${coption }">${coption }<br></c:forEach></span>
 							 </li>
 							</ul>
 						</div>
@@ -69,7 +67,7 @@
 					<div class="buy-select-coupon">
 						<p>상품쿠폰</p>
 						<select id="select-coupon">
-						<option>선택 안함</option>
+						<option value="0">선택 안함</option>
 						<c:forEach var="vo" items="${myCoupon }">
 						<option value="${vo.sale }">${vo.coupon_name }</option>
 						</c:forEach>
@@ -118,6 +116,7 @@ $(function (){
 	prices.each(function(){
 		totalPrice += parseInt($(this).text());
 	});
+	
 	$("#result-price").text(totalPrice.toLocaleString());
 	$("#result-total").text(totalPrice.toLocaleString());
 	$("#btn-buy").text(totalPrice.toLocaleString() + "원 결제");
@@ -129,6 +128,13 @@ $(function (){
 		var point = parseInt($("#result-point").text().replace(/,/g, ""));
 		console.log(point);
 		var sale = parseInt(total) / couponSale;
+		if(couponSale == 0){
+			sale = 0;
+		$("#result-coupon").text("" + sale.toLocaleString());
+		$("#result-total").text(((total - sale) + point).toLocaleString());
+		$("#btn-buy").text(((total - sale) + point).toLocaleString() + "원 결제");
+			return;
+		}
 		
 		$("#result-total").text(((total - sale) + point).toLocaleString());
 		$("#result-coupon").text("-" + sale.toLocaleString());
@@ -153,12 +159,38 @@ $(function (){
 	});
 	
 	$("#btn-buy").click(function(){
+		var product = $(".buy-product");
 		var mid = "${loginInfo}";
+		var oname = $("#product-oname").text();
+		var ooption = $("#product-ooption").text().trim();
+		var ophone = $("#product-ophone").text().trim();
+		var oprice = $("#result-total").text().replace(/,/g, "");
+		var oaddr = $("#product-maddr").text();
+		var oaddr_detail = $("#product-maddr_detail").text();
+		var opost_code = $("#product-opost_code").text();
+		
+		console.log(oname);
+		console.log(ooption);
+		console.log(ophone);
+		console.log(oprice);
+		console.log(oaddr);
+		console.log(oaddr_detail);
+		console.log(opost_code);
+		
+		if(product.length > 1){
+			product.find()
+		}
+		console.log(product);
 	});
+	
 	$("#order_detail").submit(function(){
-		var temp3 = $(".buy-prodect").length;
-		var temp1 = "<input type='hidden' value='' name='list["+i+"].pno'>";
-		var temp2 = "<input type='hidden' value='' name='list["+i+"].pno'>";
+		var product = $(".buy-product");
+		console.log(product);
+		for(var v = 0; v < prodeut.length; v++){
+		var pno = "<input type='hidden' value='' name='list["+i+"].pno'>";
+		var ono = "<input type='hidden' value='' name='list["+i+"].ono'>";
+		var product_count = "<input type='hidden' value='' name='list["+i+"].product_count'>";
+		}
 		
 	});
 // 카카오 주소
