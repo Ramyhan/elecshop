@@ -27,7 +27,13 @@
 			<div class="myPage-line"></div>
 <!-- 						상품 -->
 					<form id="order_detail">
-					
+					<input type="hidden" id="oname" name="oname">
+					<input type="hidden" id="ooption" name="ooption">
+					<input type="hidden" id="ophone" name="ophone">
+					<input type="hidden" id="oprice" name="oprice">
+					<input type="hidden" id="oaddr" name="oaddr">
+					<input type="hidden" id="oaddr_detail" name="oaddr_detail">
+					<input type="hidden" id="oaddr_detail" name="oaddr_detail">
 					<c:forEach var="buyVO" items="${cartList }">
 					<div class="buy-prodect row buy-product">
 						<div>
@@ -166,9 +172,14 @@ $(function (){
 		var ophone = $("#product-ophone").text().trim();
 		var oprice = $("#result-total").text().replace(/,/g, "");
 		var oaddr = $("#product-maddr").text();
-		var oaddr_detail = $("#product-maddr_detail").text();
-		var opost_code = $("#product-opost_code").text();
-		
+		var oaddr_detail = $("#product-maddr_detail").val();
+		var opost_code = $("#product-mpost_code").text();
+		var odelivery = $("#result-delivery").text();
+		if(odelivery == "무료"){
+			odelivery = 0;
+		}else {
+			odelivery = 1;
+		}
 		console.log(oname);
 		console.log(ooption);
 		console.log(ophone);
@@ -176,6 +187,7 @@ $(function (){
 		console.log(oaddr);
 		console.log(oaddr_detail);
 		console.log(opost_code);
+		console.log(odelivery);
 		
 		if(product.length > 1){
 			product.find()
