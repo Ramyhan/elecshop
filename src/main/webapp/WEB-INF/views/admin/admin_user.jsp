@@ -94,7 +94,17 @@ $(function(){
 	});
 	$(".user-create").on("click",function(){
 		$(".create-modal").modal("show");
+	});
+	$(".btn-create").click(function(){
+		var tname = $("#test-name").val();
+		var tid = $("#test-id").val();
+		var tpw = $("#test-pw").val();
+		var taddr = $("#test-addr").val();
+		var tdetail = $("#test-addr-detail").val();
+		var tbir = $("#test-bir").val();
+		var tstate = $("#test-state").val();
 		
+		$.post("/")
 	});
 });
 </script>
@@ -232,38 +242,42 @@ $(function(){
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">이름</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">아이디</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-id">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">비밀번호</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-pw">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">주소</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-addr">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">상세주소</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-addr-detail">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">생일</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="test-bir">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">상태</label>
-            <input type="radio" class="form-control" id="recipient-name">
-            <input type="radio" class="form-control" id="recipient-name">
+            <div class="d-flex flex-direction-column">
+	            <input type="radio" class="form-control" id="test-state" name="test-state" value="1">
+	            <span>활동</span>
+	            <input type="radio" class="form-control" id="test-state" name="test-state" value="0">
+	             <span>정지</span>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn-create btn btn-primary">생성</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
