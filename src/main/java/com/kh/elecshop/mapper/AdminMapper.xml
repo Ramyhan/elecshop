@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.elecshop.mapper.AdminMapper">
 	<select id="selectUser" resultType="com.kh.elecshop.domain.AdminUserDTO">
-		select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone
-		from (select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,rownum rn 
+		select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,mstate
+		from (select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,rownum rn ,mstate
               from tbl_member order by rownum desc)
         where rn between #{startRow} and #{endRow}
 	</select>

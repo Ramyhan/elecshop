@@ -28,5 +28,8 @@
 				<div class="cell">
 					<span>${userList.mpoint}</span>
 				</div>
+				<div class="cell">
+					<span>${userList.mstate == 0? '정지' : '활동'}</span>
+				</div>
 			</div>
 			</c:forEach>
