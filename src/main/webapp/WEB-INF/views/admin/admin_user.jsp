@@ -1,81 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-	.set-div{
-		background-color: F0F5F9;
-	}
-	.user-div{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.user-table{
-		display: table;
-		width: 97%;
-		height: auto;
-		
-	}
-	.user-tbl-header{
-		display: table-row;
-	    font-weight: bold;
-	    text-align: center;
-	    
-	}
-	.header-cell{
-       display: table-cell;
-	   border-width: thin;
-	   padding: 15 15 15 15;
-	   background-color: A8D8EA;
-	   border-right: 2px solid rgb(255,255,255);
-	}
-	.user-input{
-		font-size: small;
-		width: 16%;
-	}
-	.user-div-row{
-		display: table-row;
-		text-align: center;
-	}
-	.cell {
-    display: table-cell;
-    border-width: thin;
-    padding: 15 15 15 15;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	}
-	.second-div{
-		width: 95%;
-	    height: 100%;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	}
-	.user-tbl-header div span{
-		opacity: 0.5;
-	}
-	.user-devel{
-		display: flex;
-		flex-direction: column-reverse;
-		padding: 0 25px 15 25px;
-		width: 95%;
-		height: 15%;
-		background-color: white;
-	}
-	.page-num{
-		font-size: 14px;
-		font-weight: 800;
-	}
-</style>
+<link href="/resources/css/dongyeong/admin_table.css" rel="stylesheet" type="text/css" />
 <script>
 $(function(){
+	//체크박스 이벤트
 	$(".user-chkboxAll").change(function(){
 		var checked = $(this).prop("checked");
 		$(".user-chkbox").prop("checked", checked);
 	});
-	$(".user-create").on("click",function(){
-		
-	});
+	//페이징 처리
 	$(".page-num").on("click",function(e){
 		console.log(this);
 		e.preventDefault();
@@ -88,14 +22,112 @@ $(function(){
 		$.get("/admin/admin_user", sData, function(rData){
 			
 				$(".user-div").empty();
-				$(".user-div").append(rData);
+				$(".user-div").html(rData);
 			
 		});
 	});
+	//유저 테스트 생성 버튼
 	$(".user-create").on("click",function(){
 		$(".create-modal").modal("show");
-		
 	});
+	//유저 테스트 모달창 생성 버튼
+	$(".btn-create").on("click",function(){
+		var tname = $("#test-name").val();
+		var tid = $("#test-id").val();
+		var tpw = $("#test-pw").val();
+		var taddr = $("#test-addr").val();
+		var tdetail = $("#test-addr-detail").val();
+		var tbir = $("#test-bir").val();
+		var tstate = $(".state:checked").val();
+		var tphone = $("#test-phone").val();
+		var memail = $("#test-email").val();
+		
+		sData = {
+				mname : tname,
+				mid : tid,
+				mpw : tpw,
+				maddr : taddr,
+				maddr_detail : tdetail,
+				mbirthday : tbir,
+				mstate : tstate,
+				mphone : tphone,
+				memail : memail
+		}
+		
+		$.get("/admin/create_user",sData,function(rData){
+			console.log("44",rData)
+			if(rData == true){
+				alert("유저가 생성 되었습니다");
+				$(".create-modal").modal("hide");
+			}
+		});
+	});
+	//유저 정지 버튼
+	$(".user-suspend").click(function(){
+		var checked = $(".user-chkbox:checked").closest("div");
+		var checkeds = [];
+		checked.each(function(){
+			if($(this).parent().children("div:eq(8)").text().trim() == "활동"){
+				var chk = parseInt($(this).parent().children("div:eq(1)").text().trim());
+				checkeds.push(chk);
+			}
+		});
+		sData = {
+				"mnos" : checkeds
+		}
+		console.log("checkeds", checkeds);
+		if(checkeds != ""){
+			$.post("/admin/userSuspend",sData,function(rData){
+				if(rData != 0){
+					alert(rData + "명의 유저를  복구 시켰습니다");
+						sData = {
+								"pageNum" : ${page.criteria.pageNum}
+						}
+					$.get("/admin/admin_user",sData,function(rData){
+						$(".user-div").empty();
+						$(".user-div").html(rData);
+					});
+				}
+			});
+		}else{
+			alert("선택한 유저중에 정지 시킬 유저가 없습니다");
+			return
+		}
+	});
+	//유저 복구 버튼
+	$(".user-repair").click(function(){
+		var checked = $(".user-chkbox:checked").closest("div");
+		var checkeds = [];
+		checked.each(function(){
+			if($(this).parent().children("div:eq(8)").text().trim() == "정지"){
+				var chk = parseInt($(this).parent().children("div:eq(1)").text().trim());
+				checkeds.push(chk);
+			}
+		});
+		sData = {
+				"mnos" : checkeds
+		}
+		console.log("checkeds", checkeds);
+		if(checked != ""){
+			$.post("/admin/userRepair",sData,function(rData){
+				alert(rData + "명의 유저를  복구 시켰습니다");
+				console.log("223214",${page.criteria.pageNum});
+					sData = {
+							"pageNum" : ${page.criteria.pageNum}
+					}
+				$.get("/admin/admin_user",sData,function(rData){
+					$(".user-div").empty();
+					$(".user-div").html(rData);
+				});
+			});
+		}else{
+			alert("선택한 유저중에 복구 시킬 유저가 없습니다")
+			return
+		}
+	});
+	$(".user-point-history").on("click",function(){
+		$(".point-modal").fadeIn();
+	})
 });
 </script>
 <div class="user-div" style="width: 100%; height: 100%;">
@@ -125,9 +157,8 @@ $(function(){
 		</div>
 		<div>
 			<button type="button" class="user-create">테스트 유저 생성</button>
-			<button type="button">포인트 추가</button>
-			<button type="button">사용자 정지</button>
-			<button type="button">사용자 복구</button>
+			<button type="button" class="user-suspend">사용자 정지</button>
+			<button type="button" class="user-repair">사용자 복구</button>
 		</div>
 	</div>
 	<div class="second-div" style="background-color: white;" >
@@ -167,7 +198,7 @@ $(function(){
 					<input class="user-chkbox" type="checkbox">
 				</div>
 				<div class="cell">
-					<span>${userList.mno}</span>
+					<span class="user-mno">${userList.mno}</span>
 				</div>
 				<div class="cell">
 					<span>${userList.mname}</span>
@@ -186,6 +217,7 @@ $(function(){
 				</div>
 				<div class="cell">
 					<span>${userList.mpoint}</span>
+					<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
 				</div>
 				<div class="cell">
 					<span>${userList.mstate == 0? '정지' : '활동'}</span>
@@ -215,58 +247,68 @@ $(function(){
 			    </c:if>
 			  </ul>
 			</nav>
+				<!-- user생성 모달 -->
+			<div class="create-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">테스트 유저 생성</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">이름</label>
+			            <input type="text" class="form-control" id="test-name" value="김동영">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">아이디</label>
+			            <input type="text" class="form-control" id="test-id" value="qwe22">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">비밀번호</label>
+			            <input type="password" class="form-control" id="test-pw" value="1234">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">연락처</label>
+			            <input type="text" class="form-control" id="test-phone" value="01056302633">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">이메일</label>
+			            <input type="email" class="form-control" id="test-email"value="qwer@name.com">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">주소</label>
+			            <input type="text" class="form-control" id="test-addr" value="울산">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">상세주소</label>
+			            <input type="text" class="form-control" id="test-addr-detail" value="중구">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">생일</label>
+			            <input type="text" class="form-control" id="test-bir" value="121212">
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">상태</label>
+			            <div class="d-flex flex-direction-column">
+				            <input type="radio" class="state form-control" id="test-state1" name="test-state" value="1">
+				            <span>활동</span>
+				            <input type="radio" class="state form-control" id="test-state0" name="test-state" value="0">
+				             <span>정지</span>
+			            </div>
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn-create btn btn-primary">생성</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div> <!-- user생성 모달 -->
 		</div>
 	</div>
-	
-	<!-- user생성 모달 -->
-<div class="create-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">테스트 유저 생성</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">이름</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">아이디</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">비밀번호</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">주소</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">상세주소</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">생일</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">상태</label>
-            <input type="radio" class="form-control" id="recipient-name">
-            <input type="radio" class="form-control" id="recipient-name">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div> <!-- user생성 모달 -->
-	
 </div>
