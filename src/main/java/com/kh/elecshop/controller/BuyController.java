@@ -33,9 +33,6 @@ public class BuyController {
 	@Autowired
 	private CartService cartService;
 	
-	@Autowired
-	
-	
 	@GetMapping("/buy")
 	public void buy(HttpSession session, Model model) {
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
