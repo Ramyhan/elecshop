@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
+import com.kh.elecshop.domain.AdminProductDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.NoticeVO;
@@ -45,6 +47,13 @@ public class AdminController {
 		
 		return "/admin/registerNotice";
 	}
+	@GetMapping("/admin_product")
+	public void product(Model model, Criteria criteria) {
+		Map<String, Object> map = adminService.getProductList(criteria);
+		System.out.println(map);
+		model.addAttribute("productMap", map);
+	}
+	
 	@GetMapping("/admin_user")
 	public void user(Model model, Criteria criteria) {
 		log.info("22"+ criteria);
@@ -55,6 +64,22 @@ public class AdminController {
 		List<AdminUserDTO> list = (List<AdminUserDTO>)map.get("userList");
 		model.addAttribute("page", pageDTO);
 		model.addAttribute("userList", list);
+	}
+	@GetMapping(value="/create_user",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> createUser(AdminUserDTO adminUserDTO) {
+		System.out.println(adminUserDTO);
+		boolean result = adminService.registerTestUser(adminUserDTO);
+		return ResponseEntity.ok(result);
+	}
+	@PostMapping(value = "/userRepair", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> userRepair(@RequestParam("mnos[]") int[] mnos){
+		int count = adminService.modifyRepair(mnos);
+		return ResponseEntity.ok(count);
+	}
+	@PostMapping(value = "/userSuspend",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> userSuspend(@RequestParam("mnos[]")int[] mnos) {
+		int count = adminService.modifysusend(mnos);
+		return ResponseEntity.ok(count);
 	}
 //	@PostMapping("/admin_userTable")
 //	public String userTable(Model model, Criteria criteria) {
@@ -74,6 +99,8 @@ public class AdminController {
 		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
 		model.addAttribute("subNotice", list);
 	}
+	
+	
 	@PostMapping(value = "/updateCloseState", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public boolean updateCloseState(@RequestParam(value="nnos[]") int[] nnos) {

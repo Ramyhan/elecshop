@@ -28,21 +28,26 @@ public class CouponServiceImpl implements CouponService{
 	}
 	
 	@Override
-	public List<CouponVO> selectCoupon(String mid) {
-		List<CouponVO> list = couponMapper.selectCoupon(mid);
+	public List<CouponVO> selectUserCoupon(String mid) {
+		List<CouponVO> list = couponMapper.selectUserCoupon(mid);
 		List<CouponVO> list2 = new ArrayList<>();
 		Date date = new Date(System.currentTimeMillis());
 		
-//		유효기간 검사
+//		유효기간 검사, 사용 검사
 		for(CouponVO vo : list) {
-			Date expiry = vo.getExpiry_date();
-			int count = date.compareTo(expiry);
-			if(count < 0) {
-				list2.add(vo);
+			if(vo.getUse() == 0) {
+				Date expiry = vo.getExpiry_date();
+				int count = date.compareTo(expiry);
+				if(count < 0) {
+					list2.add(vo);
+				}
 			}
-		}
-		log.info(list2);
+			log.info(list2);
+				
+			}
 		return list2;
 	}
+
+
 
 }

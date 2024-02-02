@@ -15,17 +15,15 @@ $(function(){
 			type : type,
 			url: url,
 			success:function(rdata){
-				$(".set-div").empty();
-				$(".set-div").append(rdata);
 				if(url == "/admin/admin_dashboard"){
 					$("body").empty();
-					$("body").append(rdata);
+					$("body").html(rdata);
 					console.log(rdata);
 				}
 				else{
 					
 					$(".set-div").empty();
-					$(".set-div").append(rdata);
+					$(".set-div").html(rdata);
 				}
 				
 			}

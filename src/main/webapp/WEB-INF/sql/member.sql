@@ -10,7 +10,8 @@ create table tbl_member(
     mphone NVARCHAR2(15) unique,
     mbirthday date not null,
     mregdate date default sysdate,
-    mpoint number default 0
+    mpoint number default 0,
+    mstate number default 1 not null check (mstate in(0, 1))
 );
 
 alter table tbl_member

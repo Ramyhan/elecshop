@@ -25,7 +25,7 @@
 <script>
 $(function(){
 	var dailyResult = "${dailyResult}";
-	console.log(dailyResult);
+// 	console.log(dailyResult);
 	
 	if(dailyResult == "success"){
 		alert("출석체크 성공");

@@ -5,12 +5,42 @@
 <mapper namespace="com.kh.elecshop.mapper.AdminMapper">
 	<select id="selectUser" resultType="com.kh.elecshop.domain.AdminUserDTO">
 		select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,mstate
-		from (select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,rownum rn ,mstate
-              from tbl_member order by rownum desc)
+		from (select /*+index_desc(tbl_member)*/ mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,rownum rn ,mstate
+              from tbl_member order by rownum asc)
         where rn between #{startRow} and #{endRow}
 	</select>
 	<select id="selectUserTotal" resultType="int">
 		select count(*) from tbl_member
 	</select>
-	
+	<insert id="insertUser">
+		insert into tbl_member(mno,mname,mid,mpw,memail,maddr,maddr_detail,mphone,mbirthday,mstate)
+		values(seq_mno.nextval,#{mname},#{mid},#{mpw},#{memail},#{maddr},#{maddr_detail},#{mphone},#{mbirthday},#{mstate})
+	</insert>
+	<update id="updateSuspend">
+		update tbl_member set
+		mstate = 0
+		where mno in (
+			<foreach collection="array" separator="," item="mnos">
+				#{mnos}
+			</foreach>
+		)
+	</update>
+	<update id="updateRepair">
+		update tbl_member set
+		mstate = 1
+		where mno in (
+			<foreach collection="array" separator="," item="mnos">
+				#{mnos}
+			</foreach>
+		)
+	</update>
+	<select id="selectProduct" resultType="com.kh.elecshop.domain.AdminProductDTO">
+		select pno,pname,pprice,ptype,pimage_thoumb,order_count,pregdate
+		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,pimage_thoumb,order_count,pregdate,rownum rn
+		      from tbl_product order by rn asc)
+        where rn between #{startRow} and #{endRow}
+	</select>
+	<select id="selectProductTotal" resultType="int">
+		select count(*) from tbl_product
+	</select>
 </mapper>
