@@ -356,20 +356,21 @@ $(function() {
 								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 3 }">
+								<c:if test="${ option.otype == 1 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
 								</select>
 							</div>
 						</div><br>
+						<c:if test="${productVO.ptype == 1 || productVO.ptype == 3}">
 						<div class="divOptionName" id="optionName2">SSD</div>
 						<div class="divOption">
 							<div>
 								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 1 }">
+								<c:if test="${ option.otype == 2 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
@@ -382,14 +383,14 @@ $(function() {
 								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 2 }">
+								<c:if test="${ option.otype == 3 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
 								</select>
 							</div>
 						</div>
-						
+						</c:if>
 						<div style="padding: 10px 0px 10px 0px;">
 							<div style="font-size: 30px; font-family: '고딕'">
 								현재가: <span id="totalPrice"><fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber></span>원
@@ -402,6 +403,7 @@ $(function() {
 								title="찜하기" data-pno="${productVO.pno}" data-status=""></i>
 						</div>
 					</div>
+					
 					<!-- //상품옵션 -->
 					
 					<!-- 상품 이미지 및 스펙 -->

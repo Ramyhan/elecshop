@@ -6,7 +6,7 @@
 <mapper namespace="com.kh.elecshop.mapper.ProductMapper">
 
 	<select id="selectProductList" resultType="com.kh.elecshop.domain.ProductDTO">
-		select pno, pname, pcode, pinfo_main, pimage_thoumb
+		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
 		from tbl_product
 		where ptype = #{ptype}
 	</select>
@@ -15,6 +15,38 @@
 		select *
 		from tbl_product
 		where pno = #{pno}
+	</select>
+	
+	<select id="selectByKeyword" resultType="com.kh.elecshop.domain.ProductDTO">
+		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
+		from tbl_product
+		where ptype = #{ptype}
+		and pname like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="selectByManu" resultType="com.kh.elecshop.domain.ProductDTO" parameterType="string">
+		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
+		from tbl_product
+		where ptype = #{ptype}
+		and mno in (${manuval}) 
+	</select>
+	
+	<select id="selectByOption" resultType="com.kh.elecshop.domain.ProductDTO">
+		select distinct tbl_product.pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
+		from tbl_product, tbl_product_option
+		where ptype = #{ptype}
+		and oname in
+		<foreach collection="optionval" item="option" open="(" close=")" separator=",">
+			#{option}
+		</foreach>
+		and tbl_product.pno = tbl_product_option.pno
+	</select>
+	
+	<select id="selectByPdno" resultType="com.kh.elecshop.domain.ProductDTO" parameterType="string">
+		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
+		from tbl_product
+		where ptype = #{ptype}
+		and pdno in (${optionval})
 	</select>
 
 </mapper>
