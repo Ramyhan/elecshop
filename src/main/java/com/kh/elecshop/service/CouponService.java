@@ -7,5 +7,5 @@ import com.kh.elecshop.domain.CouponVO;
 public interface CouponService {
 
 	public boolean insertCoupon(CouponVO couponVO);
-	public List<CouponVO> selectCoupon(String mid);
+	public List<CouponVO> selectUserCoupon(String mid);
 }

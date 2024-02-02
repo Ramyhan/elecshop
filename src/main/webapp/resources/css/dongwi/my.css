@@ -510,6 +510,12 @@ footer{
 .buy-title > p{
 	margin-left: 6px;
 }
+#checkbox-div{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 77px;
+	margin-bottom: 10px;
+}
 
 /* 우측바 */
 .buy-col > h2{
@@ -590,6 +596,14 @@ border: solid 1px #606060;
 	text-align: center;
 	color: white;
 }
+.buy-prodect-checkbox{
+/* 	margin: 50px; */
+	border: solid 1px #606060;
+}
+.buy-prodect-checkbox > input {
+	margin: 50px;
+	
+}
 /* 쿠폰 */
 
 .buy-select-coupon > p {
@@ -605,4 +619,8 @@ border: solid 1px #606060;
 .buy-myPoint > span:nth-child(2){
 	color: #FFD369;	
 	font-weight: 600;
+}
+#product-ooption {
+	font-size: 15px;
+	color: #eeeeee;
 }

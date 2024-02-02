@@ -1,6 +1,5 @@
 package com.kh.elecshop.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,14 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuyDTO {
-	
-	private int cno;
-	private String mid;
-	private int cprice;
-	private String coption;
+public class OrderDetailVO {
+
+	private int odno;
 	private int pno;
-	private String pname;
-	private String pimage_thoumb;
-	
+	private int ono;
+	private int odproduct_count;
+	private String odoption;
 }
