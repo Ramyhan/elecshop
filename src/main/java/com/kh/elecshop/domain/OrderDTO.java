@@ -4,17 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class OrderVO {
+public class OrderDTO {
 
 	private int ono;
+	private int cno;
+	private int point;
 	private String mid;
 	private String oname;
 	private String ophone;

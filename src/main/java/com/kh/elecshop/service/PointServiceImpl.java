@@ -20,6 +20,7 @@ public class PointServiceImpl implements PointService {
 		List<PointVO> list = pointMapper.getPointInfo(mid);
 		return list;
 	}
-
+	
+	
 
 }

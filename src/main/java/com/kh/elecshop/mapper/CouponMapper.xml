@@ -10,9 +10,20 @@
 		#{expiry_date})
 	</insert>
 	
-	<select id="selectCoupon" resultType="com.kh.elecshop.domain.CouponVO">
+	<select id="selectUserCoupon" resultType="com.kh.elecshop.domain.CouponVO">
 	 select * from tbl_coupon
 	 where mid = #{mid}
-	
 	</select>
+	
+	<select id="selectCouponInfo" resultType="com.kh.elecshop.domain.CouponVO">
+		select * from tbl_coupon
+	 where cno = #{cno}
+	</select>
+	<update id="updateCoupon">
+		update tbl_coupon
+		set
+		expiry_date = #{expiry_date},
+		use = #{use}
+		where cno = #{cno}
+	</update>
 </mapper>

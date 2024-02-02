@@ -7,5 +7,7 @@ import com.kh.elecshop.domain.CouponVO;
 public interface CouponMapper {
 	
 	public int insertCoupon(CouponVO couponVO);
-	public List<CouponVO> selectCoupon(String mid);
+	public List<CouponVO> selectUserCoupon(String mid);
+	public int updateCoupon(CouponVO couponVO);
+	public CouponVO selectCouponInfo(int cno);
 }

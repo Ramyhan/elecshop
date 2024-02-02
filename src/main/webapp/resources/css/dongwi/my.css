@@ -510,6 +510,12 @@ footer{
 .buy-title > p{
 	margin-left: 6px;
 }
+#checkbox-div{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 77px;
+	margin-bottom: 10px;
+}
 
 /* 우측바 */
 .buy-col > h2{
@@ -589,6 +595,14 @@ border: solid 1px #606060;
 	margin: 50px;
 	text-align: center;
 	color: white;
+}
+.buy-prodect-checkbox{
+/* 	margin: 50px; */
+	border: solid 1px #606060;
+}
+.buy-prodect-checkbox > input {
+	margin: 50px;
+	
 }
 /* 쿠폰 */
 

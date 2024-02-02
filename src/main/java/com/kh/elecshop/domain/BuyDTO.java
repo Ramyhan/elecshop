@@ -1,6 +1,5 @@
 package com.kh.elecshop.domain;
 
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +18,4 @@ public class BuyDTO {
 	private String pname;
 	private String pimage_thoumb;
 	
-//	private List<BuyDTO> list;
 }

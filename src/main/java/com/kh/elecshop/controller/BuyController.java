@@ -15,12 +15,16 @@ import com.kh.elecshop.domain.BuyDTO;
 import com.kh.elecshop.domain.CartVO;
 import com.kh.elecshop.domain.CouponVO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.OrderDTO;
 import com.kh.elecshop.domain.OrderVO;
+import com.kh.elecshop.mapper.OrderMapper;
 import com.kh.elecshop.service.CartService;
 import com.kh.elecshop.service.CouponService;
 
-@Controller
+import lombok.extern.log4j.Log4j;
 
+@Controller
+@Log4j
 public class BuyController {
 
 	@Autowired
@@ -29,10 +33,13 @@ public class BuyController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	
+	
 	@GetMapping("/buy")
 	public void buy(HttpSession session, Model model) {
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		List<CouponVO> couponList = couponService.selectCoupon(memberVO.getMid());
+		List<CouponVO> couponList = couponService.selectUserCoupon(memberVO.getMid());
 		List<BuyDTO> cartList = cartService.getBuyList(memberVO.getMid());
 		
 		model.addAttribute("myCoupon", couponList);
@@ -47,9 +54,11 @@ public class BuyController {
 		return String.valueOf(result);
 	}
 	
-	@PostMapping("/order_detail")
-	public void order(OrderVO orderVO) {
+	@PostMapping("/order")
+	public String order(OrderDTO OrderDTO) {
+		log.info(OrderDTO);
 		
+		return "redirect:/main";
 		
 	}
 }

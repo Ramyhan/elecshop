@@ -11,4 +11,6 @@
 		(seq_order_ono.nextval, #{mid}, #{oname}, #{ophone}, #{oprice}, #{oaddr}, #{oaddr_detail}, #{opost_code}, #{odelivery})
 	</insert>
 
+	<select id="getSequence">
+	</select>
 </mapper>
