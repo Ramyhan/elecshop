@@ -4,7 +4,7 @@ create table tbl_daily_check(
     regdate date default sysdate
 );
 
-create sequence seq_dno;
+create sequence seq_daily_dno;
 
 commit;
 

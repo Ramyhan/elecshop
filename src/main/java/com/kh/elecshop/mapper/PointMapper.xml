@@ -7,7 +7,7 @@
 		insert into tbl_point
 		(pno, mid, ppoint, point_code)
 		values
-		(seq_pno.nextval, #{mid}, #{ppoint}, #{point_code})
+		(seq_point_pno.nextval, #{mid}, #{ppoint}, #{point_code})
 	</insert>
 	<select id="getPointInfo" resultType="com.kh.elecshop.domain.PointVO">
 		select tbl_point.pno, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,

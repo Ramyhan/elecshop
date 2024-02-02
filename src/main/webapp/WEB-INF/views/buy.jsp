@@ -258,7 +258,9 @@ $(function (){
 		if(cno == null){
 			cno = 0;
 		}
-		
+		if(point == ""){
+			point = 0;
+		}
 		$("#mid").val(mid);
 		$("#ppoint").val(point);
 		$("#cno").val(cno);

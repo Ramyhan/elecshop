@@ -14,7 +14,7 @@ create table tbl_point(
     regdate date default sysdate
 );
 
-create sequence seq_pno;
+create sequence seq_point_pno;
 
 
 -- 포인트 코드 기본 정보들
@@ -34,7 +34,7 @@ values ('PU', '포인트 사용');
 insert into tbl_point
 		(pno, mid, ppoint, point_code)
 		values
-		(seq_pno.nextval, 'zxcv1234', 100, 'RP');
+		(seq_point_pno.nextval, 'zxcv1234', 100, 'RP');
 
 
 update tbl_member set

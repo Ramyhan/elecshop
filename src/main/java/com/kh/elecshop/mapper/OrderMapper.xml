@@ -11,6 +11,8 @@
 		(seq_order_ono.nextval, #{mid}, #{oname}, #{ophone}, #{oprice}, #{oaddr}, #{oaddr_detail}, #{opost_code}, #{odelivery})
 	</insert>
 
-	<select id="getSequence">
+	<select id="getCno" resultType="int">
+		select ono from tbl_order
+		where mid = #{mid}
 	</select>
 </mapper>

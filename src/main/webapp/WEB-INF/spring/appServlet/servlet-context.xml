@@ -27,11 +27,18 @@
 	<!-- 인터셉터 -->
 	<beans:bean id="loginInterceptor"
 		class="com.kh.elecshop.interceptor.LoginInterceptor"/>
-	
+	<beans:bean id="authInterceptor"
+		class="com.kh.elecshop.interceptor.AuthInterceptor"/>
+		
 	<interceptors>
 		<interceptor>
 			<mapping path="/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myPage/**/*"/>
+			<exclude-mapping path="/main"/>
+			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 <!-- 		<interceptor> -->
 <!-- 			<mapping path="/board/**/*"/> -->

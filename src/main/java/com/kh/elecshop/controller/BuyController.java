@@ -20,6 +20,7 @@ import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.mapper.OrderMapper;
 import com.kh.elecshop.service.CartService;
 import com.kh.elecshop.service.CouponService;
+import com.kh.elecshop.service.OrderService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -32,6 +33,9 @@ public class BuyController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@GetMapping("/buy")
 	public void buy(HttpSession session, Model model) {
@@ -54,8 +58,7 @@ public class BuyController {
 	@PostMapping("/order")
 	public String order(OrderDTO OrderDTO) {
 		log.info(OrderDTO);
-		
+		orderService.insertOrder(OrderDTO);
 		return "redirect:/main";
-		
 	}
 }

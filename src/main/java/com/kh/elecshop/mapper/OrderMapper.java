@@ -6,4 +6,5 @@ public interface OrderMapper {
 
 	public int insertOrder(OrderVO orderVO);
 	
+	public int getCno(String mid);
 }
