@@ -1,8 +1,7 @@
 package com.kh.elecshop.service;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class CouponServiceImpl implements CouponService{
 //		유효기간 검사, 사용 검사
 		for(CouponVO vo : list) {
 			if(vo.getUse() == 0) {
-				Date expiry = vo.getExpiry_date();
+				java.util.Date expiry = vo.getExpiry_date();
 				int count = date.compareTo(expiry);
 				if(count < 0) {
 					list2.add(vo);

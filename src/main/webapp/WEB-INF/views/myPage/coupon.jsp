@@ -18,24 +18,34 @@
 				<table class="table table-bordered point-table">
 					<thead>
 						<tr>
-							<th>포인트 정보</th>
-							<th>포인트</th>
-							<th>아이디</th>
-							<th>날짜</th>
+							<th>쿠폰 이름</th>
+							<th>사용여부</th>
+							<th>할인률</th>
+							<th>발급날짜</th>
+							<th>유효기간</th>
 						</tr>
 					</thead>
 							<tbody>
-								<c:forEach var="vo" items="${pointInfo }">
-									<tr class="point-list">
-										<td>${vo.point_info }</td>
-										<td>${vo.ppoint }</td>
-										<td>${vo.mid }</td>
+								<c:forEach var="vo" items="${couponList }">
+									<tr class="coupon-list">
+										<td>${vo.coupon_name }</td>
+										<c:choose>
+										<c:when test="${vo.use == 0 }">
+										<td>사용 가능</td>
+										</c:when>
+										<c:otherwise>
+										<td>사용 불가</td>
+										</c:otherwise>
+										</c:choose>
+										<td>${vo.sale }%</td>
 										<td><fmt:formatDate value="${vo.regdate }"
+												pattern="yyyy-MM-dd" /></td>
+										<td><fmt:formatDate value="${vo.expiry_date }"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 								<tr class="point-button">
-									<th colspan="4">
+									<th colspan="5">
 										<button type="button" class="btn btn-warning" id="btn-load">더보기</button>
 									</th>
 								</tr>
@@ -50,14 +60,11 @@
 
 <script>
 $(function(){
-	if($(".point-list:hidden").length == 0){
-        $('#btn-load').fadeOut(100);
-	}
-	$(".point-list").slice(0, 3).show();
+	$(".coupon-list").slice(0, 3).show();
 	$("#btn-load").click(function(e) {
 		e.preventDefault();
-		$(".point-list:hidden").slice(0, 3).show(500);
-		if($(".point-list:hidden").length == 0){
+		$(".coupon-list:hidden").slice(0, 3).show(500);
+		if($(".coupon-list:hidden").length == 0){
             $('#btn-load').fadeOut(100);
 		}
 	});

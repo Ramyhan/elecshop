@@ -32,7 +32,7 @@
 					<form id="order_detail" action="/order" method="post">
 					<input type="hidden" id="mid" name="mid">
 					<input type="hidden" id="ppoint" name="point">
-					<input type="hidden" id="cno" name="cno">
+					<input type="hidden" id="coupon_no" name="coupon_no">
 					<input type="hidden" id="oname" name="oname">
 					<input type="hidden" id="ophone" name="ophone">
 					<input type="hidden" id="oprice" name="oprice">
@@ -54,7 +54,7 @@
 							 </li>
 							</ul>
 						</div>
-						<div class="buy-prodect-count">
+						<div class="buy-prodect-count" data-cart_no="${buyVO.cno }">
 							<p>수량:<span class="odproduct_count">1</span>개</p>
 						</div>
 						<div class="buy-prodect-price">
@@ -108,7 +108,7 @@
 				</div>
 		</div>
 	</div>
-		<div class="buy-price" style="width: 400px; margin-top: 10%;">
+		<div class="buy-price">
 		<div class="col buy-col">
 		<h2>결제 예정금액</h2>
 		<p>상품금액 : <span id="result-price"></span></p>
@@ -263,7 +263,7 @@ $(function (){
 		}
 		$("#mid").val(mid);
 		$("#ppoint").val(point);
-		$("#cno").val(cno);
+		$("#coupon_no").val(cno);
 		$("#oname").val(oname);
 		$("#ophone").val(ophone);
 		$("#oprice").val(oprice);
@@ -293,18 +293,22 @@ $(function (){
 		    	var odproduct_count = product.find(".odproduct_count").text();
 				var odoption = product.find($(".product-ooption")).text().trim();
 				var pno = product.find($(".buy-pno")).attr("data-pno");
+				var cart_no = product.find($(".buy-prodect-count")).attr("data-cart_no");
 				
 				var input_odoption = "<input type='hidden' value='"+odoption+"' name='list["+i+"].odoption'>";
 				var input_pno = "<input type='hidden' value='"+pno+"' name='list["+i+"].pno'>";
 				var input_odproduct_count = "<input type='hidden' value='"+odproduct_count+"' name='list["+i+"].odproduct_count'>";
+				var input_cart_cno = "<input type='hidden' value='"+cart_no+"' name='list["+i+"].cart_no'>";
 				
 				product.prepend(input_odoption);
 				product.prepend(input_pno);
 				product.prepend(input_odproduct_count);
+				product.prepend(input_cart_cno);
 				console.log(product);
 				console.log(odproduct_count);
 	 			console.log(odoption);
 	 			console.log(pno);
+	 			console.log(cart_no);
 			}
 		});
 		$("#order_detail").submit();

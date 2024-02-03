@@ -23,7 +23,7 @@ public class OrderVO {
 	private String oaddr_detail;
 	private String opost_code;
 	private int odelivery;
-	private Date regDate;
+	private Date regdate;
 	
 	private List<OrderDetailVO> list;
 	

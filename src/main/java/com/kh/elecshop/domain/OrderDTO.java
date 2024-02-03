@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class OrderDTO {
 
 	private int ono;
-	private int cno;
+	private int coupon_no;
 	private int point;
 	private String mid;
 	private String oname;

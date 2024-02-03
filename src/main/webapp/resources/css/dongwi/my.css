@@ -315,6 +315,16 @@ footer{
 .signup input{
 	width: 340px;
 }
+/* 포인트 */
+.point-list{
+	display: none;
+}
+.point-button > th{
+	border-bottom: hidden;
+	border-left: hidden;
+	border-right: hidden;
+	text-align:center;
+}
 /* 마이페이지 */
 /* 사이드바 */
 .side-bar{
@@ -517,7 +527,11 @@ footer{
 	margin-bottom: 10px;
 }
 
-/* 우측바 */
+/* 우측 구매바 */
+.buy-price{
+	width: 400px;
+ 	margin-top: 10%;
+}
 .buy-col > h2{
 	color: white;
 	margin-top: 40px;
@@ -604,6 +618,7 @@ border: solid 1px #606060;
 	margin: 50px;
 	
 }
+
 /* 쿠폰 */
 
 .buy-select-coupon > p {

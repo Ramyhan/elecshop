@@ -14,4 +14,5 @@ public class OrderDetailVO {
 	private int ono;
 	private int odproduct_count;
 	private String odoption;
+	private int cart_no;
 }

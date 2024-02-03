@@ -25,11 +25,11 @@
 						</tr>
 					</thead>
 							<tbody>
-								<c:forEach var="vo" items="${pointInfo }">
+								<c:forEach var="vo" items="${orderList }">
 									<tr class="point-list">
-										<td>${vo.point_info }</td>
-										<td>${vo.ppoint }</td>
-										<td>${vo.mid }</td>
+										<td>${vo.oname }</td>
+										<td>${vo.oaddr }</td>
+										<td>${vo.oprice }</td>
 										<td><fmt:formatDate value="${vo.regdate }"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>

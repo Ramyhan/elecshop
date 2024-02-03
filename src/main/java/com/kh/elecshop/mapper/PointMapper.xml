@@ -15,5 +15,6 @@
 		from tbl_point_code, tbl_point
 		where tbl_point.mid = #{mid}
 		and tbl_point_code.point_code = tbl_point.point_code
+        order by tbl_point.pno desc
 	</select>
 </mapper>
