@@ -7,10 +7,9 @@
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
 <!-- 포인트 -->
-<div style="height: 100%;">
 <div class="myPage-point">
 <div class="container myPage-point-container">
-<h1 style="color: white; font-family: 굴림체;">포인트 내역</h1>
+<h1>포인트 내역</h1>
 <div class="myPage-line"></div>
 <div class="container-fluid">
 	<div class="row">
@@ -43,7 +42,6 @@
 						</table>
 			</div>
 	</div>
-</div>
 </div>
 </div>
 </div>

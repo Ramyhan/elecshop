@@ -8,14 +8,14 @@
 <!-- /사이드바 -->
 <!-- 포인트 -->
 <div style="height: 100%;">
-<div class="myPage-point">
-<div class="container myPage-point-container">
-<h1 style="color: white; font-family: 굴림체;">포인트 내역</h1>
+<div class="myPage-coupon">
+<div class="container myPage-coupon-container">
+<h1>내 쿠폰</h1>
 <div class="myPage-line"></div>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-				<table class="table table-bordered point-table">
+				<table class="table table-bordered coupon-table">
 					<thead>
 						<tr>
 							<th>쿠폰 이름</th>

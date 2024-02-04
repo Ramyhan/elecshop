@@ -11,4 +11,10 @@
 		(seq_order_detail_odno.nextval, #{ono}, #{pno}, #{odoption}, #{odproduct_count})
 	</insert>
 
+	<select id="selectMyOrder" resultType="com.kh.elecshop.domain.OrderDetailVO">
+		 select odno, tbl_order_detail.pno, ono, pname, pimage_thoumb, odoption, odproduct_count
+		 from tbl_order_detail, tbl_product
+ 		 where ono = #{ono}
+		 and tbl_product.pno = tbl_order_detail.pno
+	</select>
 </mapper>

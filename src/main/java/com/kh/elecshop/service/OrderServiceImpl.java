@@ -120,7 +120,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderVO> getOrderList(String mid) {
 		List<OrderVO> list = orderMapper.getOrderList(mid);
-		
+		for(OrderVO vo : list) {
+			int ono = vo.getOno();
+			List<OrderDetailVO> odList = orderDetailMapper.selectMyOrder(ono);
+			vo.setList(odList);
+		}
 		return list;
 	}
 

@@ -452,6 +452,8 @@ footer{
 	margin-bottom: 15px;
 }
 /* //마이페이지 회원정보수정 */
+
+/* 마이페이지 포인트, 쿠폰 */
 .myPage-point {
 	display: flex;
 	height: 100%;
@@ -459,7 +461,34 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
-
+.myPage-point {
+	display: flex;
+	height: 100%;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+.myPage-point-container > h1{
+	color: white; 
+	font-family: 굴림체;
+}
+.point-table{
+	color: white;
+}
+.myPage-coupon{
+	display: flex;
+	height: 100%;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+.myPage-coupon-container > h1{
+	color: white; 
+	font-family: 굴림체;
+}
+.coupon-table{
+	color: white;
+}
 /* 찜목록 */
 .myPage-like {
 	
