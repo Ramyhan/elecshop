@@ -29,19 +29,18 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class FileUploadController {
-	private final String UPLOAD_PATH = "C:\\Users\\KH302\\Desktop\\upload";
+	private final String UPLOAD_PATH = "C:\\Users\\dongk\\Desktop\\upload";
 	
 	@PostMapping(value="/uploadAjax", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<FileVO> UploadAjax(MultipartFile[] uploadFiles) {
-		log.info("multi" + uploadFiles);
-		System.out.println("upload" + uploadFiles.length);
+	public List<FileVO> UploadAjax(MultipartFile uploadFile) {
+		log.info("multi" + uploadFile);
+		System.out.println("upload" + uploadFile);
 		String uploadPath = getFolder();
 		List<FileVO> attachList = new ArrayList<>();
 		
-		for(int i = 0; i < uploadFiles.length;i++) {
 			UUID uuid = UUID.randomUUID();
-			String orgFilename = uploadFiles[i].getOriginalFilename();
+			String orgFilename = uploadFile.getOriginalFilename();
 			String savedFilename = uuid + "_" + orgFilename;
 			File f = new File(uploadPath, savedFilename);
 			
@@ -49,11 +48,10 @@ public class FileUploadController {
 			
 			
 			FileVO fileVO = FileVO.builder()
-					.fileName(orgFilename)
-					.uploadPath(uploadPath.substring(UPLOAD_PATH.length()))
-					.uuid(uuid.toString())
-					.image(isImage)
-					.url(uploadPath + "/s_" +uuid + "_" + orgFilename)
+					.afileName(orgFilename)
+					.apath(uploadPath.substring(UPLOAD_PATH.length()))
+					.auuid(uuid.toString())
+					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/s_" +uuid + "_" + orgFilename)
 					.build();
 			attachList.add(fileVO);
 			
@@ -63,18 +61,17 @@ public class FileUploadController {
 							new FileOutputStream(
 									new File(uploadPath, "s_" + savedFilename));
 					Thumbnailator.createThumbnail(
-							uploadFiles[i].getInputStream(), thumbnail, 100, 100);
+							uploadFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 			try {
-				uploadFiles[i].transferTo(f);
+				uploadFile.transferTo(f);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
-		}
 		return attachList;
 		
 	}
@@ -88,7 +85,7 @@ public class FileUploadController {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type", Files.probeContentType(target.toPath()));
 			ResponseEntity<byte[]> entity = 
-					new ResponseEntity<>(data, headers, HttpStatus.OK);
+					new ResponseEntity<>(data,headers, HttpStatus.OK);
 			return entity;
 		} catch (IOException e) {
 			e.printStackTrace();

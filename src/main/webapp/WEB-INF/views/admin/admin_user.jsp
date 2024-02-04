@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="/resources/css/dongyeong/admin_table.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
+<link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
 <script>
 $(function(){
 	//체크박스 이벤트
-	$(".user-chkboxAll").change(function(){
+	$(document).on("change",".user-chkboxAll",function(){
 		var checked = $(this).prop("checked");
 		$(".user-chkbox").prop("checked", checked);
 	});
@@ -41,6 +45,7 @@ $(function(){
 		var tstate = $(".state:checked").val();
 		var tphone = $("#test-phone").val();
 		var memail = $("#test-email").val();
+		var post = $("#test-post").val();
 		
 		sData = {
 				mname : tname,
@@ -51,7 +56,8 @@ $(function(){
 				mbirthday : tbir,
 				mstate : tstate,
 				mphone : tphone,
-				memail : memail
+				memail : memail,
+				mpost_code : post
 		}
 		
 		$.get("/admin/create_user",sData,function(rData){
@@ -79,13 +85,14 @@ $(function(){
 		if(checkeds != ""){
 			$.post("/admin/userSuspend",sData,function(rData){
 				if(rData != 0){
-					alert(rData + "명의 유저를  복구 시켰습니다");
+					alert(rData + "명의 유저를  정지 시켰습니다");
 						sData = {
 								"pageNum" : ${page.criteria.pageNum}
 						}
-					$.get("/admin/admin_user",sData,function(rData){
-						$(".user-div").empty();
-						$(".user-div").html(rData);
+					$.get("/admin/admin_userTable",function(rData){
+						console.log("2424123", rData);
+						$(".user-table").empty();
+						$(".user-table").append(rData);
 					});
 				}
 			});
@@ -115,9 +122,10 @@ $(function(){
 					sData = {
 							"pageNum" : ${page.criteria.pageNum}
 					}
-				$.get("/admin/admin_user",sData,function(rData){
-					$(".user-div").empty();
-					$(".user-div").html(rData);
+				$.get("/admin/admin_userTable",function(rData){
+					console.log("rdada", rData);
+					$(".user-table").empty();
+					$(".user-table").append(rData);
 				});
 			});
 		}else{
@@ -130,7 +138,11 @@ $(function(){
 	})
 });
 </script>
-<div class="user-div" style="width: 100%; height: 100%;">
+<%@include file="/WEB-INF/views/include/top.jsp"%>
+<div class="main-div">
+<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
+	<div class="set-div">
+		<div class="user-div" style="width: 100%; height: 100%;">
 	<div>
 		<h1>유저 관리 페이지</h1>
 	</div>
@@ -284,6 +296,10 @@ $(function(){
 			            <input type="text" class="form-control" id="test-addr" value="울산">
 			          </div>
 			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">우편번호</label>
+			            <input type="text" class="form-control" id="test-post" value="5662">
+			          </div>
+			          <div class="form-group">
 			            <label for="recipient-name" class="col-form-label">상세주소</label>
 			            <input type="text" class="form-control" id="test-addr-detail" value="중구">
 			          </div>
@@ -312,3 +328,7 @@ $(function(){
 		</div>
 	</div>
 </div>
+	</div>
+</div>
+
+<%@include file="/WEB-INF/views/include/bottom.jsp"%>

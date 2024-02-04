@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
+import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.NoticeVO;
@@ -38,6 +40,18 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@GetMapping("/admin_product_popup")
+	public void product_popup() {
+		
+	}
+	@PostMapping(value="/adminProductRegister", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String adminProductRegister(AdminProductRegisterDTO adminProductRegisterDTO) {
+		System.out.println("dto" + adminProductRegisterDTO);
+		boolean result = adminService.registerProduct(adminProductRegisterDTO);
+		System.out.println(result);
+		return "redirect:/admin/admin_product";
+	}
+	
 	@GetMapping("/admin_dashboard")
 	public void dashBoard() {
 		
@@ -54,9 +68,20 @@ public class AdminController {
 		model.addAttribute("productMap", map);
 	}
 	
+	@GetMapping("/admin_userTable")
+	public String userTable(Criteria criteria,Model model) {
+		Map<String,Object> map = adminService.getUserList(criteria);
+		int total = (int)map.get("total");
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		@SuppressWarnings("unchecked")
+		List<AdminUserDTO> list = (List<AdminUserDTO>)map.get("userList");
+		model.addAttribute("page", pageDTO);
+		model.addAttribute("userList", list);
+		return "admin/admin_userTable";
+	}
+	
 	@GetMapping("/admin_user")
 	public void user(Model model, Criteria criteria) {
-		log.info("22"+ criteria);
 		Map<String, Object> map = adminService.getUserList(criteria);
 		int total = (int)map.get("total");
 		PageDTO pageDTO = new PageDTO(criteria, total);
@@ -81,19 +106,6 @@ public class AdminController {
 		int count = adminService.modifysusend(mnos);
 		return ResponseEntity.ok(count);
 	}
-//	@PostMapping("/admin_userTable")
-//	public String userTable(Model model, Criteria criteria) {
-//		Map<String, Object> map = adminService.getUserList(criteria);
-//		int count = (int)map.get("total");
-//		PageDTO pageDTO = new PageDTO(criteria, count);
-//		log.info("ddd"+pageDTO.getStartPage());
-//		log.info("ddd"+pageDTO.getEndPage());
-////		log.info("page" + pageDTO);
-//		model.addAttribute("page", pageDTO);
-//		model.addAttribute("userMap", map);
-//		return "admin/admin_userTable";
-//		
-//	}
 	@GetMapping("/admin_customerCenter")
 	public void admin_customerCenter(Model model) {
 		List<AdminNoticeDTO> list = noticeService.getAdminNotice();
