@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
 .popup-main, .popup-name {
 	display: flex;
@@ -64,13 +63,22 @@
 				$("#sub-select-div").find("select").attr("disabled",true);
 			}
 			if(category == 4){
-				$("#add-detail").css("display","flex");
-				$("#add-detail").find("select").attr("disabled",false);
-				$("#add-detail").find("input").attr("disabled",false);
+				$("#sound-detail").css("display","flex");
+				$("#sound-detail").find("select").attr("disabled",false);
+				$("#sound-detail").find("input").attr("disabled",false);
 			}else{
-				$("#add-detail").css("display","none");
-				$("#add-detail").find("select").attr("disabled",true);
-				$("#add-detail").find("input").attr("disabled",true);
+				$("#sound-detail").css("display","none");
+				$("#sound-detail").find("select").attr("disabled",true);
+				$("#sound-detail").find("input").attr("disabled",true);
+			}
+			if(category == 5){
+				$("#Peripherals-detail").css("display","flex");
+				$("#Peripherals-detail").find("select").attr("disabled",false);
+				$("#Peripherals-detail").find("input").attr("disabled",false);
+			}else{
+				$("#Peripherals-detail").css("display","none");
+				$("#Peripherals-detail").find("select").attr("disabled",true);
+				$("#Peripherals-detail").find("input").attr("disabled",true);
 			}
 		});
 		$("#btn-ram").click(function() {
@@ -90,13 +98,21 @@
 			ssdClone.find("[type=hidden]").attr("name","ssdList["+ selectssd.length +"].otype");
 			$("#add-ssd-div").append(ssdClone);
 		});
-		$("#btn-detail-color").click(function() {
-			var colorClone = $("#add-color-detail").clone();
-			var selectColor = $(".add-color-detail");
+		$("#btn-sound-color").click(function() {
+			var colorClone = $("#add-color-sound").clone();
+			var selectColor = $(".add-color-sound");
 			colorClone.find("select").attr("name","colorList["+ selectColor.length + "].oname");
 			colorClone.find("input:eq(0)").attr("name","colorList["+ selectColor.length + "].opirce");
 			colorClone.find("input:eq(1)").attr("name","colorList["+ selectColor.length + "].otype");
-			$("#add-color-detail-div").append(colorClone);
+			$("#add-color-sound-div").append(colorClone);
+		});
+		$("#btn-Peripherals-color").click(function() {
+			var colorClone = $("#add-color-Peripherals").clone();
+			var selectColor = $(".add-color-Peripherals");
+			colorClone.find("select").attr("name","colorList["+ selectColor.length + "].oname");
+			colorClone.find("input:eq(0)").attr("name","colorList["+ selectColor.length + "].opirce");
+			colorClone.find("input:eq(1)").attr("name","colorList["+ selectColor.length + "].otype");
+			$("#add-color-Peripherals-div").append(colorClone);
 		});
 		$("#btn-pc-color").click(function(){
 			var colorClone = $("#add-color-select").clone();
@@ -165,10 +181,10 @@
 				$("#frm-popup").prepend(hiddenThoumb);
 			});
 		$("#frm-popup").submit();
-		alert("상품 추가 완료");
-		self.close();
+		opener.parent.location.reload();
+		window.close();
 		});
-		
+				
 		function isImageFile(file) {
 		    var ext = file.name.split(".").pop().toLowerCase(); 
 		    return ($.inArray(ext, ["jpg", "jpeg", "gif", "png"]) === -1) ? false : true;
@@ -182,7 +198,6 @@
 			<span>상품 추가</span>
 			<hr>
 		</div>
-		<!--  id="frm-popup" action="" method="post" -->
 		<form id="frm-popup" action="/admin/adminProductRegister" method="post" target="/admin/admin_product">
 			<div class="popup-name">
 				<span>상품 이름</span> <input name="pname" class="product-name" type="text">
@@ -338,10 +353,10 @@
 							<div class="input-cell">
 								<select name="colorList[0].oname" class="select-option product-color" disabled>
 									<option>--선택--</option>
-									<option value="0">Black</option>
-									<option value="1">Red</option>
-									<option value="2">Gray</option>
-									<option value="3">Blue</option>
+									<option value="Black">Black</option>
+									<option value="Red">Red</option>
+									<option value="Gray">Gray</option>
+									<option value="Blue">Blue</option>
 								</select>
 								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
 								<input type="hidden" name="colorList[0].otype" value="3" disabled>
@@ -350,7 +365,7 @@
 					</div>
 				</div>
 			</div>
-			<div style="display: none;" id="add-detail">
+			<div style="display: none;" id="sound-detail">
 				<div id="add-detail-div">
 					<div class="sound-category-div" id="sound-category-div">
 						<div class="div-header">
@@ -370,9 +385,52 @@
 						</div>
 					</div>
 				</div>
-				<div id="add-color-detail-div">
-					<button type="button" class="btn-color" id="btn-detail-color">색상 추가</button>
-					<div class="add-color-detail" id="add-color-detail">
+				<div id="add-color-sound-div">
+					<button type="button" class="btn-color" id="btn-sound-color">색상 추가</button>
+					<div class="add-color-sound" id="add-color-sound">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>색상선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="colorList[0].oname" class="select-option product-color" disabled>
+									<option>--선택--</option>
+									<option value="Black">Black</option>
+									<option value="Red">Red</option>
+									<option value="Gray">Gray</option>
+									<option value="Blue">Blue</option>
+								</select>
+								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
+								<input type="hidden" name="colorList[0].otype" value="3" disabled>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;" id="Peripherals-detail">
+				<div id="add-detail-div">
+					<div class="sound-category-div" id="sound-category-div">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>카테고리 선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="pdno" class="select-sound" disabled>
+									<option>--선택--</option>
+									<option value="4">키보드</option>
+									<option value="5">마우스</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="add-color-Peripherals-div">
+					<button type="button" class="btn-color" id="btn-Peripherals-color">색상 추가</button>
+					<div class="add-color-Peripherals" id="add-color-Peripherals">
 						<div class="div-header">
 							<div class="div-header-cell">
 								<span>색상선택</span>

@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<!-- admin css -->
+	<link href="/resources/css/dongyeong/admin_table.css" rel="stylesheet" type="text/css"/>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+	<link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
+	<link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>div 태그</title>
 	<!-- 부트스트랩 -->

@@ -38,6 +38,7 @@ public class AdminController {
 	private NoticeService noticeService;
 	@Autowired
 	private AdminService adminService;
+	
 	//어드민 상품 추가 팝업창
 	@GetMapping("/admin_product_popup")
 	public void product_popup() {
@@ -55,7 +56,7 @@ public class AdminController {
 		return "/admin/registerNotice";
 	}
 	//상품 수정 메서드
-	@PostMapping("/admin_productUpdateForm")
+	@PostMapping("/admin_productInfo")
 	public void productUpdateForm(int pno) {
 		
 	}

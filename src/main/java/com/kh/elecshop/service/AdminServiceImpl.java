@@ -100,7 +100,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	@Transactional
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO) {
-		int count = adminMapper.insertProduct(adminProductRegisterDTO);
+		adminMapper.insertProduct(adminProductRegisterDTO);
 		int pno = adminProductRegisterDTO.getPno();
 		List<FileVO> fileList = adminProductRegisterDTO.getAttrProductList();
 		if(fileList != null) {
@@ -108,32 +108,32 @@ public class AdminServiceImpl implements AdminService{
 				FileVO fileVO = fileList.get(i);
 				fileVO.setPno(pno);
 			}
+			adminMapper.insertProductImage(fileList);
 		}
 		List<AdminProductRamDTO> ramList = adminProductRegisterDTO.getRamList();
-		if( ramList != null) {
+		if(ramList != null) {
 			for(int i = 0; i < ramList.size(); i ++) {
 				AdminProductRamDTO productRamDTO = ramList.get(i);
 				productRamDTO.setPno(pno);
-				int ramOption = adminMapper.insertProductRamOption(ramList);
 			}
+			adminMapper.insertProductRamOption(ramList);
 		}
 		List<AdminProductSSdDTO> ssdList = adminProductRegisterDTO.getSsdList();
 		if(ssdList != null) {
 			for(int i = 0; i < ssdList.size(); i ++) {
 				AdminProductSSdDTO productSSdDTO = ssdList.get(i);
 				productSSdDTO.setPno(pno);
-				int ssdOption = adminMapper.insertProductSSDOption(ssdList);
 			}
-			List<AdminProductColorDTO> colorList = adminProductRegisterDTO.getColorList();
-			if(colorList != null) {
-				for(int i = 0; i < colorList.size();i++) {
-					AdminProductColorDTO productColorDTO = colorList.get(i);
-					productColorDTO.setPno(pno);
-					int colorOption = adminMapper.insertProductSSDOption(ssdList);
-				}
-			}
+			adminMapper.insertProductSSDOption(ssdList);
 		}
-		int image = adminMapper.insertProductImage(fileList);
+			List<AdminProductColorDTO> colorList = adminProductRegisterDTO.getColorList();
+		if(colorList != null) {
+			for(int i = 0; i < colorList.size();i++) {
+				AdminProductColorDTO productColorDTO = colorList.get(i);
+				productColorDTO.setPno(pno);
+			}
+			adminMapper.insertProductColorOption(colorList);
+		}
 		return true;
 	}
 

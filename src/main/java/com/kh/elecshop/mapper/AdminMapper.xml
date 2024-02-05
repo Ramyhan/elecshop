@@ -148,8 +148,13 @@
 		where pno = #{pno}
 		and athoumbnail = 'y'
 	</select>
+	<!-- 상품 타입 이름 가져오기 -->
 	<select id="selectPtypeName" resultType="string">
 		select tname from tbl_product_type
 		where ptype = #{ptype}
+	</select>
+	<select id="selectUpdateProductByPno" resultType="com.kh.elecshop.domain.AdminProductDTO">
+		select * from tbl_product
+		where pno = #{pno}
 	</select>
 </mapper>

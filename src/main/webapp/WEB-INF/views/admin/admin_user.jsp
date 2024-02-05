@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/resources/css/dongyeong/admin_table.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-<link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
-<link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
 <script>
 $(function(){
 	//체크박스 이벤트
@@ -142,12 +138,12 @@ $(function(){
 <div class="main-div">
 <%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 	<div class="set-div">
-		<div class="user-div" style="width: 100%; height: 100%;">
+		<div class="user-div">
 	<div>
 	<div></div>
 		<h1>유저 관리 페이지</h1>
 	</div>
-	<div class="user-devel" style="width: 95%; height: 15%;  background-color: white;">
+	<div class="user-devel">
 		<div class="d-flex justify-content-end">
 			<select>
 				<option>
