@@ -36,4 +36,8 @@
 		where cno in (${value})
 	</delete>
 
+	<delete id="deleteByCno">
+		delete from tbl_cart
+		where cno = #{cno}
+	</delete>
 </mapper>

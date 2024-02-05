@@ -21,6 +21,9 @@
 </style>
 <script>
 $(function() {
+	$("#btnOrder").click(function(){
+		location.href = "/buy";
+	});
 	
 	$("#chkCart").change(function() {
 		var checked = $(this).prop("checked");

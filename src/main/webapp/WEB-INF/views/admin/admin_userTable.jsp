@@ -2,7 +2,36 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-			<c:forEach var="userList" items="${userMap.userList}">
+			<div class="user-tbl-header">
+				<div class="header-cell" style="opacity: 1">
+					<input class="user-chkboxAll" type="checkbox">
+				</div>
+				<div class="header-cell">
+					<span>#</span>
+				</div>
+				<div class="header-cell">
+					<span>이름</span>
+				</div>
+				<div class="header-cell">
+					<span>아이디</span>
+				</div>
+				<div class="header-cell">
+					<span>이메일</span>
+				</div>
+				<div class="header-cell">
+					<span>주소</span>
+				</div>
+				<div class="header-cell">
+					<span>연락처</span>
+				</div>
+				<div class="header-cell">
+					<span>포인트</span>
+				</div>
+				<div class="header-cell">
+					<span>상태</span>
+				</div>
+			</div>
+			<c:forEach var="userList" items="${userList}">
 			<div class="user-div-row">
 				<div class="cell">
 					<input class="user-chkbox" type="checkbox">
@@ -27,6 +56,7 @@
 				</div>
 				<div class="cell">
 					<span>${userList.mpoint}</span>
+					<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
 				</div>
 				<div class="cell">
 					<span>${userList.mstate == 0? '정지' : '활동'}</span>

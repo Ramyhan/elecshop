@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.elecshop.domain.CouponVO;
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PointVO;
 import com.kh.elecshop.domain.ProductDTO;
+import com.kh.elecshop.service.CouponService;
 import com.kh.elecshop.service.LikeService;
 import com.kh.elecshop.service.MemberService;
+import com.kh.elecshop.service.OrderService;
 import com.kh.elecshop.service.PointService;
 
 import lombok.extern.java.Log;
@@ -35,6 +39,12 @@ public class MyPageController {
 	private PointService pointService;
 	@Autowired
 	private LikeService likeService;
+	@Autowired 
+	private CouponService couponService;
+	
+	@Autowired
+	private OrderService orderService;
+	
 	
 	@GetMapping("/myInfo")
 	public void myInfo() {
@@ -42,6 +52,21 @@ public class MyPageController {
 	}
 	@GetMapping("/modify")
 	public void myPage_modify() {
+	}
+	
+	@GetMapping("/myorder")
+		public void myPage_myOrder(HttpSession session, Model model) {
+			MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+			List<OrderVO> list = orderService.getOrderList(memberVO.getMid());
+			model.addAttribute("orderList", list);
+			
+	}
+	
+	@GetMapping("/coupon")
+	public void myPage_coupon(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		List<CouponVO> couponList = couponService.selectUserCoupon(memberVO.getMid());
+		model.addAttribute("couponList", couponList);
 	}
 	
 	@GetMapping("/point")

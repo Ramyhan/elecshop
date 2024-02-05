@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
-<div class="">
+<div style="height: 100%;">
 <div class="myPage-modify-main">
 		<div class="myPage-modify-text">
 			<h1>개인 정보 수정</h1>

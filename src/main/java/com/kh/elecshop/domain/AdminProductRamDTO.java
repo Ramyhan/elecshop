@@ -6,14 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileVO {
+@Builder
+public class AdminProductRamDTO {
 	private int pno;
-	private String afileName;
-	private String apath;
-	private String auuid;
-	private String aurl;
-	private String athoumbnail;
+	private String oname;
+	private int oprice;
+	private int otype;
 }

@@ -5,9 +5,8 @@
 <mapper namespace="com.kh.elecshop.mapper.CouponMapper">
 	<insert id="insertCoupon">
 		insert into tbl_coupon
-		(cno, mid, coupon_name, use, sale, expiry_date)
-		values(seq_cno.nextval, #{mid}, #{coupon_name}, #{use}, #{sale},
-		#{expiry_date})
+		(cno, mid, coupon_name, sale, expiry_date)
+		values(seq_cno.nextval, #{mid}, #{coupon_name}, #{sale}, #{expiry_date})
 	</insert>
 	
 	<select id="selectUserCoupon" resultType="com.kh.elecshop.domain.CouponVO">
@@ -19,6 +18,8 @@
 		select * from tbl_coupon
 	 where cno = #{cno}
 	</select>
+	
+	
 	<update id="updateCoupon">
 		update tbl_coupon
 		set

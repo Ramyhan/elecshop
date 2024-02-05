@@ -7,7 +7,7 @@
 	<insert id="insertDailyCheck">
 		insert into tbl_daily_check
 		(dno, mid)
-		values(seq_dno.nextval, #{mid})
+		values(seq_daily_dno.nextval, #{mid})
 	</insert>
 	
 	<select id="selectDailyCheck" resultType="com.kh.elecshop.domain.DailyCheckVO">

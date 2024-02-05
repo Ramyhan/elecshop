@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
+<link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
 <style>
  .set-div{
  	background-color: grey;
@@ -167,87 +171,95 @@ $(function(){
 
 });
 </script>
-<div class="Center-div-title" style="text-align: center;">
-	<span>공지사항 관리</span>
-</div>
-<div>
-	<div class="container-div">
-		<div class="now-title">
+<%@include file="/WEB-INF/views/include/top.jsp"%>
+<div class="main-div">
+<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
+	<div class="set-div">
+		<div class="Center-div-title" style="text-align: center;">
+			<span>공지사항 관리</span>
+		</div>
 		<div>
-			<span style="font-size: 30px; font-weight: 900;">현재 공지 내용</span>
-			<button type="button" class="btn-register">공지 추가</button>
-			<button type="button" class="btn-delete">공지 삭제</button>
-			<button type="button" class="btn-open">공개 처리</button>
-			<button type="button" class="btn-close">비공개 처리</button>
+			<div class="container-div">
+				<div class="now-title">
+				<div>
+					<span style="font-size: 30px; font-weight: 900;">현재 공지 내용</span>
+					<button type="button" class="btn-register">공지 추가</button>
+					<button type="button" class="btn-delete">공지 삭제</button>
+					<button type="button" class="btn-open">공개 처리</button>
+					<button type="button" class="btn-close">비공개 처리</button>
+				</div>
+					<nav class="navbar-light">
+					  <form class="form-inline">
+					  	<select class="select-box" style="height: 40px;">
+					  		<option value="n">고유번호</option>
+					  		<option value="t">제목</option>
+					  		<option value="c">카테고리</option>
+					  		<option value="d">날짜</option>
+					  		<option value="s">상태</option>
+					  	</select>
+					    <input class="sb form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="button">검색</button>
+					  </form>
+					</nav>
+				</div>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table">
+						<thead>
+							<tr style="text-align: center;">
+								<th>
+									<input type="checkbox" class="notice-check-all">
+								</th>
+								<th>
+									고유번호
+								</th>
+								<th>
+									카테고리
+								</th>
+								<th>
+									공지제목
+								</th>
+								<th>
+									공지 날짜
+								</th>
+								<th>
+									상태
+								</th>
+							</tr>
+						</thead>
+						<tbody class="tbltbody">
+						<c:forEach var="adminNotice" items="${subNotice}">
+								<tr class="tbltr" style="text-align: center;">
+									<td>
+										<input type="checkbox" class="notice-checkbox" data-nno="${adminNotice.nno}">
+									</td>
+									<td>
+										${adminNotice.nno}
+									</td>
+									<td>
+										${adminNotice.ncategory}
+									</td>
+									<td>
+										${adminNotice.ntitle}
+									</td>
+									<td>
+										<fmt:formatDate value="${adminNotice.nregdate}"/>
+									</td>
+									<td class="td-state" data-state="${adminNotice.nstate }">
+									<c:choose>
+										<c:when test="${adminNotice.nstate == 'false'}">비공개</c:when>
+										<c:otherwise>공개</c:otherwise>
+									</c:choose>
+									</td>
+								</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
-			<nav class="navbar-light">
-			  <form class="form-inline">
-			  	<select class="select-box" style="height: 40px;">
-			  		<option value="n">고유번호</option>
-			  		<option value="t">제목</option>
-			  		<option value="c">카테고리</option>
-			  		<option value="d">날짜</option>
-			  		<option value="s">상태</option>
-			  	</select>
-			    <input class="sb form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="button">검색</button>
-			  </form>
-			</nav>
-		</div>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr style="text-align: center;">
-						<th>
-							<input type="checkbox" class="notice-check-all">
-						</th>
-						<th>
-							고유번호
-						</th>
-						<th>
-							카테고리
-						</th>
-						<th>
-							공지제목
-						</th>
-						<th>
-							공지 날짜
-						</th>
-						<th>
-							상태
-						</th>
-					</tr>
-				</thead>
-				<tbody class="tbltbody">
-				<c:forEach var="adminNotice" items="${subNotice}">
-						<tr class="tbltr" style="text-align: center;">
-							<td>
-								<input type="checkbox" class="notice-checkbox" data-nno="${adminNotice.nno}">
-							</td>
-							<td>
-								${adminNotice.nno}
-							</td>
-							<td>
-								${adminNotice.ncategory}
-							</td>
-							<td>
-								${adminNotice.ntitle}
-							</td>
-							<td>
-								<fmt:formatDate value="${adminNotice.nregdate}"/>
-							</td>
-							<td class="td-state" data-state="${adminNotice.nstate }">
-							<c:choose>
-								<c:when test="${adminNotice.nstate == 'false'}">비공개</c:when>
-								<c:otherwise>공개</c:otherwise>
-							</c:choose>
-							</td>
-						</tr>
-				</c:forEach>
-				</tbody>
-			</table>
 		</div>
 	</div>
 </div>
-</div>
+
+<%@include file="/WEB-INF/views/include/bottom.jsp"%>

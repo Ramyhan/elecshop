@@ -1,15 +1,21 @@
 package com.kh.elecshop.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.elecshop.domain.AdminProductDTO;
+import com.kh.elecshop.domain.AdminProductRamDTO;
+import com.kh.elecshop.domain.AdminProductRegisterDTO;
+import com.kh.elecshop.domain.AdminProductSSdDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
+import com.kh.elecshop.domain.FileVO;
 import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
@@ -70,12 +76,49 @@ public class AdminServiceImpl implements AdminService{
 		int total = adminMapper.selectProductTotal();
 		PageDTO pageDTO = new PageDTO(criteria, total);
 		List<AdminProductDTO> list = adminMapper.selectProduct(criteria);
+		for(int i = 0; i < list.size();i++) {
+			AdminProductDTO productDTO = list.get(i);
+			FileVO fileVO = adminMapper.selectAttrThoumbNailImage(productDTO.getPno());
+			productDTO.setFileVO(fileVO);
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", pageDTO);
 		map.put("productList", list);
 		
 		
 		return map;
+	}
+
+	@Override
+	@Transactional
+	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO) {
+		int count = adminMapper.insertProduct(adminProductRegisterDTO);
+		int pno = adminProductRegisterDTO.getPno();
+		List<FileVO> fileList = adminProductRegisterDTO.getAttrProductList();
+		if(fileList != null) {
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO fileVO = fileList.get(i);
+				fileVO.setPno(pno);
+			}
+		}
+		List<AdminProductRamDTO> ramList = adminProductRegisterDTO.getRamList();
+		if( ramList != null) {
+			for(int i = 0; i < ramList.size(); i ++) {
+				AdminProductRamDTO productRamDTO = ramList.get(i);
+				productRamDTO.setPno(pno);
+				int ramOption = adminMapper.insertProductRamOption(ramList);
+			}
+		}
+		List<AdminProductSSdDTO> ssdList = adminProductRegisterDTO.getSsdList();
+		if(ssdList != null) {
+			for(int i = 0; i < ssdList.size(); i ++) {
+				AdminProductSSdDTO productSSdDTO = ssdList.get(i);
+				productSSdDTO.setPno(pno);
+				int ssdOption = adminMapper.insertProductSSDOption(ssdList);
+			}
+		}
+		int image = adminMapper.insertProductImage(fileList);
+		return true;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.elecshop.domain.AdminProductDTO;
+import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.SearchDTO;
@@ -16,4 +17,5 @@ public interface AdminService {
 	public int modifysusend(int[] nnos);
 	public int modifyRepair(int[] nnos);
 	public Map<String, Object> getProductList(Criteria criteria);
+	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 }

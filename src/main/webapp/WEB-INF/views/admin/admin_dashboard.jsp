@@ -4,25 +4,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
-<script>
-$(function(){
-	$(".left-div").show();
-	$(".scroll-a").on("click",function(e){
-	   e.preventDefault();
-       $(".scroll-a i").toggle();
-	    $('.left-div').animate({width:'toggle'});
-	   var left =  $(".scroll-a").find(".scroll-left").css("display");
-	   var right =  $(".scroll-a").find(".scroll-right").css("display");
-	   console.log("left",left);
-	   console.log("right",right);
-	   if(left == "block"){
-		   $(".scroll-div").animate({left:"12.5%"});
-	   }else{
-		  $(".scroll-div").animate({left:"0%"});
-	   }
-	});
-});
-</script>
 <style>
 	.summary-table{
 		border-collapse: inherit;

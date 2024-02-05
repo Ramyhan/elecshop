@@ -17,4 +17,6 @@ public interface CartMapper {
 	public int deleteItem(String snos);
 	
 	public List<BuyDTO> selectBuyList(String mid);
+	
+	public int deleteByCno(int cno);
 }

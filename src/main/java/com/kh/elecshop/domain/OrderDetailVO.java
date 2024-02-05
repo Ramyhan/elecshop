@@ -11,7 +11,10 @@ public class OrderDetailVO {
 
 	private int odno;
 	private int pno;
+	private String pname;
+	private String pimage_thoumb;
 	private int ono;
 	private int odproduct_count;
 	private String odoption;
+	private int cart_no;
 }

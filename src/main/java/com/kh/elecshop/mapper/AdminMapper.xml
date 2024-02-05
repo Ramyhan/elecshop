@@ -13,8 +13,8 @@
 		select count(*) from tbl_member
 	</select>
 	<insert id="insertUser">
-		insert into tbl_member(mno,mname,mid,mpw,memail,maddr,maddr_detail,mphone,mbirthday,mstate)
-		values(seq_mno.nextval,#{mname},#{mid},#{mpw},#{memail},#{maddr},#{maddr_detail},#{mphone},#{mbirthday},#{mstate})
+		insert into tbl_member(mno,mname,mid,mpw,memail,maddr,maddr_detail,mphone,mbirthday,mstate,mpost_code)
+		values(seq_mno.nextval,#{mname},#{mid},#{mpw},#{memail},#{maddr},#{maddr_detail},#{mphone},#{mbirthday},#{mstate},#{mpost_code})
 	</insert>
 	<update id="updateSuspend">
 		update tbl_member set
@@ -35,12 +35,78 @@
 		)
 	</update>
 	<select id="selectProduct" resultType="com.kh.elecshop.domain.AdminProductDTO">
-		select pno,pname,pprice,ptype,pimage_thoumb,order_count,pregdate
-		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,pimage_thoumb,order_count,pregdate,rownum rn
+		select pno,pname,pprice,ptype,order_count,pregdate
+		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,order_count,pregdate,rownum rn
 		      from tbl_product order by rn asc)
         where rn between #{startRow} and #{endRow}
 	</select>
 	<select id="selectProductTotal" resultType="int">
 		select count(*) from tbl_product
+	</select>
+	<!-- product -->
+	<insert id="insertProduct">
+		insert into tbl_product(pno,pname,pprice,
+		pcode,ptype,pinfo_main,pinfo1,pinfo2,pinfo3,order_count)
+		
+		values(seq_pno.nextval,#{pname},#{pprice},#{pcode},#{ptype},#{pinfo_main},
+		#{pinfo1},#{pinfo2},#{pinfo3},#{order_count})
+		<selectKey keyProperty="pno" resultType="Integer" order="AFTER">
+			select seq_pno.currval
+			from dual
+		</selectKey>
+	</insert>
+	
+	<insert  id="insertProductImage" parameterType="com.kh.elecshop.domain.FileVO">
+		insert into tbl_attr(ano,pno,afilename,apath,auuid,athoumbnail,aurl)
+		SELECT seq_attr_ano.nextval, ano.* FROM(
+		<foreach collection="list" item="file" separator="union all">
+		<![CDATA[
+		select
+				#{file.pno} as pno,
+				#{file.afileName} as afileName,
+				#{file.apath} as apath,
+				#{file.auuid} as auuid,
+				#{file.athoumbnail} as athumbnail,
+				#{file.aurl} as aurl
+				from dual 
+				]]> 
+				
+		</foreach>
+		) ano
+	</insert>
+	<insert id="insertProductRamOption" parameterType="com.kh.elecshop.domain.AdminProductRamDTO">
+		insert into tbl_product_option(ono,pno,oname,oprice,otype)
+		SELECT seq_option_ono.nextval, ono.* FROM(
+		<foreach collection="list" item="ramList" separator="union all">
+		<![CDATA[
+		select
+		#{ramList.pno} as pno,
+		#{ramList.oname} as onane,
+		#{ramList.oprice} as orice,
+		#{ramList.otype} as otype
+		from dual
+		]]> 
+		</foreach>
+		) ono
+	</insert>
+	<insert id="insertProductSSDOption" parameterType="com.kh.elecshop.domain.AdminProductSSdDTO">
+		insert into tbl_product_option(ono,pno,oname,oprice,otype)
+		SELECT seq_option_ono.nextval, ono.* FROM(
+		<foreach collection="list" item="ssdList" separator="union all">
+		<![CDATA[
+		select
+		#{ssdList.pno} as pno,
+		#{ssdList.oname} as onane,
+		#{ssdList.oprice} as orice,
+		#{ssdList.otype} as otype
+		from dual
+		]]> 
+		</foreach>
+		) ono
+	</insert>
+	<select id="selectAttrThoumbNailImage" resultType="com.kh.elecshop.domain.FileVO">
+		select * from tbl_attr
+		where pno = #{pno}
+		and athoumbnail = 'y'
 	</select>
 </mapper>

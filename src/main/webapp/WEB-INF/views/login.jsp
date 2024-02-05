@@ -41,6 +41,7 @@
 <script>
 $(function (){
 	var loginResult = "${loginResult}";
+	console.log(loginResult);
 	if(loginResult == "fail"){
 		alert("로그인 실패");
 	}

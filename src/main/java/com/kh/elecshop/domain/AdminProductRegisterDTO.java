@@ -12,14 +12,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdminProductDTO {
+public class AdminProductRegisterDTO {
 	private int pno;
 	private String pname;
-	private long pprice;
+	private int mno;
+	private int pprice;
+	private String pcode;
 	private int ptype;
-	private int order_count;
+	private int pdno;
+	private String pinfo_main;
+	private String pinfo1;
+	private String pinfo2;
+	private String pinfo3;
 	private Date pregdate;
+	private int order_count;
+	private int pstate;
 	
+	private List<AdminProductRamDTO> ramList;
+	private List<AdminProductSSdDTO> ssdList;
 	private List<FileVO> attrProductList;
-	private FileVO fileVO;
 }

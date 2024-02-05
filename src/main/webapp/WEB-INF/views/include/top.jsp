@@ -24,14 +24,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script>
 $(function(){
-	var dailyResult = "${dailyResult}";
-// 	console.log(dailyResult);
-	
-	if(dailyResult == "success"){
-		alert("출석체크 성공");
-	}else if(dailyResult == "fail"){
-		alert("이미 출석체크를 하셨습니다.");
-	}
+	var registerResult = "${registerResult}";
+	console.log(registerResult);
+	if(registerResult == "success"){
+		alert("회원가입을 축하합니다. 회원가입 쿠폰을 지급해드립니다.");
+	}	
 	
 	$("#dailyCheck").on("click", function(e){
 		e.preventDefault();
@@ -39,6 +36,8 @@ $(function(){
 			console.log(rData);
 			if(rData == true){
 				alert("출석체크 성공");
+				var point = parseInt($("#myPoint").text()) + parseInt(500);
+				$("#myPoint").text(point)
 			}else if(rData == false){
 				alert("이미 출석체크를 하셨습니다.");
 			}
@@ -51,7 +50,7 @@ $(function(){
 			if(isLogin == "true"){
 				$.get("/getPoint", function(rData){
 					console.log(rData);					
-					$("#myPoint").text("포인트:" + rData);
+					$("#myPoint").text(rData);
 				});
 			}
 			
@@ -113,7 +112,7 @@ $(function(){
             <c:when test="${not empty loginInfo}">
             <div id="user_info">
           	 <p>${loginInfo.mid}</p>
-             <p id="myPoint">포인트:${loginInfo.mpoint }</p>
+             <p>포인트:<span id="myPoint">${loginInfo.mpoint }</span></p>
             </div>
             
             </c:when>

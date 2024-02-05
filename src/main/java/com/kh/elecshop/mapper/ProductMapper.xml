@@ -48,5 +48,12 @@
 		where ptype = #{ptype}
 		and pdno in (${optionval})
 	</select>
-
+	
+	
+	<update id="updateOrderCount">
+		update tbl_product
+		set
+		order_count = order_count - #{order_count}
+		where pno = #{pno}
+	</update>
 </mapper>

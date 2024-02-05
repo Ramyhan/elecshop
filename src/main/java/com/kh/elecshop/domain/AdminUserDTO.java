@@ -20,5 +20,6 @@ public class AdminUserDTO {
 	private String mbirthday;
 	private int mpoint;
 	private int mstate;
+	private String mpost_code;
 	private String mphone;
 }

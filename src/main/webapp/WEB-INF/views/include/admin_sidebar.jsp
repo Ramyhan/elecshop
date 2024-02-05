@@ -2,32 +2,20 @@
     pageEncoding="UTF-8"%>
 <script>
 $(function(){
-	$(".menubar").click(function(e){
-		e.preventDefault();
-		console.log("this",this);
-		var url = $(this).attr("href");
-		console.log("href",url);
-		var type = "get";
-		if(url == "/admin/admin_dashboard"){
-			type = "get";
-		}
-		$.ajax({
-			type : type,
-			url: url,
-			success:function(rdata){
-				if(url == "/admin/admin_dashboard"){
-					$("body").empty();
-					$("body").html(rdata);
-					console.log(rdata);
-				}
-				else{
-					
-					$(".set-div").empty();
-					$(".set-div").html(rdata);
-				}
-				
-			}
-		});
+	$(".left-div").show();
+	$(".scroll-a").on("click",function(e){
+	   e.preventDefault();
+       $(".scroll-a i").toggle();
+	    $('.left-div').animate({width:'toggle'});
+	   var left =  $(".scroll-a").find(".scroll-left").css("display");
+	   var right =  $(".scroll-a").find(".scroll-right").css("display");
+	   console.log("left",left);
+	   console.log("right",right);
+	   if(left == "block"){
+		   $(".scroll-div").animate({left:"12.5%"});
+	   }else{
+		  $(".scroll-div").animate({left:"0%"});
+	   }
 	});
 });
 </script>
