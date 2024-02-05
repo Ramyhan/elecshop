@@ -11,3 +11,8 @@ create table tbl_attr(
 
 alter table tbl_attr
 add athoumbnail char(1) default 'n' check(athoumbnail in('y','n'));
+
+create table tbl_visit(
+    vdate date constraint pk_vdate primary key,
+    vcount number default 0
+);

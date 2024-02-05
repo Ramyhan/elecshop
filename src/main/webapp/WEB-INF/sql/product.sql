@@ -15,7 +15,8 @@ CREATE TABLE TBL_PRODUCT(
     PIMAGE_INFO1 NVARCHAR2(50),
     PIMAGE_INFO2 NVARCHAR2(50),
     ORDER_COUNT NUMBER DEFAULT 0,
-    PREGDATE DATE DEFAULT SYSDATE
+    PREGDATE DATE DEFAULT SYSDATE,
+    ISDELETE NUMBER(1) DEFAULT 0 CHECK(ISDELETE IN (0, 1)) 
 );
 
 INSERT INTO TBL_PRODUCT(PNO, PNAME, MNO, PPRICE, PCODE, PTYPE, PDNO, PINFO_MAIN, PINFO1, PINFO2, PINFO3, PIMAGE_THOUMB, PIMAGE_INFO1, PIMAGE_INFO2, ORDER_COUNT)
@@ -118,6 +119,8 @@ create table tbl_product_detail(
     pdno number constraint pk_pdno primary key,
     pdname nvarchar2(30)
 );
+insert into tbl_product_detail (pdno, pdname)
+values (0, '기타');
 insert into tbl_product_detail (pdno, pdname)
 values (1, '스피커');
 insert into tbl_product_detail (pdno, pdname)

@@ -347,7 +347,7 @@ $(function() {
 							<span style="width: ${gradeDTO.persent}%"></span>
 						</div>
 						<div style="margin-left:130px;">${gradeDTO.average}점 (${gradeDTO.count}건)</div><br><br>
-						<h3>기준가: <fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber>원</h3><br><br>
+						<h3>기준가: 원</h3><br><br>
 						
 						<!-- 상품옵션 -->
 						<div class="divOptionName" id="optionName1">Color</div>

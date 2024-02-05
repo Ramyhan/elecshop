@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.elecshop.mapper.VisitCountMapper">
+
+	<select id="isDateExist" resultType="int">
+		select count(*)
+		from tbl_visit
+		where vdate = #{vdate}
+	</select>
+	
+	<select id="selectVisitCount" resultType="com.kh.elecshop.domain.VisitCountVO">
+		select *
+		from tbl_visit
+	</select>
+	
+	<update id="increasedCount">
+		update tbl_visit set
+			vcount = vcount + 1
+		where vdate = #{vdate}
+	</update>
+	
+	<insert id="insertDate">
+		insert into tbl_visit (vdate)
+		values (#{vdate})
+	</insert>
+
+</mapper>
