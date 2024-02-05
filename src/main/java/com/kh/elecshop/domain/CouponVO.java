@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CouponVO {
-	private String cno;
+	private int cno;
 	private String mid;
 	private String coupon_name;
 	private int use;
 	private int sale;
 	private Date regdate;
-	private java.sql.Date expiry_date;
+	private Date expiry_date;
 	
 }

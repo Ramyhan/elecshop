@@ -41,9 +41,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		}else {
 			Boolean useCookie = (boolean)map.get("useCookie");
 			HttpSession session = request.getSession();
+			String targetLocation = (String)session.getAttribute("targetLocation");
+			log.info("targetLocation:" + targetLocation);
+			session.removeAttribute("targetLocation");
+			if (targetLocation == null) {
+				modelAndView.setViewName("redirect:/");
+			} else {
+				modelAndView.setViewName("redirect:" + targetLocation);
+			}
+//			쿠키 설정
 			if(useCookie != null && useCookie == true) {
 				Cookie cookie = new Cookie("savedId", memberVO.getMid());
-				cookie.setMaxAge(60 * 60 * 24);
+				cookie.setMaxAge(60 * 60 * 24 * 7);
 				response.addCookie(cookie);
 			}
 			session.setAttribute("loginInfo", memberVO);

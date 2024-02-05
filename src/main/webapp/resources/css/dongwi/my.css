@@ -315,6 +315,16 @@ footer{
 .signup input{
 	width: 340px;
 }
+/* 포인트 */
+.point-list{
+	display: none;
+}
+.point-button > th{
+	border-bottom: hidden;
+	border-left: hidden;
+	border-right: hidden;
+	text-align:center;
+}
 /* 마이페이지 */
 /* 사이드바 */
 .side-bar{
@@ -442,6 +452,8 @@ footer{
 	margin-bottom: 15px;
 }
 /* //마이페이지 회원정보수정 */
+
+/* 마이페이지 포인트, 쿠폰 */
 .myPage-point {
 	display: flex;
 	height: 100%;
@@ -449,7 +461,34 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
-
+.myPage-point {
+	display: flex;
+	height: 100%;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+.myPage-point-container > h1{
+	color: white; 
+	font-family: 굴림체;
+}
+.point-table{
+	color: white;
+}
+.myPage-coupon{
+	display: flex;
+	height: 100%;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+}
+.myPage-coupon-container > h1{
+	color: white; 
+	font-family: 굴림체;
+}
+.coupon-table{
+	color: white;
+}
 /* 찜목록 */
 .myPage-like {
 	
@@ -517,7 +556,11 @@ footer{
 	margin-bottom: 10px;
 }
 
-/* 우측바 */
+/* 우측 구매바 */
+.buy-price{
+	width: 400px;
+ 	margin-top: 10%;
+}
 .buy-col > h2{
 	color: white;
 	margin-top: 40px;
@@ -604,6 +647,7 @@ border: solid 1px #606060;
 	margin: 50px;
 	
 }
+
 /* 쿠폰 */
 
 .buy-select-coupon > p {

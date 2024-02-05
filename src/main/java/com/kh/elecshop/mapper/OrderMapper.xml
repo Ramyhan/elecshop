@@ -11,6 +11,15 @@
 		(seq_order_ono.nextval, #{mid}, #{oname}, #{ophone}, #{oprice}, #{oaddr}, #{oaddr_detail}, #{opost_code}, #{odelivery})
 	</insert>
 
-	<select id="getSequence">
+	<select id="getOno" resultType="int">
+		select ono from (select rownum, ono from 
+		(select rownum, ono from tbl_order where mid = #{mid} order by rownum desc)
+ 		where rownum = 1)
+	</select>
+	
+	<select id="getOrderList" resultType="com.kh.elecshop.domain.OrderVO">
+		select * from tbl_order
+		where mid = #{mid}
+		order by ono desc
 	</select>
 </mapper>

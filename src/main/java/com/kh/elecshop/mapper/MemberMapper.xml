@@ -7,7 +7,7 @@
 		insert into tbl_member
 		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mpost_code, mphone, mbirthday)
 		values
-		(seq_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mpost_code}, #{mphone}, #{mbirthday})
+		(seq_member_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mpost_code}, #{mphone}, #{mbirthday})
 	</insert>
 	
 	<select id="login" resultType="com.kh.elecshop.domain.MemberVO">

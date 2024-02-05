@@ -9,7 +9,7 @@ create table tbl_coupon(
 );
 
 
-create sequence seq_coupon;
+create sequence seq_coupon_cno;
 
 insert into tbl_coupon
 (cno, mid, coupon_name, use, sale, expiry_date)
