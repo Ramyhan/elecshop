@@ -238,6 +238,7 @@ $(function (){
 	});
 	
 // 	결제 버튼
+
 	$("#btn-buy").click(function(){
 		var product = $(".buy-product");
 		var mid = "${loginInfo.mid}";
@@ -294,11 +295,14 @@ $(function (){
 				var odoption = product.find($(".product-ooption")).text().trim();
 				var pno = product.find($(".buy-pno")).attr("data-pno");
 				var cart_no = product.find($(".buy-prodect-count")).attr("data-cart_no");
+				var odprice = product.find($(".prodect-price")).text().replace(/,/g, "");
+				
 				
 				var input_odoption = "<input type='hidden' value='"+odoption+"' name='list["+i+"].odoption'>";
 				var input_pno = "<input type='hidden' value='"+pno+"' name='list["+i+"].pno'>";
 				var input_odproduct_count = "<input type='hidden' value='"+odproduct_count+"' name='list["+i+"].odproduct_count'>";
 				var input_cart_cno = "<input type='hidden' value='"+cart_no+"' name='list["+i+"].cart_no'>";
+				var input_cart_cno = "<input type='hidden' value='"+odprice+"' name='list["+i+"].odprice'>";
 				
 				product.prepend(input_odoption);
 				product.prepend(input_pno);
@@ -327,6 +331,10 @@ $(function (){
 	    }).open();
 			
 		})
+		
+		
+	
+
 });
 </script>
 <%@ include file="/WEB-INF/views/include/bottom.jsp"%>

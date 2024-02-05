@@ -58,6 +58,7 @@ public class MyPageController {
 		public void myPage_myOrder(HttpSession session, Model model) {
 			MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
 			List<OrderVO> list = orderService.getOrderList(memberVO.getMid());
+			log.info(list);
 			model.addAttribute("orderList", list);
 			
 	}
