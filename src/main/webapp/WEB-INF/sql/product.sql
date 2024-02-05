@@ -125,7 +125,7 @@ insert into tbl_product_detail (pdno, pdname)
 values (4, '마우스');
 insert into tbl_product_detail (pdno, pdname)
 values (5, '키보드');
-=======
+
 VALUES (SEQ_ONO.NEXTVAL, 5, '1111111', 100000, 2);
 INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
 VALUES (SEQ_ONO.NEXTVAL, 5, '2222222', 150000, 2);
@@ -134,4 +134,3 @@ INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
 VALUES (SEQ_ONO.NEXTVAL, 5, 'BLACK', 150000, 3);
 INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
 VALUES (SEQ_ONO.NEXTVAL, 5, 'GRAY', 150000, 3);
->>>>>>> branch 'master' of https://github.com/Ramyhan/elecshop.git

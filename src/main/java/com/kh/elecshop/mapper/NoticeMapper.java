@@ -2,6 +2,7 @@ package com.kh.elecshop.mapper;
 
 import java.util.List;
 
+
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.SearchDTO;
@@ -18,5 +19,6 @@ public interface NoticeMapper {
 	public int deleteNotice(int[] nnos);
 	public int insertNotice(NoticeVO noticeVO);
 	public List<SubNoticeDTO> selectSearchWord(SearchDTO searchDTO);
+	public int selectSearchTotal(SearchDTO searchDTO);
 }
 

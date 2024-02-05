@@ -26,9 +26,29 @@
  }
 </style>
 <script>
+// 	$.get("/admin/admin_customtableList",function(rData){
+// 		console.log(rData);
+// 		$(".costomer-div").empty();
+// 		$(".costomer-div").append(rData);
+// 	});
 $(function(){
+	//페이징 처리
+	$(document).on("click",".page-num",function(e){
+		console.log(this);
+		e.preventDefault();
+		var pageNum = $(this).attr("href");
+		console.log(pageNum);
+		console.log("g",${page.endPage});
+		sData = {
+			"pageNum" : pageNum	
+		}
+		$.get("/admin/admin_customtableList", sData, function(rData){
+			$(".costomer-div").empty();
+			$(".costomer-div").append(rData);
+		});
+	});
 	//전체 선택/해제
-	$(".notice-check-all").change(function(){
+	$(document).on("change",".notice-check-all",function(){
 		var checked = $(this).prop("checked");
 		$(".notice-checkbox").prop("checked", checked);
 	});
@@ -62,10 +82,10 @@ $(function(){
 					});
 				}
 			});
+		}else{
+			alert("비공개 시킬 공지가 없습니다");
+			return;
 		}
-// 		var stxt = nno.closest("tr").find(".td-state");
-// 		stxt.text("비공개");
-// 		console.log("s1s1", stxt);
 	});
 	//공개버튼
 	$(".btn-open").on("click",function(){
@@ -99,6 +119,9 @@ $(function(){
 					});
 				}
 			});
+		}else{
+			alert("공개 시킬 공지가 없습니다");
+			return;
 		}
 	});
 	//삭제 버튼
@@ -149,8 +172,9 @@ $(function(){
 		}
 		if(searchBar != ""){
 			$.get("/admin/searchWord",sData,function(rData){
-				$(".tbltbody").empty();
-				$(".tbltbody").append(rData);
+				console.log(rData)
+				$(".costomer-div").empty();
+				$(".costomer-div").append(rData);
 			});
 		}
 	});
@@ -203,58 +227,59 @@ $(function(){
 					</nav>
 				</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 costomer-div">
 					<table class="table">
-						<thead>
-							<tr style="text-align: center;">
-								<th>
-									<input type="checkbox" class="notice-check-all">
-								</th>
-								<th>
-									고유번호
-								</th>
-								<th>
-									카테고리
-								</th>
-								<th>
-									공지제목
-								</th>
-								<th>
-									공지 날짜
-								</th>
-								<th>
-									상태
-								</th>
-							</tr>
-						</thead>
-						<tbody class="tbltbody">
-						<c:forEach var="adminNotice" items="${subNotice}">
-								<tr class="tbltr" style="text-align: center;">
-									<td>
-										<input type="checkbox" class="notice-checkbox" data-nno="${adminNotice.nno}">
-									</td>
-									<td>
-										${adminNotice.nno}
-									</td>
-									<td>
-										${adminNotice.ncategory}
-									</td>
-									<td>
-										${adminNotice.ntitle}
-									</td>
-									<td>
-										<fmt:formatDate value="${adminNotice.nregdate}"/>
-									</td>
-									<td class="td-state" data-state="${adminNotice.nstate }">
-									<c:choose>
-										<c:when test="${adminNotice.nstate == 'false'}">비공개</c:when>
-										<c:otherwise>공개</c:otherwise>
-									</c:choose>
-									</td>
-								</tr>
-						</c:forEach>
-						</tbody>
-					</table>
+	<thead>
+		<tr style="text-align: center;">
+			<th><input type="checkbox" class="notice-check-all"></th>
+			<th>고유번호</th>
+			<th>카테고리</th>
+			<th>공지제목</th>
+			<th>공지 날짜</th>
+			<th>상태</th>
+		</tr>
+	</thead>
+	<tbody class="tbltbody">
+		<c:forEach var="adminNotice" items="${noticeMap.subNoticeList}">
+			<tr class="tbltr" style="text-align: center;">
+				<td><input type="checkbox" class="notice-checkbox"
+					data-nno="${adminNotice.nno}"></td>
+				<td>${adminNotice.nno}</td>
+				<td>${adminNotice.ncategory}</td>
+				<td>${adminNotice.ntitle}</td>
+				<td><fmt:formatDate value="${adminNotice.nregdate}" /></td>
+				<td class="td-state" data-state="${adminNotice.nstate }"><c:choose>
+						<c:when test="${adminNotice.nstate == 'false'}">비공개</c:when>
+						<c:otherwise>공개</c:otherwise>
+					</c:choose></td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+<div id="page-div" style="display: flex; justify-content: space-around;">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<c:if test="${noticeMap.page.prev == true}">
+				<li class="page-item"><a class="page-num page-link"
+					href="${noticeMap.page.startPage - 1}" aria-label="Previous"> <span
+						aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+				</a></li>
+			</c:if>
+			<c:forEach begin="${noticeMap.page.startPage }"
+				end="${noticeMap.page.endPage}" var="v">
+				<li class="page-item"><a
+					class="page-num page-link ${(noticeMap.page.criteria.pageNum == v) ? 'Active' : ''}"
+					href="${v}">${v}</a></li>
+			</c:forEach>
+			<c:if test="${noticeMap.page.next == true}">
+				<li class="page-item"><a class="page-num page-link"
+					href="${noticeMap.page.endPage + 1}" aria-label="Next"> <span
+						aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+				</a></li>
+			</c:if>
+		</ul>
+	</nav>
+</div>
 				</div>
 			</div>
 		</div>

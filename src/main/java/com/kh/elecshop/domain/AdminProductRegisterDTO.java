@@ -28,6 +28,8 @@ public class AdminProductRegisterDTO {
 	private int order_count;
 	private int pstate;
 	
+	
+	private List<AdminProductColorDTO> colorList;
 	private List<AdminProductRamDTO> ramList;
 	private List<AdminProductSSdDTO> ssdList;
 	private List<FileVO> attrProductList;

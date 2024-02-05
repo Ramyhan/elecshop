@@ -69,13 +69,19 @@
 	)
 	</delete>
 	<insert id="insertNotice">
-		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate,nurl,nfilename)
-		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate},#{nurl},#{nfileName})
+		insert into tbl_notice(nno,ncategory,ntitle,ncontent,nstate)
+		values(seq_nno.nextval,#{ncategory},#{ntitle},#{ncontent},#{nstate})
 	</insert>
 	<select id="selectSearchWord" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select ntitle,nno,ncategory,nregdate,nstate
 		from(select nno,ntitle,nregdate,nstate,ncategory 
 			 from tbl_notice order by rownum desc)
 		<include refid="search"></include>
+	</select>
+	<select id="selectSearchTotal" resultType="int">
+		select count(*) from(SELECT ntitle,nno,ncategory,nregdate,nstate
+		from(select nno,ntitle,nregdate,nstate,ncategory 
+			 from tbl_notice order by rownum desc))
+             <include refid="search"></include>
 	</select>
 </mapper>

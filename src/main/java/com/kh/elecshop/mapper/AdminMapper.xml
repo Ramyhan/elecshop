@@ -3,19 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.elecshop.mapper.AdminMapper">
+	<!-- 전체유저 찾기 -->
 	<select id="selectUser" resultType="com.kh.elecshop.domain.AdminUserDTO">
 		select mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,mstate
 		from (select /*+index_desc(tbl_member)*/ mno, mname,mid,memail,maddr,maddr_detail,mpoint,mphone,rownum rn ,mstate
               from tbl_member order by rownum asc)
         where rn between #{startRow} and #{endRow}
 	</select>
+	<!-- 전체유저 수 -->
 	<select id="selectUserTotal" resultType="int">
 		select count(*) from tbl_member
 	</select>
+	<!-- 유저 생성 -->
 	<insert id="insertUser">
 		insert into tbl_member(mno,mname,mid,mpw,memail,maddr,maddr_detail,mphone,mbirthday,mstate,mpost_code)
 		values(seq_mno.nextval,#{mname},#{mid},#{mpw},#{memail},#{maddr},#{maddr_detail},#{mphone},#{mbirthday},#{mstate},#{mpost_code})
 	</insert>
+	<!-- 유저 정지 -->
 	<update id="updateSuspend">
 		update tbl_member set
 		mstate = 0
@@ -25,6 +29,7 @@
 			</foreach>
 		)
 	</update>
+	<!-- 유저 복구 -->
 	<update id="updateRepair">
 		update tbl_member set
 		mstate = 1
@@ -34,28 +39,43 @@
 			</foreach>
 		)
 	</update>
+	<!-- 전체 공지 수 -->
+	<select id="selectNoticeTotal" resultType="int">
+		select count(*) from tbl_notice
+	</select>
+	<!-- 전체 공지 찾기 -->
+	<select id="selectNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
+		select nno,ncategory, ntitle, nregdate,nstate
+		from (select /*+index_desc(tbl_product)*/ nno, ncategory,ntitle,nregdate,nstate,rownum rn
+		      from tbl_notice order by rn asc)
+        where rn between #{startRow} and #{endRow}
+	</select>
+	<!-- product -->
+	<!-- 전체 상품 찾기 -->
 	<select id="selectProduct" resultType="com.kh.elecshop.domain.AdminProductDTO">
 		select pno,pname,pprice,ptype,order_count,pregdate
 		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,order_count,pregdate,rownum rn
 		      from tbl_product order by rn asc)
         where rn between #{startRow} and #{endRow}
 	</select>
+	<!-- 전체 상품 수 -->
 	<select id="selectProductTotal" resultType="int">
 		select count(*) from tbl_product
 	</select>
-	<!-- product -->
+	
+	<!-- 상품 추가 -->
 	<insert id="insertProduct">
-		insert into tbl_product(pno,pname,pprice,
+		insert into tbl_product(pno,pname,pprice,pdno,mno,
 		pcode,ptype,pinfo_main,pinfo1,pinfo2,pinfo3,order_count)
 		
-		values(seq_pno.nextval,#{pname},#{pprice},#{pcode},#{ptype},#{pinfo_main},
+		values(seq_pno.nextval,#{pname},#{pprice},#{pdno},#{mno},#{pcode},#{ptype},#{pinfo_main},
 		#{pinfo1},#{pinfo2},#{pinfo3},#{order_count})
 		<selectKey keyProperty="pno" resultType="Integer" order="AFTER">
 			select seq_pno.currval
 			from dual
 		</selectKey>
 	</insert>
-	
+	<!-- 상품 이미지 -->
 	<insert  id="insertProductImage" parameterType="com.kh.elecshop.domain.FileVO">
 		insert into tbl_attr(ano,pno,afilename,apath,auuid,athoumbnail,aurl)
 		SELECT seq_attr_ano.nextval, ano.* FROM(
@@ -74,6 +94,7 @@
 		</foreach>
 		) ano
 	</insert>
+	<!-- 상품 램 추가(노트북,태블릿 한정) -->
 	<insert id="insertProductRamOption" parameterType="com.kh.elecshop.domain.AdminProductRamDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
 		SELECT seq_option_ono.nextval, ono.* FROM(
@@ -81,14 +102,15 @@
 		<![CDATA[
 		select
 		#{ramList.pno} as pno,
-		#{ramList.oname} as onane,
-		#{ramList.oprice} as orice,
+		#{ramList.oname} as oname,
+		#{ramList.oprice} as oprice,
 		#{ramList.otype} as otype
 		from dual
 		]]> 
 		</foreach>
 		) ono
 	</insert>
+	<!-- 상품 ssd옵션추가(노트북,태블릿한정) -->
 	<insert id="insertProductSSDOption" parameterType="com.kh.elecshop.domain.AdminProductSSdDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
 		SELECT seq_option_ono.nextval, ono.* FROM(
@@ -96,17 +118,38 @@
 		<![CDATA[
 		select
 		#{ssdList.pno} as pno,
-		#{ssdList.oname} as onane,
-		#{ssdList.oprice} as orice,
+		#{ssdList.oname} as oname,
+		#{ssdList.oprice} as oprice,
 		#{ssdList.otype} as otype
 		from dual
 		]]> 
 		</foreach>
 		) ono
 	</insert>
+	<!-- 상품 색상옵션 추가 -->
+	<insert id="insertProductColorOption" parameterType="com.kh.elecshop.domain.AdminProductColorDTO">
+		insert into tbl_product_option(ono,pno,oname,oprice,otype)
+		SELECT seq_option_ono.nextval, ono.* FROM(
+		<foreach collection="list" item="colorList" separator="union all">
+		<![CDATA[
+		select
+		#{colorList.pno} as pno,
+		#{colorList.oname} as oname,
+		#{colorList.oprice} as oprice,
+		#{colorList.otype} as otype
+		from dual
+		]]> 
+		</foreach>
+		) ono
+	</insert>
+	<!-- 상품 썸네일 이미지 가져오기 -->
 	<select id="selectAttrThoumbNailImage" resultType="com.kh.elecshop.domain.FileVO">
 		select * from tbl_attr
 		where pno = #{pno}
 		and athoumbnail = 'y'
+	</select>
+	<select id="selectPtypeName" resultType="string">
+		select tname from tbl_product_type
+		where ptype = #{ptype}
 	</select>
 </mapper>

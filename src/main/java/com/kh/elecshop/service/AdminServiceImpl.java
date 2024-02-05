@@ -1,6 +1,5 @@
 package com.kh.elecshop.service;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.elecshop.domain.AdminNoticeDTO;
+import com.kh.elecshop.domain.AdminProductColorDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
 import com.kh.elecshop.domain.AdminProductRamDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
@@ -34,9 +35,14 @@ public class AdminServiceImpl implements AdminService{
 	private AdminMapper adminMapper;
 
 	@Override
-	public List<SubNoticeDTO> getSearchByNotice(SearchDTO searchDTO) {
+	public Map<String, Object> getSearchByNotice(SearchDTO searchDTO,Criteria criteria) {
 		List<SubNoticeDTO> list = noticeMapper.selectSearchWord(searchDTO);
-		return list;
+		int total = noticeMapper.selectSearchTotal(searchDTO);
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("subNoticeList", list);
+		map.put("page", pageDTO);
+		return map;
 	}
 
 	@Override
@@ -78,8 +84,10 @@ public class AdminServiceImpl implements AdminService{
 		List<AdminProductDTO> list = adminMapper.selectProduct(criteria);
 		for(int i = 0; i < list.size();i++) {
 			AdminProductDTO productDTO = list.get(i);
+			String ptypeName = adminMapper.selectPtypeName(productDTO.getPtype());
 			FileVO fileVO = adminMapper.selectAttrThoumbNailImage(productDTO.getPno());
 			productDTO.setFileVO(fileVO);
+			productDTO.setPtypeName(ptypeName);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", pageDTO);
@@ -116,9 +124,28 @@ public class AdminServiceImpl implements AdminService{
 				productSSdDTO.setPno(pno);
 				int ssdOption = adminMapper.insertProductSSDOption(ssdList);
 			}
+			List<AdminProductColorDTO> colorList = adminProductRegisterDTO.getColorList();
+			if(colorList != null) {
+				for(int i = 0; i < colorList.size();i++) {
+					AdminProductColorDTO productColorDTO = colorList.get(i);
+					productColorDTO.setPno(pno);
+					int colorOption = adminMapper.insertProductSSDOption(ssdList);
+				}
+			}
 		}
 		int image = adminMapper.insertProductImage(fileList);
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getAdminNoticeList(Criteria criteria) {
+		List<AdminNoticeDTO> subNoticeList = adminMapper.selectNotice(criteria);
+		int total = adminMapper.selectNoticeTotal();
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("subNoticeList", subNoticeList);
+		map.put("page", pageDTO);
+		return map;
 	}
 
 }

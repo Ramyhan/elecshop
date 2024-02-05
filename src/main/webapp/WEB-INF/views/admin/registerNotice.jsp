@@ -45,51 +45,51 @@ $(function(){
 		})
 	});
 	//공지 추가 버튼
-	$(".inquiry-btn").click(function(){
-		var that = $(this);
-		var ntitle = $("#ntitle").val();
-		var ncontent = $("#ncontent").val();
-		var ncategory = $("#ncategory").val();
-		var nstate = $("#nstate:checked").val();
-		var divAttach = $(".div-attach:gt(0)");
-		var url = "";
-		var file = "";
-		var nurls = [];
-		var files = [];
-		divAttach.each(function(i){
-			url = $(this).attr("data-url");
-			file = $(this).attr("data-fileName");
-			nurls.push(url);
-			files.push(file);
-		});
-		var nurl = nurls.join(",");
-		var nfilename = files.join(",");
-		console.log("nurl",nurl);
-		sData={
-				"ntitle" : ntitle,
-				"ncontent" : ncontent,
-				"ncategory": ncategory,
-				"nstate" : nstate,
-				"nfileName" : nfilename,
-				"nurl" : nurl
-		}
-		$.post("/admin/registerNotice",sData,function(rData){
-			if(rData == true){
-				alert("공지사항이 추가 되었습니다");
-				$.ajax({
-					type : "get",
-					url : "/admin/admin_customerCenter",
-					success : function(rdata){
-						$(".set-div").empty();
-						$(".set-div").append(rdata);
-					}
-				});
-			}else{
-				alert("공지사항 추가가 실패 하였습니다");
-				return
-			}
-		});
-	});
+// 	$(".inquiry-btn").click(function(){
+// 		var that = $(this);
+// 		var ntitle = $("#ntitle").val();
+// 		var ncontent = $("#ncontent").val();
+// 		var ncategory = $("#ncategory").val();
+// 		var nstate = $("#nstate:checked").val();
+// 		var divAttach = $(".div-attach:gt(0)");
+// 		var url = "";
+// 		var file = "";
+// 		var nurls = [];
+// 		var files = [];
+// 		divAttach.each(function(i){
+// 			url = $(this).attr("data-url");
+// 			file = $(this).attr("data-fileName");
+// 			nurls.push(url);
+// 			files.push(file);
+// 		});
+// 		var nurl = nurls.join(",");
+// 		var nfilename = files.join(",");
+// 		console.log("nurl",nurl);
+// 		sData={
+// 				"ntitle" : ntitle,
+// 				"ncontent" : ncontent,
+// 				"ncategory": ncategory,
+// 				"nstate" : nstate,
+// 				"nfileName" : nfilename,
+// 				"nurl" : nurl
+// 		}
+// 		$.post("/admin/registerNotice",sData,function(rData){
+// 			if(rData == true){
+// 				alert("공지사항이 추가 되었습니다");
+// 				$.ajax({
+// 					type : "get",
+// 					url : "/admin/admin_customTable",
+// 					success : function(rdata){
+// 						$(".tbl-tbody").empty();
+// 						$(".tbl-tbody").append(rdata);
+// 					}
+// 				});
+// 			}else{
+// 				alert("공지사항 추가가 실패 하였습니다");
+// 				return
+// 			}
+// 		});
+// 	});
 	// 첨부파일 삭제
 	$("#fileDiv").on("click", ".fa-times-circle", function() {
 		var that = $(this);
@@ -163,6 +163,7 @@ em{
 	<div class="box">
 		<div class="inquiry-div-main">
 		<!-- notice form -->
+		<form action="/admin/registerNotice" method="post">
 				<h3 style="text-align: center;">공지 추가</h3>
 				<div class="inquiry-div-sub" style="display: flex;">
 					<label>공지 제목</label>
@@ -212,6 +213,7 @@ em{
 				<div class="inquiry-div-sub d-flex justify-content-center">
 					<button type="submit" class="inquiry-btn">문의하기</button>
 				</div>
+			</form>
 			<!-- //notice form -->
 		</div>
 	</div>

@@ -19,6 +19,7 @@ public class AdminProductDTO {
 	private int ptype;
 	private int order_count;
 	private Date pregdate;
+	private String ptypeName;
 	
 	private List<FileVO> attrProductList;
 	private FileVO fileVO;

@@ -14,7 +14,7 @@ $(function(){
 		$(".user-chkbox").prop("checked", checked);
 	});
 	//페이징 처리
-	$(".page-num").on("click",function(e){
+	$(document).on("click",".page-num",function(e){
 		console.log(this);
 		e.preventDefault();
 		var pageNum = $(this).attr("href");
@@ -23,10 +23,10 @@ $(function(){
 		sData = {
 			"pageNum" : pageNum	
 		}
-		$.get("/admin/admin_user", sData, function(rData){
+		$.get("/admin/admin_customtable", sData, function(rData){
 			
-				$(".user-div").empty();
-				$(".user-div").html(rData);
+				$(".div-main").empty();
+				$(".div-main").append(rData);
 			
 		});
 	});
@@ -144,6 +144,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div" style="width: 100%; height: 100%;">
 	<div>
+	<div></div>
 		<h1>유저 관리 페이지</h1>
 	</div>
 	<div class="user-devel" style="width: 95%; height: 15%;  background-color: white;">
@@ -173,92 +174,95 @@ $(function(){
 			<button type="button" class="user-repair">사용자 복구</button>
 		</div>
 	</div>
-	<div class="second-div" style="background-color: white;" >
-		<div class ="user-table">
-			<div class="user-tbl-header">
-				<div class="header-cell" style="opacity: 1">
-					<input class="user-chkboxAll" type="checkbox">
+	<div class="div-main">
+		<div class="second-div" style="background-color: white;" >
+			<div class ="user-table">
+				<div class="user-tbl-header">
+					<div class="header-cell" style="opacity: 1">
+						<input class="user-chkboxAll" type="checkbox">
+					</div>
+					<div class="header-cell">
+						<span>#</span>
+					</div>
+					<div class="header-cell">
+						<span>이름</span>
+					</div>
+					<div class="header-cell">
+						<span>아이디</span>
+					</div>
+					<div class="header-cell">
+						<span>이메일</span>
+					</div>
+					<div class="header-cell">
+						<span>주소</span>
+					</div>
+					<div class="header-cell">
+						<span>연락처</span>
+					</div>
+					<div class="header-cell">
+						<span>포인트</span>
+					</div>
+					<div class="header-cell">
+						<span>상태</span>
+					</div>
 				</div>
-				<div class="header-cell">
-					<span>#</span>
+				<c:forEach var="userList" items="${userList}">
+				<div class="user-div-row">
+					<div class="cell">
+						<input class="user-chkbox" type="checkbox">
+					</div>
+					<div class="cell">
+						<span class="user-mno">${userList.mno}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.mname}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.mid}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.memail}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.maddr}/${userList.maddr_detail}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.mphone}</span>
+					</div>
+					<div class="cell">
+						<span>${userList.mpoint}</span>
+						<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
+					</div>
+					<div class="cell">
+						<span>${userList.mstate == 0? '정지' : '활동'}</span>
+					</div>
 				</div>
-				<div class="header-cell">
-					<span>이름</span>
-				</div>
-				<div class="header-cell">
-					<span>아이디</span>
-				</div>
-				<div class="header-cell">
-					<span>이메일</span>
-				</div>
-				<div class="header-cell">
-					<span>주소</span>
-				</div>
-				<div class="header-cell">
-					<span>연락처</span>
-				</div>
-				<div class="header-cell">
-					<span>포인트</span>
-				</div>
-				<div class="header-cell">
-					<span>상태</span>
-				</div>
+				</c:forEach>
 			</div>
-			<c:forEach var="userList" items="${userList}">
-			<div class="user-div-row">
-				<div class="cell">
-					<input class="user-chkbox" type="checkbox">
-				</div>
-				<div class="cell">
-					<span class="user-mno">${userList.mno}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.mname}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.mid}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.memail}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.maddr}/${userList.maddr_detail}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.mphone}</span>
-				</div>
-				<div class="cell">
-					<span>${userList.mpoint}</span>
-					<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
-				</div>
-				<div class="cell">
-					<span>${userList.mstate == 0? '정지' : '활동'}</span>
-				</div>
-			</div>
-			</c:forEach>
-		</div>
-		<div>
-			<nav aria-label="Page navigation example">
-			  <ul class="pagination">
-			  <c:if test="${page.prev == true}">
-			    <li class="page-item">
-			      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous">
-			        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-			      </a>
-			    </li>
-			  </c:if>
-			    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v">
-			    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
-			    </c:forEach>
-			    <c:if test="${page.next == true}">
+			<div>
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+				  <c:if test="${page.prev == true}">
 				    <li class="page-item">
-				      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next">
-				        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+				      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous">
+				        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
 				      </a>
 				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
+				  </c:if>
+				    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v">
+				    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+				    </c:forEach>
+				    <c:if test="${page.next == true}">
+					    <li class="page-item">
+					      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+					      </a>
+					    </li>
+				    </c:if>
+				  </ul>
+				</nav>
+			</div>
+		</div>
 				<!-- user생성 모달 -->
 			<div class="create-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
@@ -325,7 +329,6 @@ $(function(){
 			    </div>
 			  </div>
 			</div> <!-- user생성 모달 -->
-		</div>
 	</div>
 </div>
 	</div>

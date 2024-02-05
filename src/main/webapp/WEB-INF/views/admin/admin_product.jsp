@@ -15,6 +15,16 @@ $(function(){
 		var option = "width=900,height=700,top=100,location=no";
 		window.open(url,name,option);
 	});
+	$(".btn-product-update").click(function(e){
+		var pno = $(this).attr("data-pno");
+		var conf = confirm(pno+"번의 상품을 수정 하시겠습니까?");
+		console.log(conf);
+		if(conf == true){
+			$("#frm-product").submit();
+		}else{
+			return false;
+		}
+	});
 });
 </script>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
@@ -80,9 +90,6 @@ $(function(){
 							<span>등록일</span>
 						</div>
 						<div class="header-cell">
-							<span>수정일</span>
-						</div>
-						<div class="header-cell">
 						</div>
 					</div>
 					<c:forEach var="list" items="${productMap.productList}">
@@ -110,10 +117,17 @@ $(function(){
 							</span>
 						</div>
 						<div class="cell">
-							<span></span>
+							<span>${list.ptypeName}</span>
 						</div>
 						<div class="cell">
-							<span></span>
+						<c:choose>
+							<c:when test="${list.order_count != 0}">
+								<span>판매중</span>
+							</c:when>
+							<c:otherwise>
+								<span>품절</span>
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="cell">
 							<span>${list.order_count}</span>
@@ -124,11 +138,12 @@ $(function(){
 							</span>
 						</div>
 						<div class="cell">
-						</div>
-						<div class="cell">
-						<button>
+						<form id="frm-product" action="/admin/admin_productUpdateForm" method="post">
+						<input type="hidden" value="${list.pno}" name="pno">
+						<button type="button" class="btn-product-update" data-pno="${list.pno}">
 						<i class="fa fa-comment-dots"></i>
 						</button>
+						</form>
 						</div>
 					</div>
 					</c:forEach>

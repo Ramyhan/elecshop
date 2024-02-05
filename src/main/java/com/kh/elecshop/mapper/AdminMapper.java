@@ -2,6 +2,8 @@ package com.kh.elecshop.mapper;
 
 import java.util.List;
 
+import com.kh.elecshop.domain.AdminNoticeDTO;
+import com.kh.elecshop.domain.AdminProductColorDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
 import com.kh.elecshop.domain.AdminProductRamDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
@@ -17,10 +19,14 @@ public interface AdminMapper {
 	public int updateSuspend(int[] mnos);
 	public int updateRepair(int[] mnos);
 	public List<AdminProductDTO> selectProduct(Criteria criteria);
+	public List<AdminNoticeDTO> selectNotice(Criteria criteria);
+	public int selectNoticeTotal();
 	public int selectProductTotal();
 	public int insertProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	public int insertProductRamOption(List<AdminProductRamDTO> productRamDTO);
 	public int insertProductSSDOption(List<AdminProductSSdDTO> productSSdDTO);
+	public int insertProductColorOption(List<AdminProductColorDTO> productColorDTO);
 	public int insertProductImage(List<FileVO> list);
 	public FileVO selectAttrThoumbNailImage(int pno);
+	public String selectPtypeName(int ptype);
 }

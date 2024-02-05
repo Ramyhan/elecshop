@@ -35,7 +35,7 @@
 	width: 96%;
 }
 
-.product-select,.product-state,.product-ram-select,.product-ssd-select {
+.product-select,.select-option {
 	width: 98%;
 }
 
@@ -56,8 +56,21 @@
 			var category = $(this).val();
 			if(category == 1 || category == 3){
 				$("#sub-select-div").css("display", "flex");
+				$("#sub-select-div").find("input").attr("disabled",false);
+				$("#sub-select-div").find("select").attr("disabled",false);
 			}else{
 				$("#sub-select-div").css("display", "none");
+				$("#sub-select-div").find("input").attr("disabled",true);
+				$("#sub-select-div").find("select").attr("disabled",true);
+			}
+			if(category == 4){
+				$("#add-detail").css("display","flex");
+				$("#add-detail").find("select").attr("disabled",false);
+				$("#add-detail").find("input").attr("disabled",false);
+			}else{
+				$("#add-detail").css("display","none");
+				$("#add-detail").find("select").attr("disabled",true);
+				$("#add-detail").find("input").attr("disabled",true);
 			}
 		});
 		$("#btn-ram").click(function() {
@@ -76,6 +89,22 @@
 			ssdClone.find("[type=number]").attr("name","ssdList["+ selectssd.length +"].oprice");
 			ssdClone.find("[type=hidden]").attr("name","ssdList["+ selectssd.length +"].otype");
 			$("#add-ssd-div").append(ssdClone);
+		});
+		$("#btn-detail-color").click(function() {
+			var colorClone = $("#add-color-detail").clone();
+			var selectColor = $(".add-color-detail");
+			colorClone.find("select").attr("name","colorList["+ selectColor.length + "].oname");
+			colorClone.find("input:eq(0)").attr("name","colorList["+ selectColor.length + "].opirce");
+			colorClone.find("input:eq(1)").attr("name","colorList["+ selectColor.length + "].otype");
+			$("#add-color-detail-div").append(colorClone);
+		});
+		$("#btn-pc-color").click(function(){
+			var colorClone = $("#add-color-select").clone();
+			var selectColor = $(".add-color-select");
+			colorClone.find("select").attr("name","colorList["+ selectColor.length + "].oname");
+			colorClone.find("input:eq(0)").attr("name","colorList["+ selectColor.length + "].opirce");
+			colorClone.find("input:eq(1)").attr("name","colorList["+ selectColor.length + "].otype");
+			$("#add-color-div").append(colorClone);
 		});
 		$(".file-img").on("change",function(e){
 			var that = $(this)
@@ -188,10 +217,13 @@
 					<div class="div-header-cell">
 						<span>상품공개여부</span>
 					</div>
+					<div class="div-header-cell">
+						<span>제조사</span>
+					</div>
 				</div>
 				<div class="div-cell">
 					<div class="input-cell">
-						<select name="ptype" class="product-select">
+						<select name="ptype" class="select-option product-select">
 							<option>--선택--</option>
 							<option value="1">노트북</option>
 							<option value="2">모니터</option>
@@ -201,10 +233,31 @@
 						</select>
 					</div>
 					<div class="input-cell">
-						<select name="pstate" class="product-state">
+						<select name="pstate" class="select-option product-state">
 							<option>--선택--</option>
 							<option value="1">공개</option>
 							<option value="0">비공개</option>
+						</select>
+					</div>
+					<div class="input-cell">
+						<select name="mno" class="select-option product-state">
+							<option>--선택--</option>
+							<option value="1">삼성</option>
+							<option value="2">엘지</option>
+							<option value="3">애플</option>
+							<option value="4">델</option>
+							<option value="5">아수스</option>
+							<option value="6">레이져</option>
+							<option value="7">msi</option>
+							<option value="8">레노버</option>
+							<option value="9">hp</option>
+							<option value="10">소니</option>
+							<option value="11">젠하이져</option>
+							<option value="12">akg</option>
+							<option value="13">브리츠</option>
+							<option value="14">크리에이티브</option>
+							<option value="15">로지텍</option>
+							<option value="16">앱코</option>
 						</select>
 					</div>
 				</div>
@@ -220,7 +273,7 @@
 						</div>
 						<div class="div-cell">
 							<div class="input-cell">
-								<select name="ramList[0].oname" class="select-ram product-ram-select" disabled>
+								<select name="ramList[0].oname" class="select-option select-ram product-ram-select" disabled>
 									<option>--선택--</option>
 									<option value="8GB">8GB</option>
 									<option value="16GB">16GB</option>
@@ -251,7 +304,7 @@
 						</div>
 						<div class="div-cell">
 							<div class="input-cell">
-								<select name="ssdList[0].oname" class="select-ssd product-ssd-select" disabled>
+								<select name="ssdList[0].oname" class="select-option select-ssd product-ssd-select" disabled>
 									<option>--선택--</option>
 									<option value="128GB">128GB</option>
 									<option value="256GB">256GB</option>
@@ -269,6 +322,73 @@
 							<div class="input-ssd input-cell">
 								<input name="ssdList[0].oprice" type="number" disabled>
 								<input name="ssdList[0].otype" type="hidden" value="2" disabled>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="add-color-div">
+					<button type="button" id="btn-pc-color">색상 추가</button>
+					<div class="add-color-select" id="add-color-select">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>색상 선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="colorList[0].oname" class="select-option product-color" disabled>
+									<option>--선택--</option>
+									<option value="0">Black</option>
+									<option value="1">Red</option>
+									<option value="2">Gray</option>
+									<option value="3">Blue</option>
+								</select>
+								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
+								<input type="hidden" name="colorList[0].otype" value="3" disabled>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;" id="add-detail">
+				<div id="add-detail-div">
+					<div class="sound-category-div" id="sound-category-div">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>카테고리 선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="pdno" class="select-sound" disabled>
+									<option>--선택--</option>
+									<option value="1">스피커</option>
+									<option value="2">헤드셋</option>
+									<option value="3">이어폰</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="add-color-detail-div">
+					<button type="button" class="btn-color" id="btn-detail-color">색상 추가</button>
+					<div class="add-color-detail" id="add-color-detail">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>색상선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="colorList[0].oname" class="select-option product-color" disabled>
+									<option>--선택--</option>
+									<option value="Black">Black</option>
+									<option value="Red">Red</option>
+									<option value="Gray">Gray</option>
+									<option value="Blue">Blue</option>
+								</select>
+								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
+								<input type="hidden" name="colorList[0].otype" value="3" disabled>
 							</div>
 						</div>
 					</div>
