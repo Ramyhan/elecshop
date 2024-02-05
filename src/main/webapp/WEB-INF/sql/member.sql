@@ -14,10 +14,11 @@ create table tbl_member(
     mstate number default 1 not null check (mstate in(0, 1))
 );
 
+create sequence seq_member_mno;
+
 alter table tbl_member
 add mstate number default 0 check(mstate in(0,1)) not null;
 
-create sequence seq_member_mno;
 
 insert into tbl_member
 		(mno, mname, mid, mpw, memail, maddr, maddr_detail, mphone, mbirthday)

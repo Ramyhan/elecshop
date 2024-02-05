@@ -79,7 +79,10 @@ body {
 #user_info > p{
 	margin: 0px;
 	color: white;
+	font-weight 700;
 	text-align: center;
+	font-size: 15px;
+	
 }
 /* 드롭다운 */
 .dropdown-item:hover{
@@ -154,8 +157,18 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
 .card{
+	overflow: hidden; 
+  object-fit:cover;
+  transform:scale(1.0);        
+  transition: 0.2s ease-in-out;
+  border: solid 2px #202020;
+  width: 268px;
+  height: 500px;
+  margin-right: 10px; 
+	
+}
+.main-card{
   overflow: hidden; 
   object-fit:cover;
   transform:scale(1.0);        
@@ -166,42 +179,42 @@ body {
   margin-right: 10px; 
 	
 }
- .card-img-top{ 
+ .main-card-img-top{ 
    object-fit:cover;      
    transform:scale(1.0);         
    transition: 0.2s ease-in-out; 
    width: 280px;
    height: 280px;
  } 
- .card-body{ 
+ .main-card-body{ 
    border-top: solid 2px #202020;
    color: white;
    background-color: #202020;
    
  } 
- .card-body > p{ 
+ .main-card-body > p{ 
    color: #c0c0c0;
    font-size: 15px;
    
  } 
- .card-icon {
+ .main-card-icon {
  	position: absolute;
  	top: 460px;
  	left: 190px;
  	
  }
- .card-price{
+ .main-card-price{
  	position: absolute;
  	top: 460px;
  }
 
-.card:hover{  
+.main-card:hover{  
    transform: translateY(20px); 
    cursor: pointer; 
    
  } 
  
-.card-container{
+.main-card-container{
  	display: flex;
 /*  	justify-content: center; */
  }
@@ -488,6 +501,28 @@ footer{
 }
 .coupon-table{
 	color: white;
+}
+.myPage-myOrder{
+	display: flex;
+	height: 100%;
+	background-color: #303030;
+	justify-content: center;
+/* 	align-items: center; */
+}
+
+/* 마이페이지 내 주문내역 */
+.myPage-myOrder h2{
+	color: white; 
+	font-family: 굴림체;
+}
+.myOrder-card{
+	background-color: #202020;	
+}
+.myOrder-card-title{
+	color: white;
+}
+.myOrder-card-title:hover{
+	color: #FFD369;
 }
 /* 찜목록 */
 .myPage-like {

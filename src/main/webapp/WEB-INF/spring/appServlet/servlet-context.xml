@@ -29,6 +29,8 @@
 		class="com.kh.elecshop.interceptor.LoginInterceptor"/>
 	<beans:bean id="authInterceptor"
 		class="com.kh.elecshop.interceptor.AuthInterceptor"/>
+	<beans:bean id="visitInterceptor"
+		class="com.kh.elecshop.interceptor.VisitInterceptor"/>
 		
 	<interceptors>
 		<interceptor>
@@ -36,7 +38,12 @@
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/main"/>
+			<beans:ref bean="visitInterceptor"/>
+		</interceptor>
+		<interceptor>
 			<mapping path="/myPage/**/*"/>
+			<mapping path="/cart/**/"/>
 			<exclude-mapping path="/main"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

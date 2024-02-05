@@ -2,11 +2,11 @@
 CREATE TABLE TBL_PRODUCT(
     PNO NUMBER CONSTRAINT PK_PNO PRIMARY KEY,
     PNAME NVARCHAR2(50) NOT NULL,
---    MNO NUMBER CONSTRAINT FK_MNO REFERENCES tbl_manufacturer(MNO),
+    MNO NUMBER CONSTRAINT FK_MNO REFERENCES tbl_manufacturer(MNO),
     PPRICE NUMBER NOT NULL,
     PCODE NVARCHAR2(50), -- 일련번호
     PTYPE NUMBER(1) CONSTRAINT FK_PTYPE REFERENCES TBL_PRODUCT_TYPE(PTYPE) NOT NULL, -- 노트북:1, 모니터:2, 태블릿:3, 음향기기:4, 주변기기:5
---    PDNO NUMBER CONSTRAINT FK_PDNO REFERENCES TBL_PRODUCT_DETAIL(PDNO),
+    PDNO NUMBER CONSTRAINT FK_PDNO REFERENCES TBL_PRODUCT_DETAIL(PDNO),
     PINFO_MAIN NVARCHAR2(30),
     PINFO1 NVARCHAR2(50),
     PINFO2 NVARCHAR2(50),
@@ -15,22 +15,26 @@ CREATE TABLE TBL_PRODUCT(
     PIMAGE_INFO1 NVARCHAR2(50),
     PIMAGE_INFO2 NVARCHAR2(50),
     ORDER_COUNT NUMBER DEFAULT 0,
-    PREGDATE DATE DEFAULT SYSDATE
+    PREGDATE DATE DEFAULT SYSDATE,
+    ISDELETE NUMBER(1) DEFAULT 0 CHECK(ISDELETE IN (0, 1)) 
 );
 
-INSERT INTO TBL_PRODUCT(PNO, PNAME, PPRICE, PCODE, PTYPE, PINFO_MAIN, PINFO1, PINFO2, PINFO3, PIMAGE_THOUMB, PIMAGE_INFO1, PIMAGE_INFO2)
+INSERT INTO TBL_PRODUCT(PNO, PNAME, MNO, PPRICE, PCODE, PTYPE, PDNO, PINFO_MAIN, PINFO1, PINFO2, PINFO3, PIMAGE_THOUMB, PIMAGE_INFO1, PIMAGE_INFO2, ORDER_COUNT)
 VALUES (SEQ_PNO.NEXTVAL,
         'Galaxy Book4 Pro',
+        1,
         3140000,
         'NT960QGK-KD72G',
         1,
+        0,
         '40.6 cm WQXGA + AMOLED 디스플레이',
         '운영체계,Windows 11 Home',
         '프로세서/칩셋, Intel® Core™ Ultra 7 Processor 155H',
         '메모리, 32GB LPDDR5X Memory (On Board 32GB)',
         'galaxybook4pro.png',
         'galaxybook4pro2.jpg',
-        'galaxybook4pro3.jpg');
+        'galaxybook4pro3.jpg',
+        5);
         
 CREATE TABLE TBL_PRODUCT_OPTION(
  	ONO NUMBER CONSTRAINT PK_ONO PRIMARY KEY,
@@ -52,7 +56,6 @@ VALUES (SEQ_ONO.NEXTVAL, 5, '1T', 120000, 1);
 INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
 VALUES (SEQ_ONO.NEXTVAL, 5, 'DIVKS5LIV', 50000, 2);
 INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-<<<<<<< HEAD
 VALUES (SEQ_OPTION.NEXTVAL, 5, 'GRAY', 150000, 3);
 
 
@@ -115,6 +118,8 @@ create table tbl_product_detail(
     pdno number constraint pk_pdno primary key,
     pdname nvarchar2(30)
 );
+insert into tbl_product_detail (pdno, pdname)
+values (0, '기타');
 insert into tbl_product_detail (pdno, pdname)
 values (1, '스피커');
 insert into tbl_product_detail (pdno, pdname)

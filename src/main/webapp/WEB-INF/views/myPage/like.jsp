@@ -19,14 +19,6 @@ $(function() {
 		$(this).children(".deleteLike").css("opacity", "0");
 	});
 	
-	$(".btnProductInfo").mouseover(function() {
-		$(this).css("background-color", "#FF9843");
-// 		$(this).css("color", "white");
-	});
-	$(".btnProductInfo").mouseout(function() {
-		$(this).css("background-color", "#ffbe33");
-		$(this).css("color", "black");
-	});
 	
 	// 찜삭제
 	$(".deleteLike").click(function() {
@@ -38,7 +30,7 @@ $(function() {
 		$.post("/like/removeLno", sData, function(rData) {
 			if(rData == "true") {
 				deleteTarget = that.parent().parent().parent();
-				deleteTarget.fadeOut(1000);
+				deleteTarget.fadeOut(500);
 				var test = $("#divProduct").children();
 				console.log("test: ", test);
 			}
