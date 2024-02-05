@@ -126,7 +126,7 @@ create table tbl_order_detail(
     odno number constraint pk_order_detail_odno primary key,
     ono number constraint fk_order_detail_ono references tbl_order(ono),
     pno number constraint fk_order_detail_pno references tbl_product(pno),
-    odpirce number not null,
+    odprice number not null,
     odoption nvarchar2(100),
     odproduct_count number not null
 );
@@ -165,3 +165,104 @@ CREATE TABLE TBL_REVIEW(
     RREGDATE DATE DEFAULT SYSDATE);
     
 CREATE SEQUENCE SEQ_REVIEW;
+
+commit;
+
+--인서트
+insert into tbl_point_code(point_code, point_info, point_num)
+values ('AC', '출석체크', 500);
+
+insert into tbl_point_code(point_code, point_info, point_num)
+values ('RV', '리뷰', 1000);
+
+insert into tbl_point_code(point_code, point_info, point_num)
+values ('RP', '댓글', 100);
+
+insert into tbl_point_code(point_code, point_info)
+values ('PU', '포인트 사용');
+
+insert into tbl_product_detail (pdno, pdname)
+values (1, '스피커');
+insert into tbl_product_detail (pdno, pdname)
+values (2, '헤드셋');
+insert into tbl_product_detail (pdno, pdname)
+values (3, '이어폰');
+insert into tbl_product_detail (pdno, pdname)
+values (4, '마우스');
+insert into tbl_product_detail (pdno, pdname)
+values (5, '키보드');
+
+insert into tbl_manufacturer (mno, mname)
+values (1, '삼성(samsung');
+insert into tbl_manufacturer (mno, mname)
+values (2, '엘지(LG)');
+insert into tbl_manufacturer (mno, mname)
+values (3, '애플(apple)');
+insert into tbl_manufacturer (mno, mname)
+values (4, '델(dell)');
+insert into tbl_manufacturer (mno, mname)
+values (5, '아수스(asus)');
+insert into tbl_manufacturer (mno, mname)
+values (6, '레이져(razer)');
+insert into tbl_manufacturer (mno, mname)
+values (7, 'msi');
+insert into tbl_manufacturer (mno, mname)
+values (8, '레노버(lenovo)');
+insert into tbl_manufacturer (mno, mname)
+values (9, 'hp');
+insert into tbl_manufacturer (mno, mname)
+values (10, '소니(sony)');
+insert into tbl_manufacturer (mno, mname)
+values (11, '젠하이져');
+insert into tbl_manufacturer (mno, mname)
+values (12, 'akg');
+insert into tbl_manufacturer (mno, mname)
+values (13, '브리츠(britz)');
+insert into tbl_manufacturer (mno, mname)
+values (14, '크리에이티브');
+insert into tbl_manufacturer (mno, mname)
+values (15, '로지텍(logitech)');
+insert into tbl_manufacturer (mno, mname)
+values (16, '앱코(ABKO)');
+
+insert into tbl_product_type (ptype, tname)
+values (1, '노트북');
+insert into tbl_product_type (ptype, tname)
+values (2, '모니터');
+insert into tbl_product_type (ptype, tname)
+values (3, '태블릿');
+insert into tbl_product_type (ptype, tname)
+values (4, '음향기기');
+insert into tbl_product_type (ptype, tname)
+values (5, '주변기기');
+
+INSERT INTO TBL_PRODUCT(PNO, PNAME, MNO, PPRICE, PCODE, PTYPE, PDNO, PINFO_MAIN, PINFO1, PINFO2, PINFO3, PIMAGE_THOUMB, PIMAGE_INFO1, PIMAGE_INFO2, ORDER_COUNT)
+VALUES (SEQ_PNO.NEXTVAL,
+        'Galaxy Book4 Pro',
+        1,
+        3140000,
+        'NT960QGK-KD72G',
+        1,
+        0,
+        '40.6 cm WQXGA + AMOLED 디스플레이',
+        '운영체계,Windows 11 Home',
+        '프로세서/칩셋, Intel® Core™ Ultra 7 Processor 155H',
+        '메모리, 32GB LPDDR5X Memory (On Board 32GB)',
+        'galaxybook4pro.png',
+        'galaxybook4pro2.jpg',
+        'galaxybook4pro3.jpg',
+        5);
+        
+INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
+VALUES (SEQ_ONO.NEXTVAL, 5, '256G', 50000, 1);
+INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
+VALUES (SEQ_ONO.NEXTVAL, 5, '512G', 50000, 1);
+INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
+VALUES (SEQ_ONO.NEXTVAL, 5, '1T', 120000, 1);
+
+INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
+VALUES (SEQ_ONO.NEXTVAL, 5, 'DIVKS5LIV', 50000, 2);
+INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
+VALUES (SEQ_OPTION.NEXTVAL, 5, 'GRAY', 150000, 3);
+
+commit;

@@ -6,9 +6,9 @@
 <mapper namespace="com.kh.elecshop.mapper.OrderDetailMapper">
 	<insert id="insertOrderDetail">
 		insert into tbl_order_detail
-		(odno, ono, pno, odoption, odproduct_count)
+		(odno, ono, pno, odoption, odproduct_count, odprice)
 		values
-		(seq_order_detail_odno.nextval, #{ono}, #{pno}, #{odoption}, #{odproduct_count})
+		(seq_order_detail_odno.nextval, #{ono}, #{pno}, #{odoption}, #{odproduct_count}, #{odprice})
 	</insert>
 
 	<select id="selectMyOrder" resultType="com.kh.elecshop.domain.OrderDetailVO">

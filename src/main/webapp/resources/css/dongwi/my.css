@@ -79,7 +79,10 @@ body {
 #user_info > p{
 	margin: 0px;
 	color: white;
+	font-weight 700;
 	text-align: center;
+	font-size: 15px;
+	
 }
 /* 드롭다운 */
 .dropdown-item:hover{
@@ -154,7 +157,17 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
+.card{
+	overflow: hidden; 
+  object-fit:cover;
+  transform:scale(1.0);        
+  transition: 0.2s ease-in-out;
+  border: solid 2px #202020;
+  width: 268px;
+  height: 500px;
+  margin-right: 10px; 
+	
+}
 .main-card{
   overflow: hidden; 
   object-fit:cover;

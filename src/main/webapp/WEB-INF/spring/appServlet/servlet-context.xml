@@ -37,6 +37,7 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/myPage/**/*"/>
+			<mapping path="/cart/**/"/>
 			<exclude-mapping path="/main"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
