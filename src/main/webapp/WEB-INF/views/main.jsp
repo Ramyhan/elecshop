@@ -87,22 +87,22 @@
 <!-- 			</div> -->
 		</div>
 		<!-- //메인2 -->
-				<!-- 카드1 -->
+<!-- 		카드 -->
 		<div class="section">
-			<div class="container card-container">
-<!-- 			<div class="row"> -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/notebook.jpg" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">갤럭시북3 프로 GalaxyBook pro</h4>
+			<div class="container main-card-container">
+				<!-- 카드1 -->
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/notebook.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">갤럭시북3 프로 GalaxyBook pro</h4>
 			    <p class="card-text">
 			    16인치16인치16인치16인치16인치</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	1,300,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -112,20 +112,20 @@
 			    </div>
 			  </div>
 			</div>
-				<!-- //카드 -->
+				<!-- //카드1 -->
 				<!-- 카드2 -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/tablet.png" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">아이패드 프로3 5세대</h4>
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/tablet.png" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">아이패드 프로3 5세대</h4>
 			    <p class="card-text">
 			    디스플레이 · 32.8cm(대각선) 미니 LED 백라이트 · 2732 x 2048 픽셀</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	1,480,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -135,20 +135,20 @@
 			    </div>
 			  </div>
 			</div>
-				<!-- //카드 -->
+				<!-- //카드2 -->
 				<!-- 카드3 -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/headset.jpg" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">젠하이저 HD660S</h4>
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/headset.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">젠하이저 HD660S</h4>
 			    <p class="card-text">
-			     오픈형 헤드폰 3.5mm / 150Ω / 104dB / 10Hz~41KHz</p>
+			    오픈형 헤드폰 3.5mm / 150Ω / 104dB / 10Hz~41KHz</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	599,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -158,21 +158,20 @@
 			    </div>
 			  </div>
 			</div>
-				<!-- //카드 -->
+				<!-- //카드3 -->
 				<!-- 카드4 -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/monitor.jpg" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">델 에일리언웨어 AW2721D</h4>
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/monitor.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">델 에일리언웨어 AW2721D</h4>
 			    <p class="card-text">
-			    68.47cm(27인치) / 와이드(16:9) / IPS / 평면 / 광시야각 / 2560 x 1440(QHD) 
-			    </p>
+			    68.47cm(27인치) / 와이드(16:9) / IPS / 평면 / 광시야각 / 2560 x 1440(QHD)</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	499,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -182,26 +181,26 @@
 			    </div>
 			  </div>
 			</div>
-<!-- 			</div> -->
-		</div>
+				<!-- //카드4 -->
 			</div>
+		</div>
 				<!-- //카드 -->
-				<!-- 카드1 -->
+<!-- 		카드 -->
 		<div class="section">
-			<div class="container card-container">
-<!-- 			<div class="row"> -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/notebook.jpg" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">갤럭시북3 프로 GalaxyBook pro</h4>
+			<div class="container main-card-container">
+				<!-- 카드1 -->
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/notebook.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">갤럭시북3 프로 GalaxyBook pro</h4>
 			    <p class="card-text">
 			    16인치16인치16인치16인치16인치</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	1,300,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -211,20 +210,20 @@
 			    </div>
 			  </div>
 			</div>
-				<!-- //카드 -->
+				<!-- //카드1 -->
 				<!-- 카드2 -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/tablet.png" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">아이패드 프로3 5세대</h4>
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/tablet.png" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">아이패드 프로3 5세대</h4>
 			    <p class="card-text">
 			    디스플레이 · 32.8cm(대각선) 미니 LED 백라이트 · 2732 x 2048 픽셀</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	1,480,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -234,20 +233,20 @@
 			    </div>
 			  </div>
 			</div>
-				<!-- //카드 -->
+				<!-- //카드2 -->
 				<!-- 카드3 -->
-			  <div class="card bg-dark">
-			  <img class="card-img-top" src="/resources/images/headset.jpg" alt="Card image">
-			  <div class="card-body">
-			    <h4 class="card-title">젠하이저 HD660S</h4>
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/headset.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">젠하이저 HD660S</h4>
 			    <p class="card-text">
-			     오픈형 헤드폰 3.5mm / 150Ω / 104dB / 10Hz~41KHz</p>
+			    오픈형 헤드폰 3.5mm / 150Ω / 104dB / 10Hz~41KHz</p>
 			    <div>
-			    <p class="card-price">
+			    <p class="card-price main-card-price">
 			     	599,000원
 			    </p>
 			    </div>
-			    <div class="row card-icon">
+			    <div class="row main-card-icon">
 			    <div class="col-md-6">
 			    <i class="fa fa-heart"></i>
 			    </div>
@@ -256,9 +255,31 @@
 			    </div>
 			    </div>
 			  </div>
+			</div>
+				<!-- //카드3 -->
+				<!-- 카드4 -->
+			  <div class="card bg-dark main-card">
+			  <img class="card-img-top main-card-img-top" src="/resources/images/monitor.jpg" alt="Card image">
+			  <div class="card-body main-card-body">
+			    <h4 class="card-title main-card-title">델 에일리언웨어 AW2721D</h4>
+			    <p class="card-text">
+			    68.47cm(27인치) / 와이드(16:9) / IPS / 평면 / 광시야각 / 2560 x 1440(QHD)</p>
+			    <div>
+			    <p class="card-price main-card-price">
+			     	499,000원
+			    </p>
+			    </div>
+			    <div class="row main-card-icon">
+			    <div class="col-md-6">
+			    <i class="fa fa-heart"></i>
+			    </div>
+			    <div class="col-md-6">
+			    <i class="fa fa-shopping-cart"></i>
+			    </div>
+			    </div>
 			  </div>
-<!-- 			</div> -->
-				<!-- //카드 -->
+			</div>
+				<!-- //카드4 -->
 			</div>
 		</div>
 				<!-- //카드 -->

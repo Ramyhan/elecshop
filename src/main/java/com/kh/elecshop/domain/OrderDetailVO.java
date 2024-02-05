@@ -13,6 +13,7 @@ public class OrderDetailVO {
 	private int pno;
 	private String pname;
 	private String pimage_thoumb;
+	private int odprice;
 	private int ono;
 	private int odproduct_count;
 	private String odoption;
