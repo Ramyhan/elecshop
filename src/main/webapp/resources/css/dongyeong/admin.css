@@ -107,7 +107,15 @@
 	    position: relative;
 	    width: 35%;
 	    height: 40%;
-	    transform: translate(15%, -89%);
+	    transform: translate(15%, -99%);
+	    overflow: auto;
+	}
+	.admin-notice{
+		background-color: white;
+	    position: relative;
+	    width: 35%;
+	    height: 35%;
+	    transform: translate(120%, -195%);
 	    overflow: auto;
 	}
 	.admin-info{

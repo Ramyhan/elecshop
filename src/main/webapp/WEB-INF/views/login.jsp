@@ -19,6 +19,7 @@
 						비밀번호
 					</label>
 					<input type="password" class="form-control" id="mpw" name="mpw" />
+                <a id="forgot-password" class="small" href="/password">비밀번호 분실</a>
 				</div>
 				<div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -47,13 +48,15 @@ $(function (){
 	}
 	var cookie = document.cookie;
 	console.log(cookie);
-	var cookies = cookie.split("=");
+	var cookies = cookie.split(";");
 	console.log(cookies);
 	for(var v = 0; v < cookies.length; v++){
-		if(cookies[0].trim() == "savedId"){
-			var savedId = cookies[1];
+		var aCookie = cookies[v].split("=");
+		if(aCookie[0].trim() == "savedId"){
+			var savedId = aCookie[1];
 			console.log(savedId);
 			$("#mid").val(savedId);
+			$("#mpw").focus();
 		}
 	}
 	

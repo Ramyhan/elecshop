@@ -44,5 +44,15 @@ public class MemberServiceImpl implements MemberService {
 		int count = memberMapper.selectPoint(mid);
 		return count;
 	}
+	@Override
+	public boolean changePassword(String mid, String mpw) {
+		int count = memberMapper.changePassword(mid, mpw);
+		return (count == 1) ? true:false;
+	}
+	@Override
+	public String getEmail(String mid) {
+		String email = memberMapper.getEmail(mid);
+		return email;
+	}
 
 }

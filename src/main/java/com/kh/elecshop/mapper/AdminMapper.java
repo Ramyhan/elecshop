@@ -12,7 +12,10 @@ import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
+
 import com.kh.elecshop.domain.ProductOptionVO;
+
+import com.kh.elecshop.domain.OrderVO;
 
 public interface AdminMapper {
 	//어드민 전체 유저 조회
@@ -62,4 +65,6 @@ public interface AdminMapper {
 	//어드민 상품 옵션 삭제
 	public int deleteOption(@Param("ono") int ono,@Param("pno") int pno);
 	
+	public List<OrderVO> selectOrderList(Criteria criteria);
+	public int selectOrderTotal();
 }

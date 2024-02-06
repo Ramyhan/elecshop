@@ -16,7 +16,8 @@
 				 <p id="product-ophone"><c:set var="num" value="${loginInfo.mphone }" />
 				  	${fn:substring(num,0,3) }-${fn:substring(num,3,7) }-${fn:substring(num,7,11) }
 				</p>
-				<p id="product-mpost_code" data-type-mpost_code="${loginInfo.mpost_code }">(${loginInfo.mpost_code }) <span id="product-maddr">${loginInfo.maddr }</span></p>
+				<span id="product-mpost_code" data-type-mpost_code="${loginInfo.mpost_code }">(${loginInfo.mpost_code }) </span><span id="product-maddr">${loginInfo.maddr }</span>
+				<br>
 				<input id="product-maddr_detail" name="maddr_detail" type="text" value="${loginInfo.maddr_detail }">
 				
 				<button type="button" id="btn-addr-search" class="btn btn-warning">주소 검색</button>
@@ -117,7 +118,10 @@
 		<p>포인트 : <span id="result-point">0</span></p>
 		<h2 class="buy-result">합계 : <span class="buy-result" id="result-total">없음</span></h2>
 		<button id="btn-buy" class="btn btn-warning btn-buy" type="button"></button>
-		<button id="btn-kakao" class="btn btn-warning" type="button">카카오</button>
+		<div id="div-kakaopay">
+		<img style="cursor:pointer;" id="btn-kakaopay" src="/resources/images/kakaopay.png">
+		</div>
+	
 		</div>
 		</div>
 </div>
@@ -376,7 +380,7 @@ var product_submit = function() {
 				return;
 			}
 			product_submit();
-// 			$("#order_detail").submit();
+			$("#order_detail").submit();
 		});
 
 		// 카카오 주소
@@ -385,14 +389,17 @@ var product_submit = function() {
 				oncomplete : function(data) {
 					console.log(data);
 					var roadAddr = data.roadAddress;
+					console.log(roadAddr);
 					var post_code = data.zonecode;
-					$("#addr").text("(" + post_code + ") " + roadAddr);
+					$("#product-mpost_code").attr("data-type-mpost_code", post_code);
+					$("#product-mpost_code").text("(" + post_code + ")");
+					$("#product-maddr").text(roadAddr);
 				}
 			}).open();
 
 		})
 
-		$("#btn-kakao").click(function() {
+		$("#btn-kakaopay").click(function() {
 			var opname = $("#product-opname").text();
 			var oprice = $("#result-total").text().replace(/,/g, "");
 

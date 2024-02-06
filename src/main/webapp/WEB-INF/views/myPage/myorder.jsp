@@ -6,12 +6,12 @@
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
+<div style="height: 100%;">
 <div class="myPage-myOrder">
 <div class="container myPage-point-container">
 <h1>주문 내역</h1>
 <div class="myPage-line"></div>
 <div class="container-fluid">
-	<div class="row">
 	<c:forEach var="vo" items="${orderList }">
 		<div>
 			<h2><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" /></h2>

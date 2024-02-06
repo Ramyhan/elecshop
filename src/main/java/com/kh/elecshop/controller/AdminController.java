@@ -1,10 +1,12 @@
 package com.kh.elecshop.controller;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,14 +24,21 @@ import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
+import com.kh.elecshop.domain.DayInfoDTO;
+import com.kh.elecshop.domain.IquiryVO;
 import com.kh.elecshop.domain.NoticeVO;
+import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
+import com.kh.elecshop.domain.VisitCountVO;
 import com.kh.elecshop.service.AdminService;
+import com.kh.elecshop.service.IquiryService;
 import com.kh.elecshop.service.NoticeService;
+import com.kh.elecshop.service.VisitCountService;
 
 import lombok.extern.log4j.Log4j;
+import com.kh.elecshop.service.IquiryService;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,11 +48,23 @@ public class AdminController {
 	private NoticeService noticeService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private VisitCountService visitCountService;
+	@Autowired
+	private IquiryService iquiryService;
 	
 	//어드민 메인화면
 	@GetMapping("/admin_dashboard")
-	public void dashBoard() {
-		
+	public void dashBoard(Model model) {
+		List<VisitCountVO> chartVO = visitCountService.getVisitCountChart();
+		LocalDate vdate = LocalDate.now();
+		List<DayInfoDTO> dayInfoList = visitCountService.getDayInfo(vdate);
+		List<IquiryVO> iquiryList = iquiryService.getIquiryList();
+		List<NoticeVO> noticeList = noticeService.getLatestNotice();
+		model.addAttribute("chartVO", chartVO);
+		model.addAttribute("dayInfoList", dayInfoList);
+		model.addAttribute("iquiryList", iquiryList);
+		model.addAttribute("noticeList", noticeList);
 	}
 	//어드민 공지사항 입력창
 	@GetMapping("/notice/register")
@@ -181,5 +202,20 @@ public class AdminController {
 		Map<String, Object> map = adminService.getSearchByNotice(searchDTO,criteria);
 		model.addAttribute("noticeMap", map);
 		return "admin/admin_customtableList";
+	}
+	
+	//어드민 배송정보
+	@GetMapping("/admin_order")
+	public void admin_order(Model model, Criteria criteria) {
+		Map<String, Object> map = adminService.getOrderList(criteria);
+		model.addAttribute("orderMap", map);
+	}
+	
+	@PostMapping("/updateOrderStatus")
+	public ResponseEntity<String> updateOrderStatus(@RequestParam("status") int status, @RequestParam("ono")int ono) {
+		System.out.println(status);
+		System.out.println(ono);
+		
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 }

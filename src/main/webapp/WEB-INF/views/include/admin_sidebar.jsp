@@ -35,7 +35,7 @@ $(function(){
 				</a>
 			</li>
 			<li class="menu-li">
-				<a href="/admin/admin_delivery" class="menubar">
+				<a href="/admin/admin_order" class="menubar">
 				<i class="menu-icon fa fa-box" style="opacity: 0.4;"></i>
 					<span class="category-span">배송 관리</span>
 				<i class="down-fa fa fa-angle-down"></i>

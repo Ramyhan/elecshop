@@ -20,5 +20,6 @@ public interface NoticeMapper {
 	public int insertNotice(NoticeVO noticeVO);
 	public List<SubNoticeDTO> selectSearchWord(SearchDTO searchDTO);
 	public int selectSearchTotal(SearchDTO searchDTO);
+	public List<NoticeVO> selectLatestNotice();
 }
 
