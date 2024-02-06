@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.elecshop.mapper.IquiryMapper">
+
+	<insert id="insertIquiry">
+		insert into tbl_iquiry
+			(ino, mid, ititle, imessage)
+		values
+			(seq_ino.nextval, #{mid}, #{ititle}, #{imessage})
+	</insert>
+	
+	<select id="selectIquiryList" resultType="com.kh.elecshop.domain.IquiryVO">
+		select *
+		from tbl_iquiry
+		where ireply is null
+		order by iregdate asc
+	</select>
+	
+	<select id="selectIquiry" resultType="com.kh.elecshop.domain.IquiryVO">
+		select *
+		from tbl_iquiry
+		where ino = #{ino}
+	</select>
+	
+	<update id="updateReply">
+		update tbl_iquiry set
+			ireply = #{ireply}
+		where ino = #{ino}
+	</update>
+	
+	<delete id="deleteIquiry">
+		delete from tbl_iquiry
+		where ino = #{ino}
+	</delete>
+
+</mapper>

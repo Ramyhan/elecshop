@@ -7,13 +7,23 @@ var myChart = new Chart(chartArea, {
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
-        labels: ['24-01-27', '24-01-27', '24-01-27', '24-01-27', '24-01-27', '24-01-27'],
+        labels: ['24-1-31',
+        		 '24-1-31',
+        		 '24-1-31',
+        		 '24-1-31',
+        		 '24-1-31',
+        		 '24-1-31'],
         // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
         datasets: [{
             // ⑤dataset의 이름(String)
             label: '# of Votes',
             // ⑥dataset값(Array)
-            data: [12, 22, 3, 5, 2, 3],
+            data: [5,
+            	   10,
+            	   45,
+            	   32,
+            	   18,
+            	   21],
             // ⑦dataset의 배경색(rgba값을 String으로 표현)
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             // ⑧dataset의 선 색(rgba값을 String으로 표현)

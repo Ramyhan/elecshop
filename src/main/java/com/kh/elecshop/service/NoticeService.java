@@ -16,4 +16,5 @@ public interface NoticeService {
 	public boolean modifyNoticeOpenState(int[] nnos);
 	public int removeNotice(int[] nnos);
 	public boolean registerNotice(NoticeVO noticeVO);
+	public List<NoticeVO> getLatestNotice();
 }

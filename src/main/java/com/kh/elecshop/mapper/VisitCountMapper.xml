@@ -25,5 +25,30 @@
 		insert into tbl_visit (vdate)
 		values (#{vdate})
 	</insert>
+	
+	<select id="selectVisitChart" resultType="com.kh.elecshop.domain.VisitCountVO">
+		<![CDATA[
+			select  to_char(vdate, 'yy-mm-dd') vdate, vcount
+			from tbl_visit
+			where rownum < 7
+			order by vdate asc
+		]]>
+	</select>
+	
+	<select id="selectDayInfo" resultType="com.kh.elecshop.domain.DayInfoDTO">
+		select to_char(vdate, 'yy-mm-dd') vdate,
+		    (select count(*)
+		    from tbl_order
+		    where to_char(regdate, 'yyyy-mm-dd') = to_date(#{vdate}, 'yyyy-mm-dd')) order_count,
+		    vcount,
+		    (select sum(oprice)
+		    from tbl_order
+		    where to_char(regdate, 'yyyy-mm-dd') = to_date(#{vdate}, 'yyyy-mm-dd')) total_price,
+		    (select count(*)
+		    from tbl_member
+		    where to_char(mregdate, 'yyyy-mm-dd') = to_date(#{vdate}, 'yyyy-mm-dd')) join_count
+		from tbl_visit
+		where to_char(vdate, 'yyyy-mm-dd') = to_date(#{vdate}, 'yyyy-mm-dd')
+	</select>
 
 </mapper>

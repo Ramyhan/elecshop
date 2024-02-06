@@ -75,6 +75,11 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		return false;
 	}
+	@Override
+	public List<NoticeVO> getLatestNotice() {
+		List<NoticeVO> list = mapper.selectLatestNotice();
+		return list;
+	}
 	
 	
 }

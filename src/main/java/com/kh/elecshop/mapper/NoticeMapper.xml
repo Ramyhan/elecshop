@@ -84,4 +84,12 @@
 			 from tbl_notice order by rownum desc))
              <include refid="search"></include>
 	</select>
+	<select id="selectLatestNotice" resultType="com.kh.elecshop.domain.NoticeVO">
+		<![CDATA[
+			select *
+			from tbl_notice
+			where rownum < 8
+			order by nregdate asc
+		]]>
+	</select>
 </mapper>
