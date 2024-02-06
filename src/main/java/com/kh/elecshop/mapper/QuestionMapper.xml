@@ -7,7 +7,7 @@
 		select * from tbl_question
 	</select>
 	<select id="selectQuestionTop5" resultType="com.kh.elecshop.domain.QuestionVO">
-		select qno,qcategory,qtitle,qcontent,qimage,qsubcategory 
+		select qno,qcategory,qtitle,qcontent,qsubcategory 
 		from(select * from tbl_question order by rownum desc)
 		where rownum between 1 and 5
 	</select>

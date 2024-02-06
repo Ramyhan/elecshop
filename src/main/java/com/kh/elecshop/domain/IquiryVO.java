@@ -11,9 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VisitCountVO {
-	
-	private String vdate;
-	private int vcount;
+public class IquiryVO {
+
+	private int ino;
+	private String mid;
+	private String ititle;
+	private String imessage;
+	private String ireply;
+	private Date iregdate;
 	
 }

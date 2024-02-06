@@ -1,6 +1,9 @@
 package com.kh.elecshop.controller;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +24,17 @@ import com.kh.elecshop.domain.AdminProductDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
+import com.kh.elecshop.domain.DayInfoDTO;
+import com.kh.elecshop.domain.IquiryVO;
 import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
+import com.kh.elecshop.domain.VisitCountVO;
 import com.kh.elecshop.service.AdminService;
+import com.kh.elecshop.service.IquiryService;
 import com.kh.elecshop.service.NoticeService;
+import com.kh.elecshop.service.VisitCountService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -38,6 +46,11 @@ public class AdminController {
 	private NoticeService noticeService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private VisitCountService visitCountService;
+	@Autowired
+	private IquiryService iquiryService;
+	
 	//어드민 상품 추가 팝업창
 	@GetMapping("/admin_product_popup")
 	public void product_popup() {
@@ -45,8 +58,16 @@ public class AdminController {
 	}
 	//어드민 메인화면
 	@GetMapping("/admin_dashboard")
-	public void dashBoard() {
-		
+	public void dashBoard(Model model) {
+		List<VisitCountVO> chartVO = visitCountService.getVisitCountChart();
+		LocalDate vdate = LocalDate.now();
+		List<DayInfoDTO> dayInfoList = visitCountService.getDayInfo(vdate);
+		List<IquiryVO> iquiryList = iquiryService.getIquiryList();
+		List<NoticeVO> noticeList = noticeService.getLatestNotice();
+		model.addAttribute("chartVO", chartVO);
+		model.addAttribute("dayInfoList", dayInfoList);
+		model.addAttribute("iquiryList", iquiryList);
+		model.addAttribute("noticeList", noticeList);
 	}
 	//어드민 공지사항 입력창
 	@GetMapping("/notice/register")
