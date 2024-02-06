@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
-import com.kh.elecshop.domain.AdminProductColorDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
-import com.kh.elecshop.domain.AdminProductRamDTO;
+import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
-import com.kh.elecshop.domain.AdminProductSSdDTO;
+import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
 import com.kh.elecshop.domain.PageDTO;
+import com.kh.elecshop.domain.ProductOptionVO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.mapper.AdminMapper;
@@ -110,26 +110,26 @@ public class AdminServiceImpl implements AdminService{
 			}
 			adminMapper.insertProductImage(fileList);
 		}
-		List<AdminProductRamDTO> ramList = adminProductRegisterDTO.getRamList();
+		List<AdminProductOptionDTO> ramList = adminProductRegisterDTO.getRamList();
 		if(ramList != null) {
 			for(int i = 0; i < ramList.size(); i ++) {
-				AdminProductRamDTO productRamDTO = ramList.get(i);
+				AdminProductOptionDTO productRamDTO = ramList.get(i);
 				productRamDTO.setPno(pno);
 			}
 			adminMapper.insertProductRamOption(ramList);
 		}
-		List<AdminProductSSdDTO> ssdList = adminProductRegisterDTO.getSsdList();
+		List<AdminProductOptionDTO> ssdList = adminProductRegisterDTO.getSsdList();
 		if(ssdList != null) {
 			for(int i = 0; i < ssdList.size(); i ++) {
-				AdminProductSSdDTO productSSdDTO = ssdList.get(i);
+				AdminProductOptionDTO productSSdDTO = ssdList.get(i);
 				productSSdDTO.setPno(pno);
 			}
 			adminMapper.insertProductSSDOption(ssdList);
 		}
-			List<AdminProductColorDTO> colorList = adminProductRegisterDTO.getColorList();
+			List<AdminProductOptionDTO> colorList = adminProductRegisterDTO.getColorList();
 		if(colorList != null) {
 			for(int i = 0; i < colorList.size();i++) {
-				AdminProductColorDTO productColorDTO = colorList.get(i);
+				AdminProductOptionDTO productColorDTO = colorList.get(i);
 				productColorDTO.setPno(pno);
 			}
 			adminMapper.insertProductColorOption(colorList);
@@ -146,6 +146,35 @@ public class AdminServiceImpl implements AdminService{
 		map.put("subNoticeList", subNoticeList);
 		map.put("page", pageDTO);
 		return map;
+	}
+
+	@Override
+	public AdminProductInfoDTO getProductInfo(int pno) {
+		AdminProductInfoDTO productInfoDTO = adminMapper.selectProductInfoByPno(pno);
+		List<ProductOptionVO> OptionList = adminMapper.selectProductInfoOption(pno);
+		List<AdminProductOptionDTO> ramList =adminMapper.selectProductInfoRamOption(pno);
+		List<AdminProductOptionDTO> ssdList =adminMapper.selectProductInfoSSDOption(pno);
+		List<AdminProductOptionDTO> colorList =adminMapper.selectProductInfoColorOption(pno);
+		productInfoDTO.setRamList(ramList);
+		productInfoDTO.setSsdList(ssdList);
+		productInfoDTO.setColorList(colorList);
+		if(OptionList != null) {
+			productInfoDTO.setOptionList(OptionList);
+		}
+		List<FileVO> fileList = adminMapper.selectProductInfoImage(pno);
+		if(fileList != null) {
+			productInfoDTO.setAttrProductList(fileList);
+		}
+		return productInfoDTO;
+	}
+
+	@Override
+	public boolean removeProductOption(int ono, int pno) {
+		int count = adminMapper.deleteOption(ono, pno);
+		if(count == 1) {
+			return true;
+		}
+		return false;
 	}
 
 }

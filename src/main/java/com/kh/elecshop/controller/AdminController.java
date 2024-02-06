@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
+import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
@@ -39,11 +40,6 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	//어드민 상품 추가 팝업창
-	@GetMapping("/admin_product_popup")
-	public void product_popup() {
-		
-	}
 	//어드민 메인화면
 	@GetMapping("/admin_dashboard")
 	public void dashBoard() {
@@ -55,10 +51,30 @@ public class AdminController {
 		
 		return "/admin/registerNotice";
 	}
-	//상품 수정 메서드
-	@PostMapping("/admin_productInfo")
-	public void productUpdateForm(int pno) {
+	//어드민 상품 추가 팝업창
+	@GetMapping("/admin_product_popup")
+	public void product_popup() {
 		
+	}
+	//어드민 상품 삭제
+	@PostMapping("/admin_deleteOption")
+	@ResponseBody
+	public ResponseEntity<Boolean> deleteOption(@RequestParam("pno") int pno,@RequestParam("pno") int ono) {
+		boolean result = adminService.removeProductOption(ono, pno);
+		return ResponseEntity.ok(result);
+	}
+	//어드민 상품 수정페이지
+	@PostMapping(value="/admin_product_updateForm")
+	public void productUpdateForm(int pno, Model model) {
+		AdminProductInfoDTO productInfoDTO = adminService.getProductInfo(pno);
+		model.addAttribute("productInfo", productInfoDTO);
+	}
+	//상품 상세정보 확인 메서드
+	@PostMapping("/admin_productInfo")
+	public void productInfoForm(int pno, Model model) {
+		System.out.println("wrasd"+pno);
+		AdminProductInfoDTO productInfo = adminService.getProductInfo(pno);
+		model.addAttribute("productInfo", productInfo);
 	}
 	//상품추가 메서드
 	@PostMapping(value="/adminProductRegister", produces = MediaType.APPLICATION_JSON_VALUE)

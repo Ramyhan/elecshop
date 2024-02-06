@@ -2,15 +2,17 @@ package com.kh.elecshop.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kh.elecshop.domain.AdminNoticeDTO;
-import com.kh.elecshop.domain.AdminProductColorDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
-import com.kh.elecshop.domain.AdminProductRamDTO;
+import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
-import com.kh.elecshop.domain.AdminProductSSdDTO;
+import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
+import com.kh.elecshop.domain.ProductOptionVO;
 
 public interface AdminMapper {
 	//어드민 전체 유저 조회
@@ -34,11 +36,11 @@ public interface AdminMapper {
 	//어드민 상품 추가
 	public int insertProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	//어드민 상품 램옵션 추가
-	public int insertProductRamOption(List<AdminProductRamDTO> productRamDTO);
+	public int insertProductRamOption(List<AdminProductOptionDTO> productRamDTO);
 	//어드민 상품 ssd옵션 추가
-	public int insertProductSSDOption(List<AdminProductSSdDTO> productSSdDTO);
+	public int insertProductSSDOption(List<AdminProductOptionDTO> productSSdDTO);
 	//어드민 상품 color옵션 추가
-	public int insertProductColorOption(List<AdminProductColorDTO> productColorDTO);
+	public int insertProductColorOption(List<AdminProductOptionDTO> productColorDTO);
 	//어드민 상품 이미지 추가
 	public int insertProductImage(List<FileVO> list);
 	//어드민 상품 썸네일 조회
@@ -46,5 +48,18 @@ public interface AdminMapper {
 	//어드민 상품 타입 이름 조회
 	public String selectPtypeName(int ptype);
 	//어드민 상품 수정 정보
-	public AdminProductDTO selectUpdateProductByPno(int pno);
+	public AdminProductInfoDTO selectProductInfoByPno(int pno);
+	//어드민 상품 상세정보 옵션 가져오기
+	public List<ProductOptionVO> selectProductInfoOption(int pno);
+	//어드민 상품 이미지 가져오기
+	public List<FileVO> selectProductInfoImage(int pno);
+	//어드민 상품 램옵션 가져오기
+	public List<AdminProductOptionDTO> selectProductInfoRamOption(int pno);
+	//어드민 상품 스스디옵션 가져오기
+	public List<AdminProductOptionDTO> selectProductInfoSSDOption(int pno);
+	//어드민 상품 컬러옵션 가져오기
+	public List<AdminProductOptionDTO> selectProductInfoColorOption(int pno);
+	//어드민 상품 옵션 삭제
+	public int deleteOption(@Param("ono") int ono,@Param("pno") int pno);
+	
 }

@@ -2,6 +2,7 @@ package com.kh.elecshop.service;
 
 import java.util.Map;
 
+import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
@@ -16,4 +17,6 @@ public interface AdminService {
 	public Map<String, Object> getProductList(Criteria criteria);
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	public Map<String, Object> getAdminNoticeList(Criteria criteria);
+	public AdminProductInfoDTO getProductInfo(int pno);
+	public boolean removeProductOption(int ono, int pno);
 }

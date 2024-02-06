@@ -95,7 +95,7 @@
 		) ano
 	</insert>
 	<!-- 상품 램 추가(노트북,태블릿 한정) -->
-	<insert id="insertProductRamOption" parameterType="com.kh.elecshop.domain.AdminProductRamDTO">
+	<insert id="insertProductRamOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
 		SELECT seq_option_ono.nextval, ono.* FROM(
 		<foreach collection="list" item="ramList" separator="union all">
@@ -111,7 +111,7 @@
 		) ono
 	</insert>
 	<!-- 상품 ssd옵션추가(노트북,태블릿한정) -->
-	<insert id="insertProductSSDOption" parameterType="com.kh.elecshop.domain.AdminProductSSdDTO">
+	<insert id="insertProductSSDOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
 		SELECT seq_option_ono.nextval, ono.* FROM(
 		<foreach collection="list" item="ssdList" separator="union all">
@@ -127,7 +127,7 @@
 		) ono
 	</insert>
 	<!-- 상품 색상옵션 추가 -->
-	<insert id="insertProductColorOption" parameterType="com.kh.elecshop.domain.AdminProductColorDTO">
+	<insert id="insertProductColorOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
 		SELECT seq_option_ono.nextval, ono.* FROM(
 		<foreach collection="list" item="colorList" separator="union all">
@@ -153,8 +153,56 @@
 		select tname from tbl_product_type
 		where ptype = #{ptype}
 	</select>
-	<select id="selectUpdateProductByPno" resultType="com.kh.elecshop.domain.AdminProductDTO">
+	<!-- 상품 상세 정보가져오기 -->
+	<select id="selectProductInfoByPno" resultType="com.kh.elecshop.domain.AdminProductInfoDTO">
 		select * from tbl_product
 		where pno = #{pno}
 	</select>
+	<!-- 상품 상세정보 옵션 가져오기 -->
+	<select id="selectProductInfoOption" resultType="com.kh.elecshop.domain.ProductOptionVO">
+		select * from tbl_product_option
+		where pno = #{pno}
+	</select>
+	<!-- 상품 상세정보 이미지 가져오기 -->
+	<select id="selectProductInfoImage" resultType="com.kh.elecshop.domain.FileVO">
+		select * from tbl_attr
+		where pno = #{pno}
+	</select>
+	<!-- 상품 상세정보 ram옵션 가져오기 -->
+	<select id="selectProductInfoRamOption" resultType="com.kh.elecshop.domain.AdminProductOptionDTO">
+		select * from tbl_product_option
+		where pno = #{pno}
+		and otype = 1
+	</select>
+	<!-- 상품 상세정보 ssd옵션 가져오기 -->
+	<select id="selectProductInfoSSDOption" resultType="com.kh.elecshop.domain.AdminProductOptionDTO">
+		select * from tbl_product_option
+		where pno = #{pno}
+		and otype = 2
+	</select>
+	<!-- 상품 상세정보 color옵션 가져오기 -->
+	<select id="selectProductInfoColorOption" resultType="com.kh.elecshop.domain.AdminProductOptionDTO">
+		select * from tbl_product_option
+		where pno = #{pno}
+		and otype = 3
+	</select>
+	<!-- 상품 상세정보 수정 -->
+	<update id="updateProduct">
+		update tbl_product set
+		 pname = #{pname},
+		 mno = #{mno},
+		 pprice = #{pprice},
+		 pcode = #{pcode},
+		 pinfo_main = #{pinfo_main},
+		 pinfo1 = #{pinfo1},
+		 pinfo2 = #{pinfo2},
+		 pinfo3 = #{pinfo3},
+		 order_count = #{order_count}
+		 where pno = #{pno}
+	</update>
+	<delete id="deleteOption">
+		delete from tbl_product_option
+		where pno = #{pno}
+		and ono = #{ono}
+	</delete>
 </mapper>

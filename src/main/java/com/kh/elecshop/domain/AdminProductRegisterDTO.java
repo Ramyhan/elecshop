@@ -29,8 +29,8 @@ public class AdminProductRegisterDTO {
 	private int pstate;
 	
 	
-	private List<AdminProductColorDTO> colorList;
-	private List<AdminProductRamDTO> ramList;
-	private List<AdminProductSSdDTO> ssdList;
+	private List<AdminProductOptionDTO> colorList;
+	private List<AdminProductOptionDTO> ramList;
+	private List<AdminProductOptionDTO> ssdList;
 	private List<FileVO> attrProductList;
 }

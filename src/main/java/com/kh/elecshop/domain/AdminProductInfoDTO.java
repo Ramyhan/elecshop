@@ -16,6 +16,7 @@ public class AdminProductInfoDTO {
 	private int pno;
 	private String pname;
 	private int mno;
+	private String mname;
 	private int pprice;
 	private String pcode;
 	private int ptype;
@@ -28,8 +29,10 @@ public class AdminProductInfoDTO {
 	private int order_count;
 	private int pstate;
 	
-	private List<AdminProductColorDTO> colorList;
-	private List<AdminProductRamDTO> ramList;
-	private List<AdminProductSSdDTO> ssdList;
+	private List<ProductOptionVO> optionList;
+	
+	private List<AdminProductOptionDTO> colorList;
+	private List<AdminProductOptionDTO> ramList;
+	private List<AdminProductOptionDTO> ssdList;
 	private List<FileVO> attrProductList;
 }

@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdminProductSSdDTO {
+public class AdminProductOptionDTO {
+	private int ono;
 	private int pno;
 	private String oname;
 	private int oprice;

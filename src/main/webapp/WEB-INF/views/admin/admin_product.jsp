@@ -13,9 +13,11 @@ $(function(){
 	});
 	$(".btn-product-update").click(function(e){
 		var pno = $(this).attr("data-pno");
+		var hiddenPno = "<input type='hidden' name='pno' value='"+pno+"'/>"
 		var conf = confirm(pno+"번의 상품을 수정 하시겠습니까?");
 		console.log(conf);
 		if(conf == true){
+			$("#frm-product").append(hiddenPno);
 			$("#frm-product").submit();
 		}else{
 			return false;
@@ -135,15 +137,14 @@ $(function(){
 								</span>
 							</div>
 							<div class="cell">
-							<form id="frm-product" action="/admin/admin_productInfo" method="post">
-							<input type="hidden" value="${list.pno}" name="pno">
 							<button type="button" class="btn-product-update" data-pno="${list.pno}">
 							<i class="fa fa-comment-dots"></i>
 							</button>
-							</form>
 							</div>
 						</div>
 						</c:forEach>
+							<form id="frm-product" action="/admin/admin_productInfo" method="post">
+							</form>
 					</div>
 					<div>
 						<nav aria-label="Page navigation example">
