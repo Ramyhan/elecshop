@@ -78,10 +78,13 @@ public class AdminController {
 		
 	}
 	//어드민 상품 삭제
-	@PostMapping("/admin_deleteOption")
+	@PostMapping(value = "/admin_deleteOption", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<Boolean> deleteOption(@RequestParam("pno") int pno,@RequestParam("pno") int ono) {
-		boolean result = adminService.removeProductOption(ono, pno);
+	public ResponseEntity<Boolean> deleteOption(
+			@RequestParam("pno") int pno,@RequestParam("ono") int ono) {
+		System.out.println("pp"+pno);
+		System.out.println("pp2"+ono);
+		boolean result = adminService.removeProductOption(pno, ono);
 		return ResponseEntity.ok(result);
 	}
 	//어드민 상품 수정페이지

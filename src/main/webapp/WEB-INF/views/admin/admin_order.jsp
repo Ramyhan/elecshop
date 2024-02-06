@@ -45,11 +45,11 @@ $(function(){
 <div class="main-div">
 <%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 	<div class="set-div">
-		<div class="user-div" style="width: 100%; height: 100%;">
+		<div class="user-div">
 			<div>
 				<h1>유저 관리 페이지</h1>
 			</div>
-			<div class="user-devel" style="width: 95%; height: 15%;  background-color: white;">
+			<div class="user-devel">
 				<div class="d-flex justify-content-end">
 					<select>
 						<option>
@@ -71,123 +71,125 @@ $(function(){
 					</button>
 				</div>
 			</div>
-			<div class="second-div" style="background-color: white;" >
-				<div class ="user-table">
-					<div class="user-tbl-header">
-						<div class="header-cell">
-							<span>#</span>
+			<div class="div-main">
+				<div class="second-div" style="background-color: white;" >
+					<div class ="user-table">
+						<div class="user-tbl-header">
+							<div class="header-cell">
+								<span>#</span>
+							</div>
+							<div class="header-cell">
+								<span>구매일자</span>
+							</div>
+							<div class="header-cell">
+								<span>수령인</span>
+							</div>
+							<div class="header-cell">
+								<span>핸드폰 번호</span>
+							</div>
+							<div class="header-cell">
+								<span>주소</span>
+							</div>
+							<div class="header-cell">
+								<span>가격</span>
+							</div>
+							<div class="header-cell">
+								<span>배송비</span>
+							</div>
+							<div class="header-cell">
+								<span>배송</span>
+							</div>
 						</div>
-						<div class="header-cell">
-							<span>구매일자</span>
-						</div>
-						<div class="header-cell">
-							<span>수령인</span>
-						</div>
-						<div class="header-cell">
-							<span>핸드폰 번호</span>
-						</div>
-						<div class="header-cell">
-							<span>주소</span>
-						</div>
-						<div class="header-cell">
-							<span>가격</span>
-						</div>
-						<div class="header-cell">
-							<span>배송비</span>
-						</div>
-						<div class="header-cell">
-							<span>배송</span>
-						</div>
+						<c:forEach var="vo" items="${orderMap.orderList}">
+						<div class="user-div-row">
+							<div class="cell">
+							<a class="p-order_detail">${vo.ono }</a>
+							</div>
+							<div class="cell">
+								<span>
+								<fmt:formatDate value="${vo.regdate}" pattern="yy-MM-dd hh:mm:ss"/>
+								</span>
+							</div>
+							<div class="cell" style="text-align: left;">
+								<span style="font-size: 20px;">${vo.oname}</span>
+							</div>
+							<div class="cell">
+								<span>${vo.ophone}</span>
+							</div>
+							<div class="cell">
+								<span>(${vo.opost_code }) ${vo.oaddr } ${vo.oaddr_detail }</span>
+								<div class="row">
+							<div class="col-md-12">
+								<div id="card-863136">
+									<div>
+										<div>
+											 <a class="card-link collapsed" data-toggle="collapse" data-parent="#card-863136" href="#card-element-${vo.ono }">상세 보기</a>
+										</div>
+										<div id="card-element-${vo.ono }" class="collapse">
+											<div class="card-body card-order_detail-pname">
+											<c:forEach var="odVO" items="${vo.list }">
+												<p>${odVO.pname }</p><p>${odVO.odoption}</p> 
+											</c:forEach>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="cell">
+								<span>
+								<fmt:formatNumber value="${vo.oprice}" pattern="#,###"/>원
+								</span>
+							</div>
+							<div class="cell">
+								<span>${vo.odelivery}</span>
+							</div>
+							<div class="cell cell-status">
+							<c:choose>
+								<c:when test="${vo.delivery_status != 0}">
+									<span>발송</span>
+								</c:when>
+								<c:otherwise>
+									<span>발송 준비중</span>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							<div class="cell">
+							<button type="button" class="btn-order-status" data-ono="${vo.ono}">
+							<i class="fa fa-box"></i>
+							</button>
+							</div>
+						</div><!-- 여기 -->
+						</c:forEach>
 					</div>
-					<c:forEach var="vo" items="${orderMap.orderList}">
-					<div class="user-div-row">
-						<div class="cell">
-						<a class="p-order_detail">${vo.ono }</a>
-						</div>
-						<div class="cell">
-							<span>
-							<fmt:formatDate value="${vo.regdate}" pattern="yy-MM-dd hh:mm:ss"/>
-							</span>
-						</div>
-						<div class="cell" style="text-align: left;">
-							<span style="font-size: 20px;">${vo.oname}</span>
-						</div>
-						<div class="cell">
-							<span>${vo.ophone}</span>
-						</div>
-						<div class="cell">
-							<span>(${vo.opost_code }) ${vo.oaddr } ${vo.oaddr_detail }</span>
-							<div class="row">
-		<div class="col-md-12">
-			<div id="card-863136">
-				<div>
 					<div>
-						 <a class="card-link collapsed" data-toggle="collapse" data-parent="#card-863136" href="#card-element-${vo.ono }">상세 보기</a>
-					</div>
-					<div id="card-element-${vo.ono }" class="collapse">
-						<div class="card-body card-order_detail-pname">
-						<c:forEach var="odVO" items="${vo.list }">
-						<p>${odVO.pname }</p><p>${odVO.odoption}</p> 
-					</c:forEach>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-						</div>
-						<div class="cell">
-							<span>
-							<fmt:formatNumber value="${vo.oprice}" pattern="#,###"/>원
-							</span>
-						</div>
-						<div class="cell">
-							<span>${vo.odelivery}</span>
-						</div>
-						<div class="cell cell-status">
-						<c:choose>
-							<c:when test="${vo.delivery_status != 0}">
-								<span>발송</span>
-							</c:when>
-							<c:otherwise>
-								<span>발송 준비중</span>
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="cell">
-						<button type="button" class="btn-order-status" data-ono="${vo.ono}">
-						<i class="fa fa-box"></i>
-						</button>
-						</div>
-					</div><!-- 여기 -->
-					</c:forEach>
-				</div>
-				<div>
-					<nav aria-label="Page navigation example">
-					  <ul class="pagination">
-					  <c:if test="${orderMap.page.prev == true}">
-					    <li class="page-item">
-					      <a class="page-num page-link" href="${orderMap.page.startPage - 1}" aria-label="Previous">
-					        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-					      </a>
-					    </li>
-					  </c:if>
-					  <c:forEach begin="${orderMap.page.startPage}" end="${orderMap.page.endPage}" var="v">
-					    	<li class="page-item"><a class="page-num page-link ${(productMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
-					  </c:forEach>
-					  <c:if test="${orderMap.page.next == true }">
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination">
+						  <c:if test="${orderMap.page.prev == true}">
 						    <li class="page-item">
-						      <a class="page-num page-link" href="${orderMap.page.endPage + 1}" aria-label="Next">
-						        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+						      <a class="page-num page-link" href="${orderMap.page.startPage - 1}" aria-label="Previous">
+						        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
 						      </a>
 						    </li>
-					  </c:if>
-					  </ul>
-					</nav>
-				</div>
-				<div class="popup">
-					<div class="popup-cover">
-						
+						  </c:if>
+						  <c:forEach begin="${orderMap.page.startPage}" end="${orderMap.page.endPage}" var="v">
+						    	<li class="page-item"><a class="page-num page-link ${(productMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+						  </c:forEach>
+						  <c:if test="${orderMap.page.next == true }">
+							    <li class="page-item">
+							      <a class="page-num page-link" href="${orderMap.page.endPage + 1}" aria-label="Next">
+							        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+							      </a>
+							    </li>
+						  </c:if>
+						  </ul>
+						</nav>
+					</div>
+					<div class="popup">
+						<div class="popup-cover">
+							
+						</div>
 					</div>
 				</div>
 			</div>

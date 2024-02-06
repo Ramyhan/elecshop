@@ -5,7 +5,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		height: auto;
+		height: 100%;
 	}
 	.user-table{
 		display: table;
@@ -56,7 +56,7 @@
 		flex-direction: column-reverse;
 		padding: 0 25px 15 25px;
 		width: 95%;
-		height: 15%;
+		height: 10%;
 		background-color: white;
 	}
 	.page-num{

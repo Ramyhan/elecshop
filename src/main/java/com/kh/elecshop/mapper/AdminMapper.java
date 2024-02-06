@@ -63,7 +63,7 @@ public interface AdminMapper {
 	//어드민 상품 컬러옵션 가져오기
 	public List<AdminProductOptionDTO> selectProductInfoColorOption(int pno);
 	//어드민 상품 옵션 삭제
-	public int deleteOption(@Param("ono") int ono,@Param("pno") int pno);
+	public int deleteOption(@Param("pno") int pno,@Param("ono") int ono);
 	
 	public List<OrderVO> selectOrderList(Criteria criteria);
 	public int selectOrderTotal();
