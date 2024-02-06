@@ -15,4 +15,6 @@ public interface MemberMapper {
 	public int updateMember(MemberVO memberVO);
 	public int selectPoint(String mid);
 	public int updatePoint(Map<String, Object> map);
+	public int changePassword(@Param("mid") String mid, @Param("mpw") String mpw);
+	public String getEmail(String mid);
 }

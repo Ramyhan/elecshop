@@ -150,7 +150,7 @@ $(function() {
 							<form action="/product/goods" method="get">
 								<div class="col-md-4 divProduct">
 									<div class="container">
-										<div class="card divProd" id="divProd">
+										<div class="card divProd product-card" id="divProd">
 											<input type="hidden" name="pno" value="${ productDTO.pno }">
 											<img alt="상품 사진" src="/resources/images/${ productDTO.pimage_thoumb }" style="width:271px; height:271px;"/>
 											<button class="btnProductInfo" type="submit">자세히 알아보기>></button>

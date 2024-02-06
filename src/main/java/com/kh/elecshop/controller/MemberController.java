@@ -3,12 +3,17 @@ package com.kh.elecshop.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -30,6 +35,9 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class MemberController {
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	private MemberService memberService;
@@ -114,5 +122,39 @@ public class MemberController {
 		 return String.valueOf(count);
 	}
 	
+	
+	@GetMapping("/password")
+	public String resetPassword() {
+		
+		return "password";
+	}
+	
+	@PostMapping("/resetPassword")
+	public String resetPassword(String mid) {
+		String email = memberService.getEmail(mid);
+		log.info(email);
+		String uuid = UUID.randomUUID().toString(); // asdfaf-asdfasdfa-
+		String mpw = uuid.substring(0, uuid.indexOf("-"));
+		log.info("newPass:" + mpw);
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper helper = new MimeMessageHelper(
+						mimeMessage,
+						false, // multipart
+						"utf-8"
+						);
+				helper.setFrom("ehddnl97@gmail.com"); // 보내는 이
+				helper.setTo(email);
+				helper.setSubject("비밀번호 재설정 결과");
+				helper.setText("변경된 비밀번호:" + mpw);
+			}
+		};
+		mailSender.send(preparator);
+		log.info("메일전송 완료");
+		memberService.changePassword(mid, mpw);
+		return "redirect:/login";
+	}
 	
 }

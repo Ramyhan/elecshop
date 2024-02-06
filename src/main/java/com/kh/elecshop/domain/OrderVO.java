@@ -23,7 +23,9 @@ public class OrderVO {
 	private String oaddr_detail;
 	private String opost_code;
 	private int odelivery;
+	private int delivery_status;
 	private Date regdate;
+
 	
 	private List<OrderDetailVO> list;
 	

@@ -8,7 +8,9 @@ create table tbl_order(
     oaddr_detail NVARCHAR2(50) not null, -- 상세주소
     opost_code NVARCHAR2(10) not null, -- 우편번호
     odelivery number not null, -- 0무료 1일반 2특수
+    delivery_status number default 0 not null,
     regdate date default sysdate -- 주문일
+    
 );
 
 
@@ -25,6 +27,8 @@ create table tbl_order_detail(
 create sequence seq_order_ono;
 create sequence seq_order_detail_odno;
 
+alter table tbl_order
+add delivery_status number default 0 not null;
 alter table tbl_order_detail
 add odprice number default 0 not null;
 

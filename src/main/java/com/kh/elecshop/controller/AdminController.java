@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.NoticeVO;
+import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
@@ -164,5 +166,20 @@ public class AdminController {
 		Map<String, Object> map = adminService.getSearchByNotice(searchDTO,criteria);
 		model.addAttribute("noticeMap", map);
 		return "admin/admin_customtableList";
+	}
+	
+	//어드민 배송정보
+	@GetMapping("/admin_order")
+	public void admin_order(Model model, Criteria criteria) {
+		Map<String, Object> map = adminService.getOrderList(criteria);
+		model.addAttribute("orderMap", map);
+	}
+	
+	@PostMapping("/updateOrderStatus")
+	public ResponseEntity<String> updateOrderStatus(@RequestParam("status") int status, @RequestParam("ono")int ono) {
+		System.out.println(status);
+		System.out.println(ono);
+		
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 }

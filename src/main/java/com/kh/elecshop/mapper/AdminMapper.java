@@ -11,6 +11,7 @@ import com.kh.elecshop.domain.AdminProductSSdDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
+import com.kh.elecshop.domain.OrderVO;
 
 public interface AdminMapper {
 	public List<AdminUserDTO> selectUser(Criteria criteria);
@@ -29,4 +30,6 @@ public interface AdminMapper {
 	public int insertProductImage(List<FileVO> list);
 	public FileVO selectAttrThoumbNailImage(int pno);
 	public String selectPtypeName(int ptype);
+	public List<OrderVO> selectOrderList(Criteria criteria);
+	public int selectOrderTotal();
 }

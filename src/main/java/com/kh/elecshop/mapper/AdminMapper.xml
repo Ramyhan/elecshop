@@ -152,4 +152,14 @@
 		select tname from tbl_product_type
 		where ptype = #{ptype}
 	</select>
+	<!-- 주문 내역 리스트 -->
+	<select id="selectOrderList" resultType="com.kh.elecshop.domain.OrderVO">
+		select * from (select ono, mid, oname, ophone, oprice, oaddr, oaddr_detail, opost_code, odelivery, delivery_status, regdate, rownum rn from tbl_order
+			order by rn desc)
+			where rn between #{startRow} and #{endRow}
+	</select>
+	<!-- 전체 주문 내역 갯수 -->
+	<select id="selectOrderTotal" resultType="int">
+		select count(*) from tbl_order
+	</select>
 </mapper>

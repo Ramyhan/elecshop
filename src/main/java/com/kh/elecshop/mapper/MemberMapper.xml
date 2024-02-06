@@ -35,8 +35,19 @@
 		where mid = #{mid}
 	</update>
 	
+	<update id="changePassword">
+		update tbl_member
+		set
+		mpw = #{mpw}
+		where mid = #{mid}
+	</update>
 	<select id="selectPoint" resultType="int">
 		select mpoint from tbl_member
+		where mid = #{mid}
+	</select>
+	
+	<select id="getEmail" resultType="string">
+		select memail from tbl_member
 		where mid = #{mid}
 	</select>
 </mapper>

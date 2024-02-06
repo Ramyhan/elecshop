@@ -17,11 +17,14 @@ import com.kh.elecshop.domain.AdminProductSSdDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
+import com.kh.elecshop.domain.OrderDetailVO;
+import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.mapper.AdminMapper;
 import com.kh.elecshop.mapper.NoticeMapper;
+import com.kh.elecshop.mapper.OrderDetailMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,7 +36,9 @@ public class AdminServiceImpl implements AdminService{
 	private NoticeMapper noticeMapper;
 	@Autowired
 	private AdminMapper adminMapper;
-
+	@Autowired
+	private OrderDetailMapper orderDetailMapper;
+	
 	@Override
 	public Map<String, Object> getSearchByNotice(SearchDTO searchDTO,Criteria criteria) {
 		List<SubNoticeDTO> list = noticeMapper.selectSearchWord(searchDTO);
@@ -144,6 +149,23 @@ public class AdminServiceImpl implements AdminService{
 		PageDTO pageDTO = new PageDTO(criteria, total);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("subNoticeList", subNoticeList);
+		map.put("page", pageDTO);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> getOrderList(Criteria criteria) {
+		int total = adminMapper.selectOrderTotal();
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		
+		List<OrderVO> list = adminMapper.selectOrderList(criteria);
+		log.info("리스트" + list);
+		for(OrderVO vo : list) {
+			List<OrderDetailVO> odVO = orderDetailMapper.selectMyOrder(vo.getOno());		
+			vo.setList(odVO);
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("orderList", list);
 		map.put("page", pageDTO);
 		return map;
 	}
