@@ -48,4 +48,10 @@ public class IquiryServiceImpl implements IquiryService {
 		return (count == 1) ? true : false;
 	}
 
+	@Override
+	public List<IquiryVO> getIquiryByMid(String mid) {
+		List<IquiryVO> list = iquiryMapper.selectIquiryByMid(mid);
+		return list;
+	}
+
 }

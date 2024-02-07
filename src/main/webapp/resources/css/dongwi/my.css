@@ -553,13 +553,16 @@ footer{
   margin-right: 10px; 
 }
 .myPage-like {
-	
 	background-color: #303030;
     float: left;
 /*     height: 100%; */
     width: 100%;
 /*     position: relative; */
-	
+}
+.myPage-iquiry {
+	background-color: #303030;
+    float: left;
+    width: 100%;
 }
 
 .side-myPage-point > ul > li:nth-child(2) > a{

@@ -27,4 +27,6 @@ public class ProductVO {
 	private String pimage_info1;
 	private String pimage_info2;
 	private Date pregdate;
+	private int order_count;
+	private int isDelete;
 }
