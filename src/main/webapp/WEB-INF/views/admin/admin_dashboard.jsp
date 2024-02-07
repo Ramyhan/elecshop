@@ -6,17 +6,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
-<style>
-/* 	.summary-table { */
-/* 		border-collapse: inherit; */
-/* 	} */
-	
-/*  	.admin-iquiry {  */
-/*  		width: 583px;  */
-/*  		height: 428px; */
-/*  		bottom: 40px; */
-/*  	} */
-</style>
 <script>
 $(function() {
 	// 문의내용 확인 모달
