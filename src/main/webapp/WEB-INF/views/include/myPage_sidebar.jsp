@@ -17,7 +17,7 @@
 			<li><a href="/myPage/myorder">내 주문내역</a></li>
 			<li><a href="/myPage/like">찜 목록</a></li>
 			<li><a href="#">나의 문의 내역</a></li>
-			<li><a href="#">계정 탈퇴</a></li>
+			<li><a href="/myPage/resign">계정 탈퇴</a></li>
 		</ul>
 	</div>
 </div>

@@ -1,10 +1,15 @@
 package com.kh.elecshop.controller;
 
 import java.util.List;
+import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +49,8 @@ public class MyPageController {
 	
 	@Autowired
 	private OrderService orderService;
-	
-	
+	@Autowired
+	private JavaMailSender mailSender;
 	@GetMapping("/myInfo")
 	public void myInfo() {
 		
@@ -87,7 +92,7 @@ public class MyPageController {
 		}
 		return "redirect:/myPage/modify";
 	}
-	
+	// 회원 정보 수정
 	@PostMapping("/modifyMember")
 	public String modifyMember(MemberVO memberVO, RedirectAttributes rttr, HttpSession session) {
 		boolean result = memberService.modifyMember(memberVO);
@@ -103,7 +108,7 @@ public class MyPageController {
 		rttr.addFlashAttribute("modifyResult", "fail");
 		return "redirect:/myPage/myInfo";
 	}
-	
+	// 찜 목록
 	@GetMapping("/like")
 	public void likeList(HttpSession session, Model model) {
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
@@ -113,5 +118,51 @@ public class MyPageController {
 		model.addAttribute("productDTO", productDTO);
 	}
 	
+	
+	// 회원 탈퇴 페이지
+	@GetMapping("/resign")
+	public void resign() {
+		
+	}
+	// 회원 탈퇴 폼
+	@GetMapping("/resignForm")
+	public void resignForm() {
+		
+	}
+	// 회원 탈퇴 패스워드 체크
+	@PostMapping("/checkReSign")
+	public String checkReSign(LoginDTO loginDTO, RedirectAttributes rttr) {
+		MemberVO memberVO = memberService.login(loginDTO);
+		if(memberVO == null) {
+			rttr.addFlashAttribute("checkIdResult", "fail");
+			return "redirect:/myPage/resign";
+		}
+		return "redirect:/myPage/resignForm";
+	}
+	
+	//회원 탈퇴
+	@PostMapping("/reSignRun")
+	public String reSign(String mid) {
+		String email = memberService.getEmail(mid);
+		log.info(email);
+		String uuid = UUID.randomUUID().toString(); // asdfaf-asdfasdfa-
+		String email_code = uuid.substring(0, uuid.indexOf("-"));
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper helper = new MimeMessageHelper
+						(mimeMessage, false, "utf-8");
+				helper.setFrom("ehddnl97@gmail.com");
+				helper.setTo(email);
+				helper.setSubject("계정 탈퇴 코드");
+				helper.setText("계정 탈퇴 코드 : " + email_code);
+			}
+		};
+		mailSender.send(preparator);
+		
+		return email_code;
+	}
 	
 }
