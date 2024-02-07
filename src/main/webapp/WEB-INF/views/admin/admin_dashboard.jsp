@@ -1,22 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
-<style>
-/* 	.summary-table { */
-/* 		border-collapse: inherit; */
-/* 	} */
-	
-/*  	.admin-iquiry {  */
-/*  		width: 583px;  */
-/*  		height: 428px; */
-/*  		bottom: 40px; */
-/*  	} */
-</style>
 <script>
 $(function() {
 	// 문의내용 확인 모달
@@ -109,10 +98,6 @@ $(function() {
 				<div class="admin-graph">
 					<div class="admin-sub-title">
 						<span>방문자 현황</span>
-			<div class="graph-summary">
-				<div class="admin-graph">
-					<div class="admin-sub-title">
-						<span>방문자 현황</span>
 					</div>
 					<div class="div-hr"></div>
 					<div style="width: 90%; height: auto; display: flex; justify-content: center;">
@@ -164,139 +149,6 @@ $(function() {
 							     }
 							 }
 							});
-		
-					</script>
-		<!--   					<script src="/resources/css/dongyeong/chart.js"></script> -->
-					</div>
-				</div>
-					<div class="admin-summary">
-						<div class="admin-sub-title">
-							<span>일자별 요약</span>
-						</div>
-						<div class="div-hr"></div>
-						<div>
-							<table class="summary-table">
-							  <thead>
-							    <tr>
-							      <th>일자</th>
-							      <th>주문수</th>
-							      <th>방문자</th>
-							      <th>매출액</th>
-							      <th>가입</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  <c:forEach items="${dayInfoList}" var="dayInfoDTO">
-							  	<tr>
-							      <td>${dayInfoDTO.vdate}</td>
-							      <td>${dayInfoDTO.order_count}</td>
-							      <td>${dayInfoDTO.vcount}</td>
-							      <td>${dayInfoDTO.total_price}</td>
-							      <td>${dayInfoDTO.join_count}</td>
-							    </tr>
-							  </c:forEach>
-							  </tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="iquiry-notice">
-					<div class="admin-iquiry">
-						<div class="admin-sub-title">
-							<span>문의 관리</span>
-						</div>
-						<div class="div-hr"></div>
-						<div class="iquiry-div">
-						<c:forEach items="${iquiryList}" var="iquiryVO">
-							<div class="iquiry-message">
-								<a href="#" data-ino="${iquiryVO.ino}" class="aIquiry">
-								<span>[문의]</span>
-								<span class="iquiry-first">${iquiryVO.ititle}</span>
-								</a>
-								<div>
-									<span class="iquiry-second-name">${iquiryVO.mid}</span>
-									<span class="iquiry-second-date"><fmt:formatDate value="${iquiryVO.iregdate}" pattern="yy-MM-dd"/></span>
-									<button type="button" class="btn btn-secondary btnRemove" id="btn${iquiryVO.ino}" data-ino="${iquiryVO.ino}">삭제</button>
-								</div>
-							</div>
-						</c:forEach>
-						</div>
-					</div>
-				</div>
-				<div class="div-hr"></div>
-				<div class="iquiry-div">
-				<c:forEach items="${noticeList}" var="noticeVO">
-					<div class="iquiry-message">
-						<a href="/customerCenter/noticePage?nno=${noticeVO.nno}" data-ino="${noticeVO.nno}" class="aNotice">
-						<span>[공지사항]</span>
-						<span class="iquiry-first">${noticeVO.ntitle}</span>
-						</a>
-						<div>
-							<span class="notice-second-date"><fmt:formatDate value="${noticeVO.nregdate}" pattern="yy-MM-dd"/></span>
-							<button type="button" class="btn btn-secondary btnRemove" id="btn${noticeVO.nno}" data-ino="${noticeVO.nno}">삭제</button>
-						</div>
-					</div>
-				</c:forEach>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-					<div class="col-md-12">
-						<div class="modal fade" id="modal-iquiry" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content iquiryModal">
-									<div class="modal-header">
-										<h5 class="modal-title" id="myModalLabel">
-											문의 내용 답장
-										</h5> 
-										<button type="button" class="close" data-dismiss="modal">
-											<span aria-hidden="true">×</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-											<label for="ititle">
-												제목
-											</label>
-											<input type="text" class="form-control" id="ititle" readonly/>
-										</div>
-										<div class="form-group">
-											<label for="imessage">
-												작성자
-											</label>
-											<input type="text" class="form-control imessage" id="mid" readonly></input>
-										</div>
-										<div class="form-group">
-											<label for="imessage">
-												내용
-											</label>
-											<textarea class="form-control imessage" id="imessage" readonly></textarea>
-										</div>
-										<div class="form-group">
-											<label for="ireply">
-												답장
-											</label>
-											<textarea class="form-control" id="ireply" required></textarea>
-										</div>
-									</div>
-									<div class="modal-footer">
-										 
-										<button type="button" class="btn btn-primary btnReply" data-ino="">
-											답장하기
-										</button> 
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">
-											닫기
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			
-		</div>
 		
 					</script>
 		<!--   					<script src="/resources/css/dongyeong/chart.js"></script> -->
