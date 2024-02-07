@@ -445,9 +445,11 @@ footer{
 /* 	background-color: #303030;	 */
 }
 .myPage-modify-main{
+	width: 100%;
+	float: left;
 	display: flex;
 /* 	position: inherit; */
-	height: 100%;
+/* 	height: 100%; */
 /* 	justify-content: flex-start; */
 	background-color: #303030;
 }
