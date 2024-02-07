@@ -187,24 +187,6 @@ em{
 					<textarea class="input" maxlength="1000" style="height: 200px;" id="ncontent" name="ncontent"></textarea>
 					<span style="padding-left: 156px;">0자 입력 / 최대 1000자</span>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div id="divDrop">업로드할 파일을 드래그 &amp; 드롭하세요.</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div  id="fileDiv" 
-							class="d-flex justify-content-center p-3 bg-secondary text-white">
-							<div class="p-2 bg-info div-attach" style="display:none;">
-								<span class="spanFilename">Flex item 1</span>
-								<i class="fa fa-times-circle float-right"></i>
-								<br>
-								<img src="/resources/css/dongyeong/default.png" height="100">
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="inquiry-div-sub d-flex" style="text-align: center; justify-content: space-around;">
 					<div>
 						<input type="radio" name="nstate" id="nstate" value="true">공개
@@ -212,7 +194,7 @@ em{
 					</div>
 				</div>
 				<div class="inquiry-div-sub d-flex justify-content-center">
-					<button type="submit" class="inquiry-btn">문의하기</button>
+					<button type="submit" class="inquiry-btn">공지추가</button>
 				</div>
 			</form>
 			<!-- //notice form -->

@@ -215,13 +215,13 @@ $(function() {
 					<div class="iquiry-div">
 					<c:forEach items="${noticeList}" var="noticeVO">
 						<div class="iquiry-message">
-							<a href="#" data-ino="${noticeVO.nno}" class="aNotice">
+							<a href="/customerCenter/noticePage?nno=${noticeVO.nno}" class="aNotice">
 							<span>[공지사항]</span>
 							<span class="iquiry-first">${noticeVO.ntitle}</span>
 							</a>
 							<div>
-								<span class="notice-second-date"><fmt:formatDate value="${noticeVO.nregdate}" pattern="yy-MM-dd"/></span>
-							<button type="button" class="btn btn-secondary btnRemove" id="btn${noticeVO.nno}" data-ino="${noticeVO.nno}">삭제</button>
+								<span class="iquiry-second-name">${noticeVO.ncategory}</span>
+								<span class="iquiry-second-date"><fmt:formatDate value="${noticeVO.nregdate}" pattern="yy-MM-dd"/></span>
 							</div>
 						</div>
 					</c:forEach>
