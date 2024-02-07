@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
->>>>>>> branch 'master' of https://github.com/Ramyhan/elecshop.git
 <style>
 	.summary-table {
 		border-collapse: inherit;
@@ -226,7 +223,7 @@ $(function() {
 				<div class="iquiry-div">
 				<c:forEach items="${noticeList}" var="noticeVO">
 					<div class="iquiry-message">
-						<a href="#" data-ino="${noticeVO.nno}" class="aNotice">
+						<a href="/customerCenter/noticePage?nno=${noticeVO.nno}" data-ino="${noticeVO.nno}" class="aNotice">
 						<span>[공지사항]</span>
 						<span class="iquiry-first">${noticeVO.ntitle}</span>
 						</a>
