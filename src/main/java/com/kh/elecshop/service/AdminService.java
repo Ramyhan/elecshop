@@ -21,4 +21,5 @@ public interface AdminService {
 	public AdminProductInfoDTO getProductInfo(int pno);
 	public boolean removeProductOption(int pno, int ono);
 	public Map<String, Object> getOrderList(Criteria criteria);
+	public boolean updateOrderStatus(int ono, int status);
 }
