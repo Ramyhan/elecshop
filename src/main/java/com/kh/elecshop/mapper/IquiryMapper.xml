@@ -34,5 +34,11 @@
 		delete from tbl_iquiry
 		where ino = #{ino}
 	</delete>
+	
+	<select id="selectIquiryByMid" resultType="com.kh.elecshop.domain.IquiryVO">
+		select *
+		from tbl_iquiry
+		where mid = #{mid}
+	</select>
 
 </mapper>

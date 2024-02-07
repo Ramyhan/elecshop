@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.elecshop.domain.CouponVO;
+import com.kh.elecshop.domain.IquiryVO;
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PointVO;
 import com.kh.elecshop.domain.ProductDTO;
 import com.kh.elecshop.service.CouponService;
+import com.kh.elecshop.service.IquiryService;
 import com.kh.elecshop.service.LikeService;
 import com.kh.elecshop.service.MemberService;
 import com.kh.elecshop.service.OrderService;
@@ -41,9 +43,10 @@ public class MyPageController {
 	private LikeService likeService;
 	@Autowired 
 	private CouponService couponService;
-	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private IquiryService iquiryService;
 	
 	
 	@GetMapping("/myInfo")
@@ -111,6 +114,15 @@ public class MyPageController {
 		List<ProductDTO> productDTO = likeService.getLikeList(mid);
 		
 		model.addAttribute("productDTO", productDTO);
+	}
+	
+	@GetMapping("/myIquiry")
+	public void myIquiry(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		String mid = memberVO.getMid();
+		
+		List<IquiryVO> IquiryList = iquiryService.getIquiryByMid(mid);
+		model.addAttribute("IquiryList", IquiryList);
 	}
 	
 	
