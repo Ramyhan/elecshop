@@ -26,7 +26,7 @@
 		<load-on-startup>1</load-on-startup>
 		
 		<multipart-config>
-			<location>C:\image</location>
+			<location>C:\Users\KH302\Desktop\upload</location>
 			<max-file-size>5242880</max-file-size>
 			<max-request-size>26214400</max-request-size>
 			<file-size-threshold>5242880</file-size-threshold>

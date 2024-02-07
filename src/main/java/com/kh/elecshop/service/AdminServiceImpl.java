@@ -1,5 +1,6 @@
 package com.kh.elecshop.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,7 +168,20 @@ public class AdminServiceImpl implements AdminService{
 			productInfoDTO.setOptionList(OptionList);
 		}
 		List<FileVO> fileList = adminMapper.selectProductInfoImage(pno);
+		
 		if(fileList != null) {
+			List<FileVO> thoumbImage =  new ArrayList<FileVO>();
+			List<FileVO> infoImage =  new ArrayList<FileVO>();
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO vo = fileList.get(i);
+				if(vo.getAthoumbnail().equals("y")) {
+					thoumbImage.add(vo);
+				}else {
+					infoImage.add(vo);
+				}
+			}
+			productInfoDTO.setThoumbnailImageList(thoumbImage);
+			productInfoDTO.setInfoImageList(infoImage);
 			productInfoDTO.setAttrProductList(fileList);
 		}
 		return productInfoDTO;
@@ -176,6 +190,14 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public boolean removeProductOption(int pno, int ono) {
 		int count = adminMapper.deleteOption(pno, ono);
+		if(count == 1) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean removeProductImage(int ano) {
+		int count = adminMapper.deleteImage(ano);
 		if(count == 1) {
 			return true;
 		}

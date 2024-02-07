@@ -34,5 +34,9 @@ public class AdminProductInfoDTO {
 	private List<AdminProductOptionDTO> colorList;
 	private List<AdminProductOptionDTO> ramList;
 	private List<AdminProductOptionDTO> ssdList;
+	
 	private List<FileVO> attrProductList;
+	
+	private List<FileVO> thoumbnailImageList;
+	private List<FileVO> infoImageList;
 }
