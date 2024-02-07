@@ -421,8 +421,8 @@
 							<div class="input-cell">
 								<select name="pdno" class="select-sound" disabled>
 									<option>--선택--</option>
-									<option value="4">키보드</option>
-									<option value="5">마우스</option>
+									<option value="4">마우스</option>
+									<option value="5">키보드</option>
 								</select>
 							</div>
 						</div>

@@ -72,59 +72,66 @@
 		border-bottom: 1px solid rgba(0,0,0,0.4);
 	}
 	.admin-border{
-		background-color: #E5E1DA;
-		flex: 1 0 auto;
+		display: flex;
+    	flex-direction: column;
+    	align-items: center;
+	}
+	.graph-summary{
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 	.admin-day{
 		background-color: white;
-	    position: relative;
-	    width: 72%;
-	    height: 7%;
-	    transform: translate(7%, 16%);
-	    display: flex;
+	    width: 92%;
+	    height: 10%;
+	    margin: 10 0 10 0;
+    	border: 1px solid rgba(0,0,0,0.2);
+	}
+	.admin-graph,.admin-summary,.admin-iquiry,.admin-notice{
+		margin: 0 15 0 15;
+		border: 1px solid rgba(0,0,0,0.5);
 	}
 	.admin-graph{
 		background-color: white;
-	    position: relative;
-	    width: 36%;
-	    height: 40%;
-	    transform: translate(14%, 7%);
 	    display: flex;
    		flex-direction: column;
     	align-items: center;
+    	width: 45%;
+    	height: 95%;
 	}
 	.admin-summary{
-		display: grid;
    	 	align-items: center;
 		background-color: white;
-	    position: relative;
-	    width: 35%;
-	    height: 40%;
-	    transform: translate(120%, -93%);
+	    width: 45%;
+	    height: 95%;
+	}
+	.iquiry-notice{
+		display: flex;
+	    flex-direction: row;
+	    height: 50%;
+	    width: 100%;
+	    justify-content: center;
 	}
 	.admin-iquiry{
 		background-color: white;
-	    position: relative;
-	    width: 35%;
-	    height: 40%;
-	    transform: translate(15%, -99%);
-	    overflow: auto;
+	    width: 45%;
+	    height: 95%;
 	}
 	.admin-notice{
 		background-color: white;
-	    position: relative;
-	    width: 35%;
-	    height: 35%;
-	    transform: translate(120%, -195%);
+	    width: 45%;
+	    height: 95%;
 	    overflow: auto;
 	}
 	.admin-info{
 		background-color: white;
 	    text-align: center;
-	    position: relative;
 	    width: 20%;
 	    height: 48.6%;
-	    transform: translate(392%, -259%);
 	}
 	.day-tag{
 		display: inline-block;
@@ -146,8 +153,11 @@
     	padding: 0 10 0 10;
     	border-radius: 20px;
 	}
+	.summary-table{
+		height: 80%;
+	}
 	.admin-sub-title{
-			margin: 4px;
+		margin: 4px;
 		font-weight: 700;
 		text-align: center;
 	}
