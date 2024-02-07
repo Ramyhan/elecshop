@@ -160,8 +160,8 @@ $(function() {
 						</div>
 						<div class="div-hr"></div>
 						<div>
-							<table class="summary-table">
-							  <thead>
+							<table class="table summary-table">
+							  <thead class="summary-thead">
 							    <tr>
 							      <th>일자</th>
 							      <th>주문수</th>
@@ -172,7 +172,7 @@ $(function() {
 							  </thead>
 							  <tbody>
 							  <c:forEach items="${dayInfoList}" var="dayInfoDTO">
-							  	<tr>
+								<tr>
 							      <td>${dayInfoDTO.vdate}</td>
 							      <td>${dayInfoDTO.order_count}</td>
 							      <td>${dayInfoDTO.vcount}</td>
