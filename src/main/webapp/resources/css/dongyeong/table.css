@@ -6,7 +6,7 @@ th,
 td {
   padding: 6px 15px;
 }
-th {
+.customer-thead th {
   background: #ffbe33;
   color: black;
   text-align: left;

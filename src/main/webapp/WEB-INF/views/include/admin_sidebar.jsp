@@ -19,6 +19,13 @@ $(function(){
 	});
 });
 </script>
+<style>
+		ul{
+		list-style: none;
+    	margin:0px;
+    	padding:0px;
+	}
+</style>
 <div class="scroll-div">
 			<a class="scroll-a" href="#">
 			<i class="scroll-right fa fa-angle-double-right" style="display: none;"></i>

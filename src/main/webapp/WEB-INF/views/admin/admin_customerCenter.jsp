@@ -227,7 +227,7 @@ $(function(){
 				<div class="col-md-12 costomer-div">
 					<table class="table">
 	<thead>
-		<tr style="text-align: center;">
+		<tr style="text-align: center;" class="customer-thead">
 			<th><input type="checkbox" class="notice-check-all"></th>
 			<th>고유번호</th>
 			<th>카테고리</th>
