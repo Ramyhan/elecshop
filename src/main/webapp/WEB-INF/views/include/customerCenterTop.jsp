@@ -81,7 +81,7 @@
 
 <section class="main-section no-sub-nav">
 	<img id="image" src="/resources/images/main_img.png">
-	<div class="main-div container">
+	<div class="container">
 		<div class="col">
 			<div class="qna-title col"
 				style="text-align: center; padding-top: 50px; padding-bottom: 50px;">지원에
