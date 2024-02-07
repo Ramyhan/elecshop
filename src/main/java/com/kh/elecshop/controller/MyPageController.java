@@ -144,20 +144,16 @@ public class MyPageController {
 		
 	}
 	// 회원 탈퇴 패스워드 체크
-	@PostMapping("/checkReSign")
+	@PostMapping("/checkResign")
 	public String checkReSign(LoginDTO loginDTO, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);
 		if(memberVO == null) {
 			rttr.addFlashAttribute("checkIdResult", "fail");
 			return "redirect:/myPage/resign";
 		}
-		return "redirect:/myPage/resignForm";
-	}
-	
-	//회원 탈퇴
-	@PostMapping("/reSignRun")
-	public String reSign(String mid) {
-		String email = memberService.getEmail(mid);
+		rttr.addFlashAttribute("checkIdResult", "true");
+		
+		String email = memberService.getEmail(memberVO.getMid());
 		log.info(email);
 		String uuid = UUID.randomUUID().toString(); // asdfaf-asdfasdfa-
 		String email_code = uuid.substring(0, uuid.indexOf("-"));
@@ -175,8 +171,16 @@ public class MyPageController {
 			}
 		};
 		mailSender.send(preparator);
-		
-		return email_code;
+		rttr.addFlashAttribute("email_code", email_code);
+		return "redirect:/myPage/resignForm";
+	}
+	
+	//회원 탈퇴
+	@PostMapping("/resignRun")
+	public String reSign(String mid, HttpSession session) {
+		memberService.memberDisabled(mid);
+		session.removeAttribute("loginInfo");
+		return "redirect:/login";
 	}
 	
 }

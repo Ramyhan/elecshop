@@ -9,7 +9,7 @@
 			<h1 style="color:red;">회원 탈퇴 페이지</h1>
 			<p>비밀번호 재확인</p>
 			<div class="myPage-line"></div>
-			<form role="form" action="/myPage/checkReSign" method="post">
+			<form role="form" action="/myPage/checkResign" method="post">
 				<div class="form-group">
 					<label for="id"> 아이디 </label> <input type="text"
 						class="form-control" id="mid" name="mid" value="${loginInfo.mid }"
