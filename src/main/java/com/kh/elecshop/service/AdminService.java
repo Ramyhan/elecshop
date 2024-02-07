@@ -19,6 +19,6 @@ public interface AdminService {
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	public Map<String, Object> getAdminNoticeList(Criteria criteria);
 	public AdminProductInfoDTO getProductInfo(int pno);
-	public boolean removeProductOption(int ono, int pno);
+	public boolean removeProductOption(int pno, int ono);
 	public Map<String, Object> getOrderList(Criteria criteria);
 }

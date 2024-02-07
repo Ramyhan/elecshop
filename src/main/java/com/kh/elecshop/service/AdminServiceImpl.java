@@ -174,8 +174,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public boolean removeProductOption(int ono, int pno) {
-		int count = adminMapper.deleteOption(ono, pno);
+	public boolean removeProductOption(int pno, int ono) {
+		int count = adminMapper.deleteOption(pno, ono);
 		if(count == 1) {
 			return true;
 		}

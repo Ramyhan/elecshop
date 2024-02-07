@@ -11,6 +11,7 @@ $(function(){
 	});
 	$(document).on("click",".btn-delete",function(){
 		console.log(this);
+		var that = $(this);
 		var ono = $(this).attr("data-ono");
 		var pno = $(this).attr("data-pno");
 		console.log(ono);
@@ -23,11 +24,29 @@ $(function(){
 			}
 			$.post("/admin/admin_deleteOption",sData,function(rData){
 				console.log(rData);
+				if(rData == true){
+					var div = that.closest("div").parent();
+					div.remove();
+				}
 			});
+		}else{
 		}
+	});
+	$("#btn-add-color").click(function(){
+		
 	});
 });
 </script>
+<style>
+	.ram-div,.ssd-div,.color-div{
+		width: 15%;
+		margin: 20 30 20 30;
+	}
+	.ram-magin-div,.ssd-magin-div,.color-magin-div{
+	margin: 20 0 20 0;
+	border: 1px solid rgba(0,0,0,0.5);
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
@@ -46,7 +65,7 @@ $(function(){
 							<span>상품제목</span>
 							<input name="pname" class="product-name" type="text" value="${productInfo.pname}">
 							<span>상품가격</span>
-							<input name="pname" class="product-name" type="text" value="${productInfo.pprice}"><fmt:formatNumber pattern="#,###" value="${productInfo.pprice}"></fmt:formatNumber>
+							<input name="pname" class="product-name" type="text" value="${productInfo.pprice}">
 							<span>상품번호</span>
 							<input name="pname" class="product-name" type="text" value="${productInfo.pcode}">
 							<c:if test="${productInfo.pdno != 0 || productInfo.pdno == 3 || productInfo.pdno == 4}">
@@ -59,11 +78,10 @@ $(function(){
 									<input type="radio" name="pdno" ${productInfo.pdno == 5? "checked" : ""} >키보드
 								</div>
 							</c:if>
-							<div style="display: flex; justify-content: space-around;">
 								<div>
-									<div class="input-cell" style="display: flex;flex-direction: column;">
+									<div class="input-cell">
 										<span>제조사</span>
-										<select name="mno" class="select-option" id="select-mno">
+										<select name="mno" class="select-option" id="select-mno" style="text-align: center;">
 											<option>--선택--</option>
 											<option value="1">삼성</option>
 											<option value="2">엘지</option>
@@ -84,14 +102,17 @@ $(function(){
 										</select>
 									</div>
 								</div>
-									<div>
-										<c:if test="${productInfo.ramList != null }">
+							<div style="display: flex;">
+								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
+									<div class="ram-div">
+										<button>RAM<i class="fa fa-plus"></i></button>
 										<c:forEach items="${productInfo.ramList}" var="ram">
-											<div style="display: flex;flex-direction: column;">
-											<div style="display: flex; justify-content: space-between;">
-												<span>ram옵션</span>
-												<button data-ono="${ram.ono}" data-pno="${ram.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
-											</div>
+										<div class="ram-magin-div">
+											<div class="ram-option-div" style="display: flex;flex-direction: column;">
+												<div style="display: flex; justify-content: space-between;">
+													<span>ram옵션</span>
+													<button data-ono="${ram.ono}" data-pno="${ram.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
+												</div>
 												<select name="ramList[0].oname" class="select-option select-ram product-ram-select">
 													<option>--선택--</option>
 													<option value="8GB" ${ram.oname == '8GB'? 'selected' : ""}>8GB</option>
@@ -100,13 +121,16 @@ $(function(){
 												</select>
 												<input type="number" value="${ram.oprice}" pattern="#,###">
 											</div>
+										</div>
 										</c:forEach>
-										</c:if>
 									</div>
-									<div>
-										<c:if test="${productInfo.ssdList != null }">
-											<c:forEach items="${productInfo.ssdList }" var="ssd">
-												<div style="display: flex;flex-direction: column;">
+								</c:if>
+								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
+									<div class="ssd-div">
+										<button>SSD<i class="fa fa-plus"></i></button>
+										<c:forEach items="${productInfo.ssdList }" var="ssd">
+											<div class="ssd-magin-div">
+												<div class="ssd-option-div" style="display: flex;flex-direction: column;">
 													<div style="display: flex; justify-content: space-between;">
 														<span>ssd옵션</span>
 														<button data-ono="${ssd.ono}" data-pno="${ssd.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
@@ -120,16 +144,19 @@ $(function(){
 													</select>
 													<input type="number" value="${ssd.oprice}" pattern="#,###">
 												</div>
-											</c:forEach>
-										</c:if>
+											</div>
+										</c:forEach>
 									</div>
-									<div>
-										<c:if test="${productInfo.colorList != null }">
-											<c:forEach items="${productInfo.colorList}" var="color">
-												<div style="display: flex;flex-direction: column;">
+								</c:if>
+								<c:if test="${productInfo.ptype != 2}">
+									<div class="color-div">
+										<button id="btn-add-color">COLOR<i class="fa fa-plus"></i></button>
+										<c:forEach items="${productInfo.colorList}" var="color">
+											<div class="color-magin-div">
+												<div id="color-option-div" class="" style="display: flex;flex-direction: column;">
 													<div style="display: flex; justify-content: space-between;">
 														<span>color옵션</span>
-														<button data-color="${color.ono}" data-pno="${color.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
+														<button data-ono="${color.ono}" data-pno="${color.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
 													</div>
 													<select name="colorList[0].oname" class="select-option select-color product-color">
 														<option>--선택--</option>
@@ -139,9 +166,10 @@ $(function(){
 														<option value="Blue" ${color.oname == 'Blue'? 'selected' : ""}>Blue</option>
 													</select>
 												</div>
-											</c:forEach>
-										</c:if>
+											</div>
+										</c:forEach>
 									</div>
+								</c:if>
 							</div>
 							<div style="display: contents;">
 								<span>메인 정보</span>
