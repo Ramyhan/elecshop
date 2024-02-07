@@ -64,7 +64,10 @@ public interface AdminMapper {
 	public List<AdminProductOptionDTO> selectProductInfoColorOption(int pno);
 	//어드민 상품 옵션 삭제
 	public int deleteOption(@Param("pno") int pno,@Param("ono") int ono);
-	
+	//어드민 배송 주문내역 가져오기
 	public List<OrderVO> selectOrderList(Criteria criteria);
+	//어드민 전체 주문내역 수
 	public int selectOrderTotal();
+	//어드민 배송 송장번호 입력
+	public int updateOrderStatus(@Param("ono") int ono, @Param("status") int status);
 }
