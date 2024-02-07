@@ -4,7 +4,8 @@ create table tbl_iquiry(
     constraint fk_mid foreign key(mid) references tbl_member(mid),
     ititle nvarchar2(50) not null,
     imessage nvarchar2(500) not null,
-    ireply nvarchar2(500)
+    ireply nvarchar2(500),
+    iregdate date default sysdate
 );
 
 create sequence seq_ino;

@@ -219,4 +219,11 @@
 	<select id="selectOrderTotal" resultType="int">
 		select count(*) from tbl_order
 	</select>
+	<!-- 주문 내역 송장번호 업데이트 -->
+	<update id="updateOrderStatus">
+		update tbl_order
+		set
+		delivery_status = #{status}
+		where ono = #{ono}
+	</update>	
 </mapper>
