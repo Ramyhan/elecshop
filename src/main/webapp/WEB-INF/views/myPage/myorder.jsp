@@ -6,7 +6,7 @@
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
-<div style="background-color: #303030;" >
+<div style=" height:100%; background-color: #303030;" >
 <div class="myPage-myOrder">
 <div class="container myPage-point-container">
 <h1>주문 내역</h1>
