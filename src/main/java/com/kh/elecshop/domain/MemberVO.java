@@ -24,6 +24,7 @@ public class MemberVO {
 	private Date mregdate;
 	private java.sql.Date mbirthday;
 	private int mpoint;
+	private int mstate;
 }
 
 

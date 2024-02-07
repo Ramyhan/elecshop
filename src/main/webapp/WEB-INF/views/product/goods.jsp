@@ -347,7 +347,7 @@ $(function() {
 							<span style="width: ${gradeDTO.persent}%"></span>
 						</div>
 						<div style="margin-left:130px;">${gradeDTO.average}점 (${gradeDTO.count}건)</div><br><br>
-						<h3>기준가: 원</h3><br><br>
+						<h3>기준가: <fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber>원</h3><br><br>
 						
 						<!-- 상품옵션 -->
 						<div class="divOptionName" id="optionName1">Color</div>
@@ -395,7 +395,14 @@ $(function() {
 							<div style="font-size: 30px; font-family: '고딕'">
 								현재가: <span id="totalPrice"><fmt:formatNumber pattern="#,###">${productVO.pprice}</fmt:formatNumber></span>원
 							</div>
+							<c:choose>
+							<c:when test="${productVO.order_count == 0}">
+								<button type="button" class="btn btn-secondary">상품품절</button>
+							</c:when>
+							<c:otherwise>
 							<button id="btn-product-buy" type="button" class="btn btn-warning" data-pno="${productVO.pno }">구매하기</button>
+							</c:otherwise>
+							</c:choose>
 <!-- 							<button type="button" class="btn btn-success">장바구니에 담기</button> -->
 							<i class="fa fa-shopping-cart" id="btnCart" style="scale:2; margin-left:15px;"
 								title="장바구니에 담기" data-pno="${productVO.pno}"></i>

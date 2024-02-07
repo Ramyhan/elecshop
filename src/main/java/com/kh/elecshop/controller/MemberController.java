@@ -31,6 +31,7 @@ import com.kh.elecshop.mapper.CouponMapper;
 import com.kh.elecshop.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
+import oracle.net.aso.h;
 
 @Controller
 @Log4j
@@ -60,6 +61,7 @@ public class MemberController {
 	public void signup() {
 		
 	}
+	// 회원가입
 	@PostMapping("/registerMember")
 	public String registerMember(MemberVO memberVO, RedirectAttributes rttr) {
 		log.info(memberVO);
@@ -82,17 +84,17 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 	}
-	
+	// 로그인
 	@PostMapping("/loginPost")
 	public void loginPost(LoginDTO loginDTO, Model model, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);
 		if(memberVO == null) {
-			rttr.addFlashAttribute("loginResult", "fail");
-			return;
+		}
+		if(memberVO.getMstate() == 0) {
+			rttr.addFlashAttribute("loginResult", "disabled");
 		}
 		model.addAttribute("loginInfo", memberVO);
 		model.addAttribute("useCookie", loginDTO.isUseCookie());
-		
 	}
 	
 	@GetMapping("/logout")
@@ -100,7 +102,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/login";
 	}
-	
+	// 로그인 체크
 	@PostMapping("/checkLogin")
 	@ResponseBody
 	public String checkLogin(HttpSession session) {
@@ -109,7 +111,7 @@ public class MemberController {
 		return String.valueOf(result);
 	
 	}
-	
+	// 포인트 리스트
 	@GetMapping("/getPoint")
 	@ResponseBody
 	public String getPoint(HttpSession session) {
@@ -128,7 +130,7 @@ public class MemberController {
 		
 		return "password";
 	}
-	
+	// 패스워드 재설정
 	@PostMapping("/resetPassword")
 	public String resetPassword(String mid) {
 		String email = memberService.getEmail(mid);
@@ -147,14 +149,16 @@ public class MemberController {
 						);
 				helper.setFrom("ehddnl97@gmail.com"); // 보내는 이
 				helper.setTo(email);
-				helper.setSubject("비밀번호 재설정 결과");
-				helper.setText("변경된 비밀번호:" + mpw);
+				helper.setSubject("비밀번호 재설정");
+				helper.setText("발급된 임시 비밀번호 : " + mpw);
 			}
 		};
 		mailSender.send(preparator);
-		log.info("메일전송 완료");
 		memberService.changePassword(mid, mpw);
 		return "redirect:/login";
 	}
+	
+	
+	
 	
 }

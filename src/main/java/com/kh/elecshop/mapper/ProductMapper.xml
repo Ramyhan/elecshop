@@ -9,6 +9,7 @@
 		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
 		from tbl_product
 		where ptype = #{ptype}
+		and isdelete = 0
 	</select>
 	
 	<select id="selectProduct" resultType="com.kh.elecshop.domain.ProductVO">
@@ -22,13 +23,15 @@
 		from tbl_product
 		where ptype = #{ptype}
 		and pname like '%'||#{keyword}||'%'
+		and isdelete = 0
 	</select>
 	
 	<select id="selectByManu" resultType="com.kh.elecshop.domain.ProductDTO" parameterType="string">
 		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
 		from tbl_product
 		where ptype = #{ptype}
-		and mno in (${manuval}) 
+		and mno in (${manuval})
+		and isdelete = 0
 	</select>
 	
 	<select id="selectByOption" resultType="com.kh.elecshop.domain.ProductDTO">
@@ -40,6 +43,7 @@
 			#{option}
 		</foreach>
 		and tbl_product.pno = tbl_product_option.pno
+		and isdelete = 0
 	</select>
 	
 	<select id="selectByPdno" resultType="com.kh.elecshop.domain.ProductDTO" parameterType="string">
@@ -47,6 +51,7 @@
 		from tbl_product
 		where ptype = #{ptype}
 		and pdno in (${optionval})
+		and isdelete = 0
 	</select>
 	
 	

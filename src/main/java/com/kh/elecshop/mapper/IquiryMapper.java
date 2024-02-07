@@ -15,5 +15,7 @@ public interface IquiryMapper {
 	public int updateReply(IquiryVO iquiryVO);
 	
 	public int deleteIquiry(int ino);
+	
+	public List<IquiryVO> selectIquiryByMid(String mid);
 
 }

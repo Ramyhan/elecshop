@@ -7,6 +7,7 @@
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
 <!-- 포인트 -->
+<div style=" height: 100%; background-color: #303030;">
 <div class="myPage-point">
 <div class="container myPage-point-container">
 <h1>포인트 내역</h1>
@@ -44,7 +45,7 @@
 </div>
 </div>
 </div>
-
+</div>
 <script>
 $(function(){
 	if($(".point-list:hidden").length == 0){

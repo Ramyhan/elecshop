@@ -6,8 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.elecshop.domain.MemberVO;
 
@@ -16,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 
-	@Override
+	@Override // 컨트롤러 진입 전
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		log.info("preHandle");
@@ -28,7 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		return true;
 	}
 	
-	@Override
+	@Override // 컨트롤러 진입 후 뷰 들어가기 전
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		log.info("postHandle");
@@ -36,7 +40,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		MemberVO memberVO = (MemberVO)map.get("loginInfo");
 		log.info(memberVO);
 		modelAndView.setView(null);
-		if (memberVO == null) {
+		FlashMap flashMap = new FlashMap();
+		if(memberVO == null) {
+			flashMap.put("loginResult", "fail");
+			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
+			flashMapManager.saveOutputFlashMap(flashMap, request, response);
+			modelAndView.setViewName("redirect:/login");
+		}
+		if (memberVO.getMstate() == 0) {
+			flashMap.put("loginResult", "disabled");
+			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
+			flashMapManager.saveOutputFlashMap(flashMap, request, response);
 			modelAndView.setViewName("redirect:/login");
 		}else {
 			Boolean useCookie = (boolean)map.get("useCookie");

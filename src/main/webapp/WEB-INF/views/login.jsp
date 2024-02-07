@@ -45,6 +45,8 @@ $(function (){
 	console.log(loginResult);
 	if(loginResult == "fail"){
 		alert("로그인 실패");
+	}else if(loginResult == "disabled"){
+		alert("탈퇴된 회원입니다.");
 	}
 	var cookie = document.cookie;
 	console.log(cookie);

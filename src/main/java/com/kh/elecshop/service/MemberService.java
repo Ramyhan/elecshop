@@ -14,4 +14,5 @@ public interface MemberService {
 	public int selectPoint(String mid);
 	public boolean changePassword(String mid, String mpw);
 	public String getEmail(String mid);
+	public boolean memberDisabled(String mid);
 }

@@ -6,7 +6,7 @@
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
 <!-- /사이드바 -->
-<div style="background-color: #303030;" >
+<div style=" height:100%; background-color: #303030;" >
 <div class="myPage-myOrder">
 <div class="container myPage-point-container">
 <h1>주문 내역</h1>
@@ -21,9 +21,9 @@
 			<div class="card myOrder-card">
 				<div class="card-header">
 					 <a class="card-link collapsed myOrder-card-title" data-toggle="collapse" 
-					 data-parent="#card-460431" href="#product-info">주문번호 : ${vo.ono }</a>
+					 data-parent="#card-460431" href="#product-info-${vo.ono }">주문번호 : ${vo.ono }</a>
 				</div>
-				<div id="product-info" class="collapse">
+				<div id="product-info-${vo.ono }" class="collapse">
 						<c:forEach var="detail" items="${vo.list }">
 					<div class="card-body">
 							<div class="buy-prodect row buy-product">

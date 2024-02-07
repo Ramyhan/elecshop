@@ -54,5 +54,10 @@ public class MemberServiceImpl implements MemberService {
 		String email = memberMapper.getEmail(mid);
 		return email;
 	}
+	@Override
+	public boolean memberDisabled(String mid) {
+		int count = memberMapper.memberDisabled(mid);
+		return (count == 1) ? true : false;
+	}
 
 }

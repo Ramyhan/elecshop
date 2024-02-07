@@ -445,9 +445,11 @@ footer{
 /* 	background-color: #303030;	 */
 }
 .myPage-modify-main{
+	width: 100%;
+	float: left;
 	display: flex;
 /* 	position: inherit; */
-	height: 100%;
+/* 	height: 100%; */
 /* 	justify-content: flex-start; */
 	background-color: #303030;
 }
@@ -470,18 +472,22 @@ footer{
 
 /* 마이페이지 포인트, 쿠폰 */
 .myPage-point {
-	display: flex;
-	height: 100%;
+	width: 100%;
+	float: left;
+/* 	display: flex; */
+/* 	height: 100%; */
 	background-color: #303030;
-	justify-content: center;
-	align-items: center;
+/* 	justify-content: center; */
+/* 	align-items: center; */
 }
 .myPage-point {
-	display: flex;
-	height: 100%;
-	background-color: #303030;
-	justify-content: center;
-	align-items: center;
+	width: 100%;
+	float: left;
+/* 	display: flex; */
+/* 	height: 100%; */
+/* 	background-color: #303030; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
 }
 .myPage-point-container > h1{
 	color: white; 
@@ -504,15 +510,18 @@ footer{
 .coupon-table{
 	color: white;
 }
+
+/* 마이페이지 내 주문내역 */
 .myPage-myOrder{
-	display: flex;
-	height: 100%;
+	width: 100%;
+	float: left;
+/* 	display: flex; */
+/* 	height: 100%; */
 	background-color: #303030;
-	justify-content: center;
+/* 	justify-content: center; */
 /* 	align-items: center; */
 }
 
-/* 마이페이지 내 주문내역 */
 .myPage-myOrder h2{
 	color: white; 
 	font-family: 굴림체;
@@ -544,13 +553,16 @@ footer{
   margin-right: 10px; 
 }
 .myPage-like {
-	
 	background-color: #303030;
     float: left;
 /*     height: 100%; */
     width: 100%;
 /*     position: relative; */
-	
+}
+.myPage-iquiry {
+	background-color: #303030;
+    float: left;
+    width: 100%;
 }
 
 .side-myPage-point > ul > li:nth-child(2) > a{

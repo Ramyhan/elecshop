@@ -9,13 +9,13 @@
 		values
 		(seq_member_mno.nextval, #{mname}, #{mid}, #{mpw}, #{memail}, #{maddr}, #{maddr_detail}, #{mpost_code}, #{mphone}, #{mbirthday})
 	</insert>
-	
+<!-- 	로그인 -->
 	<select id="login" resultType="com.kh.elecshop.domain.MemberVO">
 		select * from tbl_member
 		where mid = #{mid}
 		and mpw = #{mpw}
 	</select>
-	
+<!-- 	회원 정보 수정 -->
 	<update id="updateMember">
 		update tbl_member 
 		set
@@ -28,26 +28,34 @@
 		mbirthday = #{mbirthday}
 		where mid = #{mid}
 	</update>
-	
+<!-- 	포인트 업데이트 -->
 	<update id="updatePoint">
 		update tbl_member set
 			mpoint = mpoint + #{ppoint}
 		where mid = #{mid}
 	</update>
-	
+<!-- 	패스워드 변경 -->
 	<update id="changePassword">
 		update tbl_member
 		set
 		mpw = #{mpw}
 		where mid = #{mid}
 	</update>
+<!-- 	회원 포인트 목록 -->
 	<select id="selectPoint" resultType="int">
 		select mpoint from tbl_member
 		where mid = #{mid}
 	</select>
-	
+<!-- 	이메일 가져오기 -->
 	<select id="getEmail" resultType="string">
 		select memail from tbl_member
 		where mid = #{mid}
 	</select>
+<!-- 	회원 탈퇴(비활성화) -->
+	<update id="memberDisabled">
+	 update tbl_member
+	 set
+	 mstate = 0
+	 where mid = #{mid}
+	</update>
 </mapper>

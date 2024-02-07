@@ -17,4 +17,5 @@ public interface MemberMapper {
 	public int updatePoint(Map<String, Object> map);
 	public int changePassword(@Param("mid") String mid, @Param("mpw") String mpw);
 	public String getEmail(String mid);
+	public int memberDisabled(String mid);
 }
