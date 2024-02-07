@@ -176,7 +176,6 @@ body {
   width: 268px;
   height: 500px;
   margin-right: 10px; 
-	
 }
  .main-card-img-top{ 
    object-fit:cover;      
@@ -534,6 +533,16 @@ footer{
 	margin-top: 60px;
 }
 /* 찜목록 */
+.divProd{
+  overflow: hidden; 
+  object-fit:cover;
+  transform:scale(1.0);        
+  transition: 0.2s ease-in-out;
+  border: solid 2px #202020;
+  width: 268px;
+  height: 500px;
+  margin-right: 10px; 
+}
 .myPage-like {
 	
 	background-color: #303030;
