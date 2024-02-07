@@ -218,7 +218,7 @@ public class AdminController {
 	public ResponseEntity<String> updateOrderStatus(@RequestParam("status") int status, @RequestParam("ono")int ono) {
 		System.out.println(status);
 		System.out.println(ono);
-		
+		adminService.updateOrderStatus(ono, status);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 }

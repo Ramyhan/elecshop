@@ -198,4 +198,10 @@ public class AdminServiceImpl implements AdminService{
 		return map;
 	}
 
+	@Override
+	public boolean updateOrderStatus(int ono, int status) {
+		int count = adminMapper.updateOrderStatus(ono, status);
+		return (count == 1) ? true:false;
+	}
+
 }
