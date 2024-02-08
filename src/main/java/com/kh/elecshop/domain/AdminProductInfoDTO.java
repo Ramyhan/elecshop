@@ -28,6 +28,9 @@ public class AdminProductInfoDTO {
 	private Date pregdate;
 	private int order_count;
 	private int pstate;
+	private String pimage_thoumb;
+	private String pimage_info1;
+	private String pimage_info2;
 	
 	private List<ProductOptionVO> optionList;
 	

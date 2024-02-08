@@ -57,28 +57,40 @@
 				$("#sub-select-div").css("display", "flex");
 				$("#sub-select-div").find("input").attr("disabled",false);
 				$("#sub-select-div").find("select").attr("disabled",false);
+				$("#sub-select-div").find("input").attr("required",true);
+				$("#sub-select-div").find("select").attr("required",true);
 			}else{
 				$("#sub-select-div").css("display", "none");
 				$("#sub-select-div").find("input").attr("disabled",true);
 				$("#sub-select-div").find("select").attr("disabled",true);
+				$("#sub-select-div").find("input").attr("required",false);
+				$("#sub-select-div").find("select").attr("required",false);
 			}
 			if(category == 4){
 				$("#sound-detail").css("display","flex");
 				$("#sound-detail").find("select").attr("disabled",false);
 				$("#sound-detail").find("input").attr("disabled",false);
+				$("#sound-detail").find("select").attr("required",true);
+				$("#sound-detail").find("input").attr("required",true);
 			}else{
 				$("#sound-detail").css("display","none");
 				$("#sound-detail").find("select").attr("disabled",true);
 				$("#sound-detail").find("input").attr("disabled",true);
+				$("#sound-detail").find("select").attr("required",false);
+				$("#sound-detail").find("input").attr("required",false);
 			}
 			if(category == 5){
 				$("#Peripherals-detail").css("display","flex");
 				$("#Peripherals-detail").find("select").attr("disabled",false);
 				$("#Peripherals-detail").find("input").attr("disabled",false);
+				$("#Peripherals-detail").find("select").attr("required",true);
+				$("#Peripherals-detail").find("input").attr("required",true);
 			}else{
 				$("#Peripherals-detail").css("display","none");
 				$("#Peripherals-detail").find("select").attr("disabled",true);
 				$("#Peripherals-detail").find("input").attr("disabled",true);
+				$("#Peripherals-detail").find("select").attr("required",false);
+				$("#Peripherals-detail").find("input").attr("required",false);
 			}
 		});
 		$("#btn-ram").click(function() {
@@ -161,7 +173,7 @@
 		$("#btn-close").click(function(){
 			self.close();
 		})
-		$("#btn-register").click(function(){
+		$("#frm-popup").submit(function(){
 			var preview = $(".image-preview");
 			preview.each(function(i,obj){
 				var file = $(this).attr("data-file");
@@ -189,10 +201,8 @@
 				$("#frm-popup").prepend(hiddenUrl);
 				$("#frm-popup").prepend(hiddenPath);
 				$("#frm-popup").prepend(hiddenThoumb);
-			});
-		$("#frm-popup").submit();
-		opener.parent.location.reload();
-		window.close();
+			});			
+				window.close();
 		});
 				
 		function isImageFile(file) {
@@ -210,7 +220,7 @@
 		</div>
 		<form id="frm-popup" action="/admin/adminProductRegister" method="post" target="/admin/admin_product">
 			<div class="popup-name">
-				<span>상품 이름</span> <input name="pname" class="product-name" type="text">
+				<span>상품 이름</span> <input name="pname" class="product-name" type="text" required>
 			</div>
 			<div class="product-table">
 				<div class="div-header">
@@ -226,13 +236,13 @@
 				</div>
 				<div class="div-cell">
 					<div class="input-cell">
-						<input name="pprice" class="product-input-first" type="number">
+						<input name="pprice" class="product-input-first" type="number" required>
 					</div>
 					<div class="input-cell">
 						<input name="pcode" class="product-input-second" type="text">
 					</div>
 					<div class="input-cell">
-						<input name="order_count" class="product-input-second" type="number">
+						<input name="order_count" class="product-input-second" type="number" required>
 					</div>
 				</div>
 				<div class="div-header">
@@ -248,7 +258,7 @@
 				</div>
 				<div class="div-cell">
 					<div class="input-cell">
-						<select name="ptype" class="select-option product-select">
+						<select name="ptype" class="select-option product-select" required>
 							<option>--선택--</option>
 							<option value="1">노트북</option>
 							<option value="2">모니터</option>
@@ -258,14 +268,14 @@
 						</select>
 					</div>
 					<div class="input-cell">
-						<select name="pstate" class="select-option product-state">
+						<select name="pstate" class="select-option product-state" required>
 							<option>--선택--</option>
 							<option value="1">공개</option>
 							<option value="0">비공개</option>
 						</select>
 					</div>
 					<div class="input-cell">
-						<select name="mno" class="select-option product-state">
+						<select name="mno" class="select-option product-state" required>
 							<option>--선택--</option>
 							<option value="1">삼성</option>
 							<option value="2">엘지</option>
@@ -469,7 +479,7 @@
 			</div>
 			<div class="product_info">
 				<div class="info-div">
-					<textarea name="pinfo_main" class="info-area"></textarea>
+					<textarea name="pinfo_main" class="info-area" required></textarea>
 				</div>
 			</div>
 			<div>
@@ -479,7 +489,7 @@
 			</div>
 			<div class="product_info">
 				<div class="info-div">
-					<textarea name="pinfo1" class="info-area"></textarea>
+					<textarea name="pinfo1" class="info-area" required></textarea>
 				</div>
 			</div>
 			<div>
@@ -489,7 +499,7 @@
 			</div>
 			<div class="product_info">
 				<div class="info-div">
-					<textarea name="pinfo2" class="info-area"></textarea>
+					<textarea name="pinfo2" class="info-area" required></textarea>
 				</div>
 			</div>
 			<div>
@@ -499,7 +509,7 @@
 			</div>
 			<div class="product_info">
 				<div class="info-div">
-					<textarea name="pinfo3" class="info-area"></textarea>
+					<textarea name="pinfo3" class="info-area" required></textarea>
 				</div>
 			</div>
 			<div>
@@ -509,7 +519,7 @@
 			</div>
 			<div>
 				<div>
-					<input class="file-img" type="file">
+					<input class="file-img" type="file" required>
 				</div>
 				<div class="thoumbneil">
 					<div>
@@ -524,7 +534,7 @@
 			</div>
 			<div>
 				<div>
-					<input class="file-img" type="file">
+					<input class="file-img" type="file" required>
 				</div>
 				<div class="image">
 					<div>
@@ -539,7 +549,7 @@
 			</div>
 			<div>
 				<div>
-					<input class="file-img" type="file">
+					<input class="file-img" type="file" required>
 				</div>
 				<div class="image">
 					<div>
@@ -548,7 +558,7 @@
 				</div>
 			</div>
 			<div>
-				<button id="btn-register" type="button">추가하기</button>
+				<button id="btn-register" type="submit">추가하기</button>
 				<button type="button" id="btn-close">닫기</button>
 			</div>
 		</form>

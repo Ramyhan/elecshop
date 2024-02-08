@@ -50,7 +50,7 @@ public class FileUploadController {
 					.afileName(orgFilename)
 					.apath(uploadPath.substring(UPLOAD_PATH.length()))
 					.auuid(uuid.toString())
-					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/s_" +uuid + "_" + orgFilename)
+					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/" +uuid + "_" + orgFilename)
 					.build();
 			attachList.add(fileVO);
 			

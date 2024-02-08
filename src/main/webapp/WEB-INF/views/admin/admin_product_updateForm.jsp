@@ -5,7 +5,10 @@
 <script>
 $(function(){
 	var timage = $("#image-th-div").clone();
-	var infoimage = $("#image-sub-div").clone();
+	var infoimage1 = $("#image-info-sub1-div").clone();
+	var infoimage2 = $("#image-info-sub2-div").clone();
+	
+	
 	$("#select-mno").find("option[value=${productInfo.mno}]").attr("selected",true);
 	$("#btn-productList").click(function(){
 		$(location).attr("href","/admin/admin_product");
@@ -30,9 +33,6 @@ $(function(){
 					div.remove();
 				}
 			});
-		}else{
-			var div = that.closest("div").parent().parent();
-			div.remove();
 		}
 	});
 	$("#btn-add-color").click(function(){
@@ -135,14 +135,32 @@ $(function(){
 	$(document).on("click",".delete-image",function(){
 		var that = $(this);
 		var ano = $(this).attr("data-ano");
-		if(ano != ""){
-			$.post("/admin/deleteImage",{"ano" : ano},function(rData){
-				console.log(rData)
-				if(rData == true){
-					var subDiv = that.closest(".image-sub-div");
-					subDiv.remove();
-				}
-			});
+		
+		var subDiv = that.closest(".image-sub-div");
+		var length = subDiv.length;
+		subDiv.remove();
+		length--;
+		console.log(length);
+		console.log(subDiv);
+		console.log(that.parent().parent());
+		if(that.parent().parent().parent().get(0)== $("#image-thoumb-div").get(0)){
+			if(length == 0){
+				$("#thoumb-input").attr("disabled",false);
+			}else{
+				$("#thoumb-input").prop("disabled",true);
+			}	
+		}else if(that.parent().parent().parent().get(0)== $("#image-info1-div").get(0)){
+			if(length == 0){
+				$("#info1-input").attr("disabled",false);
+			}else{
+				$("#info1-input").prop("disabled",true);
+			}	
+		}else if(that.parent().parent().parent().get(0)== $("#image-info2-div").get(0)){
+			if(length == 0){
+				$("#info2-input").attr("disabled",false);
+			}else{
+				$("#info2-input").prop("disabled",true);
+			}	
 		}
 	});
 	$(".file-image").on("change",function(e){
@@ -168,18 +186,26 @@ $(function(){
 					"data" : formData,
 					"success" : function(rData){
 						if(that.siblings("span").text().trim() == "썸네일 이미지"){
-						var image = timage;
+						var image = timage.clone(true);
 						console.log(rData);
 						var thoumb = $(".image-thoumb-div");
-						thoumb.append(image);
-								image.closest("image").attr("data-ano", "");
+								image.find("i").attr("data-ano", "");
 								image.attr("data-file", rData[0].afileName);
 								image.find("img").attr("data-apath", rData[0].apath);
 								image.find("img").attr("data-uuid", rData[0].auuid);
 								image.find("img").attr("data-url", rData[0].aurl);
 								image.find("img").attr("src","/display?fileName=" + rData[0].aurl);
+								thoumb.append(image);
 						}else{
-							var infoImage = $(".image-info-div");
+							var infoImage1 = infoimage.clone(true);
+							var infoDiv = $("#image-info-div");
+							infoImage1.find("i").attr("data-ano", "");
+							infoImage1.find("img").attr("data-file", rData[0].afileName);
+							infoImage1.find("img").attr("data-apath", rData[0].apath);
+							infoImage1.find("img").attr("data-uuid", rData[0].auuid);
+							infoImage1.find("img").attr("data-url", rData[0].aurl);
+							infoImage1.find("img").attr("src","/display?fileName=" + rData[0].aurl);
+							infoDiv.append(infoImage1);
 						}
 					}
 				});
@@ -353,34 +379,47 @@ $(function(){
 									<div style="display: flex; flex-direction: column;">
 										<div>
 											<span>썸네일 이미지</span>
-											<input type="file" class="file-image">
+												<input type="file" id="thoumb-input" class="file-image" ${not empty productInfo.pimage_thoumb? "disabled" : ''}>
 										</div>
 										<div style="display: flex;"  class="image-thoumb-div">
-											<c:forEach var="thoumbnail" items="${productInfo.thoumbnailImageList}">
-													<div style="display: flex;" class="image-th-div" id="image-th-div">
-														<div class="image-sub-div">
-															<img src="/display?fileName=${thoumbnail.aurl}" style="width: 150;height: 80;border: 1px solid;">
-															<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${thoumbnail.ano}"
-															style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
-														</div>
-													</div>
-											</c:forEach>
+											<div style="display: flex;" class="image-th-div" id="image-th-div">
+												<div class="image-sub-div">
+													<img src="/display?fileName=${productInfo.pimage_thoumb}" style="width: 150;height: 80;border: 1px solid;">
+													<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${thoumbnail.ano}"
+													style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div style="display: flex; flex-direction: column;">
 										<div>
-											<span>정보 이미지</span>
-											<input type="file" class="file-image">
+											<span>정보 이미지1</span>
+											<input type="file" id="info1-input" class="file-image"  ${not empty productInfo.pimage_info1?"disabled" : ''}>
 										</div>
-										<div style="display: flex;"  class="image-info-div">
-									<c:forEach items="${productInfo.infoImageList}" var="image">
+									<div style="display: flex;"  class="image-info1-div" id="image-info1-div">
+										<div style="display: flex;" class="image-info1-sub-div" id="image-info1-sub-div">
 											<div  class="image-sub-div" id="image-sub-div">
-												<img src="/display?fileName=${image.aurl}" style="width: 150;height: 80;border: 1px solid;">
+												<img src="/display?fileName=${productInfo.pimage_info1}" style="width: 150;height: 80;border: 1px solid;">
 												<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${image.ano}"
 												style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
 											</div>
-									</c:forEach>
 										</div>
+									</div>
+								</div>
+								<div style="display: flex; flex-direction: column;">
+									<div>
+										<span>정보 이미지2</span>
+										<input type="file" id="info1-input" class="file-image"  ${not empty productInfo.pimage_info2?"disabled" : ''}>
+									</div>
+									<div style="display: flex;"  class="image-info2-div" id="image-info2-div">
+										<div style="display: flex;" class="image-info-sub2-div" id="image-info-sub2-div">
+											<div  class="image-sub-div" id="image-sub-div">
+												<img src="/display?fileName=${productInfo.pimage_info2}" style="width: 150;height: 80;border: 1px solid;">
+												<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${image.ano}"
+												style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
