@@ -201,10 +201,8 @@
 				$("#frm-popup").prepend(hiddenUrl);
 				$("#frm-popup").prepend(hiddenPath);
 				$("#frm-popup").prepend(hiddenThoumb);
-			});
-// 			$("#frm-popup").submit();
-	// 		opener.parent.location.reload();
-			window.close();
+			});		
+		window.close();
 		});
 				
 		function isImageFile(file) {

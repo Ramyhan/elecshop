@@ -259,11 +259,11 @@ $(function(){
 							<c:if test="${productInfo.pdno != 0 || productInfo.pdno == 3 || productInfo.pdno == 4}">
 								<div>
 									<span>카테고리:</span>
-									<input type="radio" name="pdno" ${productInfo.pdno == 1? "checked" : ""} >스피커
-									<input type="radio" name="pdno" ${productInfo.pdno == 2? "checked" : ""} >헤드셋
-									<input type="radio" name="pdno" ${productInfo.pdno == 3? "checked" : ""} >이어폰
-									<input type="radio" name="pdno" ${productInfo.pdno == 4? "checked" : ""} >마우스
-									<input type="radio" name="pdno" ${productInfo.pdno == 5? "checked" : ""} >키보드
+									<input type="radio" name="pdno" ${productInfo.pdno == 1? "checked" : ""} value="1">스피커
+									<input type="radio" name="pdno" ${productInfo.pdno == 2? "checked" : ""} value="2">헤드셋
+									<input type="radio" name="pdno" ${productInfo.pdno == 3? "checked" : ""} value="3">이어폰
+									<input type="radio" name="pdno" ${productInfo.pdno == 4? "checked" : ""} value="4">마우스
+									<input type="radio" name="pdno" ${productInfo.pdno == 5? "checked" : ""} value="5">키보드
 								</div>
 							</c:if>
 								<div>
@@ -294,7 +294,7 @@ $(function(){
 								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
 									<div class="ram-div">
 										<button id="btn-add-ram">RAM<i class="fa fa-plus"></i></button>
-										<c:forEach items="${productInfo.ramList}" var="ram">
+										<c:forEach items="${productInfo.ramList}" var="ram" varStatus="status">
 										<div class="ram-magin-div" id="ram-magin-div">
 											<div class="ram-option-div" style="display: flex;flex-direction: column;">
 												<div style="display: flex; justify-content: space-between;">
@@ -307,7 +307,7 @@ $(function(){
 													<option value="16GB"  ${ram.oname == '16GB'? 'selected' : ""}>16GB</option>
 													<option value="32GB" ${ram.oname == '32GB'? 'selected' : ""}>32GB</option>
 												</select>
-												<input type="number" value="${ram.oprice}" pattern="#,###">
+												<input type="number" name="ramList[${status.index}].oprice" value="${ram.oprice}" pattern="#,###">
 											</div>
 										</div>
 										</c:forEach>
@@ -316,21 +316,21 @@ $(function(){
 								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
 									<div class="ssd-div">
 										<button id="btn-add-ssd">SSD<i class="fa fa-plus"></i></button>
-										<c:forEach items="${productInfo.ssdList }" var="ssd">
+										<c:forEach items="${productInfo.ssdList }" var="ssd" varStatus="status">
 											<div class="ssd-magin-div" id="ssd-magin-div">
 												<div class="ssd-option-div" style="display: flex;flex-direction: column;">
 													<div style="display: flex; justify-content: space-between;">
 														<span>ssd옵션</span>
 														<button data-ono="${ssd.ono}" data-pno="${ssd.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
 													</div>
-													<select name="ssdList[0].oname" class="select-option select-ssd product-ram-select">
+													<select name="ssdList[${status.index}].oname" class="select-option select-ssd product-ram-select">
 														<option>--선택--</option>
 														<option value="128GB"  ${ssd.oname == '128GB'? 'selected' : ""}>128GB</option>
 														<option value="256GB" ${ssd.oname == '256GB'? 'selected' : ""}>256GB</option>
 														<option value="512GB" ${ssd.oname == '512GB'? 'selected' : ""}>512GB</option>
 														<option value="1TB" ${ssd.oname == '1TB'? 'selected' : ""}>1TB</option>
 													</select>
-													<input type="number" value="${ssd.oprice}" pattern="#,###">
+													<input type="number" name="ssdList[${status.index}].oprice" value="${ssd.oprice}" pattern="#,###">
 												</div>
 											</div>
 										</c:forEach>
@@ -346,7 +346,7 @@ $(function(){
 														<span>color옵션</span>
 														<button data-ono="${color.ono}" data-pno="${color.pno}" type="button" class="btn-delete"><i class="fa fa-times"></i></button>
 													</div>
-													<select name="colorList[0].oname" class="select-option select-color product-color">
+													<select name="colorList[${status.index}].oname" class="select-option select-color product-color">
 														<option>--선택--</option>
 														<option value="Black" ${color.oname == 'Black'? 'selected' : ""}>Black</option>
 														<option value="Red" ${color.oname == 'Red'? 'selected' : ""}>Red</option>
@@ -385,6 +385,7 @@ $(function(){
 											<div style="display: flex;" class="image-th-div" id="image-th-div">
 												<div class="image-sub-div">
 													<img src="/display?fileName=${productInfo.pimage_thoumb}" style="width: 150;height: 80;border: 1px solid;">
+													<input type="hidden" name="pimage_thoumb" value="${productInfo.pimage_thoumb}">
 													<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${thoumbnail.ano}"
 													style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
 												</div>
@@ -400,6 +401,7 @@ $(function(){
 										<div style="display: flex;" class="image-info1-sub-div" id="image-info1-sub-div">
 											<div  class="image-sub-div" id="image-sub-div">
 												<img src="/display?fileName=${productInfo.pimage_info1}" style="width: 150;height: 80;border: 1px solid;">
+												<input type="hidden" name="pimage_info1" value="${productInfo.pimage_info1}">
 												<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${image.ano}"
 												style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
 											</div>
@@ -415,6 +417,7 @@ $(function(){
 										<div style="display: flex;" class="image-info-sub2-div" id="image-info-sub2-div">
 											<div  class="image-sub-div" id="image-sub-div">
 												<img src="/display?fileName=${productInfo.pimage_info2}" style="width: 150;height: 80;border: 1px solid;">
+												<input type="hidden" name="pimage_info2" value="${productInfo.pimage_info2}">
 												<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${image.ano}"
 												style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
 											</div>

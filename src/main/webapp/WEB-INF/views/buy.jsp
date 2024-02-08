@@ -44,7 +44,7 @@
 					<c:forEach var="buyVO" items="${cartList }">
 					<div class="buy-prodect row buy-product">
 						<div>
-							<img class="buy-image" src="/resources/images/${buyVO.pimage_thoumb }">
+							<img class="buy-image" src="/display?fileName=${buyVO.pimage_thoumb }">
 						</div>
 						<div class="buy-prodect-pname buy-pno" data-pno="${buyVO.pno }">
 							<br>
