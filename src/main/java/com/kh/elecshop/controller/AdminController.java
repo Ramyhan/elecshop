@@ -219,7 +219,7 @@ public class AdminController {
 		Map<String, Object> map = adminService.getOrderList(criteria);
 		model.addAttribute("orderMap", map);
 	}
-	
+	//어드민 송장번호
 	@PostMapping("/updateOrderStatus")
 	public ResponseEntity<String> updateOrderStatus(@RequestParam("status") int status, @RequestParam("ono")int ono) {
 		System.out.println(status);
@@ -227,4 +227,9 @@ public class AdminController {
 		adminService.updateOrderStatus(ono, status);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
+	@GetMapping("/admin_point")
+	public void admin_point(Model model, Criteria criteria) {
+		Map<String, Object> map; 
+	}
+	
 }
