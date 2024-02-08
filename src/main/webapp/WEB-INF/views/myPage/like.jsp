@@ -66,7 +66,7 @@ $(function() {
 											<i class="fa fa-times-circle deleteLike" title="삭제하기"
 												style="position: absolute; top: 10px; left: 235px; opacity: 0"
 												data-lno="${productDTO.lno}"></i>
-											<img alt="상품 사진" src="/resources/images/${ productDTO.pimage_thoumb }" style="width:271px; height:271px;"/>
+											<img alt="상품 사진" src="/display?fileName=${ productDTO.pimage_thoumb }" style="width:271px; height:271px;"/>
 											<button class="btnProductInfo" type="submit">자세히 알아보기>></button>
 											<span class="prdName">${productDTO.pname}<br><br></span>
 											<span class="prdInfo">

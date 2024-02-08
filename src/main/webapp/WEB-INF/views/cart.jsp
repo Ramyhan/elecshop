@@ -90,7 +90,7 @@ $(function() {
 										</td>
 										<td>
 											<img class="productImage" alt="상품 사진"
-												src="/resources/images/${cartDTO.pimage_thoumb}"/>
+												src="/display?fileName=${cartDTO.pimage_thoumb}"/>
 										</td>
 										<td style="vertical-align: middle;">${cartDTO.pname}</td>
 										<td style="vertical-align: middle;">
