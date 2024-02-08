@@ -20,6 +20,7 @@ public interface AdminService {
 	public Map<String, Object> getAdminNoticeList(Criteria criteria);
 	public AdminProductInfoDTO getProductInfo(int pno);
 	public boolean removeProductOption(int pno, int ono);
+	public boolean removeProductImage(int ano);
 	public Map<String, Object> getOrderList(Criteria criteria);
 	public boolean updateOrderStatus(int ono, int status);
 }

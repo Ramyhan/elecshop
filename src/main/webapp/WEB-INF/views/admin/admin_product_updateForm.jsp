@@ -4,6 +4,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
+	var timage = $("#image-thoumb-div").clone();
+	var infoimage = $("#image-sub-div").clone();
+	var infoimagess = $(".image-sub-div").clone();
+	var infoimages = $(".image-info-div > div:eq(0)").clone;
+	console.log("timage: ", timage);
+	console.log("infoImage: ", infoimage);
+	console.log("infoimagess: ", infoimagess);
+	console.log("infoimages: ", infoimages);
 	$("#select-mno").find("option[value=${productInfo.mno}]").attr("selected",true);
 	
 	$("#btn-productList").click(function(){
@@ -30,11 +38,172 @@ $(function(){
 				}
 			});
 		}else{
+			var div = that.closest("div").parent().parent();
+			div.remove();
 		}
 	});
 	$("#btn-add-color").click(function(){
-		
+		if($(".color-magin-div").length == 0){
+			var colorClone = "<div class='color-magin-div' id='color-magin-div'>"
+				colorClone +="<div class='color-option-div' style='display: flex;flex-direction: column;'>";
+				colorClone +="<div style='display: flex; justify-content: space-between;'>";
+				colorClone +="<span>ssd옵션</span>";
+				colorClone +="<button data-ono='' data-pno='' type='button' class='btn-delete'><i class='fa fa-times'></i></button>";
+				colorClone +="</div>";
+				colorClone +="<select name='colorList[0].oname' class='select-option select-color product-color-select'>";
+				colorClone +="<option>--선택--</option>";
+				colorClone +="<option value='128GB'>128GB</option>";
+				colorClone +="<option value='256GB'>256GB</option>";
+				colorClone +="<option value='512GB'>512GB</option>";
+				colorClone +="<option value='1TB'>1TB</option>";
+				colorClone +="</select>";
+				colorClone +='</div>';
+				colorClone +='</div>';
+				$(".color-div").append(colorClone);
+		}else{
+			var colorMagin = $(".color-magin-div");
+			console.log(colorMagin);
+			var colorClone = $(this).parent().find("#color-magin-div").clone();
+			console.log("222",colorClone);
+			colorClone.find("button").attr("data-ono","");
+			colorClone.find("button").attr("data-pno","");
+			colorClone.find("select").attr("name", "colorList["+ colorMagin.length +"].oname");
+			colorClone.find("select").find("option:eq(0)").prop("selected",true);
+			colorClone.find("input").val("");
+			$(".color-div").append(colorClone);
+		}
 	});
+	$(document).on("click","#btn-add-ram",function(){
+		console.log($(".ram-magin-div").length);
+		if($(".ram-magin-div").length == 0){
+			var ramClone = "<div class='ram-magin-div' id='ram-magin-div'>"
+				ramClone +="<div class='ram-option-div' style='display: flex;flex-direction: column;'>";
+				ramClone +="<div style='display: flex; justify-content: space-between;'>";
+				ramClone +="<span>ram옵션</span>";
+				ramClone +="<button data-ono='' data-pno='' type='button' class='btn-delete'><i class='fa fa-times'></i></button>";
+				ramClone +="</div>";
+				ramClone +="<select name='ramList[0].oname' class='select-option select-ram product-ram-select'>";
+				ramClone +="<option>--선택--</option>";
+				ramClone +="<option value='8GB'>8GB</option>";
+				ramClone +="<option value='16GB'>16GB</option>";
+				ramClone +="<option value='32GB'>32GB</option>";
+				ramClone +="</select>";
+				ramClone +="<input type='number'>";
+				ramClone +='</div>';
+				ramClone +='</div>';
+				$(".ram-div").append(ramClone);
+		}else{
+			var ramMagin = $(".ram-magin-div");
+			console.log(ramMagin);
+			var ramClone = $(this).parent().find("#ram-magin-div").clone();
+			console.log(ramClone);
+			ramClone.find("button").attr("data-ono","");
+			ramClone.find("button").attr("data-pno","");
+			ramClone.find("select").attr("name", "ramList["+ ramMagin.length +"].oname");
+			ramClone.find("input").attr("name", "ramList["+ ramMagin.length +"].oprice");
+			ramClone.find("select").find("option:eq(0)").prop("selected",true);
+			ramClone.find("input").val("");
+			$(".ram-div").append(ramClone);
+		}
+	});
+	
+	$("#btn-add-ssd").click(function(){
+		if($(".ssd-magin-div").length == 0){
+			var ssdClone = "<div class='ssd-magin-div' id='ssd-magin-div'>"
+				ssdClone +="<div class='ssd-option-div' style='display: flex;flex-direction: column;'>";
+				ssdClone +="<div style='display: flex; justify-content: space-between;'>";
+				ssdClone +="<span>ssd옵션</span>";
+				ssdClone +="<button data-ono='' data-pno='' type='button' class='btn-delete'><i class='fa fa-times'></i></button>";
+				ssdClone +="</div>";
+				ssdClone +="<select name='ssdList[0].oname' class='select-option select-ssd product-ssd-select'>";
+				ssdClone +="<option>--선택--</option>";
+				ssdClone +="<option value='128GB'>128GB</option>";
+				ssdClone +="<option value='256GB'>256GB</option>";
+				ssdClone +="<option value='512GB'>512GB</option>";
+				ssdClone +="<option value='1TB'>1TB</option>";
+				ssdClone +="</select>";
+				ssdClone +="<input type='number'>";
+				ssdClone +='</div>';
+				ssdClone +='</div>';
+				$(".ssd-div").append(ssdClone);
+		}else{
+			var ssdMagin = $(".ssd-magin-div");
+			console.log(ssdMagin);
+			var ssdClone = $(this).parent().find("#ssd-magin-div").clone();
+			ssdClone.find("button").attr("data-ono","");
+			ssdClone.find("button").attr("data-pno","");
+			ssdClone.find("select").attr("name", "ssdList["+ ssdMagin.length +"].oname");
+			ssdClone.find("input").attr("name", "ssdList["+ ssdMagin.length +"].oprice");
+			ssdClone.find("select").find("option:eq(0)").prop("selected",true);
+			ssdClone.find("input").val("");
+			$(".ssd-div").append(ssdClone);
+		}
+	});
+	$(document).on("click",".delete-image",function(){
+		var that = $(this);
+		var ano = $(this).attr("data-ano");
+		if(ano != ""){
+			$.post("/admin/deleteImage",{"ano" : ano},function(rData){
+				console.log(rData)
+				if(rData == true){
+					var subDiv = that.closest(".image-sub-div");
+					subDiv.remove();
+				}
+			});
+		}
+	});
+	$(".file-img").on("change",function(e){
+		console.log("11",timage);
+		console.log("22",infoimage);
+		var that = $(this);
+		var file = e.target.files[0];
+		var filename = e.target.files[0].name;
+		var formData = new FormData();
+		formData.append("uploadFile",file);
+		var reader = new FileReader();
+		console.log(reader);
+		var isImage = isImageFile(file);
+		if(isImage == true){
+			reader.onload = function(e){
+				$.ajax({
+					"url" : "/uploadAjax",
+					"type" : "post",
+					"processData" : false,
+					"contentType" : false,
+					"data" : formData,
+					"success" : function(rData){
+						console.log(rData);
+						var thoumbDiv = that.parent().parent().find(".image-thoumb-div");
+						console.log(thoumbDiv);
+						var image = "<div style='display: flex;' class='image-thoumb-div'>";
+						image += "<div class='image-sub-div'>";
+						image +="<img src='/display?fileName='"+rData[0].aurl + "' style='width: 150;height: 80;border: 1px solid;";
+// 						'data-apath >";
+						image +="<i class='fa fa-times-circle deleteLike delete-image' title='삭제하기'style='position:relative; bottom: 26px; right: 26px; opacity: 1'></i>";
+						image +="</div>";
+						image +="</div>";
+						var subImage = $(".image-info-div");
+						subImage.append(infoimage);
+// 								image.attr("data-file", rData[0].afileName);
+// 								image.find("img").attr("data-apath", rData[0].apath);
+// 								image.find("img").attr("data-uuid", rData[0].auuid);
+// 								image.find("img").attr("data-url", rData[0].aurl);
+// 								image.find("img").attr("src","/display?fileName=" + rData[0].aurl);
+					}
+				});
+			}
+			reader.readAsDataURL(file);
+		}else{
+			alert("이미지 파일만 올릴 수 있습니다");
+			$(".file-img").val("");
+			$(".image-preview").attr("src","/resources/css/dongyeong/default.png");
+			return false;
+		}
+	});
+	function isImageFile(file) {
+	    var ext = file.name.split(".").pop().toLowerCase(); 
+	    return ($.inArray(ext, ["jpg", "jpeg", "gif", "png"]) === -1) ? false : true;
+	}
 });
 </script>
 <style>
@@ -61,13 +230,14 @@ $(function(){
 				<div class="second-div">
 					<div style="width: 80%">
 						<div style="display: flex; flex-direction: column;">
-							<input name="pname" class="product-name" type="hidden" value="${productInfo.pno}">
+						<form action="/admin/updateProduct" method="post"></form>
+							<input name="pno" class="product-name" type="hidden" value="${productInfo.pno}">
 							<span>상품제목</span>
 							<input name="pname" class="product-name" type="text" value="${productInfo.pname}">
 							<span>상품가격</span>
-							<input name="pname" class="product-name" type="text" value="${productInfo.pprice}">
+							<input name="pprice" class="product-name" type="text" value="${productInfo.pprice}">
 							<span>상품번호</span>
-							<input name="pname" class="product-name" type="text" value="${productInfo.pcode}">
+							<input name="pcode" class="product-name" type="text" value="${productInfo.pcode}">
 							<c:if test="${productInfo.pdno != 0 || productInfo.pdno == 3 || productInfo.pdno == 4}">
 								<div>
 									<span>카테고리:</span>
@@ -105,9 +275,9 @@ $(function(){
 							<div style="display: flex;">
 								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
 									<div class="ram-div">
-										<button>RAM<i class="fa fa-plus"></i></button>
+										<button id="btn-add-ram">RAM<i class="fa fa-plus"></i></button>
 										<c:forEach items="${productInfo.ramList}" var="ram">
-										<div class="ram-magin-div">
+										<div class="ram-magin-div" id="ram-magin-div">
 											<div class="ram-option-div" style="display: flex;flex-direction: column;">
 												<div style="display: flex; justify-content: space-between;">
 													<span>ram옵션</span>
@@ -127,9 +297,9 @@ $(function(){
 								</c:if>
 								<c:if test="${productInfo.ptype == 1 or productInfo.ptype == 3}">
 									<div class="ssd-div">
-										<button>SSD<i class="fa fa-plus"></i></button>
+										<button id="btn-add-ssd">SSD<i class="fa fa-plus"></i></button>
 										<c:forEach items="${productInfo.ssdList }" var="ssd">
-											<div class="ssd-magin-div">
+											<div class="ssd-magin-div" id="ssd-magin-div">
 												<div class="ssd-option-div" style="display: flex;flex-direction: column;">
 													<div style="display: flex; justify-content: space-between;">
 														<span>ssd옵션</span>
@@ -152,7 +322,7 @@ $(function(){
 									<div class="color-div">
 										<button id="btn-add-color">COLOR<i class="fa fa-plus"></i></button>
 										<c:forEach items="${productInfo.colorList}" var="color">
-											<div class="color-magin-div">
+											<div id="color-magin-div" class="color-magin-div">
 												<div id="color-option-div" class="" style="display: flex;flex-direction: column;">
 													<div style="display: flex; justify-content: space-between;">
 														<span>color옵션</span>
@@ -177,28 +347,49 @@ $(function(){
 							</div>
 							<div style="display: contents;">
 								<span>서브 정보1</span>
-								<textarea rows="4" cols="50"  name="pmain_info">${productInfo.pinfo1}</textarea>
+								<textarea rows="4" cols="50"  name="pinfo1">${productInfo.pinfo1}</textarea>
 							</div>
 							<div style="display: contents;">
 								<span>서브 정보2</span>
-								<textarea rows="4" cols="50"  name="pmain_info">${productInfo.pinfo2}</textarea>
+								<textarea rows="4" cols="50"  name="pinfo2">${productInfo.pinfo2}</textarea>
 							</div>
 							<div style="display: contents;">
 								<span>서브 정보3</span>
-								<textarea rows="4" cols="50"  name="pmain_info">${productInfo.pinfo3}</textarea>
+								<textarea rows="4" cols="50"  name="pinfo3">${productInfo.pinfo3}</textarea>
 							</div>
 							<div style="padding: 20 0 20 0">
-								<c:forEach var="image" items="${productInfo.attrProductList}">
-									<c:if test="${image.athoumbnail == 'y' }">
-										<span>썸네일 이미지</span>
-									</c:if>
-									<c:if test="${image.athoumbnail == 'n' }">
-										<span>부 이미지</span>
-									</c:if>
-									<div>
-										<img src="/display?fileName=${image.aurl}" style="width: 150;height: 80;border: 1px solid;">
+									<div style="display: flex; flex-direction: column;">
+										<div>
+											<span>썸네일 이미지</span>
+											<input type="file" class="file-img">
+										</div>
+										<div style="display: flex;"  class="image-thoumb-div">
+											<c:forEach var="thoumbnail" items="${productInfo.thoumbnailImageList}">
+													<div style="display: flex;" class="image-th-div" id="image-thoumb-div">
+														<div class="image-sub-div">
+															<img src="/display?fileName=${thoumbnail.aurl}" style="width: 150;height: 80;border: 1px solid;">
+															<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${thoumbnail.ano}"
+															style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
+														</div>
+													</div>
+											</c:forEach>
+										</div>
 									</div>
-								</c:forEach>
+									<div style="display: flex; flex-direction: column;">
+										<div>
+											<span>정보 이미지</span>
+											<input type="file" class="file-img">
+										</div>
+										<div style="display: flex;"  class="image-info-div">
+									<c:forEach items="${productInfo.infoImageList}" var="image">
+											<div  class="image-sub-div" id="image-sub-div">
+												<img src="/display?fileName=${image.aurl}" style="width: 150;height: 80;border: 1px solid;">
+												<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${image.ano}"
+												style=" position:relative; bottom: 26px; right: 26px; opacity: 1"></i>
+											</div>
+									</c:forEach>
+										</div>
+								</div>
 							</div>
 						</div>
 					</div>

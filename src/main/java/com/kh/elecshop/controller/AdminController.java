@@ -77,6 +77,12 @@ public class AdminController {
 	public void product_popup() {
 		
 	}
+	//어드민 상품 이미지 삭제
+	@PostMapping(value="/deleteImage",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> productDeleteImage(@RequestParam("ano") int ano) {
+		boolean result = adminService.removeProductImage(ano);
+		return ResponseEntity.ok(result);
+	}
 	//어드민 상품 삭제
 	@PostMapping(value = "/admin_deleteOption", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

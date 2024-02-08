@@ -130,6 +130,7 @@
 			formData.append("uploadFile",file);
 			var reader = new FileReader();
 			var isImage = isImageFile(file);
+			console.log(reader.onload);
 			if(isImage == true){
 				reader.onload = function(e){
 					$.ajax({

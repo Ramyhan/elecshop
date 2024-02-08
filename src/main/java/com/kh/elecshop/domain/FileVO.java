@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileVO {
+	private int ano;
 	private int pno;
 	private String afileName;
 	private String apath;
