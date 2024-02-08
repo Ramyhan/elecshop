@@ -96,17 +96,18 @@ $(function(){
 								<textarea rows="4" cols="50" readonly name="pmain_info">${productInfo.pinfo3}</textarea>
 							</div>
 							<div style="padding: 20 0 20 0">
-								<c:forEach var="image" items="${productInfo.attrProductList}">
-									<c:if test="${image.athoumbnail == 'y' }">
-										<span>썸네일 이미지</span>
-									</c:if>
-									<c:if test="${image.athoumbnail == 'n' }">
-										<span>부 이미지</span>
-									</c:if>
 									<div>
-										<img src="/display?fileName=${image.aurl}" style="width: 150;height: 80;border: 1px solid;">
+										<span>썸네일 이미지</span>
+										<img src="/display?fileName=${productInfo.pimage_thoumb}" style="width: 150;height: 80;border: 1px solid;">
 									</div>
-								</c:forEach>
+									<div>
+										<span>부 이미지</span>
+										<img src="/display?fileName=${productInfo.pimage_info1}" style="width: 150;height: 80;border: 1px solid;">
+									</div>
+									<div>
+										<span>부 이미지</span>
+										<img src="/display?fileName=${productInfo.pimage_info2}" style="width: 150;height: 80;border: 1px solid;">
+									</div>
 							</div>
 						</div>
 					</div>
