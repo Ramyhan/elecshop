@@ -58,7 +58,7 @@
 	
 	.productInfoImage{
 		width:1100px;
-		height:750px;
+/* 		height:750px; */
 	}
 	
 	
@@ -79,7 +79,11 @@
 	.review {
 		display: none;
 	}
-	
+	img {
+		image-rendering: auto;
+		image-rendering: crisp-edges;
+		image-rendering: pixelated;
+	}
 </style>
 <script>
 $(function() {
@@ -338,7 +342,7 @@ $(function() {
 			<div class="section">
 				<div class="row">
 					<div class="col-md-7" style="float:right;">
-						<img id="productMainImage" alt="상품 사진" src="/resources/images/${productVO.pimage_thoumb}"/>	
+						<img id="productMainImage" alt="상품 사진" src="/display?fileName=${productVO.pimage_thoumb}"/>	
 					</div>
 					<div class="col-md-5" style="border: solid  1px #ffbe33; border-radius:10px;">
 						<h1 style="font-weight: 600;">${productVO.pname}</h1><br>
@@ -356,7 +360,7 @@ $(function() {
 								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 1 }">
+								<c:if test="${ option.otype == 3 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
@@ -383,7 +387,7 @@ $(function() {
 								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
 								<c:forEach items="#{optionList}" var="option">
-								<c:if test="${ option.otype == 3 }">
+								<c:if test="${ option.otype == 1 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
 								</c:forEach>
@@ -415,8 +419,8 @@ $(function() {
 					
 					<!-- 상품 이미지 및 스펙 -->
 					<div class="divInfo	col-md-12 productImage">
-						<img class="productInfoImage" alt="상품 사진" src="/resources/images/${productVO.pimage_info1}"/>
-						<img class="productInfoImage" alt="상품 사진" src="/resources/images/${productVO.pimage_info2}"/>
+						<img class="productInfoImage" alt="상품 사진" src="/display?fileName=${productVO.pimage_info1}"/>
+						<img class="productInfoImage" alt="상품 사진" src="/display?fileName=${productVO.pimage_info2}"/>
 					</div>
 					<div class="divInfo	col-md-12 productInfo">
 						<h1>스팩</h1>

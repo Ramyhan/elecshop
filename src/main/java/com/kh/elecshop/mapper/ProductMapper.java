@@ -22,4 +22,6 @@ public interface ProductMapper {
 	public List<ProductDTO> selectByPdno(@Param("ptype") int ptype, @Param("optionval") String optionval);
 	
 	public int updateOrderCount(@Param("order_count") int order_count, @Param("pno") int pno);
+	
+	public List<ProductDTO> selectTop8();
 }

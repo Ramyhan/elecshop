@@ -3,11 +3,10 @@ package com.kh.elecshop.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +14,21 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.elecshop.domain.CouponVO;
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.ProductDTO;
 import com.kh.elecshop.mapper.CouponMapper;
 import com.kh.elecshop.service.MemberService;
+import com.kh.elecshop.service.ProductService;
 
 import lombok.extern.log4j.Log4j;
-import oracle.net.aso.h;
 
 @Controller
 @Log4j
@@ -46,16 +43,13 @@ public class MemberController {
 	@Autowired
 	private CouponMapper couponMapper;
 	
+	@Autowired
+	private ProductService productService;
+	
 	@GetMapping("/main")
-	public void main() {
-//		ModelMap map = (ModelMap)modelAndView.getModel();
-//		String isVisit = (String)map.get("visit");
-//		if(isVisit == null || isVisit.equals("")) {
-//			Cookie cookie = new Cookie("visit", "visit");
-//			cookie.setMaxAge(60 * 60 * 24);
-//			response.addCookie(cookie);
-//		}
-//		modelAndView.setViewName("redirect:/main");
+	public void main(Model model) {
+		List<ProductDTO> productList = productService.getTop8();
+		model.addAttribute("productList", productList);
 	}
 	@GetMapping("/signup")
 	public void signup() {
@@ -83,16 +77,18 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public void login() {
+		
 	}
 	// 로그인
 	@PostMapping("/loginPost")
 	public void loginPost(LoginDTO loginDTO, Model model, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);
-		if(memberVO == null) {
-		}
-		if(memberVO.getMstate() == 0) {
-			rttr.addFlashAttribute("loginResult", "disabled");
-		}
+//		if(memberVO == null) {
+//			rttr.addFlashAttribute("loginResult", "fail");
+//		}
+//		if(memberVO.getMstate() == 0) {
+//			rttr.addFlashAttribute("loginResult", "disabled");
+//		}
 		model.addAttribute("loginInfo", memberVO);
 		model.addAttribute("useCookie", loginDTO.isUseCookie());
 	}

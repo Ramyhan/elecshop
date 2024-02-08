@@ -201,8 +201,15 @@
 				$("#frm-popup").prepend(hiddenUrl);
 				$("#frm-popup").prepend(hiddenPath);
 				$("#frm-popup").prepend(hiddenThoumb);
+<<<<<<< HEAD
 			});			
 				window.close();
+=======
+			});
+		$("#frm-popup").submit();
+// 		opener.parent.location.reload();
+		window.close();
+>>>>>>> branch 'master' of https://github.com/Ramyhan/elecshop.git
 		});
 				
 		function isImageFile(file) {
@@ -293,6 +300,8 @@
 							<option value="14">크리에이티브</option>
 							<option value="15">로지텍</option>
 							<option value="16">앱코</option>
+							<option value="17">하이파이맨</option>
+							<option value="18">매드캣츠</option>
 						</select>
 					</div>
 				</div>
@@ -303,7 +312,7 @@
 					<div class="add-ram-select" id="add-ram-select">
 						<div class="div-header">
 							<div class="div-header-cell">
-								<span>ㄹ에엠선택</span>
+								<span>RAM선택</span>
 							</div>
 						</div>
 						<div class="div-cell">
@@ -374,6 +383,7 @@
 								<select name="colorList[0].oname" class="select-option product-color" disabled>
 									<option>--선택--</option>
 									<option value="Black">Black</option>
+									<option value="white">white</option>
 									<option value="Red">Red</option>
 									<option value="Gray">Gray</option>
 									<option value="Blue">Blue</option>

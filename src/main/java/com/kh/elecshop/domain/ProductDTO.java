@@ -16,6 +16,7 @@ public class ProductDTO {
 	private String pname;
 	private int mno;
 	private String pcode;
+	private int pprice;
 	private int pdno;
 	private String pinfo_main;
 	private String pimage_thoumb;
