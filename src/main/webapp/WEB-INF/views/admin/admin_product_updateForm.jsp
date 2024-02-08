@@ -4,16 +4,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
-	var timage = $("#image-thoumb-div").clone();
+	var timage = $("#image-th-div").clone();
 	var infoimage = $("#image-sub-div").clone();
-	var infoimagess = $(".image-sub-div").clone();
-	var infoimages = $(".image-info-div > div:eq(0)").clone;
-	console.log("timage: ", timage);
-	console.log("infoImage: ", infoimage);
-	console.log("infoimagess: ", infoimagess);
-	console.log("infoimages: ", infoimages);
 	$("#select-mno").find("option[value=${productInfo.mno}]").attr("selected",true);
-	
 	$("#btn-productList").click(function(){
 		$(location).attr("href","/admin/admin_product");
 	});
@@ -152,7 +145,7 @@ $(function(){
 			});
 		}
 	});
-	$(".file-img").on("change",function(e){
+	$(".file-image").on("change",function(e){
 		console.log("11",timage);
 		console.log("22",infoimage);
 		var that = $(this);
@@ -162,6 +155,8 @@ $(function(){
 		formData.append("uploadFile",file);
 		var reader = new FileReader();
 		console.log(reader);
+		var qwe = that.siblings("span");
+		console.log("222",qwe);
 		var isImage = isImageFile(file);
 		if(isImage == true){
 			reader.onload = function(e){
@@ -172,23 +167,20 @@ $(function(){
 					"contentType" : false,
 					"data" : formData,
 					"success" : function(rData){
+						if(that.siblings("span").text().trim() == "썸네일 이미지"){
+						var image = timage;
 						console.log(rData);
-						var thoumbDiv = that.parent().parent().find(".image-thoumb-div");
-						console.log(thoumbDiv);
-						var image = "<div style='display: flex;' class='image-thoumb-div'>";
-						image += "<div class='image-sub-div'>";
-						image +="<img src='/display?fileName='"+rData[0].aurl + "' style='width: 150;height: 80;border: 1px solid;";
-// 						'data-apath >";
-						image +="<i class='fa fa-times-circle deleteLike delete-image' title='삭제하기'style='position:relative; bottom: 26px; right: 26px; opacity: 1'></i>";
-						image +="</div>";
-						image +="</div>";
-						var subImage = $(".image-info-div");
-						subImage.append(infoimage);
-// 								image.attr("data-file", rData[0].afileName);
-// 								image.find("img").attr("data-apath", rData[0].apath);
-// 								image.find("img").attr("data-uuid", rData[0].auuid);
-// 								image.find("img").attr("data-url", rData[0].aurl);
-// 								image.find("img").attr("src","/display?fileName=" + rData[0].aurl);
+						var thoumb = $(".image-thoumb-div");
+						thoumb.append(image);
+								image.closest("image").attr("data-ano", "");
+								image.attr("data-file", rData[0].afileName);
+								image.find("img").attr("data-apath", rData[0].apath);
+								image.find("img").attr("data-uuid", rData[0].auuid);
+								image.find("img").attr("data-url", rData[0].aurl);
+								image.find("img").attr("src","/display?fileName=" + rData[0].aurl);
+						}else{
+							var infoImage = $(".image-info-div");
+						}
 					}
 				});
 			}
@@ -361,11 +353,11 @@ $(function(){
 									<div style="display: flex; flex-direction: column;">
 										<div>
 											<span>썸네일 이미지</span>
-											<input type="file" class="file-img">
+											<input type="file" class="file-image">
 										</div>
 										<div style="display: flex;"  class="image-thoumb-div">
 											<c:forEach var="thoumbnail" items="${productInfo.thoumbnailImageList}">
-													<div style="display: flex;" class="image-th-div" id="image-thoumb-div">
+													<div style="display: flex;" class="image-th-div" id="image-th-div">
 														<div class="image-sub-div">
 															<img src="/display?fileName=${thoumbnail.aurl}" style="width: 150;height: 80;border: 1px solid;">
 															<i class="fa fa-times-circle deleteLike delete-image" title="삭제하기" data-ano="${thoumbnail.ano}"
@@ -378,7 +370,7 @@ $(function(){
 									<div style="display: flex; flex-direction: column;">
 										<div>
 											<span>정보 이미지</span>
-											<input type="file" class="file-img">
+											<input type="file" class="file-image">
 										</div>
 										<div style="display: flex;"  class="image-info-div">
 									<c:forEach items="${productInfo.infoImageList}" var="image">
