@@ -67,7 +67,7 @@ $(function() {
 				products += "<div class=\"container\">";
 				products += "<div class=\"card divProd\" id=\"divProd\">";
 				products += "<input type=\"hidden\" name=\"pno\" value=\"" + rData[v].pno + "\">";
-				products += "<img alt=\"상품 사진\" src=\"/resources/images/" + rData[v].pimage_thoumb + "\" style=\"width:271px; height:271px;\"/>";
+				products += "<img alt=\"상품 사진\" src=\"/display?fileName=" + rData[v].pimage_thoumb + "\" style=\"width:271px; height:271px;\"/>";
 				products += "<button class=\"btnProductInfo\" type=\"submit\">자세히 알아보기>></button>";
 				products += "<span class=\"prdName\">" + rData[v].pname + "<br><br></span>";
 				products += "<span class=\"prdInfo\">" + rData[v].pcode + "<br>" + rData[v].pinfo_main + "</span>";
@@ -108,18 +108,18 @@ $(function() {
 								<div style="border-top: solid 1px #ffbe33; font: bold;">
 									<div class="opSearch option2 opTitle">SSD</div>
 									<div class="opSearch opInfo2">
-										<input class="chkOption" type="checkbox" value="128G">128G<br>
-										<input class="chkOption" type="checkbox" value="256G">256G<br>
-										<input class="chkOption" type="checkbox" value="512G">512G<br>
-										<input class="chkOption" type="checkbox" value="1T">1T<br>
+										<input class="chkOption" type="checkbox" value="128GB">128GB<br>
+										<input class="chkOption" type="checkbox" value="256GB">256GB<br>
+										<input class="chkOption" type="checkbox" value="512GB">512GB<br>
+										<input class="chkOption" type="checkbox" value="1TB">1TB<br>
 									</div>
 								</div>
 								<div style="border-top: solid 1px #ffbe33; font: bold;">
 									<div class="opSearch option3 opTitle">RAM</div>
 									<div class="opSearch opInfo3">
-										<input class="chkOption" type="checkbox" value="16G">16G<br>
-										<input class="chkOption" type="checkbox" value="32G">32G<br>
-										<input class="chkOption" type="checkbox" value="64G">64G<br>
+										<input class="chkOption" type="checkbox" value="16GB">16GB<br>
+										<input class="chkOption" type="checkbox" value="32GB">32GB<br>
+										<input class="chkOption" type="checkbox" value="64GB">64GB<br>
 									</div>
 								</div>
 								</c:when>
@@ -152,7 +152,7 @@ $(function() {
 									<div class="container">
 										<div class="card divProd product-card" id="divProd">
 											<input type="hidden" name="pno" value="${ productDTO.pno }">
-											<img alt="상품 사진" src="/resources/images/${ productDTO.pimage_thoumb }" style="width:271px; height:271px;"/>
+											<img alt="상품 사진" src="/display?fileName=${ productDTO.pimage_thoumb }" style="width:271px; height:271px;"/>
 											<button class="btnProductInfo" type="submit">자세히 알아보기>></button>
 											<span class="prdName">${productDTO.pname}<br><br></span>
 											<span class="prdInfo">

@@ -55,7 +55,7 @@
 							</p>
 						</div>
 						<div class="container a-link">
-							<a class="a-style a-left" href="#">상세 페이지
+							<a class="a-style a-left" href="/product/goods?pno=19">상세 페이지
 							<span class="a-span">></span>
 							</a>
 							<a class="a-style a-right" href="#">장바구니

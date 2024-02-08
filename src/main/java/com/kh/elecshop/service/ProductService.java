@@ -14,4 +14,6 @@ public interface ProductService {
 	
 	public List<ProductDTO> searchKeyword(int ptype, String keyword, String manuval, String optionval);
 	
+	public List<ProductDTO> getTop8();
+	
 }

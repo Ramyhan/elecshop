@@ -29,7 +29,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class FileUploadController {
-	private final String UPLOAD_PATH = "C:\\Users\\KH302\\Desktop\\upload";
+	private final String UPLOAD_PATH = "C:\\image";
 	@PostMapping(value="/uploadAjax", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<FileVO> UploadAjax(MultipartFile uploadFile) {
@@ -50,7 +50,7 @@ public class FileUploadController {
 					.afileName(orgFilename)
 					.apath(uploadPath.substring(UPLOAD_PATH.length()))
 					.auuid(uuid.toString())
-					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/s_" +uuid + "_" + orgFilename)
+					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/" +uuid + "_" + orgFilename)
 					.build();
 			attachList.add(fileVO);
 			

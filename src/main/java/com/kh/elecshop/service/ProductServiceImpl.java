@@ -63,5 +63,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		return keyWordList;
 	}
+
+	@Override
+	public List<ProductDTO> getTop8() {
+		List<ProductDTO> list = productMapper.selectTop8();
+		return list;
+	}
 	
 }
