@@ -191,7 +191,7 @@
 				$("#frm-popup").prepend(hiddenThoumb);
 			});
 		$("#frm-popup").submit();
-		opener.parent.location.reload();
+// 		opener.parent.location.reload();
 		window.close();
 		});
 				
@@ -293,7 +293,7 @@
 					<div class="add-ram-select" id="add-ram-select">
 						<div class="div-header">
 							<div class="div-header-cell">
-								<span>ㄹ에엠선택</span>
+								<span>RAM선택</span>
 							</div>
 						</div>
 						<div class="div-cell">
@@ -364,6 +364,7 @@
 								<select name="colorList[0].oname" class="select-option product-color" disabled>
 									<option>--선택--</option>
 									<option value="Black">Black</option>
+									<option value="white">white</option>
 									<option value="Red">Red</option>
 									<option value="Gray">Gray</option>
 									<option value="Blue">Blue</option>

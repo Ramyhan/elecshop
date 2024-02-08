@@ -3,6 +3,7 @@ package com.kh.elecshop.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
@@ -22,8 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.elecshop.domain.CouponVO;
 import com.kh.elecshop.domain.LoginDTO;
 import com.kh.elecshop.domain.MemberVO;
+import com.kh.elecshop.domain.ProductDTO;
 import com.kh.elecshop.mapper.CouponMapper;
 import com.kh.elecshop.service.MemberService;
+import com.kh.elecshop.service.ProductService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -40,16 +43,13 @@ public class MemberController {
 	@Autowired
 	private CouponMapper couponMapper;
 	
+	@Autowired
+	private ProductService productService;
+	
 	@GetMapping("/main")
-	public void main() {
-//		ModelMap map = (ModelMap)modelAndView.getModel();
-//		String isVisit = (String)map.get("visit");
-//		if(isVisit == null || isVisit.equals("")) {
-//			Cookie cookie = new Cookie("visit", "visit");
-//			cookie.setMaxAge(60 * 60 * 24);
-//			response.addCookie(cookie);
-//		}
-//		modelAndView.setViewName("redirect:/main");
+	public void main(Model model) {
+		List<ProductDTO> productList = productService.getTop8();
+		model.addAttribute("productList", productList);
 	}
 	@GetMapping("/signup")
 	public void signup() {
