@@ -26,6 +26,7 @@ import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.mapper.AdminMapper;
 import com.kh.elecshop.mapper.NoticeMapper;
 import com.kh.elecshop.mapper.OrderDetailMapper;
+import com.kh.elecshop.mapper.ProductMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -39,6 +40,8 @@ public class AdminServiceImpl implements AdminService{
 	private AdminMapper adminMapper;
 	@Autowired
 	private OrderDetailMapper orderDetailMapper;
+	@Autowired
+	private ProductMapper productmapper;
 	
 	@Override
 	public Map<String, Object> getSearchByNotice(SearchDTO searchDTO,Criteria criteria) {
@@ -106,6 +109,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	@Transactional
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO) {
+		log.info("adminProductregisterDTO: " + adminProductRegisterDTO);
 		adminMapper.insertProduct(adminProductRegisterDTO);
 		int pno = adminProductRegisterDTO.getPno();
 		List<FileVO> fileList = adminProductRegisterDTO.getAttrProductList();
@@ -132,7 +136,7 @@ public class AdminServiceImpl implements AdminService{
 			}
 			adminMapper.insertProductSSDOption(ssdList);
 		}
-			List<AdminProductOptionDTO> colorList = adminProductRegisterDTO.getColorList();
+		List<AdminProductOptionDTO> colorList = adminProductRegisterDTO.getColorList();
 		if(colorList != null) {
 			for(int i = 0; i < colorList.size();i++) {
 				AdminProductOptionDTO productColorDTO = colorList.get(i);
@@ -140,6 +144,9 @@ public class AdminServiceImpl implements AdminService{
 			}
 			adminMapper.insertProductColorOption(colorList);
 		}
+//		for (int i = 0; i < fileList.size(); i++) {
+//			fileList.get(i).get;
+//		}
 		return true;
 	}
 

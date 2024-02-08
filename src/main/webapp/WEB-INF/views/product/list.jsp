@@ -148,7 +148,7 @@ $(function() {
 						<div class="row" id="divProduct">
 						<c:forEach items="${ productDTOList }" var="productDTO">
 							<form action="/product/goods" method="get">
-								<div class="col-md-4 divProduct">
+								<div class="col-md-4 divProduct" id="testClone">
 									<div class="container">
 										<div class="card divProd product-card" id="divProd">
 											<input type="hidden" name="pno" value="${ productDTO.pno }">

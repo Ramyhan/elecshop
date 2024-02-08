@@ -7,7 +7,8 @@ create table tbl_attr(
     athoumbnail char(1) default 'n' check(athoumbnail in ('y','n')),
     apath nvarchar2(30) not null,
     auuid nvarchar2(100) not null,
-    afilename nvarchar2(50) not null
+    afilename nvarchar2(50) not null,
+    aurl nvarchar2(300) not null
 );
 
 create sequence seq_attr_ano;
