@@ -1,6 +1,7 @@
 --모든 테이블 지우기
-SELECT 'DROP TABLE "
-' || TABLE_NAME || '" CASCADE CONSTRAINTS;' FROM user_tables;
+SELECT 'DROP TABLE "' || TABLE_NAME || '" CASCADE CONSTRAINTS;' 
+FROM user_tables;
+
 
 --모든 시퀀스 지우기
 SELECT 'DROP SEQUENCE ' || SEQUENCE_NAME || ';'
@@ -73,11 +74,12 @@ create table tbl_manufacturer(
     mno number constraint pk_manufacturer_mno primary key,
     mname nvarchar2(30)
 );
-
 create table tbl_product_type(
     ptype number constraint pk_ptype primary key,
     tname nvarchar2(30) not null
 );
+
+
 CREATE TABLE TBL_PRODUCT(
     PNO NUMBER CONSTRAINT PK_PNO PRIMARY KEY,
     PNAME NVARCHAR2(50) NOT NULL,
@@ -87,14 +89,15 @@ CREATE TABLE TBL_PRODUCT(
     PTYPE NUMBER(1) CONSTRAINT FK_PTYPE REFERENCES TBL_PRODUCT_TYPE(PTYPE) NOT NULL, -- 노트북:1, 모니터:2, 태블릿:3, 음향기기:4, 주변기기:5
     PDNO NUMBER CONSTRAINT FK_PDNO REFERENCES TBL_PRODUCT_DETAIL(PDNO),
     PINFO_MAIN NVARCHAR2(30),
-    PINFO1 NVARCHAR2(50),
-    PINFO2 NVARCHAR2(50),
-    PINFO3 NVARCHAR2(50),
-    PIMAGE_THOUMB NVARCHAR2(50),
-    PIMAGE_INFO1 NVARCHAR2(50),
-    PIMAGE_INFO2 NVARCHAR2(50),
+    PINFO1 NVARCHAR2(300),
+    PINFO2 NVARCHAR2(300),
+    PINFO3 NVARCHAR2(300),
+    PIMAGE_THOUMB NVARCHAR2(50) NOT NULL,
+    PIMAGE_INFO1 NVARCHAR2(50) NOT NULL,
+    PIMAGE_INFO2 NVARCHAR2(50) NOT NULL,
     ORDER_COUNT NUMBER DEFAULT 0,
-    PREGDATE DATE DEFAULT SYSDATE
+    PREGDATE DATE DEFAULT SYSDATE,
+    ISDELETE NUMBER(1) DEFAULT 0 CHECK(ISDELETE IN (0, 1)) 
 );
 
 CREATE TABLE TBL_PRODUCT_OPTION(
@@ -118,19 +121,18 @@ create table tbl_order(
     oaddr_detail NVARCHAR2(50) not null, -- 상세주소
     opost_code NVARCHAR2(10) not null, -- 우편번호
     odelivery number not null, -- 0무료 1일반 2특수
+    delivery_status number default 0 not null,
     regdate date default sysdate -- 주문일
 );
-
 
 create table tbl_order_detail(
     odno number constraint pk_order_detail_odno primary key,
     ono number constraint fk_order_detail_ono references tbl_order(ono),
     pno number constraint fk_order_detail_pno references tbl_product(pno),
-    odprice number not null,
+    odpirce number not null,
     odoption nvarchar2(100),
     odproduct_count number not null
 );
-
 
 create sequence seq_order_ono;
 create sequence seq_order_detail_odno;
@@ -182,6 +184,46 @@ create table tbl_visit(
     vdate date constraint pk_vdate primary key,
     vcount number default 0
 );
+
+create table tbl_iquiry(
+    ino number constraint pk_iquiry_ino primary key,
+    mid nvarchar2(20) not null,
+    constraint fk_mid foreign key(mid) references tbl_member(mid),
+    ititle nvarchar2(50) not null,
+    imessage nvarchar2(500) not null,
+    ireply nvarchar2(500),
+    iregdate date default sysdate
+);
+
+create sequence seq_ino;
+
+create table tbl_question(
+    qno number constraint pk_qno primary key,
+    qtitle nvarchar2(25) not null,
+    qcontent nvarchar2(1000) not null,
+    qcategory nvarchar2(10) not null,
+    qsubcategory nvarchar2(10) not null,
+    qurl varchar2(150),
+    qstate varchar2(5) default 'false' check(qstate in ('false','true'))
+);
+
+create sequence seq_qno;
+
+create table tbl_notice(
+    nno number constraint pk_nno primary key,
+    ncategory nvarchar2(15) not null,
+    ntitle nvarchar2(30) not null,
+    ncontent nvarchar2(500) not null,
+    nregdate date default sysdate,
+    nstate varchar2(5) default 'false' CHECK(nstate in ('false','true')),
+    nurl varchar2(50),
+    nfilename nvarchar2(50),
+    ncount number default 0 
+);
+
+create sequence seq_nno;
+
+
 
 commit;
 
@@ -252,34 +294,5 @@ insert into tbl_product_type (ptype, tname)
 values (4, '음향기기');
 insert into tbl_product_type (ptype, tname)
 values (5, '주변기기');
-
-INSERT INTO TBL_PRODUCT(PNO, PNAME, MNO, PPRICE, PCODE, PTYPE, PDNO, PINFO_MAIN, PINFO1, PINFO2, PINFO3, PIMAGE_THOUMB, PIMAGE_INFO1, PIMAGE_INFO2, ORDER_COUNT)
-VALUES (SEQ_PNO.NEXTVAL,
-        'Galaxy Book4 Pro',
-        1,
-        3140000,
-        'NT960QGK-KD72G',
-        1,
-        0,
-        '40.6 cm WQXGA + AMOLED 디스플레이',
-        '운영체계,Windows 11 Home',
-        '프로세서/칩셋, Intel® Core™ Ultra 7 Processor 155H',
-        '메모리, 32GB LPDDR5X Memory (On Board 32GB)',
-        'galaxybook4pro.png',
-        'galaxybook4pro2.jpg',
-        'galaxybook4pro3.jpg',
-        5);
-        
-INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-VALUES (SEQ_ONO.NEXTVAL, 5, '256G', 50000, 1);
-INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-VALUES (SEQ_ONO.NEXTVAL, 5, '512G', 50000, 1);
-INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-VALUES (SEQ_ONO.NEXTVAL, 5, '1T', 120000, 1);
-
-INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-VALUES (SEQ_ONO.NEXTVAL, 5, 'DIVKS5LIV', 50000, 2);
-INSERT INTO TBL_PRODUCT_OPTION(ONO, PNO, ONAME, OPRICE, OTYPE)
-VALUES (SEQ_OPTION.NEXTVAL, 5, 'GRAY', 150000, 3);
 
 commit;

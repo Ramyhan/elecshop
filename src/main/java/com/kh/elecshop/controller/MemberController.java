@@ -88,11 +88,12 @@ public class MemberController {
 	@PostMapping("/loginPost")
 	public void loginPost(LoginDTO loginDTO, Model model, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);
-		if(memberVO == null) {
-		}
-		if(memberVO.getMstate() == 0) {
-			rttr.addFlashAttribute("loginResult", "disabled");
-		}
+//		if(memberVO == null) {
+//			rttr.addFlashAttribute("loginResult", "fail");
+//		}
+//		if(memberVO.getMstate() == 0) {
+//			rttr.addFlashAttribute("loginResult", "disabled");
+//		}
 		model.addAttribute("loginInfo", memberVO);
 		model.addAttribute("useCookie", loginDTO.isUseCookie());
 	}

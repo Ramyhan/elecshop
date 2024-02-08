@@ -46,6 +46,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
 			flashMapManager.saveOutputFlashMap(flashMap, request, response);
 			modelAndView.setViewName("redirect:/login");
+			return;
 		}
 		if (memberVO.getMstate() == 0) {
 			flashMap.put("loginResult", "disabled");

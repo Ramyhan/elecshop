@@ -10,9 +10,7 @@ create table tbl_order(
     odelivery number not null, -- 0무료 1일반 2특수
     delivery_status number default 0 not null,
     regdate date default sysdate -- 주문일
-    
 );
-
 
 create table tbl_order_detail(
     odno number constraint pk_order_detail_odno primary key,
