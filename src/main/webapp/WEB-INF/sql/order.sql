@@ -16,7 +16,7 @@ create table tbl_order_detail(
     odno number constraint pk_order_detail_odno primary key,
     ono number constraint fk_order_detail_ono references tbl_order(ono),
     pno number constraint fk_order_detail_pno references tbl_product(pno),
-    odpirce number not null,
+    odprice number not null,
     odoption nvarchar2(100),
     odproduct_count number not null
 );

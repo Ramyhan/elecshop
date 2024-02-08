@@ -22,13 +22,20 @@
 				<div class="card-header">
 					 <a class="card-link collapsed myOrder-card-title" data-toggle="collapse" 
 					 data-parent="#card-460431" href="#product-info-${vo.ono }">주문번호 : ${vo.ono }</a>
+					 <c:if test="${vo.delivery_status != 0 }">
+					 <span style="color:white; float:right;">송장번호:${vo.delivery_status}</span>
+					 </c:if>
+					 <c:if test="${vo.delivery_status == 0 }">
+					 <span class="myOrder-delivery-status">미발송</span>
+					 </c:if>
+					 
 				</div>
 				<div id="product-info-${vo.ono }" class="collapse">
 						<c:forEach var="detail" items="${vo.list }">
 					<div class="card-body">
 							<div class="buy-prodect row buy-product">
 						<div>
-							<img class="buy-image" src="/resources/images/${detail.pimage_thoumb }">
+							<img class="buy-image" src="/display?fileName=${detail.pimage_thoumb }">
 						</div>
 						<div class="buy-prodect-pname buy-pno">
 							<br>
