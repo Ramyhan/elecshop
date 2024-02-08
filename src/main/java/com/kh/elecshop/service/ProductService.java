@@ -16,4 +16,6 @@ public interface ProductService {
 	
 	public List<ProductDTO> getTop8();
 	
+	public boolean removeProduct(String pnos);
+	
 }

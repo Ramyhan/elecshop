@@ -53,8 +53,8 @@
 	<!-- product -->
 	<!-- 전체 상품 찾기 -->
 	<select id="selectProduct" resultType="com.kh.elecshop.domain.AdminProductDTO">
-		select pno,pname,pprice,ptype,order_count,pregdate
-		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,order_count,pregdate,rownum rn
+		select pno,pname,pprice,ptype,order_count,pregdate,pimage_thoumb
+		from (select /*+index_desc(tbl_product)*/ pno, pname,pprice,ptype,order_count,pregdate,pimage_thoumb,rownum rn
 		      from tbl_product order by rn asc)
         where rn between #{startRow} and #{endRow}
 	</select>

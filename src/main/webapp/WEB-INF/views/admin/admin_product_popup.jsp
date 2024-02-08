@@ -201,15 +201,10 @@
 				$("#frm-popup").prepend(hiddenUrl);
 				$("#frm-popup").prepend(hiddenPath);
 				$("#frm-popup").prepend(hiddenThoumb);
-<<<<<<< HEAD
-			});			
-				window.close();
-=======
 			});
-		$("#frm-popup").submit();
-// 		opener.parent.location.reload();
-		window.close();
->>>>>>> branch 'master' of https://github.com/Ramyhan/elecshop.git
+// 			$("#frm-popup").submit();
+	// 		opener.parent.location.reload();
+			window.close();
 		});
 				
 		function isImageFile(file) {

@@ -24,4 +24,6 @@ public interface ProductMapper {
 	public int updateOrderCount(@Param("order_count") int order_count, @Param("pno") int pno);
 	
 	public List<ProductDTO> selectTop8();
+	
+	public int deleteProduct(String pnos);
 }

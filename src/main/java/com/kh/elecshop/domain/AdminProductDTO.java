@@ -20,6 +20,7 @@ public class AdminProductDTO {
 	private int order_count;
 	private Date pregdate;
 	private String ptypeName;
+	private String pimage_thoumb;
 	
 	private List<FileVO> attrProductList;
 	private FileVO fileVO;

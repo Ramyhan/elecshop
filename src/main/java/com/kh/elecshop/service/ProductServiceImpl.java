@@ -69,5 +69,11 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductDTO> list = productMapper.selectTop8();
 		return list;
 	}
+
+	@Override
+	public boolean removeProduct(String pnos) {
+		int count = productMapper.deleteProduct(pnos);
+		return (count >= 1) ? true : false;
+	}
 	
 }

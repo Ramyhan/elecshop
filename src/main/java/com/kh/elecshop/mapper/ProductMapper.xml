@@ -64,6 +64,12 @@
 		]]>
 	</select>
 	
+	<update id="deleteProduct" parameterType="string">
+		update tbl_product set
+			isdelete = 1
+		where pno in (${value}) 
+	</update>
+	
 	
 	<update id="updateOrderCount">
 		update tbl_product

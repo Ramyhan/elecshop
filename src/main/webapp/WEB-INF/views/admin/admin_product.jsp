@@ -23,6 +23,29 @@ $(function(){
 			return false;
 		}
 	});
+	
+	$(".btnChkDelete").click(function() {
+		var targets = $(".chkProd:checked");
+		
+		var pnos = [];
+		targets.each(function() {
+			var pno = $(this).attr("data-pno");
+			pnos.push(parseInt(pno));
+		});
+		
+		var str_pnos = pnos.join();
+		var url = "/product/remove";
+		var sData = {"pnos" : str_pnos};
+		
+		$.post(url, sData, function(rData) {
+			console.log("delete_result: ", rData);
+			if (rData == "true") {
+				targets.each(function() {
+					$(this).parent().pareat().fadeOut(500);
+				});
+			}
+		});
+	});
 });
 </script>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
@@ -57,7 +80,7 @@ $(function(){
 				<div>
 					<button type="button" class="product-create">상품 추가</button>
 					<button type="button" class="user-suspend">분류 설정</button>
-					<button type="button" class="user-repair"></button>
+					<button type="button" class="user-repair btnChkDelete">선택 삭제</button>
 				</div>
 			</div>
 			<div class="div-main">
@@ -94,15 +117,15 @@ $(function(){
 						<c:forEach var="list" items="${productMap.productList}">
 						<div class="user-div-row">
 							<div class="cell">
-								<input class="user-chkbox" type="checkbox">
+								<input class="user-chkbox chkProd" type="checkbox" data-pno="${list.pno}">
 							</div>
 							<div class="cell">
 								<span class="user-mno">${list.pno}</span>
 							</div>
 							<div class="cell" style="text-align: left;">
 							<c:choose>
-								<c:when test="${not empty list.fileVO.aurl || list.fileVO.aurl != null}">
-								<img src="/display?fileName=${list.fileVO.aurl}" style="width: 48px;height: 48px;">
+								<c:when test="${not empty list.pimage_thoumb || list.pimage_thoumb != null}">
+								<img src="/display?fileName=${list.pimage_thoumb}" style="width: 48px;height: 48px;">
 								</c:when>
 								<c:otherwise>
 								<img src="/resources/css/dongyeong/default.png" style="width: 48px;height: 48px;">

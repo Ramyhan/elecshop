@@ -100,5 +100,13 @@ public class ProductController {
 		List<ProductDTO> list = productService.searchKeyword(ptype, keyword, manuval, optionval);
 		return list;
 	}
+	
+	@PostMapping(value = "/remove",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	private String removeProduct(String pnos) {
+		boolean result = productService.removeProduct(pnos);
+		return String.valueOf(result);
+	}
 
 }
