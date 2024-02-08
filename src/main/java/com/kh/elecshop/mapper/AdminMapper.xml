@@ -66,16 +66,16 @@
 	<!-- 상품 추가 -->
 	<insert id="insertProduct">
 		insert into tbl_product(pno,pname,pprice,pdno,mno,
-		pcode,ptype,pinfo_main,pinfo1,pinfo2,pinfo3,order_count)
+		pcode,ptype,pinfo_main,pinfo1,pinfo2,pinfo3,pimage_thoumb,pimage_info1,pimage_info2,order_count)
 		
 		values(seq_pno.nextval,#{pname},#{pprice},#{pdno},#{mno},#{pcode},#{ptype},#{pinfo_main},
-		#{pinfo1},#{pinfo2},#{pinfo3},#{order_count})
+		#{pinfo1},#{pinfo2},#{pinfo3},#{pimage_thoumb},#{pimage_info1},#{pimage_info2},#{order_count})
 		<selectKey keyProperty="pno" resultType="Integer" order="AFTER">
 			select seq_pno.currval
 			from dual
 		</selectKey>
 	</insert>
-	<!-- 상품 이미지 -->
+	<!-- 상품 이미지 -->	
 	<insert  id="insertProductImage" parameterType="com.kh.elecshop.domain.FileVO">
 		insert into tbl_attr(ano,pno,afilename,apath,auuid,athoumbnail,aurl)
 		SELECT seq_attr_ano.nextval, ano.* FROM(
