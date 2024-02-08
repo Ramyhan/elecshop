@@ -285,5 +285,4 @@
 				<!-- //카드 -->
 	</div>
 	<!-- //메인 -->
-
 <%@ include file="/WEB-INF/views/include/bottom.jsp"  %>
