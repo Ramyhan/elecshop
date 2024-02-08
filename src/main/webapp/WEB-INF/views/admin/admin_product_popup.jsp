@@ -283,6 +283,8 @@
 							<option value="14">크리에이티브</option>
 							<option value="15">로지텍</option>
 							<option value="16">앱코</option>
+							<option value="17">하이파이맨</option>
+							<option value="18">매드캣츠</option>
 						</select>
 					</div>
 				</div>

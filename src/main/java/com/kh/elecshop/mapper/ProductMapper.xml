@@ -60,7 +60,7 @@
 		<![CDATA[
 			where rownum < 9 
 			order by (select count(*)
-          			  from tbl_order) asc;
+          			  from tbl_order) asc
 		]]>
 	</select>
 	
