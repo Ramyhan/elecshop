@@ -175,6 +175,15 @@
 				var hiddenUuid = "<input type='hidden' name='attrProductList["+i+"].auuid' value='" + uuid + "'>";
 				var hiddenUrl = "<input type='hidden' name='attrProductList["+i+"].aurl' value='" + url + "'>";
 				var hiddenPath = "<input type='hidden' name='attrProductList["+i+"].apath' value='" + apath + "'>";
+				if(thoumbnail == "y"){
+					var hiddenThoumb2 ="<input type='hidden' name='pimage_thoumb' value='" + url + "'>";
+					console.log("hiddenThoumb2: ", hiddenThoumb2);
+				$("#frm-popup").prepend(hiddenThoumb2);
+				}else{
+					var hiddenImage = "<input type='hidden' name='pimage_info" + i + "' value='" + url + "'>";
+					console.log("hiddenImage: ", hiddenImage);
+					$("#frm-popup").prepend(hiddenImage);
+				}
 				$("#frm-popup").prepend(hiddenFile);
 				$("#frm-popup").prepend(hiddenUuid);
 				$("#frm-popup").prepend(hiddenUrl);
