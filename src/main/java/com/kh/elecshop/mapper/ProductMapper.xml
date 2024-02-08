@@ -55,12 +55,12 @@
 	</select>
 	
 	<select id="selectTop8" resultType="com.kh.elecshop.domain.ProductDTO">
-		select pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
+		select pno, pname, mno, pcode, pprice, pdno, pinfo_main, pimage_thoumb
 		from tbl_product
 		<![CDATA[
 			where rownum < 9 
 			order by (select count(*)
-          			  from tbl_order) asc;
+          			  from tbl_order) asc
 		]]>
 	</select>
 	

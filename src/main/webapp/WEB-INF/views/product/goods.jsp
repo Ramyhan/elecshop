@@ -58,7 +58,7 @@
 	
 	.productInfoImage{
 		width:1100px;
-		height:750px;
+/* 		height:750px; */
 	}
 	
 	
