@@ -33,12 +33,21 @@
 				<button type="submit" class="btn btn-warning">
 					로그인
 				</button>
+<!-- 				 href="javascript:loginWithKakao()" -->
+				<a id="kakao-login-btn" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0874920e36f28bb58cf72edb6dba2aec&redirect_uri=http://localhost/login">
+			  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+			    alt="카카오 로그인 버튼" />
+				</a>
 			</form>
 		</div>
 	</div>
 </div>
 </div>
-
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+  integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('2b6040da2b8539bab2d11d471d964282'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 <script>
 $(function (){
 	var loginResult = "${loginResult}";
@@ -63,6 +72,35 @@ $(function (){
 	}
 	
 	
+	$("#kakao-login-btn").on("click", function(){
+	    //1. 로그인 시도
+	    Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          //2. 로그인 성공시, API 호출
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+				  scope : 'account_email';
+				alert('로그인성공');
+	              location.href="callback주소";
+			
+
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	        
+	}) //
+
 });
 </script>
 <%@ include file="/WEB-INF/views/include/bottom.jsp" %>
