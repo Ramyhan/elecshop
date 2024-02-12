@@ -40,6 +40,7 @@ public class AdminProductInfoDTO {
 	
 	private List<FileVO> attrProductList;
 	
-	private List<FileVO> thoumbnailImageList;
-	private List<FileVO> infoImageList;
+	private FileVO imageThoumb;
+	private FileVO imageInfo1;
+	private FileVO imageInfo2;
 }

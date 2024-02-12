@@ -40,11 +40,9 @@ public class FileUploadController {
 		
 			UUID uuid = UUID.randomUUID();
 			String orgFilename = uploadFile.getOriginalFilename();
+			System.out.println("2424" + orgFilename);
 			String savedFilename = uuid + "_" + orgFilename;
 			File f = new File(uploadPath, savedFilename);
-			
-			boolean isImage = checkImageType(f);
-			
 			
 			FileVO fileVO = FileVO.builder()
 					.afileName(orgFilename)
@@ -53,19 +51,6 @@ public class FileUploadController {
 					.aurl(uploadPath.substring(UPLOAD_PATH.length()) + "/" +uuid + "_" + orgFilename)
 					.build();
 			attachList.add(fileVO);
-			
-			if (isImage) {
-				try {
-					FileOutputStream thumbnail = 
-							new FileOutputStream(
-									new File(uploadPath, "s_" + savedFilename));
-					Thumbnailator.createThumbnail(
-							uploadFile.getInputStream(), thumbnail, 100, 100);
-					thumbnail.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			try {
 				uploadFile.transferTo(f);
 			} catch (Exception e) {
@@ -92,22 +77,22 @@ public class FileUploadController {
 		return null;
 	}
 	@PostMapping("/deleteFile")
-	public ResponseEntity<String> deleteFile(String fileName, String dataType) {
+	public ResponseEntity<String> deleteFile(String fileName) {
 		log.info("fileName:" + fileName);
-		log.info("dataType:" + dataType);
 		// 파일 삭제 처리
 		// 1. 원본 파일 삭제
 		String filePath = UPLOAD_PATH + fileName;
+		log.info("filePath:" + filePath);
 		File f = new File(filePath);
+		log.info("f:" + f);
 		boolean result = f.delete();
+		log.info("result:" + result);
 		// 2. 이미지 파일이라면 쎔네일 파일 삭제 (s_)
-		if (dataType.equals("image")) {
-			String front = fileName.substring(0, 12); // /2024/01/05/
-			String rear = fileName.substring(12);// aac58989-946b-4745-922d-0b69e32e7008_4.png
-			String thumbnailPath = UPLOAD_PATH + front + "s_" + rear;
-			File thumbF = new File(thumbnailPath);
-			result = result && thumbF.delete();
-		}
+//			String front = fileName.substring(0, 12); // /2024/01/05/
+//			String rear = fileName.substring(12);// aac58989-946b-4745-922d-0b69e32e7008_4.png
+//			String thumbnailPath = UPLOAD_PATH + front + "s_" + rear;
+//			File thumbF = new File(thumbnailPath);
+//			result = result && thumbF.delete();
 		ResponseEntity<String> entity = new ResponseEntity<String>(
 				String.valueOf(result), HttpStatus.OK);
 		return entity;
@@ -124,18 +109,5 @@ public class FileUploadController {
 			f.mkdirs();
 		}
 		return str;
-	}
-	private boolean checkImageType(File savedFile) {
-		// image/jpeg, image/png, image/gif - MIME-TYPE 체크
-		// java.nio.Files
-		try {
-			String mimeType = Files.probeContentType(savedFile.toPath());
-			log.info("mimeType:" + mimeType);
-			// mimeType 이 "image/"로 시작하는가
-			return mimeType.startsWith("image");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 }

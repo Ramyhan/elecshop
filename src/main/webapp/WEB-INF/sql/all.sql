@@ -92,9 +92,9 @@ CREATE TABLE TBL_PRODUCT(
     PINFO1 NVARCHAR2(300),
     PINFO2 NVARCHAR2(300),
     PINFO3 NVARCHAR2(300),
-    PIMAGE_THOUMB NVARCHAR2(50) NOT NULL,
-    PIMAGE_INFO1 NVARCHAR2(50) NOT NULL,
-    PIMAGE_INFO2 NVARCHAR2(50) NOT NULL,
+    PIMAGE_THOUMB NVARCHAR2(200) NOT NULL,
+    PIMAGE_INFO1 NVARCHAR2(200) NOT NULL,
+    PIMAGE_INFO2 NVARCHAR2(200) NOT NULL,
     ORDER_COUNT NUMBER DEFAULT 0,
     PREGDATE DATE DEFAULT SYSDATE,
     ISDELETE NUMBER(1) DEFAULT 0 CHECK(ISDELETE IN (0, 1)) 
@@ -174,11 +174,14 @@ create table tbl_attr(
     constraint fk_attr_mno foreign key(mno) references tbl_member(mno),
     pno number,
     constraint fk_attr_pno foreign key(pno) references tbl_product(pno),
-    athoumbnail char(1) default 'n' check(athoumbnail in ('y','n')),
+    image_info varchar2(10) check(image_info in('info1','info2','thoumb')) not null,
     apath nvarchar2(30) not null,
     auuid nvarchar2(100) not null,
-    afilename nvarchar2(50) not null
+    afilename nvarchar2(50) not null,
+    aurl nvarchar2(300) not null
 );
+
+create sequence seq_attr_ano;
 
 create table tbl_visit(
     vdate date constraint pk_vdate primary key,
@@ -240,6 +243,8 @@ values ('RP', '댓글', 100);
 insert into tbl_point_code(point_code, point_info)
 values ('PU', '포인트 사용');
 
+insert into tbl_product_detail (pdno, pdname)
+values (0, '0');
 insert into tbl_product_detail (pdno, pdname)
 values (1, '스피커');
 insert into tbl_product_detail (pdno, pdname)

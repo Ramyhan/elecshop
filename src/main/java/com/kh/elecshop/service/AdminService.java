@@ -1,12 +1,13 @@
 package com.kh.elecshop.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
-import com.kh.elecshop.domain.OrderVO;
+import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.SearchDTO;
 
 public interface AdminService {
@@ -19,8 +20,8 @@ public interface AdminService {
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	public Map<String, Object> getAdminNoticeList(Criteria criteria);
 	public AdminProductInfoDTO getProductInfo(int pno);
-	public boolean removeProductOption(int pno, int ono);
-	public boolean removeProductImage(int ano);
 	public Map<String, Object> getOrderList(Criteria criteria);
 	public boolean updateOrderStatus(int ono, int status);
+	public List<ManufacturerVO> getMenuFacturer();
+	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO);
 }

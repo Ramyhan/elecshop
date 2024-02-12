@@ -26,12 +26,12 @@ $(function(){
     	padding:0px;
 	}
 </style>
-<div class="scroll-div">
-			<a class="scroll-a" href="#">
-			<i class="scroll-right fa fa-angle-double-right" style="display: none;"></i>
-			<i class="scroll-left fa fa-angle-double-left"></i>
-			</a>
-		</div>
+<!-- <div class="scroll-div"> -->
+<!-- 			<a class="scroll-a" href="#"> -->
+<!-- 			<i class="scroll-right fa fa-angle-double-right" style="display: none;"></i> -->
+<!-- 			<i class="scroll-left fa fa-angle-double-left"></i> -->
+<!-- 			</a> -->
+<!-- 		</div> -->
 	<div class="left-div">
 		<div class="category-div">
 		<ul>

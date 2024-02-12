@@ -96,16 +96,16 @@ $(function(){
 								<textarea rows="4" cols="50" readonly name="pmain_info">${productInfo.pinfo3}</textarea>
 							</div>
 							<div style="padding: 20 0 20 0">
-									<div>
+									<div style="display: flex; flex-direction: column;">
 										<span>썸네일 이미지</span>
 										<img src="/display?fileName=${productInfo.pimage_thoumb}" style="width: 150;height: 80;border: 1px solid;">
 									</div>
-									<div>
-										<span>부 이미지</span>
+									<div style="display: flex; flex-direction: column;">
+										<span>정보 이미지1</span>
 										<img src="/display?fileName=${productInfo.pimage_info1}" style="width: 150;height: 80;border: 1px solid;">
 									</div>
-									<div>
-										<span>부 이미지</span>
+									<div style="display: flex; flex-direction: column;">
+										<span>정보 이미지2</span>
 										<img src="/display?fileName=${productInfo.pimage_info2}" style="width: 150;height: 80;border: 1px solid;">
 									</div>
 							</div>

@@ -5,6 +5,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
+	var registerResult = "${registerResult}";
+	if(registerResult == "true"){
+		alert("상품 추가가 완료 되었습니다");
+	}
 	$(".product-create").click(function(){
 		var url ="/admin/admin_product_popup";
 		var name = "product_popup";
@@ -14,7 +18,7 @@ $(function(){
 	$(".btn-product-update").click(function(e){
 		var pno = $(this).attr("data-pno");
 		var hiddenPno = "<input type='hidden' name='pno' value='"+pno+"'/>"
-		var conf = confirm(pno+"번의 상품을 수정 하시겠습니까?");
+		var conf = confirm(pno+"번의 상품을 확인하시겠습니까?");
 		console.log(conf);
 		if(conf == true){
 			$("#frm-product").append(hiddenPno);
@@ -22,6 +26,10 @@ $(function(){
 		}else{
 			return false;
 		}
+	});
+	$(".btn-add-manuFacturer").click(function(){
+		var manu = prompt("제조사를 입력해주세요");
+		
 	});
 	
 	$(".btnChkDelete").click(function() {
@@ -45,6 +53,15 @@ $(function(){
 				});
 			}
 		});
+	});
+	//페이징 처리
+	$(".page-num").click(function(e) {
+		e.preventDefault();
+		var pageNum = $(this).attr("href");
+		$("#page").val(pageNum);
+		$("#frm-page").attr("action", "/admin/admin_product");
+		console.log(pageNum);
+		$("#frm-page").submit();
 	});
 });
 </script>
@@ -79,8 +96,8 @@ $(function(){
 				</div>
 				<div>
 					<button type="button" class="product-create">상품 추가</button>
-					<button type="button" class="user-suspend">분류 설정</button>
-					<button type="button" class="user-repair btnChkDelete">선택 삭제</button>
+					<button type="button" class="btn-add-manuFacturer">제조사 추가</button>
+					<button type="button" class="btnChkDelete">선택 삭제</button>
 				</div>
 			</div>
 			<div class="div-main">
@@ -166,7 +183,7 @@ $(function(){
 							</div>
 						</div>
 						</c:forEach>
-							<form id="frm-product" action="/admin/admin_productInfo" method="post">
+							<form id="frm-product" action="/admin/admin_productInfo" method="get">
 							</form>
 					</div>
 					<div>
@@ -191,6 +208,9 @@ $(function(){
 						  </c:if>
 						  </ul>
 						</nav>
+						<form id="frm-page">
+							<input type="hidden" id="page" name="pageNum">
+						</form>
 					</div>
 					<div class="popup">
 						<div class="popup-cover">

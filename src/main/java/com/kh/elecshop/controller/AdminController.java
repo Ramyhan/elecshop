@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.elecshop.domain.AdminNoticeDTO;
 import com.kh.elecshop.domain.AdminProductDTO;
@@ -26,6 +27,7 @@ import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.DayInfoDTO;
 import com.kh.elecshop.domain.IquiryVO;
+import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
@@ -74,33 +76,28 @@ public class AdminController {
 	}
 	//어드민 상품 추가 팝업창
 	@GetMapping("/admin_product_popup")
-	public void product_popup() {
-		
+	public void product_popup(Model model) {
+		List<ManufacturerVO> list = adminService.getMenuFacturer();
+		model.addAttribute("facturer", list);
 	}
-	//어드민 상품 이미지 삭제
-	@PostMapping(value="/deleteImage",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> productDeleteImage(@RequestParam("ano") int ano) {
-		boolean result = adminService.removeProductImage(ano);
-		return ResponseEntity.ok(result);
-	}
-	//어드민 상품 삭제
-	@PostMapping(value = "/admin_deleteOption", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<Boolean> deleteOption(
-			@RequestParam("pno") int pno,@RequestParam("ono") int ono) {
-		System.out.println("pp"+pno);
-		System.out.println("pp2"+ono);
-		boolean result = adminService.removeProductOption(pno, ono);
-		return ResponseEntity.ok(result);
+	//상품 수정 버튼
+	@PostMapping("/updateProduct")
+	public String updateProduct(RedirectAttributes attributes,AdminProductInfoDTO adminProductInfoDTO) {
+		System.out.println(adminProductInfoDTO);
+		adminService.modifyProduct(adminProductInfoDTO);
+		attributes.addAttribute("pno", adminProductInfoDTO.getPno());
+		return "redirect:/admin/admin_productInfo";
 	}
 	//어드민 상품 수정페이지
 	@PostMapping(value="/admin_product_updateForm")
 	public void productUpdateForm(int pno, Model model) {
 		AdminProductInfoDTO productInfoDTO = adminService.getProductInfo(pno);
+		List<ManufacturerVO> list = adminService.getMenuFacturer();
+		model.addAttribute("facturer", list);
 		model.addAttribute("productInfo", productInfoDTO);
 	}
 	//상품 상세정보 확인 메서드
-	@PostMapping("/admin_productInfo")
+	@GetMapping("/admin_productInfo")
 	public void productInfoForm(int pno, Model model) {
 		System.out.println("wrasd"+pno);
 		AdminProductInfoDTO productInfo = adminService.getProductInfo(pno);
@@ -108,9 +105,10 @@ public class AdminController {
 	}
 	//상품추가 메서드
 	@PostMapping(value="/adminProductRegister", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String adminProductRegister(AdminProductRegisterDTO adminProductRegisterDTO) {
+	public String adminProductRegister(AdminProductRegisterDTO adminProductRegisterDTO, RedirectAttributes rttr) {
 		System.out.println("dto" + adminProductRegisterDTO);
 		boolean result = adminService.registerProduct(adminProductRegisterDTO);
+		rttr.addFlashAttribute("registerResult", result);
 		System.out.println(result);
 		return "redirect:/admin/admin_product";
 	}

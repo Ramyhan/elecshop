@@ -17,6 +17,7 @@ import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
+import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.OrderDetailVO;
 import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
@@ -110,7 +111,9 @@ public class AdminServiceImpl implements AdminService{
 	@Transactional
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO) {
 		log.info("adminProductregisterDTO: " + adminProductRegisterDTO);
-		adminMapper.insertProduct(adminProductRegisterDTO);
+		int productResult = adminMapper.insertProduct(adminProductRegisterDTO);
+		int fileResult = 0;
+		List<AdminProductOptionDTO> optionList = new ArrayList<AdminProductOptionDTO>();
 		int pno = adminProductRegisterDTO.getPno();
 		List<FileVO> fileList = adminProductRegisterDTO.getAttrProductList();
 		if(fileList != null) {
@@ -118,38 +121,37 @@ public class AdminServiceImpl implements AdminService{
 				FileVO fileVO = fileList.get(i);
 				fileVO.setPno(pno);
 			}
-			adminMapper.insertProductImage(fileList);
+			fileResult = adminMapper.insertProductImage(fileList);
 		}
 		List<AdminProductOptionDTO> ramList = adminProductRegisterDTO.getRamList();
-		if(ramList != null) {
-			for(int i = 0; i < ramList.size(); i ++) {
-				AdminProductOptionDTO productRamDTO = ramList.get(i);
-				productRamDTO.setPno(pno);
-			}
-			adminMapper.insertProductRamOption(ramList);
-		}
 		List<AdminProductOptionDTO> ssdList = adminProductRegisterDTO.getSsdList();
-		if(ssdList != null) {
-			for(int i = 0; i < ssdList.size(); i ++) {
-				AdminProductOptionDTO productSSdDTO = ssdList.get(i);
-				productSSdDTO.setPno(pno);
-			}
-			adminMapper.insertProductSSDOption(ssdList);
-		}
 		List<AdminProductOptionDTO> colorList = adminProductRegisterDTO.getColorList();
-		if(colorList != null) {
-			for(int i = 0; i < colorList.size();i++) {
-				AdminProductOptionDTO productColorDTO = colorList.get(i);
-				productColorDTO.setPno(pno);
-			}
-			adminMapper.insertProductColorOption(colorList);
+		if(ramList != null) {
+			optionList.addAll(ramList);
 		}
-//		for (int i = 0; i < fileList.size(); i++) {
-//			fileList.get(i).get;
-//		}
-		return true;
+		if(ssdList != null) {
+			optionList.addAll(ssdList);
+		}
+		if(colorList != null) {
+			optionList.addAll(colorList);
+		}
+		for(AdminProductOptionDTO dto:optionList) {
+			dto.setPno(pno);
+		}
+		int optionResult = adminMapper.insertProductOption(optionList);
+		System.out.println("optionResult:"+optionResult);
+		System.out.println("fileResult:"+fileResult);
+		System.out.println("productResult:"+productResult);
+		if(optionResult + fileResult + productResult >= 3) {
+			return true;
+		}
+		return false;
 	}
-
+	@Override
+	public List<ManufacturerVO> getMenuFacturer() {
+		List<ManufacturerVO> list = adminMapper.selectManuFacturer();
+		return list;
+	}
 	@Override
 	public Map<String, Object> getAdminNoticeList(Criteria criteria) {
 		List<AdminNoticeDTO> subNoticeList = adminMapper.selectNotice(criteria);
@@ -177,40 +179,26 @@ public class AdminServiceImpl implements AdminService{
 		List<FileVO> fileList = adminMapper.selectProductInfoImage(pno);
 		
 		if(fileList != null) {
-			List<FileVO> thoumbImage =  new ArrayList<FileVO>();
-			List<FileVO> infoImage =  new ArrayList<FileVO>();
+			FileVO thoumbImage = new FileVO();
+			FileVO imageInfo1 = new FileVO();
+			FileVO imageInfo2 = new FileVO();
 			for(int i = 0; i < fileList.size(); i++) {
 				FileVO vo = fileList.get(i);
-				if(vo.getAthoumbnail().equals("y")) {
-					thoumbImage.add(vo);
-				}else {
-					infoImage.add(vo);
+				if(vo.getImage_info().equals("thoumb")) {
+					thoumbImage = vo;
+				}else if(vo.getImage_info().equals("info1")){
+					imageInfo1 = vo;
+				}else if(vo.getImage_info().equals("info2")) {
+					imageInfo2 = vo;
 				}
 			}
-			productInfoDTO.setThoumbnailImageList(thoumbImage);
-			productInfoDTO.setInfoImageList(infoImage);
+			productInfoDTO.setImageThoumb(thoumbImage);
+			productInfoDTO.setImageInfo1(imageInfo1);
+			productInfoDTO.setImageInfo2(imageInfo2);
 			productInfoDTO.setAttrProductList(fileList);
 		}
 		return productInfoDTO;
 	}
-
-	@Override
-	public boolean removeProductOption(int pno, int ono) {
-		int count = adminMapper.deleteOption(pno, ono);
-		if(count == 1) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public boolean removeProductImage(int ano) {
-		int count = adminMapper.deleteImage(ano);
-		if(count == 1) {
-			return true;
-		}
-		return false;
-	}
-
 	public Map<String, Object> getOrderList(Criteria criteria) {
 		int total = adminMapper.selectOrderTotal();
 		PageDTO pageDTO = new PageDTO(criteria, total);
@@ -233,4 +221,36 @@ public class AdminServiceImpl implements AdminService{
 		return (count == 1) ? true:false;
 	}
 
+	@Override
+	@Transactional
+	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO) {
+		adminMapper.updateProduct(adminProductInfoDTO);
+		FileVO thoumb = adminProductInfoDTO.getImageThoumb();
+		FileVO info1 =adminProductInfoDTO.getImageInfo1();
+		FileVO info2 = adminProductInfoDTO.getImageInfo2();
+		List<FileVO> fileList = new ArrayList<FileVO>();
+		fileList.add(thoumb);
+		fileList.add(info1);
+		fileList.add(info2);
+		log.info("11" + fileList);
+		adminMapper.deleteProductOptionByPno(adminProductInfoDTO.getPno());
+		List<AdminProductOptionDTO> ramList = adminProductInfoDTO.getRamList();
+		List<AdminProductOptionDTO> ssdList = adminProductInfoDTO.getSsdList();
+		List<AdminProductOptionDTO> colorList = adminProductInfoDTO.getColorList();
+		List<AdminProductOptionDTO> productOption = new ArrayList<AdminProductOptionDTO>();
+		if(ramList != null) {
+			productOption.addAll(ramList);
+		}
+		if(ssdList != null) {
+			productOption.addAll(ssdList);
+		}
+		if(colorList != null) {
+			productOption.addAll(colorList);
+		}
+		if(productOption != null) {
+			adminMapper.updateOption(productOption);
+		}
+		adminMapper.updateProductImage(fileList);
+		return false;
+	}
 }

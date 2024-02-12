@@ -12,7 +12,7 @@ import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
-
+import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.ProductOptionVO;
 
 import com.kh.elecshop.domain.OrderVO;
@@ -39,11 +39,7 @@ public interface AdminMapper {
 	//어드민 상품 추가
 	public int insertProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	//어드민 상품 램옵션 추가
-	public int insertProductRamOption(List<AdminProductOptionDTO> productRamDTO);
-	//어드민 상품 ssd옵션 추가
-	public int insertProductSSDOption(List<AdminProductOptionDTO> productSSdDTO);
-	//어드민 상품 color옵션 추가
-	public int insertProductColorOption(List<AdminProductOptionDTO> productColorDTO);
+	public int insertProductOption(List<AdminProductOptionDTO> productOptionDTO);
 	//어드민 상품 이미지 추가
 	public int insertProductImage(List<FileVO> list);
 	//어드민 상품 썸네일 조회
@@ -62,8 +58,16 @@ public interface AdminMapper {
 	public List<AdminProductOptionDTO> selectProductInfoSSDOption(int pno);
 	//어드민 상품 컬러옵션 가져오기
 	public List<AdminProductOptionDTO> selectProductInfoColorOption(int pno);
+	//어드민 상품 제조사 가져오기
+	public List<ManufacturerVO> selectManuFacturer();
+	//어드민 상품 수정
+	public int updateProduct(AdminProductInfoDTO adminProductInfoDTO);
+	//어드민 상품 옵션 수정
+	public int updateOption(List<AdminProductOptionDTO> optionList);
+	//어드민 상품 이미지 수정
+	public int updateProductImage(List<FileVO> fileList);
 	//어드민 상품 옵션 삭제
-	public int deleteOption(@Param("pno") int pno,@Param("ono") int ono);
+	public int deleteProductOptionByPno(int pno);
 	//어드민 상품 이미지 삭제
 	public int deleteImage(int ano);
 	//어드민 배송 주문내역 가져오기

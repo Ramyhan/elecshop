@@ -75,9 +75,9 @@
 			from dual
 		</selectKey>
 	</insert>
-	<!-- 상품 이미지 -->	
+	<!-- 상품 이미지 추가 -->	
 	<insert  id="insertProductImage" parameterType="com.kh.elecshop.domain.FileVO">
-		insert into tbl_attr(ano,pno,afilename,apath,auuid,athoumbnail,aurl)
+		insert into tbl_attr(ano,pno,afilename,apath,auuid,image_info,aurl)
 		SELECT seq_attr_ano.nextval, ano.* FROM(
 		<foreach collection="list" item="file" separator="union all">
 		<![CDATA[
@@ -86,7 +86,7 @@
 				#{file.afileName} as afileName,
 				#{file.apath} as apath,
 				#{file.auuid} as auuid,
-				#{file.athoumbnail} as athumbnail,
+				#{file.image_info} as image_info,
 				#{file.aurl} as aurl
 				from dual 
 				]]> 
@@ -94,10 +94,10 @@
 		</foreach>
 		) ano
 	</insert>
-	<!-- 상품 램 추가(노트북,태블릿 한정) -->
-	<insert id="insertProductRamOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
+	<!-- 상품 옵션 추가(노트북,태블릿 한정) -->
+	<insert id="insertProductOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
 		insert into tbl_product_option(ono,pno,oname,oprice,otype)
-		SELECT seq_option_ono.nextval, ono.* FROM(
+		SELECT seq_ono.nextval, ono.* FROM(
 		<foreach collection="list" item="ramList" separator="union all">
 		<![CDATA[
 		select
@@ -110,43 +110,11 @@
 		</foreach>
 		) ono
 	</insert>
-	<!-- 상품 ssd옵션추가(노트북,태블릿한정) -->
-	<insert id="insertProductSSDOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
-		insert into tbl_product_option(ono,pno,oname,oprice,otype)
-		SELECT seq_option_ono.nextval, ono.* FROM(
-		<foreach collection="list" item="ssdList" separator="union all">
-		<![CDATA[
-		select
-		#{ssdList.pno} as pno,
-		#{ssdList.oname} as oname,
-		#{ssdList.oprice} as oprice,
-		#{ssdList.otype} as otype
-		from dual
-		]]> 
-		</foreach>
-		) ono
-	</insert>
-	<!-- 상품 색상옵션 추가 -->
-	<insert id="insertProductColorOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
-		insert into tbl_product_option(ono,pno,oname,oprice,otype)
-		SELECT seq_option_ono.nextval, ono.* FROM(
-		<foreach collection="list" item="colorList" separator="union all">
-		<![CDATA[
-		select
-		#{colorList.pno} as pno,
-		#{colorList.oname} as oname,
-		#{colorList.oprice} as oprice,
-		#{colorList.otype} as otype
-		from dual
-		]]> 
-		</foreach>
-		) ono
-	</insert>
 	<!-- 상품 썸네일 이미지 가져오기 -->
 	<select id="selectAttrThoumbNailImage" resultType="com.kh.elecshop.domain.FileVO">
 		select * from tbl_attr
 		where pno = #{pno}
-		and athoumbnail = 'y'
+		and image_info = 'thoumb'
 	</select>
 	<!-- 상품 타입 이름 가져오기 -->
 	<select id="selectPtypeName" resultType="string">
@@ -187,6 +155,10 @@
 		where pno = #{pno}
 		and otype = 3
 	</select>
+	<!-- 상품 제조사 목록 가져오기 -->
+	<select id="selectManuFacturer" resultType="com.kh.elecshop.domain.ManufacturerVO">
+		select * from(select * from tbl_manufacturer order by mno asc)
+	</select>
 	<!-- 상품 상세정보 수정 -->
 	<update id="updateProduct">
 		update tbl_product set
@@ -198,22 +170,66 @@
 		 pinfo1 = #{pinfo1},
 		 pinfo2 = #{pinfo2},
 		 pinfo3 = #{pinfo3},
+		 pimage_thoumb = #{pimage_thoumb},
+		 pimage_info1 = #{pimage_info1},
+		 pimage_info2 = #{pimage_info2},
 		 order_count = #{order_count}
 		 where pno = #{pno}
 	</update>
-	
+	<!-- 상품 옵션 수정 -->
+	<update id="updateOption" parameterType="com.kh.elecshop.domain.AdminProductOptionDTO">
+	    merge into tbl_product_option op
+	    using( 
+	        <foreach collection="list" item="item" close="" open="" separator="union">
+	            select #{item.ono} as ono,
+	                   #{item.pno} as pno,
+	                   #{item.oname} as oname,
+	                   #{item.oprice} as oprice,
+	                   #{item.otype} as otype
+	            from dual
+	        </foreach>
+	    ) add_op
+	    on (op.ono = add_op.ono) 
+		when matched then 
+		update set  
+		op.pno = add_op.pno, 
+		op.oname = add_op.oname, 
+		op.oprice = add_op.oprice,
+		op.otype = add_op.otype 
+		when not matched then insert(op.ono,op.pno,op.oname,op.oprice,op.otype) 
+		values(seq_ono.nextval,add_op.pno,add_op.oname,add_op.oprice,add_op.otype)
+	</update>
 	<!-- 상품 옵션 삭제 -->
-	<delete id="deleteOption" parameterType="int">
+	<delete id="deleteProductOptionByPno">
 		delete from tbl_product_option
 		where pno = #{pno}
-		and ono = #{ono}
 	</delete>
-	<!-- 상품 이미지 삭제 -->
-	<delete id="deleteImage">
-		delete from tbl_attr
-		where ano = #{ano}
-	</delete>
-
+	<!-- 상품수정(이미지 파일 수정) -->
+	<update id="updateProductImage" parameterType="com.kh.elecshop.domain.FileVO">
+		merge into tbl_attr a
+		using(
+		<foreach collection="list" item="item"  close=""  open="" separator="union">	
+			select 
+			#{item.ano} as ano,
+			#{item.pno} as pno,
+			#{item.apath} as apath,
+			#{item.auuid} as auuid,
+			#{item.aurl} as aurl,
+			#{item.afileName} as afileName,
+			#{item.image_info} as image_info
+			from dual
+		</foreach>
+		)add_attr
+		on(a.ano = add_attr.ano)
+		when matched then
+		update set
+		a.pno = add_attr.pno,
+		a.apath = add_attr.apath,
+		a.auuid = add_attr.auuid,
+		a.aurl = add_attr.aurl,
+		a.afileName = add_attr.afileName,
+		a.image_info = add_attr.image_info
+	</update>
 	<!-- 주문 내역 리스트 -->
 	<select id="selectOrderList" resultType="com.kh.elecshop.domain.OrderVO">
 		select * from (select ono, mid, oname, ophone, oprice, oaddr, oaddr_detail, opost_code, odelivery, delivery_status, regdate, rownum rn from tbl_order

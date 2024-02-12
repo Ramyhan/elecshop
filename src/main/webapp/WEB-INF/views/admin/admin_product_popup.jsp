@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -53,44 +54,43 @@
 	$(function() {
 		$(".product-select").change(function() {
 			var category = $(this).val();
+			console.log(category);
+			$("#sub-select-div").children().css("display", "none");
+			$("#sub-select-div").find("input").attr("disabled",true);
+			$("#sub-select-div").find("select").attr("disabled",true);
+			$("#sub-select-div").find("input").attr("required",false);
+			$("#sub-select-div").find("select").attr("required",false);
 			if(category == 1 || category == 3){
-				$("#sub-select-div").css("display", "flex");
-				$("#sub-select-div").find("input").attr("disabled",false);
-				$("#sub-select-div").find("select").attr("disabled",false);
-				$("#sub-select-div").find("input").attr("required",true);
-				$("#sub-select-div").find("select").attr("required",true);
-			}else{
-				$("#sub-select-div").css("display", "none");
-				$("#sub-select-div").find("input").attr("disabled",true);
-				$("#sub-select-div").find("select").attr("disabled",true);
-				$("#sub-select-div").find("input").attr("required",false);
-				$("#sub-select-div").find("select").attr("required",false);
-			}
-			if(category == 4){
-				$("#sound-detail").css("display","flex");
+				$("#add-ram-div").css("display", "block");
+				$("#add-ssd-div").css("display", "block");
+				$("#add-color-div").css("display", "block");
+				$("#add-ram-div").find("input").attr("disabled",false);
+				$("#add-ram-div").find("select").attr("disabled",false);
+				$("#add-ram-div").find("input").attr("required",true);
+				$("#add-ram-div").find("select").attr("required",true);
+				$("#add-ssd-div").find("input").attr("disabled",false);
+				$("#add-ssd-div").find("select").attr("disabled",false);
+				$("#add-ssd-div").find("input").attr("required",true);
+				$("#add-ssd-div").find("select").attr("required",true);
+			}else if(category == 4){
+				$("#sound-detail").css("display","block");
 				$("#sound-detail").find("select").attr("disabled",false);
 				$("#sound-detail").find("input").attr("disabled",false);
 				$("#sound-detail").find("select").attr("required",true);
 				$("#sound-detail").find("input").attr("required",true);
-			}else{
-				$("#sound-detail").css("display","none");
-				$("#sound-detail").find("select").attr("disabled",true);
-				$("#sound-detail").find("input").attr("disabled",true);
-				$("#sound-detail").find("select").attr("required",false);
-				$("#sound-detail").find("input").attr("required",false);
+			}else if(category == 5){
+				$("#add-detail-div").css("display","block");
+				$("#add-detail-div").find("select").attr("disabled",false);
+				$("#add-detail-div").find("input").attr("disabled",false);
+				$("#add-detail-div").find("select").attr("required",true);
+				$("#add-detail-div").find("input").attr("required",true);
 			}
-			if(category == 5){
-				$("#Peripherals-detail").css("display","flex");
-				$("#Peripherals-detail").find("select").attr("disabled",false);
-				$("#Peripherals-detail").find("input").attr("disabled",false);
-				$("#Peripherals-detail").find("select").attr("required",true);
-				$("#Peripherals-detail").find("input").attr("required",true);
-			}else{
-				$("#Peripherals-detail").css("display","none");
-				$("#Peripherals-detail").find("select").attr("disabled",true);
-				$("#Peripherals-detail").find("input").attr("disabled",true);
-				$("#Peripherals-detail").find("select").attr("required",false);
-				$("#Peripherals-detail").find("input").attr("required",false);
+			if(category != ""){
+				$("#add-color-div").css("display", "block");
+				$("#add-color-div").find("input").attr("disabled",false);
+				$("#add-color-div").find("select").attr("disabled",false);
+				$("#add-color-div").find("input").attr("required",true);
+				$("#add-color-div").find("select").attr("required",true);
 			}
 		});
 		$("#btn-ram").click(function() {
@@ -182,12 +182,12 @@
 				var apath = $(this).attr("data-apath");
 				var thoumbnail = $(this).attr("data-thoumbnail");
 				console.log(thoumbnail);
-				var hiddenThoumb = "<input type='hidden' name='attrProductList["+i+"].athoumbnail' value='" + thoumbnail + "'>";
+				var hiddenThoumb = "<input type='hidden' name='attrProductList["+i+"].image_info' value='" + thoumbnail + "'>";
 				var hiddenFile = "<input type='hidden' name='attrProductList["+i+"].afileName' value='" + file + "'>";
 				var hiddenUuid = "<input type='hidden' name='attrProductList["+i+"].auuid' value='" + uuid + "'>";
 				var hiddenUrl = "<input type='hidden' name='attrProductList["+i+"].aurl' value='" + url + "'>";
 				var hiddenPath = "<input type='hidden' name='attrProductList["+i+"].apath' value='" + apath + "'>";
-				if(thoumbnail == "y"){
+				if(thoumbnail == "thoumb"){
 					var hiddenThoumb2 ="<input type='hidden' name='pimage_thoumb' value='" + url + "'>";
 					console.log("hiddenThoumb2: ", hiddenThoumb2);
 				$("#frm-popup").prepend(hiddenThoumb2);
@@ -259,7 +259,7 @@
 				<div class="div-cell">
 					<div class="input-cell">
 						<select name="ptype" class="select-option product-select" required>
-							<option>--선택--</option>
+							<option value="">--선택--</option>
 							<option value="1">노트북</option>
 							<option value="2">모니터</option>
 							<option value="3">태블릿</option>
@@ -277,30 +277,72 @@
 					<div class="input-cell">
 						<select name="mno" class="select-option product-state" required>
 							<option>--선택--</option>
-							<option value="1">삼성</option>
-							<option value="2">엘지</option>
-							<option value="3">애플</option>
-							<option value="4">델</option>
-							<option value="5">아수스</option>
-							<option value="6">레이져</option>
-							<option value="7">msi</option>
-							<option value="8">레노버</option>
-							<option value="9">hp</option>
-							<option value="10">소니</option>
-							<option value="11">젠하이져</option>
-							<option value="12">akg</option>
-							<option value="13">브리츠</option>
-							<option value="14">크리에이티브</option>
-							<option value="15">로지텍</option>
-							<option value="16">앱코</option>
-							<option value="17">하이파이맨</option>
-							<option value="18">매드캣츠</option>
+							<c:forEach items="${facturer}" var="facturer" varStatus="status">
+								<option value="${facturer.mno}">${facturer.mname}</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
 			</div>
-			<div style="display: none;" id="sub-select-div">
-				<div id="add-ram-div">
+			<div id="sub-select-div" style="display: flex;">
+				<div style="display: none;" id="add-detail-div">
+					<div class="sound-category-div" id="sound-category-div">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>카테고리 선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="pdno" class="select-sound" disabled>
+									<option>--선택--</option>
+									<option value="4">마우스</option>
+									<option value="5">키보드</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="display: none;" id="sound-detail">
+					<div id="add-detail-div">
+						<div class="sound-category-div" id="sound-category-div">
+							<div class="div-header">
+								<div class="div-header-cell">
+									<span>카테고리 선택</span>
+								</div>
+							</div>
+							<div class="div-cell">
+								<div class="input-cell">
+									<select name="pdno" class="select-sound" disabled>
+										<option>--선택--</option>
+										<option value="1">스피커</option>
+										<option value="2">헤드셋</option>
+										<option value="3">이어폰</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="display: none;" id="add-detail-div">
+					<div class="sound-category-div" id="sound-category-div">
+						<div class="div-header">
+							<div class="div-header-cell">
+								<span>카테고리 선택</span>
+							</div>
+						</div>
+						<div class="div-cell">
+							<div class="input-cell">
+								<select name="pdno" class="select-sound" disabled>
+									<option>--선택--</option>
+									<option value="4">마우스</option>
+									<option value="5">키보드</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="display: none;" id="add-ram-div">
 					<button type="button" id="btn-ram">램옵션 추가</button>
 					<div class="add-ram-select" id="add-ram-select">
 						<div class="div-header">
@@ -331,7 +373,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="add-ssd-div">
+				<div style="display: none;" id="add-ssd-div">
 					<button type="button" id="btn-ssd">ssd옵션 추가</button>
 					<div class="add-ssd-select" id="add-ssd-select">
 						<div class="div-header">
@@ -363,7 +405,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="add-color-div">
+				<div style="display: none;" id="add-color-div">
 					<button type="button" id="btn-pc-color">색상 추가</button>
 					<div class="add-color-select" id="add-color-select">
 						<div class="div-header">
@@ -377,93 +419,6 @@
 									<option>--선택--</option>
 									<option value="Black">Black</option>
 									<option value="white">white</option>
-									<option value="Red">Red</option>
-									<option value="Gray">Gray</option>
-									<option value="Blue">Blue</option>
-								</select>
-								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
-								<input type="hidden" name="colorList[0].otype" value="3" disabled>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div style="display: none;" id="sound-detail">
-				<div id="add-detail-div">
-					<div class="sound-category-div" id="sound-category-div">
-						<div class="div-header">
-							<div class="div-header-cell">
-								<span>카테고리 선택</span>
-							</div>
-						</div>
-						<div class="div-cell">
-							<div class="input-cell">
-								<select name="pdno" class="select-sound" disabled>
-									<option>--선택--</option>
-									<option value="1">스피커</option>
-									<option value="2">헤드셋</option>
-									<option value="3">이어폰</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="add-color-sound-div">
-					<button type="button" class="btn-color" id="btn-sound-color">색상 추가</button>
-					<div class="add-color-sound" id="add-color-sound">
-						<div class="div-header">
-							<div class="div-header-cell">
-								<span>색상선택</span>
-							</div>
-						</div>
-						<div class="div-cell">
-							<div class="input-cell">
-								<select name="colorList[0].oname" class="select-option product-color" disabled>
-									<option>--선택--</option>
-									<option value="Black">Black</option>
-									<option value="Red">Red</option>
-									<option value="Gray">Gray</option>
-									<option value="Blue">Blue</option>
-								</select>
-								<input type="hidden" name="colorList[0].oprice" value="0" disabled>
-								<input type="hidden" name="colorList[0].otype" value="3" disabled>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div style="display: none;" id="Peripherals-detail">
-				<div id="add-detail-div">
-					<div class="sound-category-div" id="sound-category-div">
-						<div class="div-header">
-							<div class="div-header-cell">
-								<span>카테고리 선택</span>
-							</div>
-						</div>
-						<div class="div-cell">
-							<div class="input-cell">
-								<select name="pdno" class="select-sound" disabled>
-									<option>--선택--</option>
-									<option value="4">마우스</option>
-									<option value="5">키보드</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="add-color-Peripherals-div">
-					<button type="button" class="btn-color" id="btn-Peripherals-color">색상 추가</button>
-					<div class="add-color-Peripherals" id="add-color-Peripherals">
-						<div class="div-header">
-							<div class="div-header-cell">
-								<span>색상선택</span>
-							</div>
-						</div>
-						<div class="div-cell">
-							<div class="input-cell">
-								<select name="colorList[0].oname" class="select-option product-color" disabled>
-									<option>--선택--</option>
-									<option value="Black">Black</option>
 									<option value="Red">Red</option>
 									<option value="Gray">Gray</option>
 									<option value="Blue">Blue</option>
@@ -526,7 +481,7 @@
 				</div>
 				<div class="thoumbneil">
 					<div>
-						<img data-thoumbnail="y" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
+						<img data-thoumbnail="thoumb" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
 					</div>
 				</div>
 			</div>
@@ -541,7 +496,7 @@
 				</div>
 				<div class="image">
 					<div>
-						<img data-thoumbnail="n" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
+						<img data-thoumbnail="info1" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
 					</div>
 				</div>
 			</div>
@@ -556,7 +511,7 @@
 				</div>
 				<div class="image">
 					<div>
-						<img data-thoumbnail="n" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
+						<img data-thoumbnail="info2" class="image-preview" src="/resources/css/dongyeong/default.png" style="width: 80px; height: 80px;">
 					</div>
 				</div>
 			</div>

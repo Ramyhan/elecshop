@@ -16,5 +16,5 @@ public class FileVO {
 	private String apath;
 	private String auuid;
 	private String aurl;
-	private String athoumbnail;
+	private String image_info;
 }
