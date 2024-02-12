@@ -231,4 +231,18 @@
 		delivery_status = #{status}
 		where ono = #{ono}
 	</update>
+	
+	<!-- 포인트 내역 리스트 -->
+	<select id="selectPointList" resultType="com.kh.elecshop.domain.PointVO">
+		select * from (select tbl_point.pno, tbl_point.mid, tbl_point.point_code, tbl_point.ppoint, tbl_point.regdate,
+		tbl_point_code.point_info, rownum rn
+		from tbl_point_code, tbl_point
+        where tbl_point_code.point_code = tbl_point.point_code
+       order by rn desc)
+			where rn between #{startRow} and #{endRow}
+	</select>
+	<!-- 전체 포인트 내역 갯수 -->
+	<select id="selectPointTotal" resultType="int">
+		select count(*) from tbl_point
+	</select>
 </mapper>

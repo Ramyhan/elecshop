@@ -63,6 +63,13 @@ $(function(){
 				</a>
 			</li>
 			<li class="menu-li">
+				<a href="/admin/admin_point" class="menubar">
+				<i class="menu-icon fa fa-box" style="opacity: 0.4;"></i>
+					<span class="category-span">포인트 관리</span>
+				<i class="down-fa fa fa-angle-down"></i>
+				</a>
+			</li>
+			<li class="menu-li">
 				<a href="/admin/admin_customerCenter" class="menubar">
 				<i class="menu-icon fa fa-box" style="opacity: 0.4;"></i>
 					<span class="category-span">고객센터 관리</span>

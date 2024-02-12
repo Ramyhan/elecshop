@@ -47,7 +47,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div">
 			<div>
-				<h1>유저 관리 페이지</h1>
+				<h1>배송 관리 페이지</h1>
 			</div>
 			<div class="user-devel">
 				<div class="d-flex justify-content-end">
@@ -110,8 +110,8 @@ $(function(){
 								<fmt:formatDate value="${vo.regdate}" pattern="yy-MM-dd hh:mm:ss"/>
 								</span>
 							</div>
-							<div class="cell" style="text-align: left;">
-								<span style="font-size: 20px;">${vo.oname}</span>
+							<div class="cell">
+								<span>${vo.oname}</span>
 							</div>
 							<div class="cell">
 								<span>${vo.ophone}</span>
@@ -174,7 +174,7 @@ $(function(){
 						    </li>
 						  </c:if>
 						  <c:forEach begin="${orderMap.page.startPage}" end="${orderMap.page.endPage}" var="v">
-						    	<li class="page-item"><a class="page-num page-link ${(productMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+						    	<li class="page-item"><a class="page-num page-link ${(orderMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
 						  </c:forEach>
 						  <c:if test="${orderMap.page.next == true }">
 							    <li class="page-item">

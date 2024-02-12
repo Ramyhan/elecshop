@@ -8,7 +8,7 @@ SELECT 'DROP SEQUENCE ' || SEQUENCE_NAME || ';'
 FROM   ALL_SEQUENCES
 WHERE  SEQUENCE_OWNER='TEST_SHOP';
 
---시작
+-- 테이블 
 create table tbl_member(
     mno number constraint pk_mno primary key,
     mname nvarchar2(10) not null,
@@ -92,9 +92,9 @@ CREATE TABLE TBL_PRODUCT(
     PINFO1 NVARCHAR2(300),
     PINFO2 NVARCHAR2(300),
     PINFO3 NVARCHAR2(300),
-    PIMAGE_THOUMB NVARCHAR2(50) NOT NULL,
-    PIMAGE_INFO1 NVARCHAR2(50) NOT NULL,
-    PIMAGE_INFO2 NVARCHAR2(50) NOT NULL,
+    PIMAGE_THOUMB NVARCHAR2(100) NOT NULL,
+    PIMAGE_INFO1 NVARCHAR2(100) NOT NULL,
+    PIMAGE_INFO2 NVARCHAR2(100) NOT NULL,
     ORDER_COUNT NUMBER DEFAULT 0,
     PREGDATE DATE DEFAULT SYSDATE,
     ISDELETE NUMBER(1) DEFAULT 0 CHECK(ISDELETE IN (0, 1)) 
@@ -108,7 +108,7 @@ CREATE TABLE TBL_PRODUCT_OPTION(
     OTYPE NUMBER(1) NOT NULL
 );
 
-CREATE SEQUENCE SEQ_ONO;
+CREATE SEQUENCE SEQ_OPTION_ONO;
 CREATE SEQUENCE SEQ_PNO;
 
 create table tbl_order(
@@ -177,8 +177,11 @@ create table tbl_attr(
     athoumbnail char(1) default 'n' check(athoumbnail in ('y','n')),
     apath nvarchar2(30) not null,
     auuid nvarchar2(100) not null,
-    afilename nvarchar2(50) not null
+    afilename nvarchar2(50) not null,
+    aurl nvarchar2(300) not null
 );
+
+create sequence seq_attr_ano;
 
 create table tbl_visit(
     vdate date constraint pk_vdate primary key,
@@ -240,6 +243,9 @@ values ('RP', '댓글', 100);
 insert into tbl_point_code(point_code, point_info)
 values ('PU', '포인트 사용');
 
+
+insert into tbl_product_detail (pdno, pdname)
+values (0, '기타');
 insert into tbl_product_detail (pdno, pdname)
 values (1, '스피커');
 insert into tbl_product_detail (pdno, pdname)

@@ -23,4 +23,5 @@ public interface AdminService {
 	public boolean removeProductImage(int ano);
 	public Map<String, Object> getOrderList(Criteria criteria);
 	public boolean updateOrderStatus(int ono, int status);
+	public Map<String, Object> getPointList(Criteria criteria);
 }
