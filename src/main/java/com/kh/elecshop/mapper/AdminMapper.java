@@ -16,6 +16,7 @@ import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.ProductOptionVO;
 
 import com.kh.elecshop.domain.OrderVO;
+import com.kh.elecshop.domain.PointVO;
 
 public interface AdminMapper {
 	//어드민 전체 유저 조회
@@ -76,4 +77,9 @@ public interface AdminMapper {
 	public int selectOrderTotal();
 	//어드민 배송 송장번호 입력
 	public int updateOrderStatus(@Param("ono") int ono, @Param("status") int status);
+	//어드민 전체 포인트 내역 가져오기
+	public List<PointVO> selectPointList(Criteria criteria);
+	//어드민 전체 포인트 내역 수
+	public int selectPointTotal();
+	
 }

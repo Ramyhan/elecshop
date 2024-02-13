@@ -21,6 +21,7 @@ import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.OrderDetailVO;
 import com.kh.elecshop.domain.OrderVO;
 import com.kh.elecshop.domain.PageDTO;
+import com.kh.elecshop.domain.PointVO;
 import com.kh.elecshop.domain.ProductOptionVO;
 import com.kh.elecshop.domain.SearchDTO;
 import com.kh.elecshop.domain.SubNoticeDTO;
@@ -252,5 +253,17 @@ public class AdminServiceImpl implements AdminService{
 		}
 		adminMapper.updateProductImage(fileList);
 		return false;
+	}
+	public Map<String, Object> getPointList(Criteria criteria) {
+		int total = adminMapper.selectPointTotal();
+		PageDTO pageDTO = new PageDTO(criteria, total);
+		
+		List<PointVO> list = adminMapper.selectPointList(criteria);
+		log.info("리스트" + list);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pointList", list);
+		map.put("page", pageDTO);
+		return map;
 	}
 }

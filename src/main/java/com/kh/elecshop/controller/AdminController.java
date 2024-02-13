@@ -225,9 +225,11 @@ public class AdminController {
 		adminService.updateOrderStatus(ono, status);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
+
+	//어드민 포인트
 	@GetMapping("/admin_point")
 	public void admin_point(Model model, Criteria criteria) {
-		Map<String, Object> map; 
+		Map<String, Object> map = adminService.getPointList(criteria);
+		model.addAttribute("pointMap", map);
 	}
-	
 }

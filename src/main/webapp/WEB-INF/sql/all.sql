@@ -8,7 +8,7 @@ SELECT 'DROP SEQUENCE ' || SEQUENCE_NAME || ';'
 FROM   ALL_SEQUENCES
 WHERE  SEQUENCE_OWNER='TEST_SHOP';
 
---시작
+-- 테이블 
 create table tbl_member(
     mno number constraint pk_mno primary key,
     mname nvarchar2(10) not null,
@@ -108,7 +108,7 @@ CREATE TABLE TBL_PRODUCT_OPTION(
     OTYPE NUMBER(1) NOT NULL
 );
 
-CREATE SEQUENCE SEQ_ONO;
+CREATE SEQUENCE SEQ_OPTION_ONO;
 CREATE SEQUENCE SEQ_PNO;
 
 create table tbl_order(
@@ -243,8 +243,9 @@ values ('RP', '댓글', 100);
 insert into tbl_point_code(point_code, point_info)
 values ('PU', '포인트 사용');
 
+
 insert into tbl_product_detail (pdno, pdname)
-values (0, '0');
+values (0, '기타');
 insert into tbl_product_detail (pdno, pdname)
 values (1, '스피커');
 insert into tbl_product_detail (pdno, pdname)

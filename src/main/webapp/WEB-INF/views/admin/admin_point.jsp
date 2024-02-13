@@ -9,11 +9,11 @@
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
 <script>
 $(function(){
-		var ono = 0;
+		var mid = 0;
 		var that = "";
 	$(".btn-order-status").click(function(e){
-		ono = $(this).attr("data-ono");
-		var conf = confirm(ono+"번의 주문의 송장번호를 입력하시겠습니까?");
+		mid = $(this).attr("data-mid");
+		var conf = confirm("아이디 " +mid+" 의 포인트를 수정하겠습니까?");
 		that = $(this);
 // 		console.log(that);
 // 		console.log(ono);
@@ -25,19 +25,29 @@ $(function(){
 	});
 	
 	$("#btn-order-status-submit").click(function(){
-		var status = $("#modal-order-status").val();
+		var point = $("#modal-order-status").val();
 		var sData = {
-				"status" : status,
-				"ono" : ono
+				"point" : point,
+				"mid" : mid
 		}
 		$("#modal-order").modal("hide");
 		$.post("/admin/updateOrderStatus", sData, function(rData){
 			console.log(rData);
 			if(rData == "success"){
-				var div = that.parent().parent().find(".cell-status").find("span").text("발송 완료");
 				console.log(div);
 			}
 		});
+	});
+	
+	
+	$(".a-point_mid").click(function(){
+		var point = $(this).parent();
+		point.append("<p>포인트 : 150000</p>");
+		point.find("input:[p]");	
+		
+		if($('#myDiv').length))
+		console.log("클릭");
+		console.log(point);
 	});
 });
 </script>
@@ -47,7 +57,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div">
 			<div>
-				<h1>유저 관리 페이지</h1>
+				<h1>포인트 페이지</h1>
 			</div>
 			<div class="user-devel">
 				<div class="d-flex justify-content-end">
@@ -79,44 +89,70 @@ $(function(){
 								<span>#</span>
 							</div>
 							<div class="header-cell">
-								<span>구매일자</span>
+								<span>날짜</span>
 							</div>
 							<div class="header-cell">
-								<span>수령인</span>
+								<span>아이디</span>
 							</div>
 							<div class="header-cell">
-								<span>핸드폰 번호</span>
+								<span>포인트</span>
 							</div>
 							<div class="header-cell">
-								<span>주소</span>
+								<span>포인트 코드</span>
 							</div>
 							<div class="header-cell">
-								<span>가격</span>
-							</div>
-							<div class="header-cell">
-								<span>배송비</span>
-							</div>
-							<div class="header-cell">
-								<span>배송</span>
+								<span>포인트 정보</span>
 							</div>
 						</div>
+					
+					<c:forEach var="vo" items="${pointMap.pointList}">
+						<div class="user-div-row">
+							<div class="cell">
+							<span>${vo.pno }</span>
+							</div>
+							<div class="cell">
+								<span>
+								<fmt:formatDate value="${vo.regdate}" pattern="yy-MM-dd hh:mm:ss"/>
+								</span>
+							</div>
+							<div class="cell">
+								<a class="a-point_mid" data-mid="${vo.mid}">${vo.mid}</a>
+							</div>
+							<div class="cell">
+								<span>${vo.ppoint}</span>
+							</div>
+							<div class="cell">
+								<span>${vo.point_code}</span>
+							</div>
+							<div class="cell">
+								<span>
+								${vo.point_info }
+								</span>
+							</div>
+							<div class="cell">
+							<button type="button" class="btn-order-status" data-mid="${vo.mid}">
+							<i class="fa fa-box"></i>
+							</button>
+							</div>
+						</div><!-- 여기 -->
+						</c:forEach>
 					</div>
 					<div>
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination">
-						  <c:if test="${orderMap.page.prev == true}">
+						  <c:if test="${pointMap.page.prev == true}">
 						    <li class="page-item">
-						      <a class="page-num page-link" href="${orderMap.page.startPage - 1}" aria-label="Previous">
+						      <a class="page-num page-link" href="${pointMap.page.startPage - 1}" aria-label="Previous">
 						        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
 						      </a>
 						    </li>
 						  </c:if>
-						  <c:forEach begin="${orderMap.page.startPage}" end="${orderMap.page.endPage}" var="v">
-						    	<li class="page-item"><a class="page-num page-link ${(productMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+						  <c:forEach begin="${pointMap.page.startPage}" end="${pointMap.page.endPage}" var="v">
+						    	<li class="page-item"><a class="page-num page-link ${(pointMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
 						  </c:forEach>
-						  <c:if test="${orderMap.page.next == true }">
+						  <c:if test="${pointMap.page.next == true }">
 							    <li class="page-item">
-							      <a class="page-num page-link" href="${orderMap.page.endPage + 1}" aria-label="Next">
+							      <a class="page-num page-link" href="${pointMap.page.endPage + 1}" aria-label="Next">
 							        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
 							      </a>
 							    </li>
@@ -150,7 +186,7 @@ $(function(){
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="myModalLabel">
-								송장 번호
+								포인트 수정
 							</h5> 
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span>

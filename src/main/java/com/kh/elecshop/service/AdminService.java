@@ -24,4 +24,5 @@ public interface AdminService {
 	public boolean updateOrderStatus(int ono, int status);
 	public List<ManufacturerVO> getMenuFacturer();
 	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO);
+	public Map<String, Object> getPointList(Criteria criteria);
 }
