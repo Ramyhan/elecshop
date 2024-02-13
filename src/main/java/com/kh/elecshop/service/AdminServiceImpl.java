@@ -90,7 +90,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public Map<String, Object> getProductList(Criteria criteria) {
-		int total = adminMapper.selectProductTotal();
+		int total = adminMapper.selectProductTotal(criteria);
 		PageDTO pageDTO = new PageDTO(criteria, total);
 		List<AdminProductDTO> list = adminMapper.selectProduct(criteria);
 		for(int i = 0; i < list.size();i++) {

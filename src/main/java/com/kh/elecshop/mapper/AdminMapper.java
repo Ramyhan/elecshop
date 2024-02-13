@@ -36,7 +36,7 @@ public interface AdminMapper {
 	//어드민 전체 상품 조회
 	public List<AdminProductDTO> selectProduct(Criteria criteria);
 	//어드민 전체 상품 수
-	public int selectProductTotal();
+	public int selectProductTotal(Criteria criteria);
 	//어드민 상품 추가
 	public int insertProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	//어드민 상품 램옵션 추가

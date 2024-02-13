@@ -63,6 +63,18 @@ $(function(){
 		console.log(pageNum);
 		$("#frm-page").submit();
 	});
+	$("#btn-search").click(function(){
+		var keyword = $("#search-keyword").val();
+		var type = $("#search-type").find("option:selected").val();
+		console.log("22",keyword)
+		console.log("33",type)
+		$("#keyword").val(keyword);
+		$("#type").val(type);
+		var page = $("#page").val();
+		console.log("11",page);
+		$("#frm-page").attr("action", "/admin/admin_product");
+		$("#frm-page").submit();
+	});
 });
 </script>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
@@ -75,22 +87,14 @@ $(function(){
 			</div>
 			<div class="user-devel">
 				<div class="d-flex justify-content-end">
-					<select>
-						<option>
-							고유번호
-						</option>
-						<option>
-							이름
-						</option>
-						<option>
-							아이디
-						</option>
-						<option>
-							이메일
-						</option>
-					</select>
-					<input class="user-input" type="text" placeholder="Search">
-					<button>
+					<select name="type" id="search-type">
+						<option value="n">고유번호</option>
+						<option value="t">제목</option>
+						<option value="c">분류</option>
+						<option value="r">등록일</option>
+					</select> 
+					<input id="search-keyword" type="text" placeholder="Search" name="keyword">
+					<button type="button" id="btn-search">
 						<i class="fa fa-search"></i>
 					</button>
 				</div>
@@ -197,7 +201,7 @@ $(function(){
 						    </li>
 						  </c:if>
 						  <c:forEach begin="${productMap.page.startPage}" end="${productMap.page.endPage}" var="v">
-						    	<li class="page-item"><a class="page-num page-link ${(productMap.pagecriteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+						    	<li class="page-item"><a class="page-num page-link ${(productMap.page.criteria.pageNum == v) ? 'active' : ''}" href="${v}">${v}</a></li>
 						  </c:forEach>
 						  <c:if test="${productMap.page.next == true }">
 							    <li class="page-item">
@@ -209,7 +213,9 @@ $(function(){
 						  </ul>
 						</nav>
 						<form id="frm-page">
-							<input type="hidden" id="page" name="pageNum">
+							<input type="hidden" name="type" id="type" value="${productMap.page.criteria.type}">
+							<input type="hidden" name="keyword" id="keyword" value="${productMap.page.criteria.keyword}">
+							<input type="hidden" id="page" name="pageNum" value="${productMap.page.criteria.pageNum}">
 						</form>
 					</div>
 					<div class="popup">
