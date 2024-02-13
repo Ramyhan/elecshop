@@ -2,6 +2,7 @@ package com.kh.elecshop.controller;
 
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ import com.kh.elecshop.domain.SubNoticeDTO;
 import com.kh.elecshop.domain.VisitCountVO;
 import com.kh.elecshop.service.AdminService;
 import com.kh.elecshop.service.IquiryService;
+import com.kh.elecshop.service.MemberService;
 import com.kh.elecshop.service.NoticeService;
 import com.kh.elecshop.service.VisitCountService;
 
@@ -54,6 +56,8 @@ public class AdminController {
 	private VisitCountService visitCountService;
 	@Autowired
 	private IquiryService iquiryService;
+	@Autowired
+	private MemberService memberService;
 	
 	//어드민 메인화면
 	@GetMapping("/admin_dashboard")
@@ -220,8 +224,6 @@ public class AdminController {
 	//어드민 송장번호
 	@PostMapping("/updateOrderStatus")
 	public ResponseEntity<String> updateOrderStatus(@RequestParam("status") int status, @RequestParam("ono")int ono) {
-		System.out.println(status);
-		System.out.println(ono);
 		adminService.updateOrderStatus(ono, status);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
@@ -231,5 +233,16 @@ public class AdminController {
 	public void admin_point(Model model, Criteria criteria) {
 		Map<String, Object> map = adminService.getPointList(criteria);
 		model.addAttribute("pointMap", map);
+	}
+	
+	//어드민 포인트 수정
+	@PostMapping(value = "/adminUpdatePoint",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> adminUpdatePoint(@RequestParam("mid") String mid, @RequestParam("ppoint") int ppoint) {
+		System.out.println(mid);
+		System.out.println(ppoint);
+		Map<String, Object> map = new HashMap<>();
+		memberService.updateAdminPoint(map);
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 }

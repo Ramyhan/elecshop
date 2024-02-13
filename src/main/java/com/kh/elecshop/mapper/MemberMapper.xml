@@ -58,4 +58,15 @@
 	 mstate = 0
 	 where mid = #{mid}
 	</update>
+<!-- 	포인트 가져오기 -->
+	<select id="getMyPoint" resultType="int">
+		select mpoint from tbl_member
+		where mid = #{mid}
+	</select>
+<!-- 	포인트 수정 -->
+	<update id="updateAdminPoint">
+		update tbl_member set
+			mpoint = #{ppoint}
+		where mid = #{mid}
+	</update>
 </mapper>

@@ -79,7 +79,7 @@ public class MyPageController {
 		List<CouponVO> couponList = couponService.selectUserCoupon(memberVO.getMid());
 		model.addAttribute("couponList", couponList);
 	}
-	
+	// 포인트 페이지
 	@GetMapping("/point")
 	public void myPage_point(HttpSession session, Model model) {
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
@@ -87,7 +87,7 @@ public class MyPageController {
 		log.info(list);
 		model.addAttribute("pointInfo", list);
 	}
-	
+	// 아이디 체크
 	@PostMapping("/checkId")
 	public String checkId(LoginDTO loginDTO, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);

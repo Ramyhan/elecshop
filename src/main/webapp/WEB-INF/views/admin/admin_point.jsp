@@ -11,7 +11,7 @@
 $(function(){
 		var mid = 0;
 		var that = "";
-	$(".btn-order-status").click(function(e){
+	$(".btn-point-status").click(function(e){
 		mid = $(this).attr("data-mid");
 		var conf = confirm("아이디 " +mid+" 의 포인트를 수정하겠습니까?");
 		that = $(this);
@@ -25,28 +25,36 @@ $(function(){
 	});
 	
 	$("#btn-order-status-submit").click(function(){
-		var point = $("#modal-order-status").val();
+		var point = $("#modal-point-status").val();
 		var sData = {
-				"point" : point,
+				"ppoint" : point,
 				"mid" : mid
 		}
 		$("#modal-order").modal("hide");
-		$.post("/admin/updateOrderStatus", sData, function(rData){
+		$.post("/admin/adminUpdatePoint", sData, function(rData){
 			console.log(rData);
 			if(rData == "success"){
-				console.log(div);
+				console.log("완료");
 			}
 		});
 	});
 	
 	
 	$(".a-point_mid").click(function(){
+		var mid = $(this).attr("data-mid");
 		var point = $(this).parent();
-		point.append("<p>포인트 : 150000</p>");
-		point.find("input:[p]");	
-		
-		if($('#myDiv').length))
-		console.log("클릭");
+		var me = point.find("p");
+		console.log(mid);
+		if(me.length){
+			console.log("있음");
+			me.remove();
+		}else{
+			console.log("없음");
+			$.post("/getPoint", {mid : mid}, function(rData){
+				point.append("<p>포인트 : "+ rData +"</p>");
+			});
+		}
+		console.log(me);
 		console.log(point);
 	});
 });
@@ -130,7 +138,7 @@ $(function(){
 								</span>
 							</div>
 							<div class="cell">
-							<button type="button" class="btn-order-status" data-mid="${vo.mid}">
+							<button type="button" class="btn-point-status" data-mid="${vo.mid}">
 							<i class="fa fa-box"></i>
 							</button>
 							</div>
@@ -193,7 +201,7 @@ $(function(){
 							</button>
 						</div>
 						<div class="modal-body">
-							<input class="form-control mr-sm-2" type="number" id="modal-order-status">
+							<input class="form-control mr-sm-2" type="number" id="modal-point-status">
 						</div>
 						<div class="modal-footer">
 							 

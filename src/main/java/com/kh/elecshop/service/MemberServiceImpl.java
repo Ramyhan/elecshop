@@ -1,5 +1,7 @@
 package com.kh.elecshop.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean memberDisabled(String mid) {
 		int count = memberMapper.memberDisabled(mid);
+		return (count == 1) ? true : false;
+	}
+	@Override
+	public int getMyPoint(String mid) {
+		int point = memberMapper.getMyPoint(mid);
+		return point;
+	}
+	@Override
+	public boolean updateAdminPoint(Map<String, Object> map) {
+		int count = memberMapper.updateAdminPoint(map);
 		return (count == 1) ? true : false;
 	}
 
