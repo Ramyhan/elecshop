@@ -87,7 +87,7 @@ public class MyPageController {
 		log.info(list);
 		model.addAttribute("pointInfo", list);
 	}
-	// 아이디 체크
+	// 수정 아이디 체크
 	@PostMapping("/checkId")
 	public String checkId(LoginDTO loginDTO, RedirectAttributes rttr) {
 		MemberVO memberVO = memberService.login(loginDTO);

@@ -69,4 +69,9 @@
 			mpoint = #{ppoint}
 		where mid = #{mid}
 	</update>
+<!-- 	아이디 중복 체크 -->
+	<select id="checkId" resultType="com.kh.elecshop.domain.MemberVO">
+		select * from tbl_member
+		where mid = #{mid}
+	</select>
 </mapper>

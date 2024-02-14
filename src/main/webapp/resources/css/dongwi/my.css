@@ -307,6 +307,7 @@ footer{
 #forgot-password:hover{
 	color: #FFD369;
 }
+/* 회원가입페이지 */
 .signup {
 	display: flex;
 /* 	margin-top: 50px; */
@@ -328,6 +329,10 @@ footer{
 }
 .signup input{
 	width: 340px;
+}
+#btn-idCheck{
+	margin-top: 5px;
+	color: white;
 }
 /* 포인트 */
 .point-list{

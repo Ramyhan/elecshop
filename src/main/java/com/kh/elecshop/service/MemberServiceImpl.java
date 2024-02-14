@@ -71,5 +71,10 @@ public class MemberServiceImpl implements MemberService {
 		int count = memberMapper.updateAdminPoint(map);
 		return (count == 1) ? true : false;
 	}
+	@Override
+	public MemberVO checkId(String mid) {
+		MemberVO memberVO = memberMapper.checkId(mid);
+		return memberVO;
+	}
 
 }
