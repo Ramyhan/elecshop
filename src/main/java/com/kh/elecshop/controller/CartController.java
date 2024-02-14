@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.elecshop.domain.CartDTO;
@@ -20,20 +21,22 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+@RequestMapping("/cart/*")
 public class CartController {
 	
 	@Autowired
 	private CartService cartService;
 	
-	@PostMapping(value = "/addCart")
+	@PostMapping(value = "/add")
 	@ResponseBody
 	private String addCart(CartVO cartVO) {
 		log.info("cartVO: " + cartVO);
 		boolean result = cartService.addCart(cartVO);
+		log.info("result: " + result);
 		return String.valueOf(result);
 	}
 	
-	@GetMapping("/cart")
+	@GetMapping("/list")
 	private void cartList(HttpSession session, Model model) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		String mid = loginInfo.getMid();
@@ -44,7 +47,7 @@ public class CartController {
 		model.addAttribute("count", count);
 	}
 	
-	@PostMapping("/removeItems")
+	@PostMapping("/remove")
 	@ResponseBody
 	private String removeItems(String cnos) {
 		boolean result = cartService.removeItem(cnos);

@@ -221,6 +221,11 @@ $(function() {
 		var cimage = "${productVO.pimage_thoumb}"
 		var totalPrice = $("#totalPrice").text();
 		
+		if(mid == "") {
+			location.href = "/login";
+			return;
+		}
+		
 		var option = "";
 		for(var v = 1; v <= $(".selectOption").length; v++) {
 			var index = parseInt($("#selectOption" + v + " option").index($("#selectOption" + v + "  option:selected")));
@@ -248,11 +253,11 @@ $(function() {
 		};
 		
 		console.log("sData: ", sData);
-		$.post("/addCart", sData, function(rData) {
+		$.post("/cart/add", sData, function(rData) {
 			if (rData == "true") {
 				var confirmFlag = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?")
 				if(confirmFlag) {
-					location.href = "/cart";
+					location.href = "/cart/list";
 				}
 			}
 		});

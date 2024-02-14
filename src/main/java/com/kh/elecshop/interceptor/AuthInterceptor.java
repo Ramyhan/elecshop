@@ -17,6 +17,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		log.info("memberVO: " + memberVO);
 		if (memberVO == null) {
 			saveTargetLocation(request);
 			response.sendRedirect("/login");

@@ -91,7 +91,7 @@ $(function(){
 ">
           <a class="navbar-brand" href="/main">
           <span>
-            임시
+            Pazizic
           </span>
           </a>
 
@@ -165,7 +165,7 @@ $(function(){
 <!-- 				</div> -->
 <!-- 				</div> -->
               <div>
-              <a href="/cart" class="order_online">
+              <a href="/cart/list" class="order_online">
                 장바구니
               </a>
 <!--               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
