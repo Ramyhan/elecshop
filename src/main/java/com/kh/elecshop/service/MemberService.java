@@ -19,4 +19,5 @@ public interface MemberService {
 	public boolean memberDisabled(String mid);
 	public int getMyPoint(String mid);
 	public boolean updateAdminPoint(Map<String, Object> map);
+	public MemberVO checkId(String mid);
 }

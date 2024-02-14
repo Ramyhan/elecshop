@@ -10,7 +10,9 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -107,7 +109,6 @@ public class MemberController {
 		boolean result = 
 				session.getAttribute("loginInfo") != null ? true : false;
 		return String.valueOf(result);
-	
 	}
 	// 포인트 리스트
 	@GetMapping("/getPoint")
@@ -165,4 +166,17 @@ public class MemberController {
 		return point;
 	}
 	
+	// 회원가입 아이디 체크
+	@PostMapping(value = "/signupCheckId",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean checkId(@RequestParam("mid") String mid) {
+			log.info("@@@" + mid);
+			MemberVO memberVO = memberService.checkId(mid);
+			log.info("@@@" + memberVO);
+			if(memberVO == null) {
+				return true;
+			}
+			return false;
+		}
 }

@@ -10,6 +10,10 @@
 						아이디
 					</label>
 					<input type="text" class="form-control" id="mid" name="mid" required/>
+					<div>
+					<font id="idCheck"></font>
+					</div>
+					<button id="btn-idCheck" class="btn btn-warning" type="button">중복확인</button>
 				</div>
 				<div class="form-group">
 					 
@@ -88,7 +92,21 @@ $(function(){
 // 		console.log("mphone", mphone);
 // 		console.log("memail", memail);
 // 	});
-
+	$("#btn-idCheck").click(function(){
+		var mid = $("#mid").val();
+		console.log(mid);
+		$.post("/signupCheckId", {"mid" : mid}, function(rData){
+			console.log(rData);
+			if(rData == true){
+				$("#idCheck").text("가입 가능한 아이디 입니다.");
+				$("#idCheck").attr("color", "#FFD369");
+			}else if(rData == false){
+				$("#idCheck").text("이미 사용중인 아이디 입니다.");
+				$("#idCheck").attr("color", "red");
+			}
+		});
+	});
+	
 	$(".pw").keyup(function() {
 		var pass1 = $("#mpw").val();
 		var pass2 = $("#mpw2").val();
@@ -108,7 +126,6 @@ $(function(){
 	$("#btn-addr-search").click(function(){
     new daum.Postcode({
         oncomplete: function(data) {
-        	console.log(data);
         	var roadAddr = data.roadAddress;
         	$("#maddr").val(roadAddr);
         	var post_code = data.zonecode;
