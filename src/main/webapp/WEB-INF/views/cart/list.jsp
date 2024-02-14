@@ -42,7 +42,7 @@ $(function() {
 		
 		var str_cnos = cnos.join();
 		console.log("str_cnos: ", str_cnos);
-		var url = "/removeItems";
+		var url = "/cart/remove";
 		var sData = {"cnos" : str_cnos};
 		
 		$.post(url, sData, function(rData) {
