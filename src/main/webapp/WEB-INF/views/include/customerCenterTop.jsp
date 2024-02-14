@@ -84,10 +84,9 @@
 	<div class="container">
 		<div class="col">
 			<div class="qna-title col"
-				style="text-align: center; padding-top: 50px; padding-bottom: 50px;">지원에
-				오신걸 환영합니다</div>
+				style="text-align: center; padding-top: 50px; padding-bottom: 50px;">파지직 고객센터</div>
 			<p
-				style="text-align: center; padding-bottom: 50px; font-size: 25px; opacity: 0.6; color: gray;">서브 제목</p>
+				style="text-align: center; padding-bottom: 50px; font-size: 25px; opacity: 0.6; color: gray;">도와드리겠습니다</p>
 			<!-- 검색창 -->
 			<div class="col wrap">
 				<div class="search col" style="padding-left: 47px;">

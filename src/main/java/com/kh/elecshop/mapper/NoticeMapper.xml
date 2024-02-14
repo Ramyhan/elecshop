@@ -33,6 +33,9 @@
 		select nno,ncategory, ntitle, nregdate
 		from tbl_notice
 		where nstate = 'true'
+		<if test='ncategory neq null and ncategory != "전체".toString()'>
+			and ncategory like '%' || #{ncategory} || '%'
+		</if>
 	</select>
 	<select id="selectByNno" resultType="com.kh.elecshop.domain.NoticeVO">
 		select * from tbl_notice
@@ -91,5 +94,10 @@
 			where rownum < 8
 			order by nregdate asc
 		]]>
+	</select>
+	<select id="selectNoticeByCategory" resultType="com.kh.elecshop.domain.NoticeVO">
+		select ntitle,nno,ncategory,nregdate,nstate
+		from tbl_notice
+		where ncategory = #{ncategory}
 	</select>
 </mapper>

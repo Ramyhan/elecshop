@@ -90,7 +90,6 @@ em{
 						<option value="배송">배송</option>
 						<option value="시스템">시스템</option>
 						<option value="제품">제품</option>
-						<option value="커뮤니티">커뮤니티</option>
 					</select>
 				</div>
 				<div class="inquiry-div-sub d-flex flex-wrap">

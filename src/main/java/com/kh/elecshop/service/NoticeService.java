@@ -8,7 +8,7 @@ import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.SubNoticeDTO;
 
 public interface NoticeService {
-	public List<SubNoticeDTO> getSubNotice();
+	public List<SubNoticeDTO> getSubNotice(NoticeVO noticeVO);
 	public Map<String, Object> getNoticePage(int nno);
 	public List<SubNoticeDTO> getNoticeTop5();
 	public List<AdminNoticeDTO> getAdminNotice();

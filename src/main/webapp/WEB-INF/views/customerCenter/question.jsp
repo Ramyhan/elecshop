@@ -84,18 +84,20 @@ body{
 .card-header:first-child a{
 	color: black;
 }
-.card-header:first-child a:hover{
-	color:#FFD369;
+.card-header a{
+	display: block;
+	width: auto;
 }
 .card-span{
-	position: fixed;
 	top: 9px;
 	left: 50px;
 }
-.question-up{
+.question-up,.question-down{
 	position: absolute;
-	left: 96.2%;
-	opacity: 0%;
+	left: 97.5%;
+}
+.question-up{
+	opacity: 0;
 }
 
 </style>
@@ -191,7 +193,7 @@ $(function(){
 					<c:forEach var="question" items="${questionList}">
 						<div class="card">
 							<div class="card-header">
-								 <a data-qno="${question.qno}" class="card-a card-link collapsed d-flex justify-content-between" data-toggle="collapse" data-parent="#card-203733" href="#card-element-${question.qno}">
+								 <a data-qno="${question.qno}" class="card-a card-link collapsed" data-toggle="collapse" data-parent="#card-203733" href="#card-element-${question.qno}">
 								 <i class="fa fa-question-circle"></i>
 								 <span class="card-span" data-qcategory="${question.qcategory}" data-qsubcategory="${question.qsubcategory}">
 								 	${question.qtitle}

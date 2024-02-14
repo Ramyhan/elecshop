@@ -44,6 +44,17 @@
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 </style>
+<script>
+$(function(){
+	$(".notice-category").click(function(e){
+		e.preventDefault();
+		var category = $(this).attr("href");
+		$("#frm-notice").find("input[name=ncategory]").val(category);
+		$("#frm-notice").submit();
+		
+	})
+})
+</script>
 <div class="container-fluid notice-main">
 	<div class="row">
 		<div class="col-md-12">
@@ -54,16 +65,16 @@
 				<div class="d-flex justify-content-between" 
     			style="width: 100%; border: 3px solid #B7C4CF; background-color: white;">
     				<div class="notice-div notice align-self-center">
-        				<a class="notice" href="#">전체</a>
+        				<a class="notice-category" href="전체">전체</a>
     				</div>
     				<div  class="notice-div align-self-center">
-        				<a class="notice" href="#">시스템</a>
+        				<a class="notice-category" href="배송">배송</a>
     				</div>
     				<div class="notice-div align-self-center">
-        				<a class="notice" href="#">제품</a>
+        				<a class="notice-category" href="제품">제품</a>
     				</div>
     				<div class="notice-div align-self-center">
-        				<a class="notice" href="#">커뮤니티</a>
+        				<a class="notice-category" href="시스템">시스템</a>
     				</div>
 				</div>
 				<hr style="border= 0; height: 3px; background: black;">
@@ -83,9 +94,9 @@
 							</span>
 						</div>
 					</c:forEach>
-					<div>
-					
-					</div>
+					<form action="/customerCenter/getNoticeCategory" id="frm-notice">
+						<input name="ncategory" type="hidden">
+					</form>
 				</div>
 					<!-- //공지사항 테이블 -->
 					
@@ -98,7 +109,7 @@
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 						    </li>
-						    <li class="page-num"><a class="page-link" href="#">1</a></li>
+						    <li class="notice-page-num"><a class="page-link" href="#">1</a></li>
 						    <li class="page-item">
 						      <a class="page-link" href="#" aria-label="Next">
 						        <span aria-hidden="true">&raquo;</span>

@@ -10,7 +10,7 @@ import com.kh.elecshop.domain.SubNoticeDTO;
 
 public interface NoticeMapper {
 	
-	public List<SubNoticeDTO> subselectAll();
+	public List<SubNoticeDTO> subselectAll(NoticeVO noticeVO);
 	public NoticeVO selectByNno(int nno);
 	public List<SubNoticeDTO> selectByTop5();
 	public List<AdminNoticeDTO> selectAdminNotice();
@@ -21,5 +21,6 @@ public interface NoticeMapper {
 	public List<SubNoticeDTO> selectSearchWord(SearchDTO searchDTO);
 	public int selectSearchTotal(SearchDTO searchDTO);
 	public List<NoticeVO> selectLatestNotice();
+	public List<NoticeVO> selectNoticeByCategory(String ncategory);
 }
 

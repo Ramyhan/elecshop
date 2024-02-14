@@ -19,8 +19,8 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeMapper mapper;
 
 	@Override
-	public List<SubNoticeDTO> getSubNotice() {
-		List<SubNoticeDTO> list = mapper.subselectAll();
+	public List<SubNoticeDTO> getSubNotice(NoticeVO noticeVO) {
+		List<SubNoticeDTO> list = mapper.subselectAll(noticeVO);
 		return list;
 	}
 	public Map<String, Object>  getNoticePage(int nno) {
@@ -80,6 +80,4 @@ public class NoticeServiceImpl implements NoticeService{
 		List<NoticeVO> list = mapper.selectLatestNotice();
 		return list;
 	}
-	
-	
 }
