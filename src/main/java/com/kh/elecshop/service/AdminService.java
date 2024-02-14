@@ -25,4 +25,5 @@ public interface AdminService {
 	public List<ManufacturerVO> getMenuFacturer();
 	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO);
 	public Map<String, Object> getPointList(Criteria criteria);
+	public boolean registerManuFacturer(String mname);
 }

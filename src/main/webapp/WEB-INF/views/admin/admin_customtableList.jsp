@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <table class="table">
-	<thead>
+	<thead class="customer-thead">
 		<tr style="text-align: center;">
 			<th><input type="checkbox" class="notice-check-all"></th>
 			<th>고유번호</th>

@@ -76,7 +76,7 @@ public class AdminController {
 	@GetMapping("/notice/register")
 	public String noticeRegister() {
 		
-		return "/admin/registerNotice";
+		return "/admin/registerNoticeForm";
 	}
 	//어드민 상품 추가 팝업창
 	@GetMapping("/admin_product_popup")
@@ -115,6 +115,13 @@ public class AdminController {
 		rttr.addFlashAttribute("registerResult", result);
 		System.out.println(result);
 		return "redirect:/admin/admin_product";
+	}
+	//어드민 제조사 추가
+	@GetMapping(value = "/registerManuFacturer", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean registerManuFacturer(@RequestParam("manu") String manu) {
+		boolean result = adminService.registerManuFacturer(manu);
+		return result;
 	}
 	//어드민 상품관리화면
 	@GetMapping("/admin_product")
@@ -197,14 +204,15 @@ public class AdminController {
 	@ResponseBody
 	public int deleteNotice(@RequestParam("nnos[]") int[] nnos) {
 		int count = noticeService.removeNotice(nnos);
+		System.out.println("count" + count);
 		return count;
 	}
 	//어드민 공지사항 추가 버튼
 	@PostMapping(value="/registerNotice", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String registerNotice(NoticeVO noticeVO) {
+	public String registerNotice(NoticeVO noticeVO, RedirectAttributes rttrs) {
 		System.out.println("notice" + noticeVO);
 		boolean result = noticeService.registerNotice(noticeVO);
-		System.out.println(result);
+		rttrs.addFlashAttribute("noticeResult", result);
 		return "redirect:/admin/admin_customerCenter";
 	}
 	//어드민 공지사항 검색버튼

@@ -154,6 +154,17 @@ public class AdminServiceImpl implements AdminService{
 		return list;
 	}
 	@Override
+	public boolean registerManuFacturer(String mname) {
+		String name = adminMapper.selectManuFacturerByMname(mname);
+		if(name == null) {
+			int count = adminMapper.insertManuFacturer(mname);
+			if(count == 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
 	public Map<String, Object> getAdminNoticeList(Criteria criteria) {
 		List<AdminNoticeDTO> subNoticeList = adminMapper.selectNotice(criteria);
 		int total = adminMapper.selectNoticeTotal();

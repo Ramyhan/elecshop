@@ -29,6 +29,12 @@
 // 		$(".costomer-div").append(rData);
 // 	});
 $(function(){
+	var registerNotice = "${noticeResult}";
+	if(registerNotice == "true"){
+		alert("공지가 추가 되었습니다");
+	}else if(registerNotice == "false"){
+		alert("공지 추가 실패 하였습니다");
+	}
 	//페이징 처리
 	$(document).on("click",".page-num",function(e){
 		console.log(this);

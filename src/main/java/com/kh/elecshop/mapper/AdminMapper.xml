@@ -107,7 +107,14 @@
 		select count(*) from tbl_product a
 		<include refid="search"></include>
 	</select>
-	
+	<select id="selectManuFacturerByMname" resultType="string">
+		select mname from tbl_manufacturer
+		where mname = #{mname}
+	</select>
+	<insert id="insertManuFacturer">
+		insert into tbl_manuFacturer(mno,mname)
+		values((select count(*) + 1 from tbl_manufacturer),#{mname})
+	</insert>
 	<!-- 상품 추가 -->
 	<insert id="insertProduct">
 		insert into tbl_product(pno,pname,pprice,pdno,mno,

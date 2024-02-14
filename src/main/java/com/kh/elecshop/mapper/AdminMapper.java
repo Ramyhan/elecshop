@@ -41,6 +41,10 @@ public interface AdminMapper {
 	public int insertProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	//어드민 상품 램옵션 추가
 	public int insertProductOption(List<AdminProductOptionDTO> productOptionDTO);
+	//어드민 제조사 유효성 검사
+	public String selectManuFacturerByMname(String mname);
+	//어드민 제조사 추가
+	public int insertManuFacturer(String mname);
 	//어드민 상품 이미지 추가
 	public int insertProductImage(List<FileVO> list);
 	//어드민 상품 썸네일 조회

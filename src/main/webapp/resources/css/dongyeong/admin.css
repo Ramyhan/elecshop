@@ -82,7 +82,6 @@
 	.admin-day{
 		background-color: white;
 	    width: 92%;
-	    height: 15%;
 	    margin: 10 0 10 0;
     	border: 1px solid rgba(0,0,0,0.2);
 	}
@@ -112,6 +111,7 @@
 	    justify-content: center;
 	}
 	.admin-iquiry{
+		overflow: overlay;
 		background-color: white;
 	    width: 45%;
 	    height: 95%;
@@ -149,7 +149,7 @@
     	border-radius: 20px;
 	}
 	.summary-table{
-		height: 80%;
+		height: auto;
 	}
 	.admin-sub-title{
 		margin: 4px;

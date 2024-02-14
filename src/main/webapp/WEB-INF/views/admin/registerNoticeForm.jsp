@@ -3,48 +3,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
-	$("#divDrop").on("dragenter dragover", function (e){
-		e.preventDefault();
-	});
-	$("#divDrop").on("drop", function (e){
-		e.preventDefault();
-		console.log(e.originalEvent.dataTransfer.files);
-		var files = e.originalEvent.dataTransfer.files;
-		var formData = new FormData();
-		for(var v = 0; v < files.length; v++){
-			formData.append("uploadFiles" , files[v]);
-		}
-		console.log("formData",formData);
-		$.ajax({
-			"url" : "/uploadAjax",
-			"type" : "post",
-			"processData" : false,
-			"contentType" : false,
-			"data" : formData,
-			"success" : function(rData) {
-				console.log("rData",rData);
-				$(rData).each(function(i, obj) {
-					var fileDivClone = $("#fileDiv > div:eq(0)").clone();
-					fileDivClone.find(".spanFilename").text(obj.fileName);
-					var dataType="file";
-					if(obj.image == true){
-						dataType="image";
-						var fName = obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName;
-						var url = "/display?fileName=" + fName;
-						fileDivClone.find("img").attr("src", url);
-					}
-					fileDivClone.find(".fa-times-circle").attr("data-filename", obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
-					$("#fileDiv").append(fileDivClone);
-					fileDivClone.fadeIn(1000);
-					fileDivClone.find(".fa-times-circle").attr("data-type", dataType);
-					
-					// 서버에 보낼 데이터 세팅
-					fileDivClone.attr("data-url", obj.url);
-					fileDivClone.attr("data-fileName", obj.fileName);
-				});
-			}
-		})
-	});
 	//공지 추가 버튼
 	$(".inquiry-btn").click(function(){
 		var that = $(this);
@@ -52,60 +10,14 @@ $(function(){
 		var ncontent = $("#ncontent").val();
 		var ncategory = $("#ncategory").val();
 		var nstate = $("#nstate:checked").val();
-		var divAttach = $(".div-attach:gt(0)");
-		var url = "";
-		var file = "";
-		var nurls = [];
-		var files = [];
-		divAttach.each(function(i){
-			url = $(this).attr("data-url");
-			file = $(this).attr("data-fileName");
-			nurls.push(url);
-			files.push(file);
-		});
-		var nurl = nurls.join(",");
-		var nfilename = files.join(",");
-		console.log("nurl",nurl);
-		sData={
+		var sData = {
 				"ntitle" : ntitle,
 				"ncontent" : ncontent,
 				"ncategory": ncategory,
-				"nstate" : nstate,
-				"nfileName" : nfilename,
-				"nurl" : nurl
+				"nstate" : nstate
 		}
-		$.post("/admin/registerNotice",sData,function(rData){
-			if(rData == true){
-				alert("공지사항이 추가 되었습니다");
-				$.ajax({
-					type : "get",
-					url : "/admin/admin_customTable",
-					success : function(rdata){
-						$(".tbl-tbody").empty();
-						$(".tbl-tbody").append(rdata);
-					}
-				});
-			}else{
-				alert("공지사항 추가가 실패 하였습니다");
-				return
-			}
-		});
-	});
-	// 첨부파일 삭제
-	$("#fileDiv").on("click", ".fa-times-circle", function() {
-		var that = $(this);
-		var url = "/deleteFile";
-		var sendData = {
-				"fileName" : that.attr("data-filename"),
-				"dataType" : that.attr("data-type")
-		};
-		$.post(url, sendData, function(rData) {
-			console.log("rData:", rData);
-			if (rData == "true") {
-				that.parent().remove();
-			}
-		});
-	});
+		console.log(sData);
+	});	
 });
 	
 </script>

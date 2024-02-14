@@ -172,13 +172,15 @@ $(function() {
 							  </thead>
 							  <tbody>
 							  <c:forEach items="${dayInfoList}" var="dayInfoDTO">
-								<tr>
-							      <td>${dayInfoDTO.vdate}</td>
-							      <td>${dayInfoDTO.order_count}</td>
-							      <td>${dayInfoDTO.vcount}</td>
-							      <td>${dayInfoDTO.total_price}</td>
-							      <td>${dayInfoDTO.join_count}</td>
-							    </tr>
+							  	<c:if test="${dayInfoDTO != null}">
+									<tr>
+								      <td>${dayInfoDTO.vdate}</td>
+								      <td>${dayInfoDTO.order_count}</td>
+								      <td>${dayInfoDTO.vcount}</td>
+								      <td><fmt:formatNumber value="${dayInfoDTO.total_price}" pattern="#,###"/>원</td>
+								      <td>${dayInfoDTO.join_count}명</td>
+								    </tr>
+							  	</c:if>
 							  </c:forEach>
 							  </tbody>
 							</table>

@@ -42,6 +42,7 @@
 			<beans:ref bean="visitInterceptor"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/customerCenter/inquiry"/>
 			<mapping path="/myPage/**/*"/>
 			<mapping path="/cart/**/*"/>
 			<exclude-mapping path="/main"/>

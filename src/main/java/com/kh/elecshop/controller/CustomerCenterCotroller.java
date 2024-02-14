@@ -44,7 +44,6 @@ public class CustomerCenterCotroller {
 	public void notice(Model model) {
 		List<SubNoticeDTO> list = noticeService.getSubNotice();
 		model.addAttribute("list", list);
-		
 	}
 	@GetMapping("/noticePage")
 	public void noticePage(int nno, Model model) {

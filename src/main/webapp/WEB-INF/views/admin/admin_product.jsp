@@ -29,12 +29,20 @@ $(function(){
 	});
 	$(".btn-add-manuFacturer").click(function(){
 		var manu = prompt("제조사를 입력해주세요");
-		
+		if(manu != null){
+			$.get("/admin/registerManuFacturer",{"manu" : manu},function(rData){
+				console.log(rData);
+				if(rData == true){
+					alert("제조사가 추가 되었습니다")
+				}else{
+					alert("중복된 제조사가 있습니다");
+				}
+			})
+		}
 	});
 	
 	$(".btnChkDelete").click(function() {
 		var targets = $(".chkProd:checked");
-		
 		var pnos = [];
 		targets.each(function() {
 			var pno = $(this).attr("data-pno");

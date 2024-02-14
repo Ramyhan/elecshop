@@ -111,7 +111,7 @@ $(function() {
 				-->
 				<div class="inquiry-div-sub d-flex">
 					<label>제목</label>
-					<em style="padding-right: 86px; color: blue;">(필수)</em>
+					<em style="padding-right: 107px; color: blue;">(필수)</em>
 					<input class="input ititle" type="text" id="iemail" name="iemail">
 				</div>
 				<div class="inquiry-div-sub d-flex flex-wrap">
