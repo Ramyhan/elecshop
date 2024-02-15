@@ -360,7 +360,6 @@ $(function(){
 										</c:forEach>
 									</div>
 								</c:if>
-								<c:if test="${productInfo.ptype != 2}">
 									<div class="color-div">
 										<button type="button" id="btn-add-color">COLOR<i class="fa fa-plus"></i></button>
 										<c:forEach items="${productInfo.colorList}" var="color" varStatus="status">
@@ -386,7 +385,6 @@ $(function(){
 											</div>
 										</c:forEach>
 									</div>
-								</c:if>
 							</div>
 							<div style="display: contents;">
 								<span>메인 정보</span>
