@@ -364,7 +364,7 @@ $(function() {
 							<div>
 								<select id="selectOption1" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
-								<c:forEach items="#{optionList}" var="option">
+								<c:forEach items="${optionList}" var="option">
 								<c:if test="${ option.otype == 3 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
@@ -378,7 +378,7 @@ $(function() {
 							<div>
 								<select id="selectOption2" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
-								<c:forEach items="#{optionList}" var="option">
+								<c:forEach items="${optionList}" var="option">
 								<c:if test="${ option.otype == 2 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>
@@ -391,7 +391,7 @@ $(function() {
 							<div>
 								<select id="selectOption3" name="option" class="selectOption" style="width: 100%; border-radius:10px;">
 									<option value="0" selected>-----옵션을 선택해주세요-----</option>
-								<c:forEach items="#{optionList}" var="option">
+								<c:forEach items="${optionList}" var="option">
 								<c:if test="${ option.otype == 1 }">
 									<option value="${option.oprice}">${option.oname}(+${option.oprice})</option>
 								</c:if>

@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.elecshop.domain.IquiryVO;
 import com.kh.elecshop.domain.MemberVO;
 import com.kh.elecshop.domain.NoticeVO;
 import com.kh.elecshop.domain.QuestionVO;
 import com.kh.elecshop.domain.SubNoticeDTO;
+import com.kh.elecshop.service.IquiryService;
 import com.kh.elecshop.service.NoticeService;
 import com.kh.elecshop.service.QuestionService;
 
@@ -35,12 +37,19 @@ public class CustomerCenterCotroller {
 	@Autowired
 	private QuestionService questionService;
 	
+	@Autowired
+	private IquiryService iquiryService;
+	
 	@GetMapping("/FAQ")
 	public void FAQ(Model model, HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		String mid = loginInfo.getMid();
 		List<SubNoticeDTO>top5Notice = noticeService.getNoticeTop5();
 		List<QuestionVO> top5Question = questionService.getQuestionTop5();
+		List<IquiryVO> top5Iquiry = iquiryService.getIquiryTop5(mid);
 		model.addAttribute("top5Notice", top5Notice);
 		model.addAttribute("top5Question", top5Question);
+		model.addAttribute("top5Iquiry", top5Iquiry);
 		
 	}
 	@GetMapping("/getNoticeCategory")

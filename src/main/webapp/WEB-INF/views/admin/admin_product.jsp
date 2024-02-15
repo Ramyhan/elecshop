@@ -21,8 +21,9 @@ $(function(){
 		var conf = confirm(pno+"번의 상품을 확인하시겠습니까?");
 		console.log(conf);
 		if(conf == true){
-			$("#frm-product").append(hiddenPno);
-			$("#frm-product").submit();
+// 			$("#frm-product").append(hiddenPno);
+// 			$("#frm-product").submit();
+			location.href = "/admin/admin_productInfo?pno=" + pno;
 		}else{
 			return false;
 		}

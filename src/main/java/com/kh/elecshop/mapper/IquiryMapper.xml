@@ -40,5 +40,15 @@
 		from tbl_iquiry
 		where mid = #{mid}
 	</select>
+	
+	<select id="selectIquiryTop5" resultType="com.kh.elecshop.domain.IquiryVO">
+		select *
+		from tbl_iquiry
+		where mid = #{mid}
+		<![CDATA[
+			and rownum < 6
+		]]>
+		order by iregdate desc
+	</select>
 
 </mapper>

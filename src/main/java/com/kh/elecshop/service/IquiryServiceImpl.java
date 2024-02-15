@@ -54,4 +54,10 @@ public class IquiryServiceImpl implements IquiryService {
 		return list;
 	}
 
+	@Override
+	public List<IquiryVO> getIquiryTop5(String mid) {
+		List<IquiryVO> list = iquiryMapper.selectIquiryTop5(mid);
+		return list;
+	}
+
 }
