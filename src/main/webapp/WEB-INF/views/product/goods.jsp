@@ -110,13 +110,16 @@ $(function() {
 	
 	// 옵션 선택시 현재가격 변경
 	$(".selectOption").change(function() {
-		var option1Price = parseInt($("#selectOption1").val());
-		var option2Price = parseInt($("#selectOption2").val());
-		var option3Price = parseInt($("#selectOption3").val());
-		var totalOptionPrice = option1Price + option2Price + option3Price
+		var totalOptionPrice = parseInt($("#selectOption1").val());
 		
-		var totalPrice = parseInt("${productVO.pprice}") + totalOptionPrice;
+		var otype = "${option.otype}";
+		if(otype == 1 || otype == 3) {
+			var option2Price = parseInt($("#selectOption2").val());
+			var option3Price = parseInt($("#selectOption3").val());
+			totalOptionPrice += option2Price + option3Price
+		}
 		
+		var totalPrice = parseInt("${productVO.pprice}") + parseInt(totalOptionPrice);
 		$("#totalPrice").text(totalPrice);
 	});
 	
