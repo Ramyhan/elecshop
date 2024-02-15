@@ -31,7 +31,7 @@
 </sql>
 	<select id="subselectAll" resultType="com.kh.elecshop.domain.SubNoticeDTO">
 		select nno,ncategory, ntitle, nregdate
-		from tbl_notice
+		from (select * from tbl_notice  order by nregdate desc)
 		where nstate = 'true'
 		<if test='ncategory neq null and ncategory != "전체".toString()'>
 			and ncategory like '%' || #{ncategory} || '%'
@@ -43,13 +43,13 @@
 	</select>
 	<select id="selectByTop5" resultType="com.kh.elecshop.domain.SubNoticeDTO">
 		select nno,ncategory, ntitle, nregdate from
-		(select * from tbl_notice order by rownum desc)
+		(select * from tbl_notice order by nregdate desc)
 		where rownum between 1 and 5
 		and nstate = 'true'
 	</select>
 	<select id="selectAdminNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select nno,ncategory,ncontent, ntitle, nregdate, nstate
-		from (select * from tbl_notice order by rownum desc)
+		from (select * from tbl_notice order by nregdate desc)
 	</select>
 	<update id="updateCloseNoticeState">
 		update tbl_notice set
@@ -78,13 +78,13 @@
 	<select id="selectSearchWord" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select ntitle,nno,ncategory,nregdate,nstate
 		from(select nno,ntitle,nregdate,nstate,ncategory 
-			 from tbl_notice order by rownum desc)
+			 from tbl_notice order by nregdate desc)
 		<include refid="search"></include>
 	</select>
 	<select id="selectSearchTotal" resultType="int">
 		select count(*) from(SELECT ntitle,nno,ncategory,nregdate,nstate
 		from(select nno,ntitle,nregdate,nstate,ncategory 
-			 from tbl_notice order by rownum desc))
+			 from tbl_notice order by nregdate desc))
              <include refid="search"></include>
 	</select>
 	<select id="selectLatestNotice" resultType="com.kh.elecshop.domain.NoticeVO">

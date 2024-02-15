@@ -89,7 +89,7 @@
 	<select id="selectNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select nno,ncategory, ntitle, nregdate,nstate
 		from (select /*+index_desc(tbl_product)*/ nno, ncategory,ntitle,nregdate,nstate,rownum rn
-		      from tbl_notice order by rn asc)
+		      from tbl_notice order by nregdate asc)
         where rn between #{startRow} and #{endRow}
 	</select>
 	<!-- product -->

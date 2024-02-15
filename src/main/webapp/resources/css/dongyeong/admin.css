@@ -191,3 +191,6 @@
 		color : red;
 		opacity: 0.5;
 	}
+	.page-item a.active{
+		background-color: #ffbe33;
+	}

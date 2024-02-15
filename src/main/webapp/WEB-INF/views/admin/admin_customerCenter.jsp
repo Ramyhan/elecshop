@@ -83,7 +83,7 @@ $(function(){
 							$(this).closest("tr").find(".td-state").text("비공개");
 						}
 					});
-					alert(nno.length+"개의 공지를 비공개 처리 하였습니다");
+					alert(checked_nnos.length+"개의 공지를 비공개 처리 하였습니다");
 				}
 			});
 		}else{
@@ -121,7 +121,7 @@ $(function(){
 							$(this).closest("tr").find(".td-state").text("공개");
 						}
 					});
-					alert(nno.length+"개의 공지를 공개 처리 하였습니다");
+					alert(checked_nnos.length+"개의 공지를 공개 처리 하였습니다");
 				}
 			});
 		}else{
@@ -272,7 +272,7 @@ $(function(){
 								<c:forEach begin="${noticeMap.page.startPage }"
 									end="${noticeMap.page.endPage}" var="v">
 									<li class="page-item"><a
-										class="page-num page-link ${(noticeMap.page.criteria.pageNum == v) ? 'Active' : ''}"
+										class="page-num page-link ${(noticeMap.page.criteria.pageNum == v) ? 'active' : ''}"
 										href="${v}">${v}</a></li>
 								</c:forEach>
 								<c:if test="${noticeMap.page.next == true}">
