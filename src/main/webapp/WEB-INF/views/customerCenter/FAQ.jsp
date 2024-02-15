@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/views/include/customerCenterTop.jsp"%>
 <script>
 $(function(){
@@ -89,8 +90,17 @@ i{
 							<c:forEach items="${top5Iquiry}" var="iquiryVO">
 								<tr>
 									<td>${iquiryVO.ino}</td>
-									<td>${iquiryVO.ititle}</td>
-									<td></td>
+									<td>${fn:substring(iquiryVO.ititle, 0, 10)}...</td>
+									<td>
+									<c:choose>
+									<c:when test="${iquiryVO.ireply != null}">
+									    	<strong>답변 완료</strong>
+									</c:when>
+									<c:otherwise>
+									    	<strong>답변 미완료</strong>
+									</c:otherwise>
+									</c:choose>
+									</td>
 									<td style="text-align: right;">
 										<fmt:formatDate value="${iquiryVO.iregdate}" pattern="yyyy-MM-dd"/>
 									</td>

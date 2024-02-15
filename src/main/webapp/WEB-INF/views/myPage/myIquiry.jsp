@@ -55,6 +55,7 @@ $(function() {
 									</div>
 									 <a class="card-link iquiry-ititle" data-toggle="collapse"
 									 		data-parent="#card-119400" href="#card-element-${iquiryVO.ino}">
+									 	<span>T: ${iquiryVO.ititle}</span><br>
 									 	<span>Q: ${iquiryVO.imessage}</span>
 									 	<span style="float: right;">
 										 	<span><fmt:formatDate value="${iquiryVO.iregdate}" pattern="yy-MM-dd"/></span>
