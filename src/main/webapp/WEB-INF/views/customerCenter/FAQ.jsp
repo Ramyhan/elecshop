@@ -81,16 +81,20 @@ i{
 							<th>나의 문의 내역</th>
 							<th></th>
 							<th></th>
-							<th style="text-align: right;"><a href="#">더보기</a></th>
+							<th style="text-align: right;"><a href="/myPage/myIquiry">더보기</a></th>
 						</tr>
 						</thead>
 						<tbody>
+						<c:forEach items="${top5Iquiry}" var="iquiryVO">
 							<tr>
-							<td>1</td>
-							<td>살려주세요 너무 어려워요</td>
-							<td></td>
-							<td style="text-align: right;">01/04/2012</td>
-						</tr>
+								<td>${iquiryVO.ino}</td>
+								<td>${iquiryVO.ititle}</td>
+								<td>${iquiryVO.imessage}</td>
+								<td style="text-align: right;">
+									<fmt:formatDate value="${iquiryVO.iregdate}" pattern="yyyy-MM-dd"/>
+								</td>
+							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>

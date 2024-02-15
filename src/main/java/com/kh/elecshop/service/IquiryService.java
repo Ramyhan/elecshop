@@ -17,4 +17,6 @@ public interface IquiryService {
 	public boolean removeIquiry(int ino);
 	
 	public List<IquiryVO> getIquiryByMid(String mid);
+	
+	public List<IquiryVO> getIquiryTop5(String mid);
 }
