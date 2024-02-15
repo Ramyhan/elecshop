@@ -59,8 +59,8 @@
 		padding-left: 8px;
 	}
 	.down-fa{
-	position: absolute;
-    left: 10.5%;
+	float: right;
+    padding-right: 25px;
 	}
 	.admin-title{
 		padding: 20px 0 30 0;

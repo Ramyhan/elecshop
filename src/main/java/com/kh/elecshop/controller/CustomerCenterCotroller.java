@@ -43,13 +43,16 @@ public class CustomerCenterCotroller {
 	@GetMapping("/FAQ")
 	public void FAQ(Model model, HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		String mid = loginInfo.getMid();
+		if(loginInfo != null) {
+			String mid = loginInfo.getMid();
+			List<IquiryVO> top5Iquiry = iquiryService.getIquiryTop5(mid);
+			model.addAttribute("top5Iquiry", top5Iquiry);
+		}
 		List<SubNoticeDTO>top5Notice = noticeService.getNoticeTop5();
 		List<QuestionVO> top5Question = questionService.getQuestionTop5();
-		List<IquiryVO> top5Iquiry = iquiryService.getIquiryTop5(mid);
+		model.addAttribute("loginInfo", loginInfo);
 		model.addAttribute("top5Notice", top5Notice);
 		model.addAttribute("top5Question", top5Question);
-		model.addAttribute("top5Iquiry", top5Iquiry);
 		
 	}
 	@GetMapping("/getNoticeCategory")

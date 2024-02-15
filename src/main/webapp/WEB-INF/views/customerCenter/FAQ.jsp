@@ -52,7 +52,7 @@ i{
 			<div class="row">
 				<div class="col-md-2">
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-${not empty loginInfo? 4 : 8}">
 					<table class="table">
 						<thead>
 							<tr>
@@ -74,30 +74,32 @@ i{
 						</tbody>
 					</table>
 				</div>
-				<div class="col-4">
-					<table class="table">
-						<thead>
-							<tr>
-							<th>나의 문의 내역</th>
-							<th></th>
-							<th></th>
-							<th style="text-align: right;"><a href="/myPage/myIquiry">더보기</a></th>
-						</tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${top5Iquiry}" var="iquiryVO">
-							<tr>
-								<td>${iquiryVO.ino}</td>
-								<td>${iquiryVO.ititle}</td>
-								<td>${iquiryVO.imessage}</td>
-								<td style="text-align: right;">
-									<fmt:formatDate value="${iquiryVO.iregdate}" pattern="yyyy-MM-dd"/>
-								</td>
+				<c:if test="${not empty loginInfo}">
+					<div class="col-4">
+						<table class="table">
+							<thead>
+								<tr>
+								<th>문의 내역</th>
+								<th></th>
+								<th></th>
+								<th style="text-align: right;"><a href="/myPage/myIquiry">더보기</a></th>
 							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+							<c:forEach items="${top5Iquiry}" var="iquiryVO">
+								<tr>
+									<td>${iquiryVO.ino}</td>
+									<td>${iquiryVO.ititle}</td>
+									<td></td>
+									<td style="text-align: right;">
+										<fmt:formatDate value="${iquiryVO.iregdate}" pattern="yyyy-MM-dd"/>
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</c:if>
 				<div class="col-md-2">
 				</div>
 			</div>
@@ -111,7 +113,7 @@ i{
 		</div>
 		<div class="col-md-8" style="margin-bottom: 50px;">
 			<div class="d-flex justify-content-between">
-			<h3 style="font">자주 묻는 질문 TOP 5</h3>
+			<h3 style="font">자주 묻는 질문</h3>
 			<a href="/customerCenter/question">더보기</a>
 			</div>	
 			<hr style="border: solid;">

@@ -31,7 +31,7 @@ $(function(){
 							<span>상품제목</span>
 							<input name="pname" class="product-name" type="text" value="${productInfo.pname}" readonly="readonly">
 							<span>상품가격</span>
-							<input name="pname" class="product-name" type="text" value="${productInfo.pprice}" readonly="readonly"><fmt:formatNumber pattern="#,###" value="${productInfo.pprice}"/>
+							<input name="pname" class="product-name" type="text" value="<fmt:formatNumber pattern="#,###" value="${productInfo.pprice}"/>원" readonly="readonly">
 							<span>상품번호</span>
 							<input name="pname" class="product-name" type="text" value="${productInfo.pcode}" readonly="readonly">
 							<div>

@@ -83,6 +83,7 @@ $(function(){
 							$(this).closest("tr").find(".td-state").text("비공개");
 						}
 					});
+					alert(nno.length+"개의 공지를 비공개 처리 하였습니다");
 				}
 			});
 		}else{
@@ -120,6 +121,7 @@ $(function(){
 							$(this).closest("tr").find(".td-state").text("공개");
 						}
 					});
+					alert(nno.length+"개의 공지를 공개 처리 하였습니다");
 				}
 			});
 		}else{

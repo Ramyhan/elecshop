@@ -3,6 +3,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
+	$("#notice-tarea").keydown(function() {
+		var imessage = $(this).val();
+// 		console.log("imessage: ", imessage.length);
+		$("#limit").text(imessage.length + "자 입력 / 최대 1000자");
+	});
 	//공지 추가 버튼
 	$(".inquiry-btn").click(function(){
 		var that = $(this);
@@ -81,7 +86,7 @@ em{
 				<div class="inquiry-div-sub" style="display: flex;">
 					<label>공지 제목</label>
 					<em style=" color: green;">(필수)</em>
-					<input class="input" type="text" id="ntitle" name="ntitle">
+					<input class="input" type="text" id="ntitle" name="ntitle" required="required">
 				</div>
 				<div class="inquiry-div-sub d-flex">
 					<label>카테고리</label>
@@ -95,8 +100,8 @@ em{
 				<div class="inquiry-div-sub d-flex flex-wrap">
 					<label>문의 내용</label>
 					<em style=" color: blue;">(필수)</em>
-					<textarea class="input" maxlength="1000" style="height: 200px;" id="ncontent" name="ncontent"></textarea>
-					<span style="padding-left: 156px;">0자 입력 / 최대 1000자</span>
+					<textarea id="notice-tarea" class="input" maxlength="1000" style="height: 200px;" id="ncontent" name="ncontent" required="required"></textarea>
+					<span id="limit" style="padding-left: 156px;">0자 입력 / 최대 1000자</span>
 				</div>
 				<div class="inquiry-div-sub d-flex" style="text-align: center; justify-content: space-around;">
 					<div>
@@ -105,7 +110,7 @@ em{
 					</div>
 				</div>
 				<div class="inquiry-div-sub d-flex justify-content-center">
-					<button type="submit" class="inquiry-btn">공지추가</button>
+					<button type="submit" class="inquiry-btn">공지등록</button>
 				</div>
 			</form>
 			<!-- //notice form -->
