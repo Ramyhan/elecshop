@@ -112,8 +112,8 @@ $(function() {
 	$(".selectOption").change(function() {
 		var totalOptionPrice = parseInt($("#selectOption1").val());
 		
-		var otype = "${option.otype}";
-		if(otype == 1 || otype == 3) {
+		var ptype = "${productVO.ptype}";
+		if(ptype == "1" || ptype == "3") {
 			var option2Price = parseInt($("#selectOption2").val());
 			var option3Price = parseInt($("#selectOption3").val());
 			totalOptionPrice += option2Price + option3Price
