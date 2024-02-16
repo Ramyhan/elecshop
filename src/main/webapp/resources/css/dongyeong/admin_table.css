@@ -80,3 +80,11 @@
     flex-direction: column;
     align-items: center;
 	}
+	.modal-thead{
+	    display: table-cell;
+		border-right: 1px solid rgba(255,255,255);
+	}
+	.modal-td{
+		display: table-cell;
+		border-bottom: 1px solid rgba(0,0,0,0.5);
+	}

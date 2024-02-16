@@ -15,6 +15,7 @@ import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
+import com.kh.elecshop.domain.AdminUserPointDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
 import com.kh.elecshop.domain.ManufacturerVO;
@@ -107,7 +108,10 @@ public class AdminServiceImpl implements AdminService{
 		
 		return map;
 	}
-
+	public List<AdminUserPointDTO> getUserPointListByMid(String mid){
+		List<AdminUserPointDTO> list = adminMapper.selectUserPointList(mid);
+		return list;
+	}
 	@Override
 	@Transactional
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO) {
@@ -236,7 +240,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	@Transactional
 	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO) {
-		adminMapper.updateProduct(adminProductInfoDTO);
+		int productInfo = adminMapper.updateProduct(adminProductInfoDTO);
 		FileVO thoumb = adminProductInfoDTO.getImageThoumb();
 		FileVO info1 =adminProductInfoDTO.getImageInfo1();
 		FileVO info2 = adminProductInfoDTO.getImageInfo2();
@@ -245,7 +249,7 @@ public class AdminServiceImpl implements AdminService{
 		fileList.add(info1);
 		fileList.add(info2);
 		log.info("11" + fileList);
-		adminMapper.deleteProductOptionByPno(adminProductInfoDTO.getPno());
+		int count = adminMapper.deleteProductOptionByPno(adminProductInfoDTO.getPno());
 		List<AdminProductOptionDTO> ramList = adminProductInfoDTO.getRamList();
 		List<AdminProductOptionDTO> ssdList = adminProductInfoDTO.getSsdList();
 		List<AdminProductOptionDTO> colorList = adminProductInfoDTO.getColorList();
@@ -263,7 +267,7 @@ public class AdminServiceImpl implements AdminService{
 			adminMapper.updateOption(productOption);
 		}
 		adminMapper.updateProductImage(fileList);
-		return false;
+		return true;
 	}
 	public Map<String, Object> getPointList(Criteria criteria) {
 		int total = adminMapper.selectPointTotal();

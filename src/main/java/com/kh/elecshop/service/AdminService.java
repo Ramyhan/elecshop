@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
+import com.kh.elecshop.domain.AdminUserPointDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.ManufacturerVO;
 import com.kh.elecshop.domain.SearchDTO;
@@ -16,6 +17,7 @@ public interface AdminService {
 	public boolean registerTestUser(AdminUserDTO adminUserDTO);
 	public int modifysusend(int[] nnos);
 	public int modifyRepair(int[] nnos);
+	public List<AdminUserPointDTO> getUserPointListByMid(String mid);
 	public Map<String, Object> getProductList(Criteria criteria);
 	public boolean registerProduct(AdminProductRegisterDTO adminProductRegisterDTO);
 	public Map<String, Object> getAdminNoticeList(Criteria criteria);

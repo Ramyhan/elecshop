@@ -112,6 +112,8 @@ $(function(){
 							<div class="header-cell">
 								<span>포인트 정보</span>
 							</div>
+							<div class="header-cell">
+							</div>
 						</div>
 					
 					<c:forEach var="vo" items="${pointMap.pointList}">
@@ -140,7 +142,7 @@ $(function(){
 							</div>
 							<div class="cell">
 							<button type="button" class="btn-point-status" data-mid="${vo.mid}">
-							<i class="fa fa-box"></i>
+							<i class="fab fa-bitcoin"></i>
 							</button>
 							</div>
 						</div><!-- 여기 -->

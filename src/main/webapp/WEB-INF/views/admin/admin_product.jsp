@@ -56,9 +56,9 @@ $(function(){
 		
 		$.post(url, sData, function(rData) {
 			console.log("delete_result: ", rData);
-			if (rData == "true") {
+			if (rData == true) {
 				targets.each(function() {
-					$(this).parent().pareat().fadeOut(500);
+					$(this).parent().parent().fadeOut(500);
 				});
 			}
 		});
@@ -92,7 +92,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div">
 			<div>
-				<h1>유저 관리 페이지</h1>
+				<h1>상품 관리 페이지</h1>
 			</div>
 			<div class="user-devel">
 				<div class="d-flex justify-content-end">

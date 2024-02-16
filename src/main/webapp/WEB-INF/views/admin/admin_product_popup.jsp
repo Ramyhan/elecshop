@@ -347,7 +347,7 @@
 					<div class="add-ram-select" id="add-ram-select">
 						<div class="div-header">
 							<div class="div-header-cell">
-								<span>RAM선택</span>
+								<span>RAM추가</span>
 							</div>
 						</div>
 						<div class="div-cell">
@@ -378,7 +378,7 @@
 					<div class="add-ssd-select" id="add-ssd-select">
 						<div class="div-header">
 							<div class="div-header-cell">
-								<span>스스디추가</span>
+								<span>SSD추가</span>
 							</div>
 						</div>
 						<div class="div-cell">
