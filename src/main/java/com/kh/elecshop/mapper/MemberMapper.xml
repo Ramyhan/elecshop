@@ -55,7 +55,7 @@
 	<update id="memberDisabled">
 	 update tbl_member
 	 set
-	 mstate = 0
+	 mstate = 2
 	 where mid = #{mid}
 	</update>
 <!-- 	포인트 가져오기 -->
