@@ -58,7 +58,7 @@ $(function(){
 			<li class="menu-li">
 				<a href="/admin/admin_user" class="menubar">
 				<i class="menu-icon fa fa-box" style="opacity: 0.4;"></i>
-					<span class="category-span">사용자 관리</span>
+					<span class="category-span">유저 관리</span>
 				<i class="down-fa fa fa-angle-down"></i>
 				</a>
 			</li>
