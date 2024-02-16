@@ -268,7 +268,7 @@ $(function() {
 	
 	// 찜목록 추가 및 삭제
 	var isLike = "${isLike}";
-	console.log("isLike: ", isLike);
+	
 	if (isLike == "true") {
 		$("#btnLike").css({"color" : "red"});
 		$("#btnLike").attr({"title" : "찜해제"});
@@ -276,6 +276,11 @@ $(function() {
 	}
 	
 	$("#btnLike").click(function() {
+		var mid = "${loginInfo.mid}";
+		if(mid == "") {
+			location.href = "/login";
+			return;
+		}
 		var that = $(this);
 		var status = $(this).attr("data-status");
 		console.log("status: ", status);

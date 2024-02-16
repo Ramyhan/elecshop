@@ -56,9 +56,9 @@ $(function(){
 		
 		$.post(url, sData, function(rData) {
 			console.log("delete_result: ", rData);
-			if (rData == "true") {
+			if (rData == true) {
 				targets.each(function() {
-					$(this).parent().pareat().fadeOut(500);
+					$(this).parent().parent().fadeOut(500);
 				});
 			}
 		});
