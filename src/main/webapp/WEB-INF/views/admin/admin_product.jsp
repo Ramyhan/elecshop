@@ -60,6 +60,9 @@ $(function(){
 				targets.each(function() {
 					$(this).parent().parent().fadeOut(500);
 				});
+				alert(pnos.length+"개의 상품이 삭제 되었습니다");
+			}else{
+				alert("상품 삭제가 실패하였습니다");
 			}
 		});
 	});
