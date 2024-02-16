@@ -251,6 +251,8 @@ public class AdminController {
 		System.out.println(mid);
 		System.out.println(ppoint);
 		Map<String, Object> map = new HashMap<>();
+		map.put("mid", mid);
+		map.put("ppoint", ppoint);
 		memberService.updateAdminPoint(map);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
