@@ -8,11 +8,11 @@
 					<label class="footer-label">카테고리</label>
 					<div class="footer-list">
 						<ul>
-							<li>노트북</li>
-							<li>모니터</li>
-							<li>태블릿</li>
-							<li>음향기기</li>
-							<li>주변기기</li>
+							<li><a href="/product/list?ptype=1">노트북</a></li>
+							<li><a href="/product/list?ptype=2">모니터</a></li>
+							<li><a href="/product/list?ptype=3">태블릿</a></li>
+							<li><a href="/product/list?ptype=4">음향기기</a></li>
+							<li><a href="/product/list?ptype=5">주변기기</a></li>
 						</ul>
 					</div>
 				</div>
@@ -20,11 +20,13 @@
 					<label class="footer-label">마이페이지</label>
 					<div class="footer-list">
 						<ul>
-							<li>회원정보</li>
-							<li>회원정보 수정</li>
-							<li>포인트</li>
-							<li>구매한 제품 등록</li>
-							<li>회원탈퇴</li>
+							<li><a href="/myPage/myInfo">회원정보</a></li>
+							<li><a href="/myPage/point">포인트</a></li>
+							<li><a href="/myPage/coupon">내 쿠폰</a></li>
+							<li><a href="/myPage/myorder">내 주문내역</a></li>
+							<li><a href="/myPage/like">찜 목록</a></li>
+							<li><a href="/myPage/myIquiry">나의 문의 내역</a></li>
+							<li><a href="/myPage/resign">계정 탈퇴</a></li>
 						</ul>
 					</div>
 				</div>
@@ -32,10 +34,10 @@
 					<label class="footer-label">고객센터</label>
 					<div class="footer-list">
 						<ul>
-							<li>고객센터 홈</li>
-							<li>공지사항</li>
-							<li>1:1 문의</li>
-							<li>자주 묻는 질문</li>
+							<li><a href="/customerCenter/FAQ">고객센터 홈</a></li>
+							<li><a href="/customerCenter/notice">공지사항</a></li>
+							<li><a href="/customerCenter/inquiry">1:1 문의</a></li>
+							<li><a href="/customerCenter/question">자주 묻는 질문</a></li>
 						</ul>
 					</div>
 				</div>

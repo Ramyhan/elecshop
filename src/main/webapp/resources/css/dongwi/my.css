@@ -279,6 +279,9 @@ footer{
 .footer-line{
 	border-bottom: solid 1px #444444;
 }
+.footer-list > ul > li > a {
+	color: #808080;
+}
 /* 로그인 페이지 */
 .login{
 	display: flex; 
