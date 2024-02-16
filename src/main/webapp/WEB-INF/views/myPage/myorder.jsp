@@ -50,7 +50,7 @@
 							<p>수량:<span class="odproduct_count">1</span>개</p>
 						</div>
 						<div class="buy-prodect-price">
-							<p class="prodect-price">${detail.odprice }</p>
+							<p class="prodect-price"><fmt:formatNumber pattern="#,###">${detail.odprice }</fmt:formatNumber></span>원</p>
 						</div>
 						<div class="buy-prodect-delivery">
 							<p>무료배송<p>

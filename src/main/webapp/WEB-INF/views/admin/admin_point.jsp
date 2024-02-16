@@ -51,6 +51,7 @@ $(function(){
 		}else{
 			console.log("없음");
 			$.post("/getPoint", {mid : mid}, function(rData){
+				console.log(rData);
 				point.append("<p>포인트 : "+ rData +"</p>");
 			});
 		}
