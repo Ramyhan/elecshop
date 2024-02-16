@@ -27,10 +27,10 @@ $(function(){
 		});
 	});
 	//유저 포인트 내역 버튼
-	$(".user-point-history").on("click",function(){
+	$(document).on("click",".user-point-history",function(){
 		var that = $(this);
 		var mid = $(this).attr("data-mid");
-		$.post("/admin/userPointList",{"mid" : mid},function(rData){
+		$.get("/admin/userPointList",{"mid" : mid},function(rData){
 			$(".modal-tbody").empty();
 			$(".modal-title").text(mid + "님의 포인트 내역");
 			modalTd = "";
@@ -218,7 +218,13 @@ $(function(){
 						<button type="button" data-mid="${userList.mid}" class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
 					</div>
 					<div class="cell">
-						<span>${userList.mstate == 0? '정지' : '활동'}</span>
+						<span>
+						<c:choose>
+							<c:when test="${userList.mstate == 0}">정지</c:when>
+							<c:when test="${userList.mstate == 1}">활동</c:when>
+							<c:when test="${userList.mstate == 2}">탈퇴</c:when>
+						</c:choose>
+						</span>
 					</div>
 				</div>
 				</c:forEach>

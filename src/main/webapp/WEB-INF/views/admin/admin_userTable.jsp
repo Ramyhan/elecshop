@@ -58,35 +58,39 @@
 					</div>
 					<div class="cell">
 						<span>${userList.mpoint}</span>
-						<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
+						<button data-mid="${userList.mid}" class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
 					</div>
 					<div class="cell">
-						<span>${userList.mstate == 0? '정지' : '활동'}</span>
+						<c:choose>
+							<c:when test="${userList.mstate == 0}">정지</c:when>
+							<c:when test="${userList.mstate == 1}">활동</c:when>
+							<c:when test="${userList.mstate == 2}">탈퇴</c:when>
+						</c:choose>
 					</div>
 				</div>
 				</c:forEach>
 			</div>
-<!-- 			<div> -->
-<!-- 				<nav aria-label="Page navigation example"> -->
-<!-- 				  <ul class="pagination"> -->
-<%-- 				  <c:if test="${page.prev == true}"> --%>
-<!-- 				    <li class="page-item"> -->
-<%-- 				      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous"> --%>
-<!-- 				        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span> -->
-<!-- 				      </a> -->
-<!-- 				    </li> -->
-<%-- 				  </c:if> --%>
-<%-- 				    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v"> --%>
-<%-- 				    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li> --%>
-<%-- 				    </c:forEach> --%>
-<%-- 				    <c:if test="${page.next == true}"> --%>
-<!-- 					    <li class="page-item"> -->
-<%-- 					      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next"> --%>
-<!-- 					        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span> -->
-<!-- 					      </a> -->
-<!-- 					    </li> -->
-<%-- 				    </c:if> --%>
-<!-- 				  </ul> -->
-<!-- 				</nav> -->
-<!-- 			</div> -->
+			<div>
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+				  <c:if test="${page.prev == true}">
+				    <li class="page-item">
+				      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous">
+				        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+				      </a>
+				    </li>
+				  </c:if>
+				    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v">
+				    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
+				    </c:forEach>
+				    <c:if test="${page.next == true}">
+					    <li class="page-item">
+					      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next">
+					        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+					      </a>
+					    </li>
+				    </c:if>
+				  </ul>
+				</nav>
+			</div>
 		</div>

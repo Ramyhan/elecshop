@@ -157,7 +157,7 @@ public class AdminController {
 		model.addAttribute("userList", list);
 	}
 	// 어드민 유저 포인트 내역
-	@PostMapping(value = "/userPointList",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/userPointList",produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AdminUserPointDTO>> userPointList(@RequestParam("mid")String mid){
 		System.out.println("22" + mid);
