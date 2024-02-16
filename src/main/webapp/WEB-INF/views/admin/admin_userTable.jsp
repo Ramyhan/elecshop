@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-			<div class="second-div" style="background-color: white;" >
+		<div class="second-div" style="background-color: white;" >
 			<div class ="user-table">
 				<div class="user-tbl-header">
 					<div class="header-cell" style="opacity: 1">
