@@ -76,8 +76,8 @@ $(function(){
 						}
 					$.get("/admin/admin_userTable",function(rData){
 						console.log("2424123", rData);
-						$(".user-table").empty();
-						$(".user-table").append(rData);
+						$(".div-main").empty();
+						$(".div-main").append(rData);
 					});
 				}
 			});
