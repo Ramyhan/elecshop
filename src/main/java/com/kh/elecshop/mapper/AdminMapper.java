@@ -10,6 +10,7 @@ import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminProductOptionDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
+import com.kh.elecshop.domain.AdminUserPointDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.FileVO;
 import com.kh.elecshop.domain.ManufacturerVO;
@@ -29,6 +30,8 @@ public interface AdminMapper {
 	public int updateSuspend(int[] mnos);
 	//어드민 유저 체크된 유저 복구
 	public int updateRepair(int[] mnos);
+	//어드민 해당 유저 포인트 내역 확인
+	public List<AdminUserPointDTO> selectUserPointList(String mid);
 	//어드민 전체 공지 조회
 	public List<AdminNoticeDTO> selectNotice(Criteria criteria);
 	//어드민 전체 공지 수

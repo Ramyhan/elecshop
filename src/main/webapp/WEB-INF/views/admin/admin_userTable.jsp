@@ -66,27 +66,27 @@
 				</div>
 				</c:forEach>
 			</div>
-			<div>
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination">
-				  <c:if test="${page.prev == true}">
-				    <li class="page-item">
-				      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous">
-				        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-				      </a>
-				    </li>
-				  </c:if>
-				    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v">
-				    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li>
-				    </c:forEach>
-				    <c:if test="${page.next == true}">
-					    <li class="page-item">
-					      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next">
-					        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
-					      </a>
-					    </li>
-				    </c:if>
-				  </ul>
-				</nav>
-			</div>
+<!-- 			<div> -->
+<!-- 				<nav aria-label="Page navigation example"> -->
+<!-- 				  <ul class="pagination"> -->
+<%-- 				  <c:if test="${page.prev == true}"> --%>
+<!-- 				    <li class="page-item"> -->
+<%-- 				      <a class="page-num page-link" href="${page.startPage - 1}" aria-label="Previous"> --%>
+<!-- 				        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span> -->
+<!-- 				      </a> -->
+<!-- 				    </li> -->
+<%-- 				  </c:if> --%>
+<%-- 				    <c:forEach begin="${page.startPage }" end="${page.endPage}" var="v"> --%>
+<%-- 				    	<li class="page-item"><a class="page-num page-link ${(page.criteria.pageNum == v) ? 'Active' : ''}" href="${v}">${v}</a></li> --%>
+<%-- 				    </c:forEach> --%>
+<%-- 				    <c:if test="${page.next == true}"> --%>
+<!-- 					    <li class="page-item"> -->
+<%-- 					      <a class="page-num page-link" href="${page.endPage + 1}" aria-label="Next"> --%>
+<!-- 					        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span> -->
+<!-- 					      </a> -->
+<!-- 					    </li> -->
+<%-- 				    </c:if> --%>
+<!-- 				  </ul> -->
+<!-- 				</nav> -->
+<!-- 			</div> -->
 		</div>

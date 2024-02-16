@@ -92,7 +92,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div">
 			<div>
-				<h1>유저 관리 페이지</h1>
+				<h1>상품 관리 페이지</h1>
 			</div>
 			<div class="user-devel">
 				<div class="d-flex justify-content-end">
