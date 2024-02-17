@@ -211,8 +211,8 @@ $(function(){
 					<span style="font-size: 30px; font-weight: 900;">현재 공지 내용</span>
 					<button type="button" class="btn-register">공지 추가</button>
 					<button type="button" class="btn-delete">공지 삭제</button>
-					<button type="button" class="btn-question">자주 묻는 질문 추가</button>
-					<button type="button" class="btn-question">자주 묻는 질문 삭제</button>
+<!-- 					<button type="button" class="btn-question">자주 묻는 질문 추가</button> -->
+<!-- 					<button type="button" class="btn-question">자주 묻는 질문 삭제</button> -->
 					<button type="button" class="btn-open">공개 처리</button>
 					<button type="button" class="btn-close">비공개 처리</button>
 				</div>
