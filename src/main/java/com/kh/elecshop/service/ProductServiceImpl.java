@@ -52,9 +52,15 @@ public class ProductServiceImpl implements ProductService {
 		if(optionval != null && !optionval.equals("")) {
 			if(ptype == 1 || ptype == 3) {
 				String[] options = optionval.split(",");
-				optionvalList = productMapper.selectByOption(ptype, options);
+				for(int i = 0; i < options.length; i++) {
+					String option = options[i];
+					if(i == 0) {
+						optionvalList = productMapper.selectByOption(ptype, option);
+					} else {
+						optionvalList.retainAll(productMapper.selectByOption(ptype, option));
+					}
+				}
 				keyWordList.retainAll(optionvalList);
-				log.info("optionvalList: " + optionvalList);
 			} else if(ptype == 4 || ptype == 5) {
 				optionvalList = productMapper.selectByPdno(ptype, optionval);
 				keyWordList.retainAll(optionvalList);

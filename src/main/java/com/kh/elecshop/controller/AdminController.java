@@ -26,6 +26,7 @@ import com.kh.elecshop.domain.AdminProductDTO;
 import com.kh.elecshop.domain.AdminProductInfoDTO;
 import com.kh.elecshop.domain.AdminProductRegisterDTO;
 import com.kh.elecshop.domain.AdminUserDTO;
+import com.kh.elecshop.domain.AdminUserPointDTO;
 import com.kh.elecshop.domain.Criteria;
 import com.kh.elecshop.domain.DayInfoDTO;
 import com.kh.elecshop.domain.IquiryVO;
@@ -89,8 +90,9 @@ public class AdminController {
 	@PostMapping("/updateProduct")
 	public String updateProduct(RedirectAttributes attributes,AdminProductInfoDTO adminProductInfoDTO) {
 		System.out.println(adminProductInfoDTO);
-		adminService.modifyProduct(adminProductInfoDTO);
+		boolean result = adminService.modifyProduct(adminProductInfoDTO);
 		attributes.addAttribute("pno", adminProductInfoDTO.getPno());
+		attributes.addFlashAttribute("productModifyResult", result);
 		return "redirect:/admin/admin_productInfo";
 	}
 	//어드민 상품 수정페이지
@@ -154,12 +156,14 @@ public class AdminController {
 		model.addAttribute("page", pageDTO);
 		model.addAttribute("userList", list);
 	}
-	//어드민 유저테스트 생성 모달창
-	@GetMapping(value="/create_user",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> createUser(AdminUserDTO adminUserDTO) {
-		System.out.println(adminUserDTO);
-		boolean result = adminService.registerTestUser(adminUserDTO);
-		return ResponseEntity.ok(result);
+	// 어드민 유저 포인트 내역
+	@GetMapping(value = "/userPointList",produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<AdminUserPointDTO>> userPointList(@RequestParam("mid")String mid){
+		System.out.println("22" + mid);
+		List<AdminUserPointDTO> list = adminService.getUserPointListByMid(mid);
+		System.out.println("list" + list);
+		return ResponseEntity.ok(list);
 	}
 	//어드민 유저 복구버튼
 	@PostMapping(value = "/userRepair", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -251,6 +255,8 @@ public class AdminController {
 		System.out.println(mid);
 		System.out.println(ppoint);
 		Map<String, Object> map = new HashMap<>();
+		map.put("mid", mid);
+		map.put("ppoint", ppoint);
 		memberService.updateAdminPoint(map);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}

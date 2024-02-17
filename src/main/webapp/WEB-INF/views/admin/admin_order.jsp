@@ -34,7 +34,7 @@ $(function(){
 		$.post("/admin/updateOrderStatus", sData, function(rData){
 			console.log(rData);
 			if(rData == "success"){
-				var div = that.parent().parent().find(".cell-status").find("span").text("발송 완료");
+				var div = that.parent().parent().find(".cell-status").find("span").text("발송");
 				console.log(div);
 			}
 		});

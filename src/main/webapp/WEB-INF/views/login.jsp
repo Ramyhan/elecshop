@@ -55,6 +55,8 @@ $(function (){
 	if(loginResult == "fail"){
 		alert("아이디와 비밀번호를 다시 확인해주세요.");
 	}else if(loginResult == "disabled"){
+		alert("정지된 회원입니다.");
+	}else if(loginResult == "resign"){
 		alert("탈퇴된 회원입니다.");
 	}
 	var cookie = document.cookie;

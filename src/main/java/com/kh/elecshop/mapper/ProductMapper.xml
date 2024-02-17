@@ -38,10 +38,10 @@
 		select distinct tbl_product.pno, pname, mno, pcode, pdno, pinfo_main, pimage_thoumb
 		from tbl_product, tbl_product_option
 		where ptype = #{ptype}
-		and oname in
-		<foreach collection="optionval" item="option" open="(" close=")" separator=",">
-			#{option}
-		</foreach>
+		and oname in #{option}
+<!-- 		<foreach collection="optionval" item="option" open="(" close=")" separator=","> -->
+<!-- 			#{option} -->
+<!-- 		</foreach> -->
 		and tbl_product.pno = tbl_product_option.pno
 		and isdelete = 0
 	</select>

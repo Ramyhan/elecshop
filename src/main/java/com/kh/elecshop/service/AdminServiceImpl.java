@@ -240,7 +240,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	@Transactional
 	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO) {
-		adminMapper.updateProduct(adminProductInfoDTO);
+		int productInfo = adminMapper.updateProduct(adminProductInfoDTO);
 		FileVO thoumb = adminProductInfoDTO.getImageThoumb();
 		FileVO info1 =adminProductInfoDTO.getImageInfo1();
 		FileVO info2 = adminProductInfoDTO.getImageInfo2();
@@ -249,7 +249,7 @@ public class AdminServiceImpl implements AdminService{
 		fileList.add(info1);
 		fileList.add(info2);
 		log.info("11" + fileList);
-		adminMapper.deleteProductOptionByPno(adminProductInfoDTO.getPno());
+		int count = adminMapper.deleteProductOptionByPno(adminProductInfoDTO.getPno());
 		List<AdminProductOptionDTO> ramList = adminProductInfoDTO.getRamList();
 		List<AdminProductOptionDTO> ssdList = adminProductInfoDTO.getSsdList();
 		List<AdminProductOptionDTO> colorList = adminProductInfoDTO.getColorList();
@@ -267,7 +267,7 @@ public class AdminServiceImpl implements AdminService{
 			adminMapper.updateOption(productOption);
 		}
 		adminMapper.updateProductImage(fileList);
-		return false;
+		return true;
 	}
 	public Map<String, Object> getPointList(Criteria criteria) {
 		int total = adminMapper.selectPointTotal();
