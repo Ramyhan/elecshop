@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/top.jsp" %>
 <%@ include file="/WEB-INF/views/include/myPage_sidebar.jsp" %>
-<div style="height: 100%; background-color: #303030;">
+<div style="height: 100%;">
 <div class="myPage-modify-main">
 		<div class="myPage-modify-text">
 			<h1>개인 정보 수정</h1>
@@ -50,9 +50,7 @@
 				</div>
 				<button type="submit" class="btn btn-warning">확인</button>
 			</form>
-			<div class="myPage-login">
-				<br>
-			</div>
+			<div class="myPage-login"></div>
 		</div>
 </div>
 </div>

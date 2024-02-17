@@ -89,7 +89,7 @@ $(function() {
 							<span>주문</span>
 							<span class="day-num">1</span>
 							<span>문의</span>
-							<span class="day-num">${iquiryList.size()}</span>
+							<span class="day-num">2</span>
 						</div>
 					</div>
 				</div>

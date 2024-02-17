@@ -112,8 +112,8 @@ $(function() {
 	$(".selectOption").change(function() {
 		var totalOptionPrice = parseInt($("#selectOption1").val());
 		
-		var ptype = "${productVO.ptype}";
-		if(ptype == "1" || ptype == "3") {
+		var otype = "${option.otype}";
+		if(otype == 1 || otype == 3) {
 			var option2Price = parseInt($("#selectOption2").val());
 			var option3Price = parseInt($("#selectOption3").val());
 			totalOptionPrice += option2Price + option3Price
@@ -268,7 +268,7 @@ $(function() {
 	
 	// 찜목록 추가 및 삭제
 	var isLike = "${isLike}";
-	
+	console.log("isLike: ", isLike);
 	if (isLike == "true") {
 		$("#btnLike").css({"color" : "red"});
 		$("#btnLike").attr({"title" : "찜해제"});
@@ -276,11 +276,6 @@ $(function() {
 	}
 	
 	$("#btnLike").click(function() {
-		var mid = "${loginInfo.mid}";
-		if(mid == "") {
-			location.href = "/login";
-			return;
-		}
 		var that = $(this);
 		var status = $(this).attr("data-status");
 		console.log("status: ", status);

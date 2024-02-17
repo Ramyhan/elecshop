@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-		<div class="second-div" style="background-color: white;" >
+			<div class="second-div" style="background-color: white;" >
 			<div class ="user-table">
 				<div class="user-tbl-header">
 					<div class="header-cell" style="opacity: 1">
@@ -58,14 +58,10 @@
 					</div>
 					<div class="cell">
 						<span>${userList.mpoint}</span>
-						<button data-mid="${userList.mid}" class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
+						<button class="user-point-history" style="font-size: 13px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.3);">내역보기</button>
 					</div>
 					<div class="cell">
-						<c:choose>
-							<c:when test="${userList.mstate == 0}">정지</c:when>
-							<c:when test="${userList.mstate == 1}">활동</c:when>
-							<c:when test="${userList.mstate == 2}">탈퇴</c:when>
-						</c:choose>
+						<span>${userList.mstate == 0? '정지' : '활동'}</span>
 					</div>
 				</div>
 				</c:forEach>

@@ -261,7 +261,7 @@ $(function(){
 	<div class="set-div">
 		<div class="user-div">
 			<div>
-				<h1>상품 수정 페이지</h1>
+				<h1>상품 상세페이지</h1>
 			</div>
 			<div class="div-main">
 				<div class="second-div">

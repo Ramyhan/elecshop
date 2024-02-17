@@ -53,7 +53,7 @@ $(function(){
 				var point = parseInt($("#myPoint").text()) + parseInt(500);
 				$("#myPoint").text(point)
 			}else if(rData == false){
-				alert("이미 출석체크가 완료된 회원입니다.");
+				alert("이미 출석체크를 하셨습니다.");
 			}
 		});
 		

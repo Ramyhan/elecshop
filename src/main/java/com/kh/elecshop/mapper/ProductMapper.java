@@ -17,7 +17,7 @@ public interface ProductMapper {
 
 	public List<ProductDTO> selectByManu(@Param("ptype") int ptype, @Param("manuval") String manuval);
 	
-	public List<ProductDTO> selectByOption(@Param("ptype") int ptype, @Param("option") String option);
+	public List<ProductDTO> selectByOption(@Param("ptype") int ptype, @Param("optionval") String[] optionval);
 	
 	public List<ProductDTO> selectByPdno(@Param("ptype") int ptype, @Param("optionval") String optionval);
 	

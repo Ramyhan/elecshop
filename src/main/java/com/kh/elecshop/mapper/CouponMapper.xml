@@ -6,7 +6,7 @@
 	<insert id="insertCoupon">
 		insert into tbl_coupon
 		(cno, mid, coupon_name, sale, expiry_date)
-		values(seq_coupon_cno.nextval, #{mid}, #{coupon_name}, #{sale}, #{expiry_date})
+		values(seq_cno.nextval, #{mid}, #{coupon_name}, #{sale}, #{expiry_date})
 	</insert>
 	
 	<select id="selectUserCoupon" resultType="com.kh.elecshop.domain.CouponVO">

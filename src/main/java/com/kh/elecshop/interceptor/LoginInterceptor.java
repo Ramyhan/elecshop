@@ -54,14 +54,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			flashMapManager.saveOutputFlashMap(flashMap, request, response);
 			modelAndView.setViewName("redirect:/login");
 			return;
-		}else if(memberVO.getMstate() == 2) {
-			flashMap.put("loginResult", "resign");
-			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
-			flashMapManager.saveOutputFlashMap(flashMap, request, response);
-			modelAndView.setViewName("redirect:/login");
-			return;
-		}
-		else {
+		}else {
 			Boolean useCookie = (boolean)map.get("useCookie");
 			HttpSession session = request.getSession();
 			String targetLocation = (String)session.getAttribute("targetLocation");

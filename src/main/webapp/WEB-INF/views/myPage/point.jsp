@@ -10,7 +10,6 @@
 <div style=" height: 100%; background-color: #303030;">
 <div class="myPage-point">
 <div class="container myPage-point-container">
-<br>
 <h1>포인트 내역</h1>
 <div class="myPage-line"></div>
 <div class="container-fluid">
@@ -52,10 +51,10 @@ $(function(){
 	if($(".point-list:hidden").length == 0){
         $('#btn-load').fadeOut(100);
 	}
-	$(".point-list").slice(0, 5).show();
+	$(".point-list").slice(0, 3).show();
 	$("#btn-load").click(function(e) {
 		e.preventDefault();
-		$(".point-list:hidden").slice(0, 5).show(500);
+		$(".point-list:hidden").slice(0, 3).show(500);
 		if($(".point-list:hidden").length == 0){
             $('#btn-load').fadeOut(100);
 		}

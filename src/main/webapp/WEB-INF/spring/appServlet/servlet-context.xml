@@ -45,7 +45,6 @@
 			<mapping path="/customerCenter/inquiry"/>
 			<mapping path="/myPage/**/*"/>
 			<mapping path="/cart/**/*"/>
-			<mapping path="/like/*"/>
 			<exclude-mapping path="/main"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

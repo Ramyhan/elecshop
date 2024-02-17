@@ -4,12 +4,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(function(){
-	var result = "${productModifyResult}";
-	if(result == "true"){
-		alert("상품이 수정 되었습니다")
-	}else if(result== "false"){
-		alert("상품이 수정 실패하였습니다")
-	}
 	$("#btn-productList").click(function(){
 		$(location).attr("href","/admin/admin_product");
 	});

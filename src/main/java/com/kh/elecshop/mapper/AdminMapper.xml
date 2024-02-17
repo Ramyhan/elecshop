@@ -56,12 +56,11 @@
 	<select id="selectUserTotal" resultType="int">
 		select count(*) from tbl_member
 	</select>
-	<select id="selectUserPointList" resultType="com.kh.elecshop.domain.AdminUserPointDTO">
-		select a.regdate,a.ppoint,b.point_info from tbl_point a, tbl_point_code b
-		where a.mid = #{mid}
-		and a.point_code = b.point_code
-		order by regdate desc
-	</select>
+	<!-- 유저 생성 -->
+	<insert id="insertUser">
+		insert into tbl_member(mno,mname,mid,mpw,memail,maddr,maddr_detail,mphone,mbirthday,mstate,mpost_code)
+		values(seq_mno.nextval,#{mname},#{mid},#{mpw},#{memail},#{maddr},#{maddr_detail},#{mphone},#{mbirthday},#{mstate},#{mpost_code})
+	</insert>
 	<!-- 유저 정지 -->
 	<update id="updateSuspend">
 		update tbl_member set
