@@ -281,4 +281,15 @@ public class AdminServiceImpl implements AdminService{
 		map.put("page", pageDTO);
 		return map;
 	}
+
+	@Override
+	public int getIquiryOrderTotal() {
+		int count = adminMapper.selectDashboardTotal();
+		return count;
+	}
+	@Override
+	public int selectIncompleteOrder() {
+		int count = adminMapper.selectIncompleteOrder();
+		return count;
+	}
 }

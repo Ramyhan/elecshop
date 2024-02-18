@@ -34,6 +34,10 @@ public interface AdminMapper {
 	public List<AdminUserPointDTO> selectUserPointList(String mid);
 	//어드민 전체 공지 조회
 	public List<AdminNoticeDTO> selectNotice(Criteria criteria);
+	//어드민 대쉬보드 미완료 문의 수
+	public int selectIncompleteOrder();
+	//어드민 대쉬보드 주문수 + 문의수
+	public int selectDashboardTotal();
 	//어드민 전체 공지 수
 	public int selectNoticeTotal();
 	//어드민 전체 상품 조회

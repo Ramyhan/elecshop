@@ -28,4 +28,6 @@ public interface AdminService {
 	public boolean modifyProduct(AdminProductInfoDTO adminProductInfoDTO);
 	public Map<String, Object> getPointList(Criteria criteria);
 	public boolean registerManuFacturer(String mname);
+	public int getIquiryOrderTotal();
+	public int selectIncompleteOrder();
 }

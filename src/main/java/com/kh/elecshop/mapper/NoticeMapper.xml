@@ -42,14 +42,16 @@
 		where nno = #{nno}
 	</select>
 	<select id="selectByTop5" resultType="com.kh.elecshop.domain.SubNoticeDTO">
-		select nno,ncategory, ntitle, nregdate from
-		(select * from tbl_notice order by nregdate desc)
-		where rownum between 1 and 5
+		select nno,ncategory, ntitle, nregdate,nstate
+		from (select /*+index_desc(tbl_notice)*/ nno, ncategory,ntitle,nregdate,nstate,rownum rn
+		      from tbl_notice order by nregdate desc)
+        where rn between 1 and 5
 		and nstate = 'true'
 	</select>
 	<select id="selectAdminNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
-		select nno,ncategory,ncontent, ntitle, nregdate, nstate
-		from (select * from tbl_notice order by nregdate desc)
+		select nno,ncategory,ncontent, ntitle, nregdate, nstate,rownum
+		from (select nno,ncategory,ncontent, ntitle, nregdate, nstate,rownum rn
+        from tbl_notice order by nregdate desc)
 	</select>
 	<update id="updateCloseNoticeState">
 		update tbl_notice set

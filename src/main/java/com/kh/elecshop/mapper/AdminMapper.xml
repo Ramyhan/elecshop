@@ -72,6 +72,19 @@
 			</foreach>
 		)
 	</update>
+	<!-- 대쉬보드 주문수 + 문의수 -->
+	<select id="selectDashboardTotal" resultType="int">
+		select (
+		(select count(*) from tbl_iquiry where ireply is null) +
+		(select count(*) from tbl_order where delivery_status = 0)
+		)count
+		from dual
+	</select>
+	<!-- 대쉬보드 송장번호 미입력 주문 수 -->
+	<select id="selectIncompleteOrder" resultType="int">
+		select count(*) from tbl_order
+		where delivery_status = 0
+	</select>
 	<!-- 유저 복구 -->
 	<update id="updateRepair">
 		update tbl_member set
@@ -89,8 +102,8 @@
 	<!-- 전체 공지 찾기 -->
 	<select id="selectNotice" resultType="com.kh.elecshop.domain.AdminNoticeDTO">
 		select nno,ncategory, ntitle, nregdate,nstate
-		from (select /*+index_desc(tbl_product)*/ nno, ncategory,ntitle,nregdate,nstate,rownum rn
-		      from tbl_notice order by nregdate asc)
+		from (select /*+index_desc(tbl_notice)*/ nno, ncategory,ntitle,nregdate,nstate,rownum rn
+		      from tbl_notice order by nregdate desc)
         where rn between #{startRow} and #{endRow}
 	</select>
 	<!-- product -->

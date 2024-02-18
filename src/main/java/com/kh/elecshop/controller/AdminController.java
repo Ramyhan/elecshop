@@ -69,6 +69,10 @@ public class AdminController {
 		List<DayInfoDTO> dayInfoList = visitCountService.getDayInfo(vdate);
 		List<IquiryVO> iquiryList = iquiryService.getIquiryList();
 		List<NoticeVO> noticeList = noticeService.getLatestNotice();
+		int orderCount = adminService.selectIncompleteOrder();
+		int total = adminService.getIquiryOrderTotal();
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("resultTotal", total);
 		model.addAttribute("chartVO", chartVO);
 		model.addAttribute("dayInfoList", dayInfoList);
 		model.addAttribute("iquiryList", iquiryList);

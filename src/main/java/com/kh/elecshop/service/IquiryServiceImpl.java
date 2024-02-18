@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.elecshop.domain.IquiryVO;
+import com.kh.elecshop.mapper.AdminMapper;
 import com.kh.elecshop.mapper.IquiryMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -16,6 +17,9 @@ public class IquiryServiceImpl implements IquiryService {
 	
 	@Autowired
 	private IquiryMapper iquiryMapper;
+	
+	@Autowired 
+	private AdminMapper adminMapper;
 
 	@Override
 	public boolean addIquiry(IquiryVO iquiryVO) {

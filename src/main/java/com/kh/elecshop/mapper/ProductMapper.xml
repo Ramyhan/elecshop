@@ -55,13 +55,10 @@
 	</select>
 	
 	<select id="selectTop8" resultType="com.kh.elecshop.domain.ProductDTO">
-		select pno, pname, mno, pcode, pprice, pdno, pinfo_main, pimage_thoumb
-		from tbl_product
-		<![CDATA[
-			where rownum < 9 
-			order by (select count(*)
-          			  from tbl_order) asc
-		]]>
+		select a.pno,a.pprice,a.mno,a.pcode,a.pdno,a.pimage_thoumb,a.pname,a.pinfo_main,
+		(select count(*) from tbl_order_detail where a.pno = pno) ww
+		from tbl_product a
+		order by a.pregdate,ww desc
 	</select>
 	
 	<update id="deleteProduct" parameterType="string">

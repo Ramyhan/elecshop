@@ -140,7 +140,7 @@
 	    align-items: center;
 	    flex-direction: column;
 	}
-	.day-num{
+	#day-order,#day-iquiry{
 		color: red;
 	}
 	.day-result{

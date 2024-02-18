@@ -124,7 +124,7 @@ i{
 		<div class="col-md-8" style="margin-bottom: 50px;">
 			<div class="d-flex justify-content-between">
 			<h3 style="font">자주 묻는 질문</h3>
-			<a href="/customerCenter/question">더보기</a>
+<!-- 			<a href="/customerCenter/question">더보기</a> -->
 			</div>	
 			<hr style="border: solid;">
 			<div id="card-51726" >

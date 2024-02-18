@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+	pageEncoding="UTF-8"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <link href="/resources/css/dongyeong/table.css" rel="stylesheet" />
 <link href="/resources/css/dongyeong/admin.css" rel="stylesheet" />
 <script>
@@ -46,6 +49,10 @@ $(function() {
 					var target = $("#btn" + ino).parent().parent();
 					console.log("target: ", target);
 					$("#modal-iquiry").modal("hide");
+					var dayResult =  parseInt($(".day-result").text());
+					var dayIquiry = parseInt($("#day-iquiry").text());
+					$("#day-iquiry").text(dayIquiry - 1);
+					$(".day-result").text(dayResult - 1);
 					target.fadeOut(1000);
 				}
 			}
@@ -62,6 +69,10 @@ $(function() {
 			"success" : function(rData) {
 				if (rData == "true") {
 					var deleteTarget = that.parent().parent();
+					var dayResult =  parseInt($(".day-result").text());
+					var dayIquiry = parseInt($("#day-iquiry").text());
+					$("#day-iquiry").text(dayIquiry - 1);
+					$(".day-result").text(dayResult - 1);
 					deleteTarget.fadeOut(1000);
 				}
 			}
@@ -71,7 +82,7 @@ $(function() {
 </script>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
 <div class="main-div">
-<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
+	<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 	<div class="set-div">
 		<div class="admin-title" style="width: 100%; text-align: center;">
 			<span>관리자 페이지</span>
@@ -81,15 +92,15 @@ $(function() {
 				<div class="day-div">
 					<div class="admin-sub-title">
 						<span>오늘 할 일</span>
-						<span class="day-result">43</span>
+						<span class="day-result">${resultTotal}</span>
 					</div>
 					<div class="div-hr"></div>
 					<div>
 						<div>
-							<span>주문</span>
-							<span class="day-num">1</span>
+							<span>주문</span> 
+							<span id="day-order">${orderCount}</span> 
 							<span>문의</span>
-							<span class="day-num">${iquiryList.size()}</span>
+							<span id="day-iquiry">${iquiryList.size()}</span>
 						</div>
 					</div>
 				</div>
@@ -100,9 +111,10 @@ $(function() {
 						<span>방문자 현황</span>
 					</div>
 					<div class="div-hr"></div>
-					<div style="width: 90%; height: auto; display: flex; justify-content: center;">
-		 					<canvas id="myChart" width="600;" height="300;"></canvas>
-		 					<script>
+					<div
+						style="width: 90%; height: auto; display: flex; justify-content: center;">
+						<canvas id="myChart" width="600;" height="300;"></canvas>
+						<script>
 							var chartArea = document.getElementById('myChart').getContext('2d');
 							//차트를 생성한다. 
 							var myChart = new Chart(chartArea, {
@@ -151,59 +163,61 @@ $(function() {
 							});
 		
 					</script>
-		<!--   					<script src="/resources/css/dongyeong/chart.js"></script> -->
+						<!--   					<script src="/resources/css/dongyeong/chart.js"></script> -->
 					</div>
 				</div>
-					<div class="admin-summary">
-						<div class="admin-sub-title">
-							<span>일자별 요약</span>
-						</div>
-						<div class="div-hr"></div>
-						<div>
-							<table class="table summary-table">
-							  <thead class="summary-thead">
-							    <tr>
-							      <th>일자</th>
-							      <th>주문수</th>
-							      <th>방문자</th>
-							      <th>매출액</th>
-							      <th>가입</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  <c:forEach items="${dayInfoList}" var="dayInfoDTO">
-							  	<c:if test="${dayInfoDTO != null}">
-									<tr>
-								      <td>${dayInfoDTO.vdate}</td>
-								      <td>${dayInfoDTO.order_count}</td>
-								      <td>${dayInfoDTO.vcount}</td>
-								      <td><fmt:formatNumber value="${dayInfoDTO.total_price}" pattern="#,###"/>원</td>
-								      <td>${dayInfoDTO.join_count}명</td>
-								    </tr>
-							  	</c:if>
-							  </c:forEach>
-							  </tbody>
-							</table>
-						</div>
+				<div class="admin-summary">
+					<div class="admin-sub-title">
+						<span>일자별 요약</span>
+					</div>
+					<div class="div-hr"></div>
+					<div>
+						<table class="table summary-table">
+							<thead class="summary-thead">
+								<tr>
+									<th>일자</th>
+									<th>주문수</th>
+									<th>방문자</th>
+									<th>매출액</th>
+									<th>가입</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${dayInfoList}" var="dayInfoDTO">
+									<c:if test="${dayInfoDTO != null}">
+										<tr>
+											<td>${dayInfoDTO.vdate}</td>
+											<td>${dayInfoDTO.order_count}</td>
+											<td>${dayInfoDTO.vcount}</td>
+											<td><fmt:formatNumber value="${dayInfoDTO.total_price}"
+													pattern="#,###" />원</td>
+											<td>${dayInfoDTO.join_count}명</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
-				<div class="iquiry-notice">
-					<div class="admin-iquiry">
-						<div class="admin-sub-title">
-							<span>문의 관리</span>
-						</div>
-						<div class="div-hr"></div>
-						<div class="iquiry-div">
+			</div>
+			<div class="iquiry-notice">
+				<div class="admin-iquiry">
+					<div class="admin-sub-title">
+						<span>문의 관리</span>
+					</div>
+					<div class="div-hr"></div>
+					<div class="iquiry-div">
 						<c:forEach items="${iquiryList}" var="iquiryVO">
 							<div class="iquiry-message">
-								<a href="#" data-ino="${iquiryVO.ino}" class="aIquiry">
-								<span>[문의]</span>
-								<span class="iquiry-first">${iquiryVO.ititle}</span>
+								<a href="#" data-ino="${iquiryVO.ino}" class="aIquiry"> <span>[문의]</span>
+									<span class="iquiry-first">${iquiryVO.ititle}</span>
 								</a>
 								<div>
-									<span class="iquiry-second-name">${iquiryVO.mid}</span>
-									<span class="iquiry-second-date"><fmt:formatDate value="${iquiryVO.iregdate}" pattern="yy-MM-dd"/></span>
-								<button type="button" class="btn btn-secondary btnRemove" id="btn${iquiryVO.ino}" data-ino="${iquiryVO.ino}">삭제</button>
+									<span class="iquiry-second-name">${iquiryVO.mid}</span> <span
+										class="iquiry-second-date"><fmt:formatDate
+											value="${iquiryVO.iregdate}" pattern="yy-MM-dd" /></span>
+									<button type="button" class="btn btn-secondary btnRemove"
+										id="btn${iquiryVO.ino}" data-ino="${iquiryVO.ino}">삭제</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -215,75 +229,65 @@ $(function() {
 					</div>
 					<div class="div-hr"></div>
 					<div class="iquiry-div">
-					<c:forEach items="${noticeList}" var="noticeVO">
-						<div class="iquiry-message">
-							<a href="/customerCenter/noticePage?nno=${noticeVO.nno}" class="aNotice">
-							<span>[공지사항]</span>
-							<span class="iquiry-first">${noticeVO.ntitle}</span>
-							</a>
-							<div>
-								<span class="iquiry-second-name">${noticeVO.ncategory}</span>
-								<span class="iquiry-second-date"><fmt:formatDate value="${noticeVO.nregdate}" pattern="yy-MM-dd"/></span>
+						<c:forEach items="${noticeList}" var="noticeVO">
+							<div class="iquiry-message">
+								<a href="/customerCenter/noticePage?nno=${noticeVO.nno}"
+									class="aNotice"> <span>[공지사항]</span> <span
+									class="iquiry-first">${noticeVO.ntitle}</span>
+								</a>
+								<div>
+									<span class="iquiry-second-name">${noticeVO.ncategory}</span> <span
+										class="iquiry-second-date"><fmt:formatDate
+											value="${noticeVO.nregdate}" pattern="yy-MM-dd" /></span>
+								</div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-					<div class="col-md-12">
-						<div class="modal fade" id="modal-iquiry" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content iquiryModal">
-									<div class="modal-header">
-										<h5 class="modal-title" id="myModalLabel">
-											문의 내용 답장
-										</h5> 
-										<button type="button" class="close" data-dismiss="modal">
-											<span aria-hidden="true">×</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-											<label for="ititle">
-												제목
-											</label>
-											<input type="text" class="form-control" id="ititle" readonly/>
-										</div>
-										<div class="form-group">
-											<label for="imessage">
-												작성자
-											</label>
-											<input type="text" class="form-control imessage" id="mid" readonly></input>
-										</div>
-										<div class="form-group">
-											<label for="imessage">
-												내용
-											</label>
-											<textarea class="form-control imessage" id="imessage" readonly></textarea>
-										</div>
-										<div class="form-group">
-											<label for="ireply">
-												답장
-											</label>
-											<textarea class="form-control" id="ireply" required></textarea>
-										</div>
-									</div>
-									<div class="modal-footer">
-										 
-										<button type="button" class="btn btn-primary btnReply" data-ino="">
-											답장하기
-										</button> 
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">
-											닫기
-										</button>
-									</div>
+			<div class="col-md-12">
+				<div class="modal fade" id="modal-iquiry" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content iquiryModal">
+							<div class="modal-header">
+								<h5 class="modal-title" id="myModalLabel">문의 내용 답장</h5>
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="ititle"> 제목 </label> <input type="text"
+										class="form-control" id="ititle" readonly />
 								</div>
+								<div class="form-group">
+									<label for="imessage"> 작성자 </label> <input type="text"
+										class="form-control imessage" id="mid" readonly></input>
+								</div>
+								<div class="form-group">
+									<label for="imessage"> 내용 </label>
+									<textarea class="form-control imessage" id="imessage" readonly></textarea>
+								</div>
+								<div class="form-group">
+									<label for="ireply"> 답장 </label>
+									<textarea class="form-control" id="ireply" required></textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" class="btn btn-primary btnReply"
+									data-ino="">답장하기</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">닫기</button>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 	</div>
 </div>
 

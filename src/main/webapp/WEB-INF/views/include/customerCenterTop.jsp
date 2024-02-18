@@ -109,8 +109,8 @@
 			<li><a class="menuLink" href="/customerCenter/FAQ">고객센터 홈</a></li>
 			<li><a class="menuLink" href="/customerCenter/notice">공지사항</a></li>
 			<li><a class="menuLink" href="/customerCenter/inquiry">1:1문의</a></li>
-			<li><a class="menuLink" href="/customerCenter/question">자주
-					묻는 질문</a></li>
+<!-- 			<li><a class="menuLink" href="/customerCenter/question">자주 -->
+<!-- 					묻는 질문</a></li> -->
 		</ul>
 	</nav>
 </div>
