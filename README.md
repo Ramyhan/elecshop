@@ -5,4 +5,4 @@ HTML5,
 jQuery, 
 ORACLE 11, 
 Apache Tomncat 9.0, 
-BootStrap4, 
+BootStrap4
